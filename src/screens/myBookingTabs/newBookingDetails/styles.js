@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Matrics,Color } from '../../../utils';
+import { Matrics,Color } from '../../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -17,15 +17,18 @@ export default StyleSheet.create({
       },
       mainView:{
         flex:1,
+        backgroundColor:Color.white,
         justifyContent:'center',
+        alignSelf:'center',
         width:wp('90%'),
-        margin:wp('5%'),
-        elevation:4,
-        shadowOpacity:0.2,
-        shadowRadius:1,
-       // shadowOffset: { width: 0, height: 1 },
+        marginTop:hp('2%'),
+        margin:wp('2%'),
+        elevation: 4,
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
+        shadowOffset: { width: 0, height: 2 },
         borderRadius: Matrics.Scale(10),
-       
+        padding:Matrics.Scale(5)
       },
       topView:{
         flexDirection:'row',
@@ -34,6 +37,37 @@ export default StyleSheet.create({
         alignSelf:'center',
         marginTop:hp('2%')
        
+      },
+      service_dis_btn:{
+        width:wp('30%'),
+  
+      },
+      service_customer:{
+        width:wp('50%'),
+        marginTop:hp('1%'),
+        marginLeft:wp('5%')
+      },
+      btnView:{
+        borderRadius: Matrics.Scale(5),
+        backgroundColor:Color.AppColor,
+        justifyContent:'center',
+        marginTop:hp('5%'),
+
+      },
+      btnViewAccept:{
+        borderRadius: Matrics.Scale(5),
+        backgroundColor:Color.green,
+        justifyContent:'center',
+        marginTop:hp('5%'),
+       
+
+      },
+      btnViewReject:{
+        borderRadius: Matrics.Scale(5),
+        backgroundColor:Color.pink,
+        justifyContent:'center',
+        marginTop:hp('1%'),
+      
       },
       amount_view:{
         flexDirection:'row',
@@ -64,6 +98,13 @@ export default StyleSheet.create({
         fontWeight:'800',
        
       },
+      textBook_Time_dis:{
+        marginTop:hp('2%'),
+        color:Color.ligthGray,
+        fontSize:Matrics.Scale(18),
+        width:wp('50%'),
+        fontWeight:'800',
+      },
       textTime_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(18),
@@ -87,17 +128,20 @@ export default StyleSheet.create({
       service_btn_mainview:{
         flexDirection:'row',
         width:wp('80%'),
-        alignSelf:'center',
+       
         marginTop:hp('2%'),
-        justifyContent:'center'
+      },
+      service_dis_book:{
+        width:wp('50%'),
+        marginLeft: wp('5%'),
+        marginTop:hp('1%')
       },
       service_dis:{
-        width:wp('50%'),
+        width:wp('40%'),
+        marginLeft: wp('5%'),
+        marginTop:hp('1%')
       },
-      service_dis_btn:{
-        width:wp('30%'),
-  
-      },
+     
       btnView:{
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.AppColor,
@@ -153,16 +197,10 @@ export default StyleSheet.create({
       },
       can_reschedulic_View:{
         flexDirection:'row',
-        width:wp('20%'),
-        marginLeft:wp('1%')
+        width:wp('50%'),
+        marginLeft:wp('3%')
         
      },
-     reschedulic_View:{
-      flexDirection:'row',
-     
-      marginLeft:wp('3%')
-      
-   },
      inc_dec_icon:{
       justifyContent:'center',
       alignSelf:'center',
@@ -193,24 +231,124 @@ textcancel:{
   alignSelf:'center',
   alignItems:'center',
 },
-btnPhone:{
-  alignSelf:'flex-end',
-  justifyContent:'flex-end',
-  top:hp('70%'),
-  position:'absolute',
-  marginEnd:wp('2%')
-  
-  
+textBookingDetails:{
+  margin:wp('5%'),
+  color:Color.AppColor,
+  fontSize:Matrics.Scale(18),
+  width:wp('60%'),
+  fontWeight:'800'
 },
-iconbell:{
-  justifyContent:'center',
-  alignSelf:'center',
-  alignItems:'center',
-  borderRadius:20,
-  padding:10,
-  fontSize:14,
-  fontWeight:'900',
-  
-},
+imgView: {
 
+  backgroundColor:Color.white,
+   marginLeft: wp('2%'),
+  
+  flexDirection:'row',
+  width:wp('70%')
+  },
+  courseImg: {
+    width: Matrics.Scale(80),
+    height:Matrics.Scale(80),
+    borderRadius: 80/2,
+    resizeMode:'cover',
+  },
+  courseImgView: {
+    backgroundColor: 'lightgray',
+    borderRadius: 80/2,
+    zIndex: 0,
+  },
+  dataname:{
+    marginTop:hp('3%'),
+    marginLeft:wp('3%'),
+    fontSize:16,
+    fontWeight:'500',
+    color:Color.bleck
+  } ,
+  datars:{
+    marginLeft:wp('3%'),
+    fontSize:14,
+    color:Color.gray
+  },
+  call_View:{
+    flexDirection:'row',
+    marginLeft:wp('5%'),
+    marginTop:hp('2%'),
+   
+  },
+  address_View:{
+    flexDirection:'row',
+    marginLeft:wp('5%'),
+    
+  },
+  note_View:{
+    flexDirection:'row',
+    marginLeft:wp('5%'),
+    marginBottom:hp('5%'),
+  },
+  call_icon:{
+    justifyContent:'center',
+    alignSelf:'center',
+    alignItems:'center',
+    color:Color.AppColor,
+    padding:Matrics.Scale(10),
+    fontSize:Matrics.Scale(24),
+    fontWeight:'900',
+  },
+  textCall:{
+  
+    fontSize:16,
+    fontWeight:'500',
+    color:Color.gray,
+    marginTop:hp('1%')
+  } ,
+  textAddress:{
+    fontSize:16,
+    fontWeight:'500',
+    color:Color.gray,
+    marginTop:hp('1%'),
+    width:wp('80%'),
+    justifyContent:'center',
+    alignSelf:'center'
+  },
+  viewLine:{
+    width:wp('80%'),
+    backgroundColor:Color.ligthGray,
+    height:hp('0.1%'),
+    justifyContent:'center',
+    alignSelf:'center',
+    marginTop:hp('3%')
+
+  },
+  textNote:{
+    color:Color.AppColor,
+    marginTop:hp('1%'),
+    fontSize:Matrics.Scale(20),
+    fontWeight:'900'
+  },
+  trackView: {
+    justifyContent:'center',
+    alignSelf:'center',
+    width: wp('90%'),
+    marginTop: hp('3%'),
+    marginBottom:hp('3%')
+  },
+  buttonStyltrack:{
+   
+    backgroundColor: "rgba(66, 77, 228, 1)",
+    borderRadius: Matrics.Scale(5),
+    width: wp('90%'),
+    height: Platform.OS == 'ios'? hp('6%') : hp('8%'),
+    alignItems:'center',
+    alignContent:'center',
+    alignSelf:'center',
+    textAlign:'center' ,
+  },
+  textTrack:{
+    justifyContent:'center',
+    color:Color.white,
+    fontWeight:'500',
+    fontSize:Matrics.Scale(18),
+    textAlign: "center",
+    top: Platform.OS === 'ios' ? hp('1%') : hp('2%'), 
+  },
 })

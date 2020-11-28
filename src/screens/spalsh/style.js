@@ -7,6 +7,7 @@ export default StyleSheet.create({
         alignItems:'center',
         backgroundColor:'#424DE4'
     },
+    
     logo:{
         height:'100%',
         width:'100%'

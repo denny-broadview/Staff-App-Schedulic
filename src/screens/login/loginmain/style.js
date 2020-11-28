@@ -3,7 +3,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-
+  import { Matrics,Color } from '../../../utlis';
 export default StyleSheet.create({
      loginmainarea:{  
        width:wp('90%'),
@@ -11,8 +11,17 @@ export default StyleSheet.create({
        alignSelf:'center',
      },
      loginTopHeading:{
-     marginTop:'20%',
-     marginBottom:'10%'
+     marginTop:hp('5%'),
+     marginBottom:hp('5%')
+    },
+    loginTopText:{
+      color: Color.darkGray, 
+      fontSize: 20
+    },
+    loginTextDetail:{
+      color: Color.ligthGray, 
+      fontSize: 18,
+       marginTop: 4
     },
     checkboxContainer: {
      flexDirection: "row",
@@ -20,7 +29,7 @@ export default StyleSheet.create({
    },
    button: {
      alignItems: "center",
-     backgroundColor: "#424DE4",
+     backgroundColor: Color.AppColor,
      padding: 12,
      borderRadius:6,
      width:wp('90%'),
@@ -34,17 +43,29 @@ export default StyleSheet.create({
       marginTop:20,
       width: wp('90%'),
    },
-   textCode:{
+   textInpute:{
       justifyContent:'center', 
-      color:'#000',
+      color:Color.bleck,
       width: wp('80%'),
       marginLeft:wp('2%')
      
     },
     icon: {
       alignSelf:'center',
-      color:'#ccc',
+      color:Color.ligthGray,
       fontSize: 22,
       fontWeight:'bold'
   },
+  checkText:{
+    color: Color.darkGray, 
+    fontSize: 16
+  },
+  buttoView:{
+    position: 'absolute', 
+    bottom: 0
+  },
+  buttonText:{
+    color: Color.white,
+     fontSize: 16
+  }
 })

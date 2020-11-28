@@ -1,10 +1,17 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Platform } from 'react-native';
+import { Matrics,Color } from '../../../utlis';
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-
+ 
+ 
 export default StyleSheet.create({
+     container: {
+          flex: 1,
+          backgroundColor: Color.white,
+        },
+        
      sendinvoice:{
           padding:16,
           shadowColor: "#000",
