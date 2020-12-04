@@ -8,6 +8,7 @@ import {String} from '../../../utlis/String.js';
 import styles from './style';
 import { Auth, Constants } from '@global';
 import {useDispatch} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   setUserData,
   setUserToken,
@@ -15,7 +16,9 @@ import {
   setUserId,
 } from '../../../store/actions';
 import Validate from '../../../utlis/Validate'
+import firebase from 'react-native-firebase';
 
+var fcmToken;
 const LoginMain = (props) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [hidePass, setHidePass] = useState(true);
@@ -24,12 +27,34 @@ const LoginMain = (props) => {
   const [loding, setLoding] = useState(false);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    
+    _checkPermission();
+   
+  }, []);
+  async function _checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    _getToken();
+  }
+
+  async function _getToken() {
+    fcmToken = await firebase.messaging().getToken();
+    console.log('fcmtoken------------',fcmToken)
+    await AsyncStorage.setItem('fcmToken', fcmToken);
+    const channel = new firebase.notifications.Android.Channel(
+      'general',
+      'General',
+      firebase.notifications.Android.Importance.Max,
+    ).setDescription('general notification channel');
+    firebase.notifications().android.createChannel(channel);
+  }
+
   function mobileLogin() {
     
     let myForm = new FormData();
     myForm.append('email', email);
     myForm.append('password', password);
- //   myForm.append('device_token',fcmToken)
+    myForm.append('device_token',fcmToken)
     console.log('mobileLogin req =====>', myForm);
     setLoding(true)
     Auth.PostServiceAuth(myForm, Constants.ApiAction.mobileLogin, (res) => {

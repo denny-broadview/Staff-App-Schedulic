@@ -12,7 +12,7 @@ const WorkingHours = (props) => {
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
   useEffect(() => {
-    getWorkingHR
+    getWorkingHR()
   }, []);
 
   // Api calling All category
@@ -36,7 +36,7 @@ const WorkingHours = (props) => {
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
       </View>
     );
   }
@@ -48,7 +48,7 @@ const WorkingHours = (props) => {
         search={false}
         notification={false}
         searchClick={false}
-        onPress={() => props.navigation.goBack()}
+        onPress={() => props.navigation.navigate('MyAccount')}
         headertext={String.account.workinghr}
       />
       <View style={{justifyContent: 'center'}}>
@@ -62,8 +62,10 @@ const WorkingHours = (props) => {
             <View>
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
-                <Text style={styles.menuname}>{item.week_day_id}</Text>
-                <Text style={styles.menu}>{item.day_start_time == 'null'? null :item.day_start_time}</Text>
+                <Text style={styles.menuname}>{item.days}</Text>
+                {/* <Text style={styles.menu}>{item.day_start_time == 'null' ? null :item.day_start_time}</Text> */}
+               {item.day_start_time == null && item.day_end_time == null && item.off_day == 'Y' ?<Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{item.day_start_time} {String.account.to} {item.day_end_time}</Text>}
+               
                 {/* <Icon name="right" style={styles.menu} /> */}
               </TouchableOpacity>
             </View>

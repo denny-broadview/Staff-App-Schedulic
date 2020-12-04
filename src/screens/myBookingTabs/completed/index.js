@@ -20,11 +20,50 @@ const CompletedTab = (props) => {
   const userInfo = useSelector(state => state.user.user)
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
+ // search
+ const [masterDataSource, setMasterDataSource] = useState([]);
+ const searchKeyFromProbs = useSelector(
+   (state) => state.BookingService.serachKey,
+ );
+ var currencyFormatter = require('currency-formatter');
+  const currency = useSelector((state) => state.setting.setting.currency);
+
+  const currencySymbolePosition = useSelector(
+    (state) => state.setting.setting.currency_symbol_position,
+  );
+
+  const currencyFrm = useSelector(
+    (state) => state.setting.setting.currency_format,
+  );
 
   useEffect(() => {
     getComplteTask();
   
   }, []);
+  useEffect(() => {
+    console.log(
+      'Data from redux searchKeyFromProbs ~~~~~~',
+      searchKeyFromProbs,
+    );
+    searchFilterFunction(searchKeyFromProbs);
+  }, [searchKeyFromProbs]);
+  //search start
+  function searchFilterFunction(text) {
+    if (text) {
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.service.service_name
+          ? item.service.service_name.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setData(newData);
+      // setSearchTerm(text);
+    } else {
+      setData(masterDataSource);
+      // setSearchTerm(text);
+    }
+  }
  // Api calling for complteTask
  function getComplteTask() {
   setLoading(true);
@@ -38,7 +77,7 @@ const CompletedTab = (props) => {
     if (res[1].data == true) {
       setLoading(false);
       setData(res[1].response);
-     
+      setMasterDataSource(res[1].response);
     } else {
       setData(res.data);
       setLoading(false);
@@ -50,7 +89,7 @@ const CompletedTab = (props) => {
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
       </View>
     );
   }
@@ -104,8 +143,24 @@ const CompletedTab = (props) => {
                     <Text style={styles.textDate_time}>
                       {String.MyBookingTab.amount}
                     </Text>
-
-                    <Text style={styles.textTime_dis}>{item.total_cost}</Text>
+                    {currencySymbolePosition == 'left' ? (
+                        <Text style={styles.textTime_dis}>
+                          {currencyFormatter.format(
+                            item.total_cost,
+                            {code: currency},
+                            {locale: currencyFrm},
+                          )}
+                        </Text>
+                      ) : (
+                        <Text style={styles.textTime_dis}>
+                          {currencyFormatter.format(
+                            item.total_cost,
+                            {locale: currencyFrm},
+                            {code: currency},
+                          )}
+                        </Text>
+                      )}
+                   
                   </View>
                   <View style={styles.service_customer}>
                     <Text style={styles.textDate_time}>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "525137053760",
+    "firebase_url": "https://shedulicstaff.firebaseio.com",
+    "project_id": "shedulicstaff",
+    "storage_bucket": "shedulicstaff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525137053760:android:fb021c9636d700036c77a5",
+        "android_client_info": {
+          "package_name": "com.schedulicstaff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "525137053760-1vdh074cd1bd13mbsbi4r6c52e5ieduf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNLN9cT0uzKwoxGmMl5SSZTMeI0Wis9VY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "525137053760-1vdh074cd1bd13mbsbi4r6c52e5ieduf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

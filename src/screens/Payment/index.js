@@ -4,6 +4,14 @@ import styles from './style';
 import {String} from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 const Payment = (props) => {
+  const [data, setData] = useState({});
+  useEffect(() => {
+    if (props.route.params !== null) {
+      setData(props.route.params.datapass);
+      console.log('item ongoing in paymant screen-----------', props.route.params.datapass);
+    }
+    console.log(' ongoing pic-----------', props.route.params.image);
+  }, []);
   return (
     <View style={styles.mainView}>
       <HeaderView
@@ -12,7 +20,7 @@ const Payment = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Login')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.payment.paymants}
         onPress={() => props.navigation.goBack()}
       />
@@ -24,7 +32,7 @@ const Payment = (props) => {
           <View>
             <View>
               <TouchableOpacity style={styles.commonpayment}
-                onPress={() => props.navigation.navigate('CashPaymantDetails')}>
+                onPress={() => props.navigation.navigate('CashPaymantDetails',{datapass: props.route.params.datapass,image:props.route.params.image})}>
                 <View>
                   <Text style={styles.textView}>{String.payment.cash}</Text>
                 </View>

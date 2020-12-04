@@ -4,23 +4,22 @@ import styles from './styles';
 import HeaderView from '../../../component/headerTab';
 import {String} from '../../../utlis/String';
 import {Matrics, Color} from '../../../utlis';
-import {Theme, Auth, Constants} from '@global';
+import {Auth, Constants} from '@global';
 import {MySpinner} from '../../../component/MySpinner';
-
+import { useSelector } from 'react-redux';
 const Breaks = (props) => {
-  const [data, setData] = useState([
-    {name: 'Sunday',Time:'8:00 am To 6:00 pm'},
-    {name: 'Monday',Time:'10:00 am To 4:00 pm'},
-    {name: 'Tuesday',Time:'Day off'},
-  ]);
+  const userInfo = useSelector(state => state.user.user)
+  const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getBreack();
+  }, []);
 
   // Api calling for breck data
   function getBreack() {
     setLoading(true);
     let myForm = new FormData();
-    myForm.append('staff_id', userInfo.user_id);
+    myForm.append('mobile', '');
     console.log('parm Workinghours~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(userInfo.token,userInfo.user_id,myForm, Constants.ApiAction.staffBreck, (res) => {
       console.log('data--------', res);
@@ -38,7 +37,7 @@ const Breaks = (props) => {
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
       </View>
     );
   }
@@ -64,9 +63,10 @@ const Breaks = (props) => {
             <View>
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
-                <Text style={styles.menuname}>{item.name}</Text>
-                <Text style={styles.menu}>{item.Time}</Text>
-                {/* <Icon name="right" style={styles.menu} /> */}
+              <Text style={styles.menuname}>{item.days}</Text>
+
+                {item.break_start_time == null && item.break_end_time == null ? <Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{item.break_start_time} {String.account.to} {item.break_end_time }</Text>}
+           
               </TouchableOpacity>
             </View>
           )}></FlatList>

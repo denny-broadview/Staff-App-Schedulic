@@ -13,11 +13,23 @@ import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
 import moment from 'moment';
+import {useSelector} from 'react-redux';
+import {Auth, Constants} from '@global';
+import {MySpinner} from '../../../component/MySpinner';
 const NewBookingDetails = (props) => {
-  const [loadingSearch, setLoadingSearch] = useState(false);
-  const [disable, setdisable] = useState(false);
+  const userInfo = useSelector((state) => state.user.user);
+ 
+  const [loagind, setLoading] = useState(false);
+ 
   const [data, setData] = useState({});
-
+  var currencyFormatter = require('currency-formatter');
+  const currency = useSelector((state) => state.setting.setting.currency);
+  const currencySymbolePosition = useSelector(
+    (state) => state.setting.setting.currency_symbol_position,
+  );
+  const currencyFrm = useSelector(
+    (state) => state.setting.setting.currency_format,
+  );
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
@@ -26,6 +38,35 @@ const NewBookingDetails = (props) => {
     console.log('pic-----------', props.route.params.image);
   }, []);
 
+   // Api calling for newBookings update satus
+   function getStatus(st) {
+    setLoading(true);
+    let myForm = new FormData();
+    myForm.append('order_item_id',data.id);
+    myForm.append('staff_id',userInfo.user_id);
+    myForm.append('order_status',st)
+    console.log('parm booking status~~~~~~~~~', myForm);
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.status_update,
+      (res) => {
+        console.log(' booking data status--------', res);
+        if (res[1].data == true) {
+          setLoading(false);
+          if(st == "R"){
+            props.navigation.navigate('Home');
+          }
+          else if(st == "AC")
+          props.navigation.navigate('OngoingTab');
+        } else {
+         
+          setLoading(false);
+        }
+      },
+    );
+  }
   return (
     <View style={styles.container}>
       <HeaderView
@@ -34,12 +75,13 @@ const NewBookingDetails = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Home')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
       />
       <ScrollView style={{flex: 1}}>
         <View style={{justifyContent: 'center', flex: 1}}>
+        <MySpinner size="large" visible={loagind} />
           <View style={styles.mainView}>
             <View style={styles.topView}>
               <Text style={styles.textDate_time}>
@@ -77,8 +119,23 @@ const NewBookingDetails = (props) => {
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
                   </Text>
-
-                  <Text style={styles.textTime_dis}>{data.total_cost}</Text>
+                  {currencySymbolePosition == 'left' ? (
+                    <Text style={styles.textTime_dis}>
+                      {currencyFormatter.format(
+                        data.total_cost,
+                        {code: currency},
+                        {locale: currencyFrm},
+                      )}
+                    </Text>
+                  ) : (
+                    <Text style={styles.textTime_dis}>
+                      {currencyFormatter.format(
+                        data.total_cost,
+                        {locale: currencyFrm},
+                        {code: currency},
+                      )}
+                    </Text>
+                  )}
                 </View>
                 <View style={styles.service_customer}>
                   <Text style={styles.textDate_time}>
@@ -93,14 +150,14 @@ const NewBookingDetails = (props) => {
                 <View style={styles.service_dis_btn}>
                   <TouchableOpacity
                     style={styles.btnViewAccept}
-                    onPress={() => props.navigation.navigate('OngoingTab')}>
+                    onPress={() =>getStatus("AC")}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.accept}
                     </Text>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.btnViewReject}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() =>getStatus("R")}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.reject}
                     </Text>

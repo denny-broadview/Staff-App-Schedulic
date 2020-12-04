@@ -77,7 +77,7 @@ const MyAccount = (props) => {
    
     return (
         <View style={styles.container}>
-            <HeaderView header={true}  searchClick ={false}  search={false} notification={true} onPressNoti={() => props.navigation.replace('LoginMain')} headertext={String.account.MyAccount}/>
+            <HeaderView header={true}  searchClick ={false}  search={false} notification={true} onPressNoti={() => props.navigation.replace('Notification')} headertext={String.account.MyAccount}/>
 
             {/* <Toolbar  backButton={false} title={String.account.my_account} notification={true} search={true} /> */}
             <ScrollView style={{ flex: 1 }} bounces={false} showsVerticalScrollIndicator={false}>

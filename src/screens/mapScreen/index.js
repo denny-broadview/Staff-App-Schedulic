@@ -19,8 +19,15 @@ import IconCall from 'react-native-vector-icons/Ionicons';
 const MapScreen = (props) => {
   const [lat, setLat] = useState('');
   const [lng, setLng] = useState('');
-
- 
+  const [data, setData] = useState({});
+  
+  useEffect(() => {
+    if (props.route.params !== null) {
+      setData(props.route.params.datapass);
+      console.log('item ongoing map-----------', props.route.params.datapass);
+    }
+    console.log(' ongoing pic-----------', props.route.params.image);
+  }, []);
 
   function callNow(phone) {
     let phoneNumber = phone;
@@ -50,7 +57,7 @@ const MapScreen = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Home')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.map.map}
         onPress={() => props.navigation.goBack()}
       />
@@ -70,7 +77,7 @@ const MapScreen = (props) => {
           coordinate={{latitude: Number(21.1503), longitude: Number(72.825)}}>
           <View style={styles.courseImgView}>
             <Image
-              source={require('../../assets/images/profile.jpg')}
+              source={{uri:props.route.params.image}}
               style={styles.courseImg}
             />
           </View>
@@ -108,12 +115,12 @@ const MapScreen = (props) => {
         </View>
         <TouchableOpacity
           style={styles.btnPhone}
-          onPress={() => callNow(8866071780)}>
+          onPress={() => callNow(props.route.params.datapass.customer.phone_office)}>
           <IconCall name="md-call-sharp" style={styles.iconbell} />
         </TouchableOpacity>
         <View style={styles.staffView}>
           <Text style={styles.text_diatance}>{String.map.customer}</Text>
-          <Text style={styles.text_dist}>customername</Text>
+        <Text style={styles.text_dist}>{props.route.params.datapass.customer.fullname}</Text>
         </View>
       </View>
     </View>

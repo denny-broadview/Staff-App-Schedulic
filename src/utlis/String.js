@@ -1,6 +1,7 @@
 export const String = {
   app: {
     App: 'Schedulic Staff',
+    datanotfound:'No data found'
   },
   login: {
     AppoitmentBookingApp: 'Appointment Booking Application',
@@ -72,7 +73,9 @@ export const String = {
     name: 'Enter name',
     fname:'Enter Firstname',
     lname:'Enter Lastname',        
-    logoutMessage:'Are you sure you want to logout?'
+    logoutMessage:'Are you sure you want to logout?',
+    to:'to',
+    notification:'Notification'
 
   },
   MyBookingTab: {

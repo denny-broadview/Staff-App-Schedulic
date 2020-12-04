@@ -4,7 +4,7 @@ import styles from './styles';
 import HeaderView from '../../../component/headerTab';
 import {String} from '../../../utlis/String';
 import {Matrics, Color} from '../../../utlis';
-import {Theme, Auth, Constants} from '@global';
+import {Auth, Constants} from '@global';
 import {MySpinner} from '../../../component/MySpinner';
 import { useSelector } from 'react-redux';
 const Category = (props) => {
@@ -36,7 +36,7 @@ const Category = (props) => {
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
       </View>
     );
   }

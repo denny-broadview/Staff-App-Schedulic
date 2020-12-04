@@ -16,15 +16,18 @@
       android:allowBackup="false"
       android:screenOrientation="portrait"
       android:theme="@style/AppTheme">
-       <meta-data  
+
+      <meta-data  
       android:name="com.google.android.geo.API_KEY"  
       android:value="AIzaSyB_579vZQgFOWgZ_PyZV6kQOXvecElWKrE"/> 
+
       <activity
         android:name=".MainActivity"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
         android:launchMode="singleTask"
         android:windowSoftInputMode="adjustResize">
+
         
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -32,6 +35,15 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+       <service android:name="io.invertase.firebase.messaging.RNFirebaseMessagingService">
+    <intent-filter>
+      <action android:name="com.google.firebase.MESSAGING_EVENT" />
+    </intent-filter>
+  </service>
+  <meta-data
+        android:name="com.google.firebase.messaging.default_notification_channel_id"
+        android:value="general"/>
+    <service android:name="io.invertase.firebase.messaging.RNFirebaseBackgroundMessagingService" />
     </application>
 
 </manifest>

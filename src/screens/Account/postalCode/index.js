@@ -37,7 +37,7 @@ const PostalCode = (props) => {
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
       </View>
     );
   }

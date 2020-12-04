@@ -12,6 +12,8 @@ import moment from 'moment';
 const Home = (props) => {
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
+  console.log('userInfo====================================',userInfo);
+ 
   const [starCount, setStarCount] = useState(0);
   const [bookingdata,setBookingData]= useState([]);
   const [onGoingdata,setonGoingData]=useState([]);
@@ -21,6 +23,7 @@ const Home = (props) => {
     getBooking();
     getOnGoing();
     getComplteTask();
+    setStarCount(userInfo.avgRatings[0].aggregate)
   }, []);
 
    // Api calling for newBookings
@@ -105,7 +108,7 @@ const Home = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Login')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={'Home'}
       />
       <ScrollView style={{flex: 1}}>

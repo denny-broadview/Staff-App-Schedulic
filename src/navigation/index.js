@@ -38,6 +38,7 @@ import NewBookingDetails from '../screens/myBookingTabs/newBookingDetails';
 import onGoingDetails from '../screens/myBookingTabs/onGoingDetails';
 import CompletDetails from '../screens/myBookingTabs/completedDetails';
 import Invoice from '../screens/myBookingTabs/invoice';
+import Notification from '../screens/Notification';
 import { useDispatch,useSelector } from 'react-redux';
 import { Auth, Constants } from '@global'
 import { setSetting,setTax} from '../store/actions'
@@ -50,7 +51,7 @@ const TopTab = createMaterialTopTabNavigator();
 const BookingStack = createStackNavigator();
 export default App = () => {
   const [isConnected, setIsConnected] = useState(true);
-
+  const dispatch = useDispatch()
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
       if (state.isConnected == true) {
@@ -251,6 +252,7 @@ export default App = () => {
             options={{headerShown: false}}
           />
            <Stack.Screen name="MyAccount" component={BottomTabs} options={{headerShown: false}}/>
+           <Stack.Screen  name="Notification" component={Notification} options={{headerShown:false}}/>
         </Stack.Navigator>
       </NavigationContainer>
       {isConnected == true ? null : (

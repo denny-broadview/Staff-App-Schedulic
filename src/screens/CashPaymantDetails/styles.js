@@ -103,10 +103,11 @@ export default StyleSheet.create({
   amountView: {
     marginTop:hp('2%'),
     flexDirection: 'row',
-   
     justifyContent:'center',
+    alignSelf:'center',
     width: wp('100%'),
   },
+ 
   text_amount: {
     color: Color.bleck,
     width: wp('70%'),
@@ -115,7 +116,7 @@ export default StyleSheet.create({
   },
   text_rs: {
     color: Color.bleck,
-    width: wp('15%'),
+    width: wp('20%'),
     fontSize: Matrics.Scale(18),
     fontWeight: '600',
     alignSelf: 'flex-end',
@@ -123,7 +124,7 @@ export default StyleSheet.create({
   },
   text_coupon: {
     color: Color.bleck,
-    width: wp('40%'),
+    width: wp('45%'),
     fontSize: Matrics.Scale(18),
     fontWeight: '600',
   },

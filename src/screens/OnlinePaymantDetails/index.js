@@ -22,7 +22,7 @@ const OnlinePaymantDetails = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Login')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.payment.paymantDetails}
         onPress={() => props.navigation.goBack()}
       />

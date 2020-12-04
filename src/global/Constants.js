@@ -23,6 +23,13 @@ const Constants = {
     staffOnGoing:'staff-ongoing-bookings',
     completTask:'staff-booking',
     logout:'logout',
+    invoice:'download-invoice',
+    sendInvoice:'send-invoice',
+    holiday:'staff-holidayslist',
+    notification:'get-notification',
+    cashpaymant:'staff-payment-update',
+    couponcode: 'check-discount-coupon',
+    status_update:'staff-update-bookings'
 
   },
   SplashScreen: {

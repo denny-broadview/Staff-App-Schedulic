@@ -5,8 +5,8 @@ import { String } from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 
 import { Color, Matrics } from '../../../utlis';
-// import { useDispatch } from 'react-redux';
-// import { setSearchKey } from '../../../store/actions'
+import { useDispatch } from 'react-redux';
+import { setSearchKey } from '../../../store/actions'
 const MyBookingMainView = ({ navigation}) => {
   
   // console.log('MyBookingMainView navigation --- > ',navigation);
@@ -51,7 +51,7 @@ const renderHeader = (props) => {
   let [enableSearch, setEnableSearch] = useState(false);
   let [enable] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  //const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
   // searchbar 
   const fnSearchEnable = () => {
@@ -72,16 +72,16 @@ const renderHeader = (props) => {
 
   };
 
-  // const onSetSearchkey = key =>
-  //  dispatch(setSearchKey(key)
-  // )
+  const onSetSearchkey = key =>
+   dispatch(setSearchKey(key)
+  )
 
   return (
     <HeaderView
       header={true}
       back={false}
       notification={true}
-      onPressNoti={() => props.navigation.replace('Home')}
+      onPressNoti={() => props.navigation.replace('Notification')}
       headertext={String.MyBookingTab.myBooking}
       //Sreachbar
       onPressSearch={() => fnSearchEnable()}

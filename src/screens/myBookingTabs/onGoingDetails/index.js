@@ -16,8 +16,8 @@ import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
 import TimeIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Color, Matrics} from '../../../utlis';
 import moment from 'moment';
+import {useSelector} from 'react-redux';
 
 const onGoingDetails = (props) => {
   const [timeSettingCancel, setTimeSettingCancel] = useState('');
@@ -28,6 +28,15 @@ const onGoingDetails = (props) => {
   const [completedClick, setCompletedClick] = useState(false);
   const [note, setNote] = useState('');
   const [data, setData] = useState({});
+  var currencyFormatter = require('currency-formatter');
+  const currency = useSelector((state) => state.setting.setting.currency);
+  const currencySymbolePosition = useSelector(
+    (state) => state.setting.setting.currency_symbol_position,
+  ); 
+  const currencyFrm = useSelector(
+    (state) => state.setting.setting.currency_format,
+  );
+ 
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
@@ -53,7 +62,7 @@ const onGoingDetails = (props) => {
         search={false}
         notification={true}
         searchClick={false}
-        onPressNoti={() => props.navigation.navigate('Home')}
+        onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
       />
@@ -67,7 +76,7 @@ const onGoingDetails = (props) => {
               <Text style={styles.textstatus}>{String.MyBookingTab.satus}</Text>
             </View>
             <View style={styles.topView_dis}>
-              {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
+             
               <Text style={styles.textDate_dis}>{moment(data.booking_date).format('DD MMM YYYY')}</Text>
               <Text style={styles.textTime_dis}>{data.booking_time}</Text>
               <Text style={styles.textstatus_dis}>{data.order_status}</Text>
@@ -91,7 +100,26 @@ const onGoingDetails = (props) => {
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
                   </Text>
-                  <Text style={styles.textTime_dis}>{data.total_cost}</Text>
+                  {currencySymbolePosition == 'left' ? (
+                    <Text style={styles.textTime_dis}>
+                      {currencyFormatter.format(
+                        data.total_cost,
+                        {code: currency},
+                        {locale: currencyFrm},
+                      )}
+                      
+                    </Text>
+                  ) : (
+                    <Text style={styles.textTime_dis}>
+                      {currencyFormatter.format(
+                        data.total_cost,
+                        {locale: currencyFrm},
+                        {code: currency},
+                      )}
+                    
+                    </Text>
+                  )}
+                 
                 </View>
                 <View style={styles.service_customer}>
                   <Text style={styles.textDate_time}>
@@ -113,7 +141,7 @@ const onGoingDetails = (props) => {
                 {completedClick == true ? (
                   <TouchableOpacity
                     style={styles.btnViewDetails}
-                    onPress={() => props.navigation.navigate('Payment')}>
+                    onPress={() => props.navigation.navigate('Payment',{datapass: props.route.params.datapass,image:props.route.params.image})}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.completed}
                     </Text>
@@ -131,7 +159,7 @@ const onGoingDetails = (props) => {
                 ) : (
                   <TouchableOpacity
                     style={styles.btnViewMap}
-                    onPress={() => props.navigation.navigate('MapScreen')}>
+                    onPress={() => props.navigation.navigate('MapScreen',{datapass: props.route.params.datapass,image:props.route.params.image})}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.map}
                     </Text>
