@@ -29,7 +29,7 @@ const Constants = {
     notification:'get-notification',
     cashpaymant:'staff-payment-update',
     couponcode: 'check-discount-coupon',
-    status_update:'staff-update-bookings'
+    status_update:'staff-update-bookings',
 
   },
   SplashScreen: {

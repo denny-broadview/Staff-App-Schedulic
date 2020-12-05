@@ -4,9 +4,9 @@ import styles from './styles';
 import {String} from '../../utlis/String';
 import Icon from 'react-native-vector-icons/AntDesign';
 const PaymantDone = (props) => {
- 
+  const orderId = props.route.params.order_id;
   useEffect(() => {
-   
+   console.log('orderId ---  ',orderId);
   }, []);
 
 
@@ -24,7 +24,7 @@ const PaymantDone = (props) => {
       <View style={styles.orderidView}>
      
         <Text style={styles.topText}>{String.success.orderid}</Text>
-        <Text style={styles.topText}>125102</Text>
+        <Text style={styles.topText}>{orderId}</Text>
       </View>
       <View style={styles.proceedtocheckMainView}>
         <TouchableOpacity style={styles.buttonStylupdate}  onPress={() => props.navigation.replace('Home')}>
