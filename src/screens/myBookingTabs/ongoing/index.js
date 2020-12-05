@@ -249,7 +249,7 @@ const OngoingTab = (props) => {
                       </TouchableOpacity>
                     </View>
                     <View style={styles.btnViewReject}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={() =>  props.navigation.navigate('Reshedul',{datapass: item})}>
                         <Text style={styles.btnText}>
                           {String.MyBookingTab.reschedule}
                         </Text>

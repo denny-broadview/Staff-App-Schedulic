@@ -106,6 +106,9 @@ export const String = {
    select_date:'Select Date',
    select_time:'Select Time',
    addnote:'Add Note',
+   next:'Next',
+   confirm:'confirm',
+   error_message_select_startdate:'Please select start date',
   },
 
   cashpaymant: {

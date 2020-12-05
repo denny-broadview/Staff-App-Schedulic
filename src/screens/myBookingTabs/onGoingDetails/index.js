@@ -17,17 +17,25 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
 import TimeIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
+import CalendarPicker from 'react-native-calendar-picker';
 import {useSelector} from 'react-redux';
-
+import {Matrics, Color} from '../../../utlis';
 const onGoingDetails = (props) => {
   const [timeSettingCancel, setTimeSettingCancel] = useState('');
   const [timeSettingReshedulic, setTimeSettingReshedulic] = useState('');
   const [modalReshedulVisible, setReshedulVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const [onTheWayClieck, setOnTheWayClieck] = useState(true);
   const [workStarted, setWorkStarted] = useState(false);
   const [completedClick, setCompletedClick] = useState(false);
   const [note, setNote] = useState('');
   const [data, setData] = useState({});
+  const maxDate = new Date(2040, 1, 1);
+  const minDate = new Date();
+  const [calenderClick, setcalenderClick] = useState();
+  const [limit, setlimit] = useState('');
+  const [finaldate, setFinalDate] = useState('');
+  const [fdate, setfdate] = useState('');
   var currencyFormatter = require('currency-formatter');
   const currency = useSelector((state) => state.setting.setting.currency);
   const currencySymbolePosition = useSelector(
@@ -54,6 +62,89 @@ const onGoingDetails = (props) => {
     setOnTheWayClieck(false);
   }
 
+  const _startFinal = (date) => {
+    var firstDate = moment(date._d).format('YYYY-MM-DD');
+    const startDate = date ? date.toString() : '';
+    //day
+    let setectDay = startDate.slice(0, 3);
+    //day date
+    let selectstartdate = startDate.slice(7, 10);
+    //month
+    let selectstartmonth = startDate.slice(3, 7);
+    //year
+    let selectstartyear = startDate.slice(10, 15);
+  
+    setlimit(startDate);
+    setfdate(firstDate);
+    setFinalDate(firstDate);
+    setDateShow(setectDay + ',' + selectstartmonth + '' + selectstartdate);
+    console.log('firstdate~~~~~~~~', firstDate);
+  
+  };
+
+  function _onDateChange(date) {
+    {
+      calenderClick == true ? _startFinal(date) : null;
+    }
+  }
+
+  function calenderview() {
+    setModalVisible()
+    return (
+      <View style={styles.centeredView}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <TouchableHighlight
+              style={{...styles.closeButton}}
+              onPress={() => {
+                setModeltimeVisible(!modalVisible);
+              }}>
+              <Icon name="closecircle" style={styles.closeIcon} />
+            </TouchableHighlight>
+            <View>
+              <Text style={styles.textSelectedTextDia}>
+                {String.MyBookingTab.select_date}
+              </Text>
+            </View>
+            <CalendarPicker
+              textStyle={{
+                color: Color.bleck,
+                justifyContent: 'center',
+                alignContent: 'center',
+              }}
+              weekdaysColor="#424DE4"
+              weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
+              previousTitle="<"
+              nextTitle=">"
+              onDateChange={_onDateChange}
+              selectedDayColor="#424DE4"
+              selectedDayTextColor="#FFFFFF"
+              minDate={calenderClick == true ? minDate : limit}
+              maxDate={maxDate}
+             
+            />
+            <TouchableHighlight
+              style={{
+                ...styles.nextButton,
+                backgroundColor: Color.AppColor,
+              }}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+              }}>
+              <Text style={styles.textStyle}>
+                {String.MyBookingTab.next}
+              </Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+    </View>
+    );
+  }
   return (
     <View style={styles.container}>
       <HeaderView
@@ -107,7 +198,6 @@ const onGoingDetails = (props) => {
                         {code: currency},
                         {locale: currencyFrm},
                       )}
-                      
                     </Text>
                   ) : (
                     <Text style={styles.textTime_dis}>
@@ -116,7 +206,6 @@ const onGoingDetails = (props) => {
                         {locale: currencyFrm},
                         {code: currency},
                       )}
-                    
                     </Text>
                   )}
                  
@@ -167,9 +256,7 @@ const onGoingDetails = (props) => {
                 )}
                 <View style={styles.btnViewReject}>
                   <TouchableOpacity
-                    onPress={() => {
-                      setReshedulVisible(true);
-                    }}>
+                    onPress={() =>  props.navigation.navigate('Reshedul',{datapass: props.route.params.datapass})}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.reschedule}
                     </Text>
@@ -178,123 +265,7 @@ const onGoingDetails = (props) => {
               </View>
             </View>
           </View>
-          {/* Reshedulic click open dialog*/}
-          <View style={styles.centeredView}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalReshedulVisible}>
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <View style={{flexDirection: 'row'}}>
-                    <View>
-                      <Text style={styles.textSelectedTextDia}>
-                        {String.MyBookingTab.reschedule}
-                      </Text>
-                    </View>
-                    <View>
-                      <TouchableOpacity
-                        style={styles.closeButton}
-                        onPress={() => {
-                          setReshedulVisible(!modalReshedulVisible);
-                        }}>
-                        <Icon name="closecircle" style={styles.closeIcon} />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <Text style={styles.textDesDialog}>
-                    Work can&apos;t be completed due to some{'\n'}resone
-                  </Text>
-                  <View style={{flexDirection: 'row', marginTop: 10}}>
-                    <View>
-                      <Text style={styles.textService}>
-                        {String.MyBookingTab.services}
-                      </Text>
-                    </View>
-                    <View>
-                      <Text style={styles.servicenametext}> Haircut</Text>
-                    </View>
-                  </View>
-                  <View style={styles.priseView}>
-                    <View style={styles.textseledat_tim}>
-                      <Text style={styles.topTitle}>
-                        {String.MyBookingTab.select_date}
-                      </Text>
-                    </View>
-                    <View style={styles.textseledat_tim}>
-                      <Text style={styles.topTitle}>
-                        {String.MyBookingTab.select_time}
-                      </Text>
-                    </View>
-                  </View>
-                  <View style={styles.priseView}>
-                    <View>
-                      <TouchableOpacity
-                        style={styles.menuView}
-                        onPress={() => {}}>
-                        <Icon name="calendar" style={styles.timeDateIcon} />
-                        <Text style={styles.textDate}>Select Date</Text>
-                        {/* {startDate == '' && startMonth == '' ? (
-                            <Text style={styles.textDate}>Select Date</Text>
-                          ) : (
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={styles.textDate}>{startDate}</Text>
-                              <Text style={styles.textDate}>{startMonth}</Text>
-                              <Text style={styles.textDate}>{startYear}</Text>
-                            </View>
-                          )} */}
-                      </TouchableOpacity>
-                    </View>
-                    <View>
-                      <TouchableOpacity
-                        style={styles.menuView}
-                        onPress={() => {}}>
-                        <TimeIcon
-                          name="clock-time-ten-outline"
-                          style={styles.timeDateIcon}
-                        />
-                        <Text style={styles.textDate}>Select Time</Text>
-                        {/* {startDate == '' && startMonth == '' ? (
-                            <Text style={styles.textDate}>Select Date</Text>
-                          ) : (
-                            <View style={{flexDirection: 'row'}}>
-                              <Text style={styles.textDate}>{startDate}</Text>
-                              <Text style={styles.textDate}>{startMonth}</Text>
-                              <Text style={styles.textDate}>{startYear}</Text>
-                            </View>
-                          )} */}
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-
-                  <Text style={styles.addnoteText}>
-                    {String.MyBookingTab.addnote}
-                  </Text>
-                  <View style={styles.inputBordeNote}>
-                    <TextInput
-                      style={styles.textCodeAddress}
-                      onChangeText={(text) => {
-                        setNote(text);
-                      }}
-                      placeholder={String.MyBookingTab.addnote}
-                      numberOfLines={5}
-                      multiline={true}
-                      keyboardType="default"
-                    />
-                  </View>
-                  <TouchableHighlight
-                    style={styles.nextButton}
-                    onPress={() => {
-                      setReshedulVisible(!modalReshedulVisible);
-                    }}>
-                    <Text style={styles.textBtnStyle}>
-                      {String.MyBookingTab.reschedule}
-                    </Text>
-                  </TouchableHighlight>
-                </View>
-              </View>
-            </Modal>
-          </View>
+        
 
           <View style={styles.mainView}>
             <Text style={styles.textBookingDetails}>

@@ -29,7 +29,13 @@ const Constants = {
     notification:'get-notification',
     cashpaymant:'staff-payment-update',
     couponcode: 'check-discount-coupon',
-    status_update:'staff-update-bookings'
+    status_update:'staff-update-bookings',
+<<<<<<< HEAD
+    listHoliday:'list-holidays',
+    getListTiming:'list-availabel-timings',
+    resedule:'staff-resedule-bookings'
+=======
+>>>>>>> 8db3556d7ea41821c1e908417dde1f6f898196e1
 
   },
   SplashScreen: {

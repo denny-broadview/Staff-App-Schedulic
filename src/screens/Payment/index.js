@@ -5,15 +5,34 @@ import {String} from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 const Payment = (props) => {
   const [data, setData] = useState({});
+  const [payment, setPayment] = useState([]);
+  const [payJson, setPayJson] = useState({});
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
-      console.log('item ongoing in paymant screen-----------', props.route.params.datapass);
+      setPayJson(props.route.params.datapass.payment);
+      console.log('item Payment in paymant screen-----------', props.route.params.datapass);
     }
-    console.log(' ongoing pic-----------', props.route.params.image);
+    console.log('Payment pic-----------', props.route.params.image);
+   
   }, []);
+  useEffect(()=>{
+    if (payJson && payJson != null && payJson != undefined) {
+      let js={
+        "reference_id": payJson.reference_id,
+        "transactionId": payJson.transaction_id,
+        "payment_datetime": payJson.payment_date,
+        "payment_method": payJson.payment_mode,
+        "amount": payJson.amount,
+        "paymentnotes": payJson.payment_notes
+      }
+      setPayment(js)
+      console.log('Payment arr-----------', js);
+    }
+   
+  },[data])
   return (
-    <View style={styles.mainView}>
+    <View style={styles.mainView}> 
       <HeaderView
         header={true}
         back={true}
@@ -32,7 +51,12 @@ const Payment = (props) => {
           <View>
             <View>
               <TouchableOpacity style={styles.commonpayment}
-                onPress={() => props.navigation.navigate('CashPaymantDetails',{datapass: props.route.params.datapass,image:props.route.params.image})}>
+                onPress={() => props.navigation.navigate('CashPaymantDetails',{
+                  datapass: props.route.params.datapass,
+                  payment: payment,
+                  method: 'cash',
+                  image:props.route.params.image
+                  })}>
                 <View>
                   <Text style={styles.textView}>{String.payment.cash}</Text>
                 </View>
@@ -46,7 +70,13 @@ const Payment = (props) => {
             </View>
             <View >
               <TouchableOpacity style={styles.commonpayment}
-              onPress={()=> props.navigation.navigate('OnlinePaymantDetails')}>
+              // onPress={()=> props.navigation.navigate('OnlinePaymantDetails')}>
+              onPress={() => props.navigation.navigate('CashPaymantDetails',{
+                datapass: props.route.params.datapass,
+                payment: payment,
+                method: 'online',
+                image:props.route.params.image
+                })}>
               <View>
                 <Text style={styles.textView}>{String.payment.Online}</Text>
               </View>

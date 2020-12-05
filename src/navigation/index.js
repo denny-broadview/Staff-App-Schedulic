@@ -37,6 +37,7 @@ import MapScreen from '../screens/mapScreen';
 import NewBookingDetails from '../screens/myBookingTabs/newBookingDetails';
 import onGoingDetails from '../screens/myBookingTabs/onGoingDetails';
 import CompletDetails from '../screens/myBookingTabs/completedDetails';
+import Reshedul from '../screens/myBookingTabs/Reshedul';
 import Invoice from '../screens/myBookingTabs/invoice';
 import Notification from '../screens/Notification';
 import { useDispatch,useSelector } from 'react-redux';
@@ -253,6 +254,7 @@ export default App = () => {
           />
            <Stack.Screen name="MyAccount" component={BottomTabs} options={{headerShown: false}}/>
            <Stack.Screen  name="Notification" component={Notification} options={{headerShown:false}}/>
+           <Stack.Screen name="Reshedul" component={Reshedul} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
       {isConnected == true ? null : (
