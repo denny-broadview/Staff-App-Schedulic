@@ -101,9 +101,9 @@ const Payment = (props) => {
           </View>
         </ScrollView>
       </View>
-      <TouchableOpacity style={styles.button}>
+      {/* <TouchableOpacity style={styles.button}>
         <Text style={styles.btnText}>{String.payment.Next}</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

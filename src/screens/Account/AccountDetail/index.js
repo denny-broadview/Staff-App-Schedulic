@@ -15,8 +15,10 @@ import {MySpinner} from '../../../component/MySpinner';
 import { useDispatch,useSelector } from 'react-redux';
 import {setUserData} from '../../../store/actions';
 import {Auth, Constants} from '@global';
+import Validate from '../../../utlis/Validate'
 const AccountDetails = (props) => {
   const userInfo = useSelector(state => state.user.user)
+ 
   const [fname, setfName] = useState('');
   const [lname,setlName]= useState('');
   const [email, setEmail] = useState('');
@@ -39,6 +41,16 @@ const AccountDetails = (props) => {
     setEmail(userInfo.email);
     setPhonenumber(userInfo.phone);
    }, []);
+
+   useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(email)
+      // Send Axios request here
+      emailCheck();
+    }, 5000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [email])
  
     // Api calling for breck data
   function editProfile() {
@@ -58,18 +70,44 @@ const AccountDetails = (props) => {
       onSetUserData(res[1].response);
        
         console.log('Userdata---', onSetUserData(res[1].response));
-        props.navigation.replace('MyAccount')
+        props.navigation.navigate('MyAccount')
       
       }
     else {
+      console.log('false---', res[1].data);
       Auth.ToastMessage(JSON.stringify(res[1].response));
       setLoading(false)
     }
     });
   }
+  
+
+  //Api call to email check
+  function emailCheck() {
+    setLoading(true)
+    let myForm = new FormData();
+    myForm.append('email',email);
+    myForm.append('user_id',userInfo.user_id);
+    console.log('email check parm =====>', myForm);
+   
+    Auth.PostServiceAuth(myForm, Constants.ApiAction.emailCheck, (res) => {
+     
+      console.log('email cehck =====>', res);
+      if (res[1].data == true) {
+        setLoading(false);
+        console.log('email check true=====>', res[1].data);
+       
+      } else {
+        setLoading(false);
+        Auth.ToastMessage(res[1].response);
+      }
+    });
+  }
+
+
   function validation() {
     console.log(userInfo);
-    let regExp = /^(?:[a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-zA-Z0-9-]*[a-zA-Z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    let regExp = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
     if (fname == '' && lname == '' && email == '' && Phonenumber == '') {
       setLoading(false);
@@ -84,14 +122,14 @@ const AccountDetails = (props) => {
 
       Auth.ToastMessage(String.loginmain.error_message_lname);
     } 
-    else if (email == '') {
+    else if (Validate.isEmpty(email)) { 
       setLoading(false);
-
       Auth.ToastMessage(String.loginmain.error_message_email);
-    } else if (regExp.test(email) == false) {
+    }  
+    else if (!Validate.isEmail(email)){
       setLoading(false);
-
       Auth.ToastMessage(String.loginmain.error_message_email_valid);
+     
     } else if (Phonenumber == '') {
       setLoading(false);
 
@@ -146,9 +184,12 @@ const AccountDetails = (props) => {
                 <TextInput
                   style={styles.textCode}
                   value={email}
-                  onChangeText={(text) => {
-                    setEmail(text);
-                  }}
+                  // onChangeText={(text) => {
+                  //   setEmail(text);
+                   
+                  // }}
+
+                  onChangeText={(text) => setEmail(text)}
                   placeholder={String.loginmain.loginplaceholderEmail}
                   keyboardType="email-address"
                 />

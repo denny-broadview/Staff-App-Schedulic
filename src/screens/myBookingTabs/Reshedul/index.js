@@ -129,6 +129,7 @@ const Reshedul = (props) => {
     setHours(rhours);
     return num + ' minutes = ' + rhours + ' hour(s) and ';
   }
+  
   // api call holiday and Offday
   function getHoliday() {
     setLoading(true);

@@ -15,134 +15,110 @@ import {String} from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
-import TimeIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {MySpinner} from '../../../component/MySpinner';
 import moment from 'moment';
-import CalendarPicker from 'react-native-calendar-picker';
+import {Auth, Constants} from '@global';
 import {useSelector} from 'react-redux';
-import {Matrics, Color} from '../../../utlis';
 const onGoingDetails = (props) => {
-  const [timeSettingCancel, setTimeSettingCancel] = useState('');
-  const [timeSettingReshedulic, setTimeSettingReshedulic] = useState('');
-  const [modalReshedulVisible, setReshedulVisible] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const userInfo = useSelector((state) => state.user.user);
   const [onTheWayClieck, setOnTheWayClieck] = useState(true);
   const [workStarted, setWorkStarted] = useState(false);
   const [completedClick, setCompletedClick] = useState(false);
   const [note, setNote] = useState('');
   const [data, setData] = useState({});
-  const maxDate = new Date(2040, 1, 1);
-  const minDate = new Date();
-  const [calenderClick, setcalenderClick] = useState();
-  const [limit, setlimit] = useState('');
-  const [finaldate, setFinalDate] = useState('');
-  const [fdate, setfdate] = useState('');
+  const [loagind, setLoading] = useState(false);
+  //time
+  const [curTime, setCurTime] = useState('');
+  var timeconvert;
   var currencyFormatter = require('currency-formatter');
   const currency = useSelector((state) => state.setting.setting.currency);
   const currencySymbolePosition = useSelector(
     (state) => state.setting.setting.currency_symbol_position,
-  ); 
+  );
   const currencyFrm = useSelector(
     (state) => state.setting.setting.currency_format,
   );
- 
+
+  const settingreshedultime = useSelector(
+    (state) => state.setting.setting.min_reseduling_time,
+  );
+  const currenttime = moment()
+    .utcOffset('+05:30')
+    .format('YYYY-MM-DD HH:mm:ss');
+  const currentdate = moment().utcOffset('+05:30').format('YYYY-MM-DD');
+  const crtime = moment().utcOffset('+05:30').format('HH:mm:ss');
+  console.log('CurrentData~~~~~~~~~~~', currentdate);
+  console.log('currentTime~~~~~~~~', crtime);
+  console.log('currentdate time------------', currenttime);
+  console.log('settingReshedultime-----', settingreshedultime);
   useEffect(() => {
+    time_convert();
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
       console.log('item ongoing-----------', props.route.params.datapass);
     }
     console.log(' ongoing pic-----------', props.route.params.image);
   }, []);
-  function btnClick() {
-    setOnTheWayClieck(false);
-    setWorkStarted(true);
-  }
-  function btnworkStarted() {
-    setCompletedClick(true);
-    setWorkStarted(false);
-    setOnTheWayClieck(false);
-  }
 
-  const _startFinal = (date) => {
-    var firstDate = moment(date._d).format('YYYY-MM-DD');
-    const startDate = date ? date.toString() : '';
-    //day
-    let setectDay = startDate.slice(0, 3);
-    //day date
-    let selectstartdate = startDate.slice(7, 10);
-    //month
-    let selectstartmonth = startDate.slice(3, 7);
-    //year
-    let selectstartyear = startDate.slice(10, 15);
-  
-    setlimit(startDate);
-    setfdate(firstDate);
-    setFinalDate(firstDate);
-    setDateShow(setectDay + ',' + selectstartmonth + '' + selectstartdate);
-    console.log('firstdate~~~~~~~~', firstDate);
-  
-  };
+  // calculetion of booking statuswise
+  function bookingtimecurrenttime(val1, val2) {
+    var startTime = moment(val2, 'HH:mm:ss');
+    var endTime = moment(val1, 'HH:mm:ss');
+    var duration = moment.duration(endTime.diff(startTime));
+    // duration in hours
+    var hours = parseInt(duration.asHours());
+    var minutes = parseInt(duration.asMinutes()) % 60;
 
-  function _onDateChange(date) {
-    {
-      calenderClick == true ? _startFinal(date) : null;
-    }
+    console.log('current time~~~~~~~~~~~~~~', val1);
+    console.log('booking time~~~~~~~~~~~~~~', val2);
+   
+    console.log('diff========', minutes + hours * 60);
+
+    return minutes + hours * 60;
   }
 
-  function calenderview() {
-    setModalVisible()
-    return (
-      <View style={styles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <TouchableHighlight
-              style={{...styles.closeButton}}
-              onPress={() => {
-                setModeltimeVisible(!modalVisible);
-              }}>
-              <Icon name="closecircle" style={styles.closeIcon} />
-            </TouchableHighlight>
-            <View>
-              <Text style={styles.textSelectedTextDia}>
-                {String.MyBookingTab.select_date}
-              </Text>
-            </View>
-            <CalendarPicker
-              textStyle={{
-                color: Color.bleck,
-                justifyContent: 'center',
-                alignContent: 'center',
-              }}
-              weekdaysColor="#424DE4"
-              weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
-              previousTitle="<"
-              nextTitle=">"
-              onDateChange={_onDateChange}
-              selectedDayColor="#424DE4"
-              selectedDayTextColor="#FFFFFF"
-              minDate={calenderClick == true ? minDate : limit}
-              maxDate={maxDate}
-             
-            />
-            <TouchableHighlight
-              style={{
-                ...styles.nextButton,
-                backgroundColor: Color.AppColor,
-              }}
-              onPress={() => {
-                setModalVisible(!modalVisible);
-              }}>
-              <Text style={styles.textStyle}>
-                {String.MyBookingTab.next}
-              </Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-      </Modal>
-    </View>
+  function covertDateTime(val1, val2) {
+    var str = val1 + ' ' + val2;
+    const bDate = moment(str, 'YYYY-MM-DD HH:mm:ss');
+    return bDate;
+  }
+  function time_convert() {
+    const num = settingreshedultime;
+
+    var hours = Math.floor(num / 60);
+    var minutes = num % 60;
+    var seconds = Math.floor(num * 60 - hours * 3600 - minutes * 60);
+
+    timeconvert = hours + ':' + minutes + ':' + seconds;
+    const bDate1 = moment(timeconvert).format('HH:mm:ss');
+    console.log('timeconvert-----------', timeconvert);
+    console.log('second-----------', seconds);
+    return hours + ':' + minutes;
+  }
+
+  // Api calling for newBookings
+  function getStatus(st) {
+    console.log('usertoken----', userInfo.token);
+    setLoading(true);
+    let myForm = new FormData();
+    myForm.append('order_item_id', data.id);
+    myForm.append('staff_id', userInfo.user_id);
+    myForm.append('order_status', st);
+    console.log('parm ongoing status~~~~~~~~~', myForm);
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.status_update,
+      (res) => {
+        console.log(' ongoing data status--------', res);
+        if (res[1].data == true) {
+          setLoading(false);
+          props.navigation.navigate('OngoingTab');
+        } else {
+          setLoading(false);
+        }
+      },
     );
   }
   return (
@@ -160,6 +136,7 @@ const onGoingDetails = (props) => {
       <ScrollView style={{flex: 1}}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <View style={styles.mainView}>
+            <MySpinner size="large" visible={loagind} />
             <View style={styles.topView}>
               <Text style={styles.textDate_time}>
                 {String.MyBookingTab.date_time}
@@ -167,8 +144,9 @@ const onGoingDetails = (props) => {
               <Text style={styles.textstatus}>{String.MyBookingTab.satus}</Text>
             </View>
             <View style={styles.topView_dis}>
-             
-              <Text style={styles.textDate_dis}>{moment(data.booking_date).format('DD MMM YYYY')}</Text>
+              <Text style={styles.textDate_dis}>
+                {moment(data.booking_date).format('DD MMM YYYY')}
+              </Text>
               <Text style={styles.textTime_dis}>{data.booking_time}</Text>
               <Text style={styles.textstatus_dis}>{data.order_status}</Text>
             </View>
@@ -180,9 +158,11 @@ const onGoingDetails = (props) => {
             <View style={styles.service_btn_mainview}>
               <View style={styles.service_dis}>
                 <Text style={styles.textDate_time}>
-                  {String.MyBookingTab.services}
+                  {String.cashpaymant.service}
                 </Text>
-                <Text style={styles.textTime_dis}>{data.service == null ? null : data.service.service_name}</Text>
+                <Text style={styles.textTime_dis}>
+                  {data.service == null ? null : data.service.service_name}
+                </Text>
               </View>
             </View>
             <View style={styles.service_btn_mainview}>
@@ -208,64 +188,89 @@ const onGoingDetails = (props) => {
                       )}
                     </Text>
                   )}
-                 
                 </View>
                 <View style={styles.service_customer}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.customer}
                   </Text>
-                  <Text style={styles.textTime_dis}> {data.customer == null ? null : data.customer.fullname}</Text>
+                  <Text style={styles.textTime_dis}>
+                    {data.customer == null ? null : data.customer.fullname}
+                  </Text>
                 </View>
               </View>
               <View style={styles.service_dis_btn}>
-                {onTheWayClieck == false ? (
+                {data.order_status == 'OW' &&
+                data.booking_date == currentdate &&
+                bookingtimecurrenttime(crtime, data.booking_time) < 30 ? (
                   <TouchableOpacity
                     style={styles.btnViewWorkstarted}
-                    onPress={() => btnworkStarted()}>
+                    onPress={() => getStatus('WS')}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.workstarted}
                     </Text>
                   </TouchableOpacity>
                 ) : null}
-                {completedClick == true ? (
+                {data.order_status == 'WS' && data.payment != null ? (
                   <TouchableOpacity
                     style={styles.btnViewDetails}
-                    onPress={() => props.navigation.navigate('Payment',{datapass: props.route.params.datapass,image:props.route.params.image})}>
+                    onPress={() => {
+                      getStatus('CO'),
+                        props.navigation.navigate('Payment', {
+                          datapass: props.route.params.datapass,
+                          image: props.route.params.image,
+                        });
+                    }}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.completed}
                     </Text>
                   </TouchableOpacity>
                 ) : null}
 
-                {onTheWayClieck == true ? (
+                {data.order_status == 'AC' &&
+                data.booking_date == currentdate &&
+                bookingtimecurrenttime(crtime, data.booking_time) < 60 ? (
                   <TouchableOpacity
                     style={styles.btnViewOntheWay}
-                    onPress={() => btnClick()}>
+                    onPress={() => getStatus('OW')}>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.ontheway}
                     </Text>
                   </TouchableOpacity>
-                ) : (
+                ) : null}
+                {data.order_status == 'OW' &&
+                data.service.service_sub_type == 'at-home' ? (
                   <TouchableOpacity
                     style={styles.btnViewMap}
-                    onPress={() => props.navigation.navigate('MapScreen',{datapass: props.route.params.datapass,image:props.route.params.image})}>
+                    onPress={() =>
+                      props.navigation.navigate('MapScreen', {
+                        datapass: props.route.params.datapass,
+                        image: props.route.params.image,
+                      })
+                    }>
                     <Text style={styles.btnText}>
                       {String.MyBookingTab.map}
                     </Text>
                   </TouchableOpacity>
-                )}
-                <View style={styles.btnViewReject}>
-                  <TouchableOpacity
-                    onPress={() =>  props.navigation.navigate('Reshedul',{datapass: props.route.params.datapass})}>
-                    <Text style={styles.btnText}>
-                      {String.MyBookingTab.reschedule}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                ) : null}
+                {covertDateTime(data.booking_date, data.booking_time).diff(
+                  curTime,
+                ) >= timeconvert ? (
+                  <View style={styles.btnViewReject}>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.navigation.navigate('Reshedul', {
+                          datapass: props.route.params.datapass,
+                        })
+                      }>
+                      <Text style={styles.btnText}>
+                        {String.MyBookingTab.reschedule}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                ) : null}
               </View>
             </View>
           </View>
-        
 
           <View style={styles.mainView}>
             <Text style={styles.textBookingDetails}>
@@ -274,32 +279,38 @@ const onGoingDetails = (props) => {
             <View style={styles.imgView}>
               <View style={styles.courseImgView}>
                 <Image
-                  source={{uri:props.route.params.image}}
+                  source={{uri: props.route.params.image}}
                   style={styles.courseImg}
                 />
               </View>
               <View>
-                <Text style={styles.dataname}>{data.customer == null ? null : data.customer.fullname}</Text>
-                <Text style={styles.datars}>{data.customer == null ? null : data.customer.email}</Text>
+                <Text style={styles.dataname}>
+                  {data.customer == null ? null : data.customer.fullname}
+                </Text>
+                <Text style={styles.datars}>
+                  {data.customer == null ? null : data.customer.email}
+                </Text>
               </View>
             </View>
             <View style={styles.call_View}>
               <IconCall name="md-call-sharp" style={styles.call_icon} />
-              <Text style={styles.textCall}>{data.customer == null ? null : data.customer.phone}</Text>
+              <Text style={styles.textCall}>
+                {data.customer == null ? null : data.customer.phone}
+              </Text>
             </View>
             {data.service && data.service.servicesubType == 'at-home' ? (
-
-            <View style={styles.address_View}>
-              <Icon name="enviroment" style={styles.call_icon} />
-              <Text style={styles.textAddress}>jsgsg</Text>
-            </View>):null}
+              <View style={styles.address_View}>
+                <Icon name="enviroment" style={styles.call_icon} />
+                <Text style={styles.textAddress}>jsgsg</Text>
+              </View>
+            ) : null}
             <View style={styles.viewLine} />
             {data.status_notes !== null ? (
-
-            <View style={styles.note_View}>
-              <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>
-              <Text style={styles.textAddress}>{data.status_notes}</Text>
-            </View>):null}
+              <View style={styles.note_View}>
+                <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>
+                <Text style={styles.textAddress}>{data.status_notes}</Text>
+              </View>
+            ) : null}
           </View>
         </View>
       </ScrollView>

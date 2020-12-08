@@ -42,7 +42,7 @@ import Invoice from '../screens/myBookingTabs/invoice';
 import Notification from '../screens/Notification';
 import { useDispatch,useSelector } from 'react-redux';
 import { Auth, Constants } from '@global'
-import { setSetting,setTax} from '../store/actions'
+import { setSetting,setTax,setBusiness} from '../store/actions'
 const {width} = Dimensions.get('window');
 const Stack = createStackNavigator();
 YellowBox.ignoreWarnings(['']);
@@ -65,6 +65,7 @@ export default App = () => {
   useEffect(()=>{
     allSettingApi();
     getAllTax();
+    getBusiness();
   },[])
 
   //Get All setting
@@ -106,6 +107,23 @@ export default App = () => {
     dispatch(setTax(data))
   }
 
+  const onSetBusiness = data =>{
+    dispatch(setBusiness(data))
+  }
+   // get business api call use of paymant url
+   function getBusiness() {
+    
+    let myForm = new FormData();
+    myForm.append('business_id', Constants.businessid);
+    Auth.PostServiceAuth(myForm, Constants.ApiAction.getBusiness, (res) => {
+      if (res[1].data == true) {
+        console.log('business------',res[1].response)
+        onSetBusiness(res[1].response);
+      } else {
+        Auth.ToastMessage(res[1].data);
+      }
+    });
+  }
   const BottomTabs = () => {
     return (
       <Tab.Navigator tabBar={(props) => <BottomBar {...props} />}>

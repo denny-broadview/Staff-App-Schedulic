@@ -1,4 +1,4 @@
-import React, { useEffect, useState, } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,16 +8,17 @@ import {
   TextInput,
 } from 'react-native';
 import styles from './styles';
-import { String } from '../../utlis/String';
+import {String} from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useSelector } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
-import { MySpinner } from '../../component/MySpinner';
-import { Auth, Constants } from '@global';
+import {useSelector} from 'react-redux';
+import {ScrollView} from 'react-native-gesture-handler';
+import {MySpinner} from '../../component/MySpinner';
+import {Auth, Constants} from '@global';
 const axios = require('axios').default;
 const CashPaymantDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
+  const businessdata = useSelector((state) => state.businessDetails.businessDetails);
   var currencyFormatter = require('currency-formatter');
   const currency = useSelector((state) => state.setting.setting.currency);
   const currencySymbolePosition = useSelector(
@@ -40,11 +41,13 @@ const CashPaymantDetails = (props) => {
   let [grantTotal, setGrantTotal] = useState('');
 
   const [payment, setPayment] = useState([]);
+
   const [taxObject, setTaxObject] = useState([]);
   const [method, setMethod] = useState([]);
   let subtotal = props.route.params.datapass.total_cost;
   let taxSub = 0;
   useEffect(() => {
+   
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
       setPayment(props.route.params.payment);
@@ -54,14 +57,15 @@ const CashPaymantDetails = (props) => {
   }, []);
   useEffect(() => {
     taxCal();
-  }, [data])
+  }, [data]);
 
   useEffect(() => {
     let val = fnFinalVal();
     setGrantTotal(val);
     console.log('txtTotla in useEffect  - ', val);
-  }, [discountType])
+  }, [discountType]);
 
+ 
   // coupon code api calling
   function couponeCodeapi() {
     setLoading(true);
@@ -91,12 +95,14 @@ const CashPaymantDetails = (props) => {
 
     for (var i in taxArray) {
       if (i == 0) {
-        amountGST = (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr.push({ amount: amountGST });
+        amountGST =
+          (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
+        GstSgstArr.push({amount: amountGST});
         taxSub = taxSub + amountGST;
       } else if (i == 1) {
-        amountCGST = (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr.push({ amount: amountCGST });
+        amountCGST =
+          (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
+        GstSgstArr.push({amount: amountCGST});
         taxSub = taxSub + amountCGST;
       }
     }
@@ -110,12 +116,11 @@ const CashPaymantDetails = (props) => {
     setCalTaxArray(tempsArr);
 
     if (taxSub) {
-      let val = fnFinalVal()
+      let val = fnFinalVal();
       setGrantTotal(val);
       console.log('txtTotla arshad tax - ', val);
-
     }
-  }
+  };
   const fnFinalVal = () => {
     let val;
     console.log('grantTotal------', grantTotal);
@@ -124,9 +129,9 @@ const CashPaymantDetails = (props) => {
     console.log('discountvalue------', discountvalue);
     // console.log('discountType------', discountType);
     if (discountvalue && discountType) {
-
       if (discountType == 'P') {
-        let discount = (parseFloat(grantTotal) * parseFloat(discountvalue)) / 100;
+        let discount =
+          (parseFloat(grantTotal) * parseFloat(discountvalue)) / 100;
 
         val = parseFloat(grantTotal) - parseFloat(discount);
         console.log('discountType------arsh ', discount);
@@ -134,45 +139,43 @@ const CashPaymantDetails = (props) => {
       } else {
         val = parseFloat(grantTotal) - parseFloat(discountvalue);
       }
-
     } else {
       val = parseFloat(taxSub) + parseFloat(subtotal);
     }
     return val;
-  }
+  };
   const paymentApi = () => {
     let resObject;
 
     let order = {
-      "tax": calTaxArray,
-      "discount_type": discountvalue,
-      "discount_value": discountvalue,
-      "discount": discount,
-      "nettotal": grantTotal
+      tax: calTaxArray,
+      discount_type: discountvalue,
+      discount_value: discountvalue,
+      discount: discount,
+      nettotal: grantTotal,
     };
 
     if (method == 'cash') {
       resObject = {
-        "order_item_id": data.id,
-        "payment": [payment],
-        "orders": [order],
-        "orderItem": [order]
-      }
+        order_item_id: data.id,
+        payment: [payment],
+        orders: [order],
+        orderItem: [order],
+      };
     } else {
       resObject = {
-        "order_item_id": data.id,
-        "URL": "https://app.schedulic.com/online-payment?order-item=" +data.id,
-        "email": userInfo.email,
-        "payment": [payment],
-        "orders": [order],
-        "orderItem": [order]
-      }
+        order_item_id: data.id,
+        URL: businessdata.payment_url + data.id,
+        email: userInfo.email,
+        payment: [payment],
+        orders: [order],
+        orderItem: [order],
+      };
     }
-
 
     console.log(' resObject ', JSON.stringify(resObject));
 
-    setLoading(true)
+    setLoading(true);
     axios
       .post(
         Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant,
@@ -181,31 +184,30 @@ const CashPaymantDetails = (props) => {
           headers: {
             'Content-Type': 'application/json',
             'api-token': userInfo.token,
-            'staff-id': userInfo.user_id
-          }
+            'staff-id': userInfo.user_id,
+          },
         },
       )
       .then((response) => {
-        setLoading(false)
+        setLoading(false);
         console.log('Payment  update--------', response.data);
-        console.log('order id---------', response.data.response)
+        console.log('order id---------', response.data.response);
         // props.navigation.navigate('ViewAppointmant', {id: response.data.response});
         let dataSatus = response.data.data;
 
         if (dataSatus == true) {
           console.log(response.data.response);
-          props.navigation.replace('PaymantDone', { order_id: data.id })
+          props.navigation.replace('PaymantDone', {order_id: data.id});
         } else {
-          Auth.ToastMessage("Error! while payment Update.");
+          Auth.ToastMessage('Error! while payment Update.');
         }
-
       })
       .catch(function (error) {
         console.log(error);
-        setLoading(false)
-        Auth.ToastMessage("Error! while order Bookign.");
+        setLoading(false);
+        Auth.ToastMessage('Error! while order Bookign.');
       });
-  }
+  };
   return (
     <View style={styles.container}>
       <HeaderView
@@ -225,8 +227,9 @@ const CashPaymantDetails = (props) => {
           <View style={styles.imgView}>
             <View style={styles.courseImgView}>
               <Image
-                source={{ uri: props.route.params.image }}
-                style={styles.courseImg} />
+                source={{uri: props.route.params.image}}
+                style={styles.courseImg}
+              />
             </View>
             <Text style={styles.userNameSyl}>
               {data.customer == null ? null : data.customer.fullname}
@@ -236,19 +239,19 @@ const CashPaymantDetails = (props) => {
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
                   data.total_cost,
-                  { code: currency },
-                  { locale: currencyFrm },
+                  {code: currency},
+                  {locale: currencyFrm},
                 )}
               </Text>
             ) : (
-                <Text style={styles.userAmount}>
-                  {currencyFormatter.format(
-                    data.total_cost,
-                    { locale: currencyFrm },
-                    { code: currency },
-                  )}
-                </Text>
-              )}
+              <Text style={styles.userAmount}>
+                {currencyFormatter.format(
+                  data.total_cost,
+                  {locale: currencyFrm},
+                  {code: currency},
+                )}
+              </Text>
+            )}
           </View>
         </View>
         <View style={styles.amountView}>
@@ -258,46 +261,45 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-                { code: currency },
-                { locale: currencyFrm },
+                {code: currency},
+                {locale: currencyFrm},
               )}
             </Text>
           ) : (
-              <Text style={styles.text_rs}>
-                {currencyFormatter.format(
-                  data.total_cost,
-                  { locale: currencyFrm },
-                  { code: currency },
-                )}
-              </Text>
-            )}
+            <Text style={styles.text_rs}>
+              {currencyFormatter.format(
+                data.total_cost,
+                {locale: currencyFrm},
+                {code: currency},
+              )}
+            </Text>
+          )}
         </View>
 
         <View>
-
           <View>
             <FlatList
               data={calTaxArray}
-              renderItem={({ item, index }) => (
+              renderItem={({item, index}) => (
                 <View style={styles.amountView}>
                   <Text style={styles.text_amount}>{item.name}</Text>
                   {currencySymbolePosition == 'left' ? (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
                         item.amount,
-                        { code: currency },
-                        { locale: currencyFrm },
+                        {code: currency},
+                        {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
-                      <Text style={styles.text_rs}>
-                        {currencyFormatter.format(
-                          item.amount,
-                          { locale: currencyFrm },
-                          { code: currency },
-                        )}
-                      </Text>
-                    )}
+                    <Text style={styles.text_rs}>
+                      {currencyFormatter.format(
+                        item.amount,
+                        {locale: currencyFrm},
+                        {code: currency},
+                      )}
+                    </Text>
+                  )}
                 </View>
               )}></FlatList>
           </View>
@@ -312,50 +314,69 @@ const CashPaymantDetails = (props) => {
                 </Text>
               </View>
             ) : (
-                <View style={styles.coiponView}>
-                  <TextInput
-                    style={styles.textCouponCode}
-                    onChangeText={(text) => {
-                      setCouponeCode(text);
-                    }}
-                    placeholder={String.cashpaymant.couponcode}
-                    maxLength={10}
-                    keyboardType="default"
+              <View style={styles.coiponView}>
+                <TextInput
+                  style={styles.textCouponCode}
+                  onChangeText={(text) => {
+                    setCouponeCode(text);
+                  }}
+                  placeholder={String.cashpaymant.couponcode}
+                  maxLength={10}
+                  keyboardType="default"
+                />
+                <View style={styles.couponIconView}>
+                  <Icon
+                    name="check"
+                    style={styles.inc_coupon}
+                    onPress={() => couponeCodeapi()}
                   />
-                  <View style={styles.couponIconView}>
-                    <Icon
-                      name="check"
-                      style={styles.inc_coupon}
-                      onPress={() => couponeCodeapi()}
-                    />
-                  </View>
                 </View>
-              )}
+              </View>
+            )}
           </View>
         </View>
         <View style={styles.borderView} />
         <View style={styles.totalamountView}>
           <Text style={styles.textTotal}>{String.cashpaymant.total}</Text>
-
-          <Text style={styles.textTotalRs}>{grantTotal}</Text>
+          {currencySymbolePosition == 'left' ? (
+            <Text style={styles.textTotalRs}>
+              {currencyFormatter.format(
+                grantTotal,
+                {code: currency},
+                {locale: currencyFrm},
+              )}
+            </Text>
+          ) : (
+            <Text style={styles.textTotalRs}>
+              {currencyFormatter.format(
+                grantTotal,
+                {locale: currencyFrm},
+                {code: currency},
+              )}
+            </Text>
+          )}
         </View>
         <View style={styles.add_more_serviceMainView}>
-          {method == 'cash' ? <TouchableOpacity
-            style={styles.buttonStylpass}
-            onPress={() => paymentApi()}>
-            <Text style={styles.textChange}>{String.cashpaymant.paid}</Text>
-          </TouchableOpacity>
-            :
+          {method == 'cash' ? (
             <TouchableOpacity
               style={styles.buttonStylpass}
               onPress={() => paymentApi()}>
-              <Text style={styles.textChange}>{String.cashpaymant.paymantlink}</Text>
+              <Text style={styles.textChange}>{String.cashpaymant.paid}</Text>
             </TouchableOpacity>
-          }
+          ) : (
+            <TouchableOpacity
+              style={styles.buttonStylpass}
+              onPress={() => paymentApi()}>
+              <Text style={styles.textChange}>
+                {String.cashpaymant.paymantlink}
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={styles.proceedtocheckMainView}>
-          <TouchableOpacity style={styles.buttonStylupdate} 
-           onPress={() => props.navigation.goBack()} >
+          <TouchableOpacity
+            style={styles.buttonStylupdate}
+            onPress={() => props.navigation.goBack()}>
             <Text style={styles.textUpdate}>{String.cashpaymant.cancel}</Text>
           </TouchableOpacity>
         </View>

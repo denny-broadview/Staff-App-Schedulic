@@ -77,7 +77,7 @@ const MyAccount = (props) => {
    
     return (
         <View style={styles.container}>
-            <HeaderView header={true}  searchClick ={false}  search={false} notification={true} onPressNoti={() => props.navigation.replace('Notification')} headertext={String.account.MyAccount}/>
+            <HeaderView header={true}  searchClick ={false}  search={false} notification={true} onPressNoti={() => props.navigation.navigate('Notification')} headertext={String.account.MyAccount}/>
 
             {/* <Toolbar  backButton={false} title={String.account.my_account} notification={true} search={true} /> */}
             <ScrollView style={{ flex: 1 }} bounces={false} showsVerticalScrollIndicator={false}>
@@ -91,34 +91,34 @@ const MyAccount = (props) => {
                             <Text style={styles.emailphone}>{userInfo.phone}</Text>
                         </View>
                         <View style={{ justifyContent: 'flex-end', alignSelf: 'center' }}>
-                            <TouchableOpacity style={styles.editimg} onPress={()=> props.navigation.replace('AccountDetails')}>
+                            <TouchableOpacity style={styles.editimg} onPress={()=> props.navigation.navigate('AccountDetails')}>
                                 <Icon name="edit-3" style={styles.icon} ></Icon>
                             </TouchableOpacity>
                         </View>
                     </View>
                     <View >
-                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.replace('Category')}>
+                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('Category')}>
                             <Icon name="grid" style={styles.menu}></Icon>
                             <Text style={styles.menuname}>{String.account.category}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.viewBoder}></View>
                     <View >
-                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.replace('PostalCode')}>
+                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('PostalCode')}>
                             <IconAddress name="location-searching" style={styles.menu}></IconAddress>
                             <Text style={styles.menuname}>{String.account.postlCode}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.viewBoder}></View>
                     <View >
-                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.replace('WorkingHours')}>
+                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('WorkingHours')}>
                             <IconTime name="timer-outline" style={styles.menu}></IconTime>
                             <Text style={styles.menuname}>{String.account.workinghr}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styles.viewBoder}></View>
                     <View >
-                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.replace('Breaks')}>
+                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('Breaks')}>
                             <IconFontAwesome5 name="utensils" style={styles.menu}></IconFontAwesome5>
                             <Text style={styles.menuname}>{String.account.breaks}</Text>
                         </TouchableOpacity>
@@ -126,7 +126,7 @@ const MyAccount = (props) => {
                     </View>
                     <View style={styles.viewBoder}></View>
                     <View >
-                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.replace('TimeOff')}>
+                        <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('TimeOff')}>
                             <IconTimeOff name="timer-off-outline" style={styles.menu}></IconTimeOff>
                             <Text style={styles.menuname}>{String.account.timeoff}</Text>
                         </TouchableOpacity>

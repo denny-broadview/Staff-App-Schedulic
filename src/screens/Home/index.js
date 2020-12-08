@@ -129,7 +129,7 @@ const Home = (props) => {
               <StarRating
                 maxStars={5}
                 rating={starCount}
-                selectedStar={(rating) => _onStarRatingPress(rating)}
+               // selectedStar={(rating) => _onStarRatingPress(rating)}
                 starSize={18}
                 fullStarColor="#FFC300"
                 emptyStarColor="#CECCCC"

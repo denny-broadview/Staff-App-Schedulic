@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import userReducer from './reducers/user';
 import settingReducer from './reducers/setting';
 import serviceReducer from './reducers/bookingService';
+import businessDetails from './reducers/buisenssReduser';
 
 
 
@@ -17,14 +18,16 @@ const persistConfig = {
     whitelist: [
       'user',
       'setting',
-      'serviceReducer'
+      'serviceReducer',
+      'businessDetails'
     ],
   };
 
 const rootReducer = combineReducers({
     user: userReducer,
     setting:settingReducer,
-    BookingService:serviceReducer
+    BookingService:serviceReducer,
+    businessDetails:businessDetails
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
