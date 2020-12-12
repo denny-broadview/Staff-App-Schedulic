@@ -30,7 +30,6 @@ export default StyleSheet.create({
     height: Matrics.Scale(50),
     borderRadius: 50 / 2,
     resizeMode: 'cover',
-  
     backgroundColor: Color.white,
   },
   topView: {
@@ -46,14 +45,13 @@ export default StyleSheet.create({
     padding:hp('1%')
   },
   imgView: {
-   
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'flex-start',
   },
   userNameSyl: {
-    width: wp('55%'),
+    width: wp('50%'),
     marginLeft: wp('10%'),
     color: Color.gray,
   },
@@ -197,13 +195,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     fontSize: Matrics.Scale(18),
-    width: wp('60'),
+    width: wp('50%'),
     marginLeft: wp('2%'),
     fontWeight: '900',
   },
   textTotalRs: {
     justifyContent: 'center',
     alignSelf: 'center',
+    width: wp('30%'),
     fontSize: Matrics.Scale(18),
     marginLeft: wp('15%'),
     fontWeight: '900',

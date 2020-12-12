@@ -86,6 +86,7 @@ const CompletedTab = (props) => {
 }
 
   function noItemDisplay() {
+   // setLoading(false);
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
@@ -100,7 +101,7 @@ const CompletedTab = (props) => {
         <View style={{justifyContent: 'center', flex: 1}}>
           <MySpinner size="large" visible={loagind} />
           <FlatList
-            ListEmptyComponent={noItemDisplay}
+            ListEmptyComponent={loagind == false ? noItemDisplay() :null}
             data={data}
             renderItem={({item, index}) => (
               <View style={styles.mainView}>

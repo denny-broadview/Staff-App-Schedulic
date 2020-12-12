@@ -30,6 +30,11 @@ const Constants = {
     cashpaymant:'staff-payment-update',
     couponcode: 'check-discount-coupon',
     status_update:'staff-update-bookings',
+    listHoliday:'list-holidays',
+    getListTiming:'list-availabel-timings',
+    resedule:'staff-resedule-bookings',
+    emailCheck:'admin-staff-email-check',
+    getBusiness:'get-business'
 
   },
   SplashScreen: {

@@ -11,8 +11,7 @@ const NewBookingTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
-  const [timeSettingCancel, setTimeSettingCancel] = useState('');
-  const [timeSettingReshedulic, setTimeSettingReshedulic] = useState('');
+ 
 
   // search
   const [masterDataSource, setMasterDataSource] = useState([]);
@@ -113,6 +112,7 @@ const NewBookingTab = (props) => {
     );
   }
   function noItemDisplay() {
+   // setLoading(false);
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
@@ -129,7 +129,7 @@ const NewBookingTab = (props) => {
         <View style={{justifyContent: 'center', flex: 1}}>
           <MySpinner size="large" visible={loagind} />
           <FlatList
-            ListEmptyComponent={noItemDisplay}
+            ListEmptyComponent={loagind == false ? noItemDisplay() :null}
             data={data}
             renderItem={({item, index}) => (
               <View style={styles.mainView}>

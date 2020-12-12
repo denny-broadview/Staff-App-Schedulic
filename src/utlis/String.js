@@ -1,7 +1,8 @@
 export const String = {
   app: {
     App: 'Schedulic Staff',
-    datanotfound:'No data found'
+    datanotfound:'No data found',
+    Nointernet:'No Internet Connection!'
   },
   login: {
     AppoitmentBookingApp: 'Appointment Booking Application',
@@ -106,6 +107,9 @@ export const String = {
    select_date:'Select Date',
    select_time:'Select Time',
    addnote:'Add Note',
+   next:'Next',
+   confirm:'confirm',
+   error_message_select_startdate:'Please select start date',
   },
 
   cashpaymant: {

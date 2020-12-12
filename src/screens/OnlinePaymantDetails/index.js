@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const OnlinePaymantDetails = (props) => {
   const [couponview, setCouponView] = useState(false);
   const [couponeCode, setCouponeCode] = useState('');
+
   return (
     <View style={styles.container}>
       <HeaderView

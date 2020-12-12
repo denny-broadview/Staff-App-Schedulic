@@ -8,3 +8,4 @@ export const SET_SETTING = 'GET_SETTING';
 export const SET_SERVICE_LIST = 'SET_SERVICE_LIST';
 export const TAX = 'TAX';
 export const SEARCH_KEY = 'SEARCH_KEY';
+export const SET_BUSINESS ='SET_BUSINESS'

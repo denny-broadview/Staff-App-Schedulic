@@ -24,6 +24,7 @@
     "radio-buttons-react-native": "^1.0.4",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-calendar-picker": "^7.0.3",
     "react-native-firebase": "^5.6.0",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-loading-spinner-overlay": "^2.0.0",
