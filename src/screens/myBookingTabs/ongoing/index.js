@@ -159,7 +159,7 @@ const OngoingTab = (props) => {
                           {String.MyBookingTab.workstarted}
                         </Text>
                       </TouchableOpacity>
-                    ) : null}
+                   ) : null}
                     {completedClick == true ? (
                       <TouchableOpacity
                         style={styles.btnViewDetails}

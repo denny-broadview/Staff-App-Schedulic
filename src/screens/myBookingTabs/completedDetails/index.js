@@ -78,7 +78,7 @@ const CompletDetails = (props) => {
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
-      />
+      /> 
       <ScrollView style={{flex: 1}}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <View style={styles.mainView}>
