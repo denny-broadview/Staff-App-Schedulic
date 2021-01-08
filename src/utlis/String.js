@@ -1,8 +1,8 @@
 export const String = {
   app: {
     App: 'Schedulic Staff',
-    datanotfound:'No data found',
-    Nointernet:'No Internet Connection!'
+    datanotfound: 'No data found',
+    Nointernet: 'No Internet Connection!',
   },
   login: {
     AppoitmentBookingApp: 'Appointment Booking Application',
@@ -22,12 +22,11 @@ export const String = {
     error_message_email_valid: 'Please Enter Valid Email-id',
     error_message_password: 'Please Enter Password',
     error_message_password_length: 'Please Enter 8 Digit Password',
-    error_message_phone_no:'Please Enter Phone number',
-    error_message_phone_length:'Please Enter 10 Digit mobile number',
-    error_message_fname:'Please Enter Firstname',
-    error_message_lname:'Please Enter Lastname'
-
-    },
+    error_message_phone_no: 'Please Enter Phone number',
+    error_message_phone_length: 'Please Enter 10 Digit mobile number',
+    error_message_fname: 'Please Enter Firstname',
+    error_message_lname: 'Please Enter Lastname',
+  },
   home: {
     Helloword: ' Hello!',
     Newbooking: ' New Bookings',
@@ -72,19 +71,18 @@ export const String = {
     update: 'Update',
     accountDetails: 'Account Details',
     name: 'Enter name',
-    fname:'Enter Firstname',
-    lname:'Enter Lastname',        
-    logoutMessage:'Are you sure you want to logout?',
-    to:'to',
-    notification:'Notification'
-
+    fname: 'Enter Firstname',
+    lname: 'Enter Lastname',
+    logoutMessage: 'Are you sure you want to logout?',
+    to: 'to',
+    notification: 'Notification',
   },
   MyBookingTab: {
     myBooking: 'My Booking',
     detail: 'Details',
     date_time: 'Date & Time',
     satus: 'Satus',
-    servicest:'Services',
+    servicest: 'Services',
     details: 'Details',
     pay: 'Pay',
     amount: 'Amount',
@@ -102,14 +100,14 @@ export const String = {
     completed: 'Completed',
     invoice: 'Invoice',
     rating: 'Rating',
-    staff:'Staff',
-   services:'Service :',
-   select_date:'Select Date',
-   select_time:'Select Time',
-   addnote:'Add Note',
-   next:'Next',
-   confirm:'confirm',
-   error_message_select_startdate:'Please select start date',
+    staff: 'Staff',
+    services: 'Service :',
+    select_date: 'Select Date',
+    select_time: 'Select Time',
+    addnote: 'Add Note',
+    next: 'Next',
+    confirm: 'confirm',
+    error_message_select_startdate: 'Please select start date',
   },
 
   cashpaymant: {
@@ -130,9 +128,9 @@ export const String = {
     orderid: 'Order Id :',
     done: 'Done',
   },
-  map:{
-    map:'Map',
-    distance:'Distance :',
-    customer:'Customer :'
-  }
+  map: {
+    map: 'Map',
+    distance: 'Distance :',
+    customer: 'Customer :',
+  },
 };

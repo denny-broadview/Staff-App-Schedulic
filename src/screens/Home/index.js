@@ -169,7 +169,7 @@ const Home = (props) => {
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.bookingCount}>{bookingdata.length > 0? bookingdata.length:0}</Text>
+                      <Text style={styles.bookingCount}>{bookingdata !=null && bookingdata.length > 0 ? bookingdata.length:0}</Text>
                     </View>
                   </View>
                   </TouchableOpacity>
@@ -193,7 +193,7 @@ const Home = (props) => {
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.ongoingCount}> {onGoingdata.length > 0? onGoingdata.length:0} </Text>
+                      <Text style={styles.ongoingCount}> {onGoingdata !=null && onGoingdata.length > 0 ? onGoingdata.length:0} </Text>
                     </View>
                   
                   </View>  
@@ -218,7 +218,7 @@ const Home = (props) => {
                       </Text>
                     </View>
                     <View>
-                      <Text style={styles.completCount}> {completeTask.length > 0 ? completeTask.length : 0} </Text>
+                      <Text style={styles.completCount}> {completeTask !=null && completeTask.length > 0 ? completeTask.length : 0} </Text>
                     </View>
                    
                   </View>
