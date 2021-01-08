@@ -37,7 +37,7 @@ class Invoice extends Component {
         myForm,
         Constants.ApiAction.sendInvoice,
         (res) => {
-          console.log(' send invoice--------', res);
+          console.log('send invoice--------', res);
           if (res[1].data == true) {
             Auth.ToastMessage(res[1].response);
           } else {
