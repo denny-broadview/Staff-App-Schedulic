@@ -157,7 +157,7 @@ const AccountDetails = (props) => {
         <KeyboardAvoidingView>
           <View style={styles.mainView}>
             <MySpinner size="large" visible={loagind} />
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{alignItems: 'center', justifyContent: 'center',}}>
               <View style={styles.inputBorde}>
                 <TextInput
                   style={styles.textCode}

@@ -67,6 +67,24 @@ const BottomBar = (props) => {
         
       </ImageBackground>
     </View>
+    // <View>
+    //   <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF' ,borderRadius: 20,}}> 
+    //   <FlatList
+    //     data={data}
+    //     showsHorizontalScrollIndicator={false}
+    //     style={{flex:1}}
+    //     horizontal
+    //     renderItem={({ item, index }) => {
+    //       return (
+    //         <TouchableOpacity style={{ flex:1,alignItems: "center",justifyContent:'space-between',marginHorizontal:wp('10%')}} onPress={() => onPressItem(index)}>
+    //           <Text style={[{size:10, color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.img}</Text>
+    //           <Text style={[{ size:10,color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.name}</Text>
+    //         </TouchableOpacity>
+    //       )
+    //     }}
+    //   />
+    // </View>
+    // </View>
   )
 
 }

@@ -12,13 +12,12 @@ export default StyleSheet.create({
           justifyContent:'center',
           alignContent:'center',
           alignSelf:'center',
-       
      },
      topprofiledeatils:{
           padding:20,
           flexDirection:'row',
-          marginBottom:'10%',
-          marginTop:'6%'  
+          marginBottom:'8%',
+          marginTop:'4%',
      },
      profileimage:{
           height:80,
@@ -49,13 +48,12 @@ export default StyleSheet.create({
           color: Color.AppColor
      },
      userText:{
-          color: Color.ligthGray, 
+          color: Color.bleck, 
           fontSize: 16,
-           marginTop: hp('2%')
+          marginTop:8
      },
      rating: {
           width: wp('30%'),
-          marginLeft:wp('2%'),
         },
      
      bgimagehome:{
@@ -79,7 +77,7 @@ export default StyleSheet.create({
       },
       commonProfile:{
           backgroundColor:Color.white,
-          padding:20,
+          padding:24,
           borderRadius:8,
           flexDirection:'row',
           alignItems:'center',
@@ -102,9 +100,9 @@ export default StyleSheet.create({
       },
       cardSubTextTitle:{
           color: Color.silver,
-           fontSize: 12,
-            marginTop: hp('1%'),
-            marginLeft:wp('3%')
+          fontSize: 12,
+          marginTop:Matrics.Scale(2),
+          fontWeight:"500",
       },
       bookingCount:{
           fontSize:28,

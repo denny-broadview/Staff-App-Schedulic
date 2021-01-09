@@ -23,30 +23,29 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(240, 240, 240, 10)',
   },
   menuView: {
+    justifyContent:'space-between',
     flexDirection: 'row',
-    width: wp('90%'),
-    padding:hp('1%')
+    padding:hp('1%'),
+    margin:hp('1%'),
   },
-  menuname: {
-    width: wp('75%'),
+  menuname:{
     color: Color.iconAccount,
     justifyContent: 'center',
     alignSelf: 'center',
-   padding:wp('1%')
+    marginLeft: Matrics.Scale(5),
+    textTransform:'capitalize'
   },
-  menu: {
+  menu:{
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
     color: Color.iconAccount,
-    marginLeft:wp('2%')
-  
   },
   border: {
     justifyContent: 'center',
     width: wp('90%'),
     height: hp('0.1%'),
-    backgroundColor: Color.ligthGray,
+    backgroundColor: "rgba(240, 240, 240, 10)",
     marginLeft: wp('5%'),
   },
   categoryText:{

@@ -150,7 +150,7 @@ const Home = (props) => {
                 <Text style={styles.dateTex}>  {moment().utcOffset('+05:30').format('DD MMM YYYY')}</Text>
               </View>
 
-              <View style={{marginTop: 30}}>
+              <View style={{marginTop: 20}}>
                 <View style={styles.commonProfile}>
                 <TouchableOpacity style={styles.btnCard} onPress={()=> props.navigation.navigate('NewBookingTab')}>
                   <View>

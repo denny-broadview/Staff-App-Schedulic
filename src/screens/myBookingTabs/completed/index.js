@@ -106,7 +106,7 @@ const CompletedTab = (props) => {
             renderItem={({item, index}) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
-                  <Text style={styles.textDate_time}>
+                  <Text style={styles.bookingTextDate}>
                     {String.MyBookingTab.date_time}
                   </Text>
                   <Text style={styles.textstatus}>
@@ -116,8 +116,8 @@ const CompletedTab = (props) => {
                 <View style={styles.topView_dis}>
                   {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
                   <Text style={styles.textDate_dis}>{moment(item.booking_date).format('DD MMM YYYY')}</Text>
-                  <Text style={styles.textTime_dis}>{item.booking_time}</Text>
-                  <Text style={styles.textstatus_dis}>{item.order_status}</Text>
+                  <Text style={styles.bookingTimeText}>{moment(item.booking_time, 'HH:mm:ss').format('LT')}</Text>
+                  <Text style={styles.textstatus_dis}>{item.order_status=='CO'?'Completed':item.order_status}</Text>
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>

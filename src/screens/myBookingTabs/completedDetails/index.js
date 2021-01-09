@@ -16,6 +16,7 @@ import StarRating from 'react-native-star-rating';
 import moment from 'moment';
 import {Auth, Constants} from '@global';
 import {useSelector} from 'react-redux';
+import { Matrics } from '../../../utlis';
 const CompletDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [loadingSearch, setLoadingSearch] = useState(false);
@@ -90,21 +91,26 @@ const CompletDetails = (props) => {
             </View>
             <View style={styles.topView_dis}>
               {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-              <Text style={styles.textDate_dis}>
-                {moment(data.booking_date).format('DD MMM YYYY')}
-              </Text>
-              <Text style={styles.textTime_dis}>{data.booking_time}</Text>
-              <Text style={styles.textstatus_dis}>{data.order_status}</Text>
+              <View style={{flexDirection:"row",marginLeft:"4%"}}> 
+                <Text style={styles.textDate_dis}>
+                  {moment(data.booking_date).format('DD MMM YYYY')}
+                </Text>
+                <Text style={styles.textTime_dis}>{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
+              </View>
+              <View> 
+              <Text style={styles.textstatus_dis}>{data.order_status=='CO'?'Completed':data.order_status}</Text>
+              </View>
             </View>
             <View style={{flexDirection: 'row'}}>
               <View style={styles.service_dis_book}>
                 <Text style={styles.textBook_Time_dis}>
-                  Book on {moment(data.booking_date).format('DD MMM YYYY')}
+                  Booked on {moment(data.booking_date).format('DD MMM YYYY')}&nbsp; 
+                   @{moment(data.booking_time, 'HH:mm:ss').format('LT')}
                 </Text>
               </View>
-              <View style={{width: '25%'}}>
+              <View style={{marginTop:Matrics.Scale(10)}}>
                 <Text style={styles.text_rat}>{String.MyBookingTab.staff}</Text>
-                <Text style={styles.textTime_dis}>{userInfo.full_name}</Text>
+                <Text style={[styles.textTime_dis,styles.textRight]}>{userInfo.full_name}</Text>
                 <View style={styles.staff_call_View}>
                   <IconCall
                     name="md-call-outline"
@@ -122,7 +128,10 @@ const CompletDetails = (props) => {
                 </Text>
                 <Text style={styles.textTime_dis}>
                   {data.service == null ? null : data.service.service_name}
-                </Text>
+                  </Text>
+                  <Text style={styles.textTime_dis}>
+                  Duration {data.service == null ? null : data.service.service_time}&nbsp; min
+                  </Text>
               </View>
             </View>
 
@@ -188,7 +197,6 @@ const CompletDetails = (props) => {
               </View>
             </View>
           </View>
-
           <View style={styles.mainView}>
             <Text style={styles.textBookingDetails}>
               {String.MyBookingTab.customer_detail}
@@ -210,7 +218,6 @@ const CompletDetails = (props) => {
                 </Text>
               </View>
             </View>
-
             <View style={styles.call_View}>
               <IconCall name="md-call-sharp" style={styles.call_icon} />
               <Text style={styles.textCall}>

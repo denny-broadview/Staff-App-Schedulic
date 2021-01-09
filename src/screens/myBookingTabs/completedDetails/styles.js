@@ -28,7 +28,8 @@ export default StyleSheet.create({
         shadowRadius: 1,
         shadowOffset: { width: 0, height: 2 },
         borderRadius: Matrics.Scale(10),
-        padding:Matrics.Scale(5)
+        padding:Matrics.Scale(5),
+        paddingBottom:"5%"
       },
       topView:{
         flexDirection:'row',
@@ -45,7 +46,7 @@ export default StyleSheet.create({
       service_customer:{
         width:wp('50%'),
         marginTop:hp('1%'),
-        marginLeft:wp('5%')
+        marginLeft:wp('4%')
       },
       btnView:{
         borderRadius: Matrics.Scale(5),
@@ -79,78 +80,75 @@ export default StyleSheet.create({
       },
       topView_dis:{
         flexDirection:'row',
-        width:wp('80%'),
-        justifyContent:'center',
-        alignSelf:'center',
+        width:wp('84%'),
+        justifyContent:'space-between',
         marginTop:hp('1%'),
-        marginStart:wp('5%')
+        // marginStart:wp('5%')
       },
       textDate_time:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('60%'),
-        fontWeight:'800'
+        fontWeight:'800',
+        marginBottom:Matrics.Scale(4)
       },
       text_rat:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
-       alignSelf:'flex-end',
-        fontWeight:'800'
+        fontSize:Matrics.Scale(16),
+        fontWeight:'800',
+        textAlign:'right',
+        width:wp('30%'),
       },
       textDate_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
-        width:wp('30%'),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
        
       },
       textBook_Time_dis:{
         marginTop:hp('2%'),
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('50%'),
         fontWeight:'800',
       },
       textTime_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
-        width:wp('30%'),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
-       
+      },
+      textRight:{
+        textAlign:'right',
       },
       staff_text_phone:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
-        width:wp('30%'),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        marginRight:wp('10%')
       },
       textstatus:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('20%')
+        width:wp('20%'),
+        textAlign:'right',
       },
       textstatus_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('25%'),
        
       },
       service_btn_mainview:{
         flexDirection:'row',
         width:wp('80%'),
-        marginTop:hp('2%'),
       },
       service_dis_book:{
         width:wp('50%'),
-        marginLeft: wp('5%'),
-        marginTop:hp('1%')
+        marginLeft:hp('2%')
       },
       service_dis:{
         width:wp('40%'),
-        marginLeft: wp('5%'),
+        marginLeft: wp('4%'),
         marginTop:hp('1%')
       },
      
@@ -182,7 +180,7 @@ export default StyleSheet.create({
       },
       text_amount:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('30%'),
@@ -190,7 +188,7 @@ export default StyleSheet.create({
       },
       text_staff:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('20%'),
@@ -203,7 +201,7 @@ export default StyleSheet.create({
       },
       text_amount_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
       },
@@ -246,7 +244,7 @@ textcancel:{
 textBookingDetails:{
   margin:wp('5%'),
   color:Color.AppColor,
-  fontSize:Matrics.Scale(18),
+  fontSize:Matrics.Scale(16),
   width:wp('60%'),
   fontWeight:'800'
 },
@@ -289,7 +287,6 @@ imgView: {
   },
   staff_call_View:{
     flexDirection:'row',
-    width:wp('30%'),
     
   },
   address_View:{
@@ -314,7 +311,6 @@ imgView: {
   staff_call_icon:{
     justifyContent:'center',
     alignSelf:'center',
-   
     color:Color.ligthGray,
     fontSize:Matrics.Scale(16),
     fontWeight:'900',
@@ -372,7 +368,7 @@ imgView: {
     justifyContent:'center',
     color:Color.white,
     fontWeight:'500',
-    fontSize:Matrics.Scale(18),
+    fontSize:Matrics.Scale(16),
     textAlign: "center",
     top: Platform.OS === 'ios' ? hp('1%') : hp('2%'), 
   },

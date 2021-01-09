@@ -63,10 +63,14 @@ const PostalCode = (props) => {
             <View>
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
+                <View style={{flexDirection:'row'}}> 
                 <Icon name="map-marker-alt" style={styles.menu} />
                 <Text style={styles.menuname}>{item.area}</Text>
+                </View>
+                <View> 
                 <Text style={styles.menu}>{item.postal_code}</Text>
                 {/* <Icon name="right" style={styles.menu} /> */}
+                </View>
               </TouchableOpacity>
             </View>
           )}></FlatList>

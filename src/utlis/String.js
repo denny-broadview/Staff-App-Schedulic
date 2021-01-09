@@ -28,8 +28,8 @@ export const String = {
     error_message_lname: 'Please Enter Lastname',
   },
   home: {
-    Helloword: ' Hello!',
-    Newbooking: ' New Bookings',
+    Helloword: 'Hello!',
+    Newbooking: 'New Bookings',
     Describtion: 'Lorem ipsum dolor',
     Ongoing: 'Ongoing',
     TaskCompleted: 'Task Completed',
@@ -60,7 +60,7 @@ export const String = {
   account: {
     MyAccount: 'My Account',
     category: 'Category',
-    postlCode: 'Postl Codes',
+    postlCode: 'Postal Codes',
     workinghr: 'Working Hours',
     breaks: 'Breaks',
     timeoff: 'Time Off',
@@ -81,7 +81,7 @@ export const String = {
     myBooking: 'My Booking',
     detail: 'Details',
     date_time: 'Date & Time',
-    satus: 'Satus',
+    satus: 'Status',
     servicest: 'Services',
     details: 'Details',
     pay: 'Pay',

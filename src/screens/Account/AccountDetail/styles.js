@@ -118,11 +118,12 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(66, 77, 228, 1)',
     borderRadius: Matrics.Scale(5),
     width: wp('90%'),
-    height: Platform.OS == 'ios' ? hp('6%') : hp('8%'),
+    height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
     textAlign: 'center',
+    marginBottom:"6%"
   },
   textUpdate: {
     justifyContent: 'center',
@@ -130,7 +131,7 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: Matrics.Scale(18),
     textAlign: 'center',
-    top: Platform.OS === 'ios' ? hp('1%') : hp('2%'),
+    top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
   },
   pickerStyle: {
     height: Platform.OS == 'ios' ? hp('5%') : hp('7%'),
