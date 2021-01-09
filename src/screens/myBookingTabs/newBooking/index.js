@@ -101,9 +101,11 @@ const NewBookingTab = (props) => {
           setLoading(false);
           if(st == "R"){
             props.navigation.navigate('Home');
+            getBooking()
           }
           else if(st == "AC")
           props.navigation.navigate('OngoingTab');
+          getBooking()
         } else {
          
           setLoading(false);
@@ -134,7 +136,7 @@ const NewBookingTab = (props) => {
             renderItem={({item, index}) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
-                  <Text style={styles.textDate_time}>
+                  <Text style={styles.bookingTextDate}>
                     {String.MyBookingTab.date_time}
                   </Text>
                   <Text style={styles.textstatus}>
@@ -146,7 +148,7 @@ const NewBookingTab = (props) => {
                   <Text style={styles.textDate_dis}>
                     {moment(item.booking_date).format('DD MMM YYYY')}
                   </Text>
-                  <Text style={styles.textTime_dis}>{item.booking_time}</Text>
+                  <Text style={styles.bookingTimeText}>{moment(item.booking_time, 'HH:mm:ss').format('LT')}</Text>
                   <Text style={styles.textstatus_dis}>{item.order_status}</Text>
                 </View>
                 <View style={styles.service_btn_mainview}>
@@ -187,7 +189,7 @@ const NewBookingTab = (props) => {
                   <Text style={styles.textTime_dis}>okk</Text>
                 </View> */}
                 <View style={styles.service_btn_mainview}>
-                  <View style={{marginLeft: 10}}>
+                  <View>
                     <View style={styles.service_dis}>
                       <Text style={styles.textDate_time}>
                         {String.MyBookingTab.amount}

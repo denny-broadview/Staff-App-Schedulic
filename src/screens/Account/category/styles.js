@@ -25,7 +25,7 @@ export default StyleSheet.create({
   menuView: {
     flexDirection: 'row',
     width: wp('90%'),
-    padding:hp('1%')
+    padding:Matrics.Scale('12')
   },
   menuname: {
     width: wp('80%'),
@@ -47,13 +47,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     width: wp('90%'),
     height: hp('0.1%'),
-    backgroundColor: Color.ligthGray,
+    backgroundColor: "rgba(240, 240, 240, 10)",
     marginLeft: wp('5%'),
   },
   categoryText:{
     color:Color.darkGray,
     fontSize:16,
-    fontWeight:'400',
+    fontWeight:'500',
     justifyContent:'center',
     alignItems:'center',
     margin:hp('2%')  }

@@ -47,7 +47,7 @@ const MyAccount = (props) => {
             [
                 
                     {text: 'Cancel', onPress: () => console.log('Cancel Pressed!')},
-                    {text: 'Yes', onPress: () => logOut()}
+                    {text: 'Yes', onPress: () => signOut()}
                 
             ],
             

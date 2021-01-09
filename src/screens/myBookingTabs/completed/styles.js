@@ -26,8 +26,8 @@ export default StyleSheet.create({
         shadowOpacity:0.1,
         shadowOffset: { width: 0, height: 1 },
         borderRadius:Matrics.Scale(10),
-        padding:Matrics.Scale(5)
-       
+        padding:Matrics.Scale(5),
+        paddingBottom:"5%"
       },
       topView:{
         flexDirection:'row',
@@ -49,39 +49,55 @@ export default StyleSheet.create({
         width:wp('80%'),
         justifyContent:'center',
         alignSelf:'center',
-        marginTop:hp('1%'),
-        marginStart:wp('5%')
       },
       textDate_time:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('60%'),
-        fontWeight:'800'
+        fontWeight:'800',
+        marginBottom:Matrics.Scale(2),
+        marginTop:Matrics.Scale(8),
         
+      },
+      bookingTextDate:{
+        color:Color.AppColor,
+        fontSize:Matrics.Scale(16),
+        width:wp('60%'),
+        fontWeight:'800',
+        marginTop:Matrics.Scale(4),
       },
       textDate_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
-       
+        marginBottom:Matrics.Scale(4),
+        marginTop:Matrics.Scale(6),
+        marginLeft:"7%"
       },
       textTime_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
-       
+      },
+      bookingTimeText:{
+        color:Color.ligthGray,
+        fontSize:Matrics.Scale(16),
+        width:wp('30%'),
+        fontWeight:'800',
+        marginBottom:Matrics.Scale(4),
+        marginTop:Matrics.Scale(6),
       },
       textstatus:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('20%')
       },
       textstatus_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('25%'),
        
@@ -90,7 +106,6 @@ export default StyleSheet.create({
         flexDirection:'row',
         width:wp('80%'),
         alignSelf:'center',
-        marginTop:hp('2%'),
         justifyContent:'center'
       },
       service_dis:{
@@ -98,7 +113,6 @@ export default StyleSheet.create({
       },
       service_customer:{
         width:wp('50%'),
-        marginTop:hp('1%')
       },
       service_dis_btn:{
         width:wp('30%'),
@@ -108,8 +122,7 @@ export default StyleSheet.create({
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.AppColor,
         justifyContent:'center',
-        marginTop:hp('5%'),
-
+        marginTop:Matrics.Scale(8)
       },
       btnViewAccept:{
         borderRadius: Matrics.Scale(5),
@@ -139,7 +152,7 @@ export default StyleSheet.create({
       },
       text_amount:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('30%'),
@@ -147,7 +160,7 @@ export default StyleSheet.create({
       },
       text_staff:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('20%'),
@@ -160,7 +173,7 @@ export default StyleSheet.create({
       },
       text_amount_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
       },
@@ -212,8 +225,6 @@ btnPhone:{
   top:hp('70%'),
   position:'absolute',
   marginEnd:wp('2%')
-  
-  
 },
 iconbell:{
   justifyContent:'center',
@@ -223,7 +234,5 @@ iconbell:{
   padding:10,
   fontSize:14,
   fontWeight:'900',
-  
 },
-
 })

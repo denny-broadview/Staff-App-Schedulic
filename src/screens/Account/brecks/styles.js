@@ -25,7 +25,8 @@ export default StyleSheet.create({
   menuView: {
     flexDirection: 'row',
     width: wp('90%'),
-    padding:hp('1%')
+    padding:hp('1%'),
+    
   },
   menuname: {
     width: wp('55%'),

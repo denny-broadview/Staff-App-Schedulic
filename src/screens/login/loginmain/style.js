@@ -61,8 +61,8 @@ export default StyleSheet.create({
     fontSize: 16
   },
   buttoView:{
-    position: 'absolute', 
-    bottom: 0
+   alignSelf:'center',
+   marginTop:hp('30%'),
   },
   buttonText:{
     color: Color.white,

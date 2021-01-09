@@ -21,7 +21,8 @@ export default StyleSheet.create({
         marginLeft:wp('30%')
     },
     topMain:{
-        flexDirection:'row'
+        flexDirection:'row',
+        backgroundColor:'#F9F9F9'
     },
     nameLest:{
         width:wp('70%'),
@@ -55,7 +56,8 @@ export default StyleSheet.create({
     },
     menuView:{
         flexDirection:'row',
-        marginTop: 10
+        marginTop: Matrics.Scale(6),
+        marginBottom: Matrics.Scale(6),
     },
     menu:{
         justifyContent:'center',

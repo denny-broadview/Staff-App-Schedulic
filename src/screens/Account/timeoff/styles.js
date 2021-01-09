@@ -24,28 +24,27 @@ export default StyleSheet.create({
   },
   menuView: {
     flexDirection: 'row',
-    width: wp('90%'),
-    padding:hp('1%')
+    padding:hp('1%'),
+    justifyContent:'space-between',
+    margin:hp('1%'),
   },
   menuname: {
-    width: wp('55%'),
     color: Color.iconAccount,
     justifyContent: 'center',
     alignSelf: 'center',
     marginLeft: wp('5%'),
+    textTransform:'capitalize'
   },
   menu: {
-  
-   textAlign:'right',
+    textAlign:'right',
     color: Color.iconAccount,
-  
-  
+    marginRight: wp('5%'),
   },
   border: {
     justifyContent: 'center',
     width: wp('90%'),
     height: hp('0.1%'),
-    backgroundColor: Color.ligthGray,
+    backgroundColor: "rgba(240, 240, 240, 10)",
     marginLeft: wp('5%'),
   },
   categoryText:{
