@@ -58,7 +58,7 @@ export default StyleSheet.create({
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.green,
         justifyContent:'center',
-        marginTop:hp('5%'),
+       
        
 
       },
@@ -78,7 +78,7 @@ export default StyleSheet.create({
       },
       topView_dis:{
         flexDirection:'row',
-        width:wp('80%'),
+        width:wp('90%'),
         justifyContent:'center',
         alignSelf:'center',
         marginTop:hp('1%'),
@@ -86,41 +86,40 @@ export default StyleSheet.create({
       },
       textDate_time:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('60%'),
         fontWeight:'800'
         
       },
       textDate_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
        
       },
       textBook_Time_dis:{
-        marginTop:hp('2%'),
+        marginTop:hp('1%'),
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('50%'),
         fontWeight:'800',
       },
       textTime_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
-       
       },
       textstatus:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('20%')
       },
       textstatus_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('25%'),
        
@@ -134,7 +133,7 @@ export default StyleSheet.create({
       service_dis_book:{
         width:wp('50%'),
         marginLeft: wp('5%'),
-        marginTop:hp('1%')
+      
       },
       service_dis:{
         width:wp('40%'),
@@ -170,7 +169,7 @@ export default StyleSheet.create({
       },
       text_amount:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('30%'),
@@ -178,7 +177,7 @@ export default StyleSheet.create({
       },
       text_staff:{
         color:Color.AppColor,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         justifyContent:'center',
         alignSelf:'center',
         width:wp('20%'),
@@ -191,7 +190,7 @@ export default StyleSheet.create({
       },
       text_amount_dis:{
         color:Color.ligthGray,
-        fontSize:Matrics.Scale(18),
+        fontSize:Matrics.Scale(16),
         width:wp('30%'),
         fontWeight:'800',
       },
@@ -234,7 +233,7 @@ textcancel:{
 textBookingDetails:{
   margin:wp('5%'),
   color:Color.AppColor,
-  fontSize:Matrics.Scale(18),
+  fontSize:Matrics.Scale(16),
   width:wp('60%'),
   fontWeight:'800'
 },

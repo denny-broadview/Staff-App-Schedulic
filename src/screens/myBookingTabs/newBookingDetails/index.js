@@ -94,8 +94,73 @@ const NewBookingDetails = (props) => {
               <Text style={styles.textDate_dis}>
                 {moment(data.booking_date).format('DD MMM YYYY')}
               </Text>
-              <Text style={styles.textTime_dis}>{data.booking_time}</Text>
-              <Text style={styles.textstatus_dis}>{data.order_status}</Text>
+              <Text style={styles.textTime_dis}>{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
+              {/* <Text style={styles.textstatus_dis}>{data.order_status}</Text> */}
+              {data.order_status != null && data.order_status == 'CNF' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Confirm</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'P' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Pending</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'AC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Accept</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'OW' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>On The Way</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'WS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Work Started</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'C' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Canceled</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'RSS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'RSA' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'RSC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {data.order_status != null && data.order_status == 'CC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Cancel by Client</Text>
+                    </View>
+                  ) : null}
+                  {data.order_status != null && data.order_status == 'CO' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Completed</Text>
+                    </View>
+                  ) : null}
             </View>
             <View style={styles.service_dis_book}>
               <Text style={styles.textBook_Time_dis}>
@@ -105,7 +170,7 @@ const NewBookingDetails = (props) => {
             <View style={styles.service_btn_mainview}>
               <View style={styles.service_dis}>
                 <Text style={styles.textDate_time}>
-                  {String.MyBookingTab.services}
+                  {String.MyBookingTab.servicest}
                 </Text>
                 <Text style={styles.textTime_dis}>
                   {data.service == null ? null : data.service.service_name}
@@ -124,14 +189,14 @@ const NewBookingDetails = (props) => {
                       {currencyFormatter.format(
                         data.total_cost,
                         {code: currency},
-                        {locale: currencyFrm},
+                       // {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                        {locale: currencyFrm},
+                       // {locale: currencyFrm},
                         {code: currency},
                       )}
                     </Text>
@@ -208,14 +273,20 @@ const NewBookingDetails = (props) => {
               </Text>
             </View>
 
-            {data.service && data.service.servicesubType == 'at-home' ? (
+            {/* {data.service && data.service.servicesubType == 'at-home' ? (
               <View style={styles.address_View}>
                 <Icon name="enviroment" style={styles.call_icon} />
                 <Text style={styles.textAddress}>{data.customer.address}</Text>
               </View>
-            ) : null}
-
-            <View style={styles.viewLine} />
+            ) : null} */}
+           
+              <View style={styles.address_View}>
+                <Icon name="enviroment" style={styles.call_icon} />
+                <Text style={styles.textAddress}>{data.customer !=null? data.customer.address:"Address not defiend"}</Text>
+              </View>
+           
+          {data.status_notes !== null ? 
+            <View style={styles.viewLine} />:null}
             {data.status_notes !== null ? (
               <View style={styles.note_View}>
                 <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>

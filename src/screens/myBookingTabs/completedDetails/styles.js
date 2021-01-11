@@ -68,7 +68,7 @@ export default StyleSheet.create({
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.AppColor,
         justifyContent:'center',
-        marginTop:hp('1%'),
+        marginTop:hp('3%'),
       
       },
       amount_view:{
@@ -116,6 +116,7 @@ export default StyleSheet.create({
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
+        
       },
       textRight:{
         textAlign:'right',

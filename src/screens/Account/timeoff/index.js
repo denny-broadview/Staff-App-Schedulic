@@ -21,9 +21,9 @@ const TimeOff = (props) => {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm timeoff ~~~~~~~~~', myForm);
+    
     Auth.PostCustomerTokenAuth(userInfo.token,userInfo.user_id,myForm, Constants.ApiAction.holiday, (res) => {
-      console.log('data--------', res);
+     
       if (res[1].data == true) {
         setLoading(false);
         setData(res[1].response);
@@ -64,7 +64,7 @@ const TimeOff = (props) => {
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
                 <Text style={styles.menuname}>{item.description}</Text>
-          {item.start_date == item.end_date ? <Text style={styles.menu}>{item.start_date}</Text> :<Text style={styles.menu}>{moment(item.start_date).format('DD MMM')} { String.account.to } {moment(item.end_date).format('DD MMM YYYY')}</Text>}
+          {item.start_date == item.end_date ? <Text style={styles.menu}>{moment(item.start_date).format('DD MMM')}</Text> :<Text style={styles.menu}>{moment(item.start_date).format('DD MMM')} { String.account.to } {moment(item.end_date).format('DD MMM YYYY')}</Text>}
                
                 {/* <Icon name="right" style={styles.menu} /> */}
               </TouchableOpacity>

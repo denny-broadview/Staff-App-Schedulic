@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, SafeAreaView,
+  RefreshControl,
+  ActivityIndicator} from 'react-native';
 import styles from './styles';
 import {String} from '../../../utlis/String';
 import {Auth, Constants} from '@global';
@@ -8,12 +10,10 @@ import {MySpinner} from '../../../component/MySpinner';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 const NewBookingTab = (props) => {
+  const [refreshing, setRefreshing] = useState(true);
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
- 
-
-  // search
   const [masterDataSource, setMasterDataSource] = useState([]);
   const searchKeyFromProbs = useSelector(
     (state) => state.BookingService.serachKey,
@@ -28,38 +28,39 @@ const NewBookingTab = (props) => {
   const currencyFrm = useSelector(
     (state) => state.setting.setting.currency_format,
   );
-
   useEffect(() => {
     getBooking();
   }, []);
   useEffect(() => {
-    console.log(
-      'Data from redux searchKeyFromProbs ~~~~~~',
-      searchKeyFromProbs,
-    );
+    console.log('Data from redux searchKeyFromProbs ~~~~~~', searchKeyFromProbs);
     searchFilterFunction(searchKeyFromProbs);
   }, [searchKeyFromProbs]);
+ 
+  const onRefresh = () => {
+    setData([]);
+    getBooking();
+  };
 
-  //search start
-  function searchFilterFunction(text) {
-    if (text) {
-      const newData = masterDataSource.filter(function (item) {
-        const itemData = item.service.service_name
-          ? item.service.service_name.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setData(newData);
-      // setSearchTerm(text);
-    } else {
-      setData(masterDataSource);
-      // setSearchTerm(text);
-    }
+ //search start
+ function searchFilterFunction(text) {
+  if (text) {
+    const newData = masterDataSource.filter(function (item) {
+      const itemData = item.service.service_name
+        ? item.service.service_name.toUpperCase()
+        : ''.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setData(newData);
+  } else {
+    setData(masterDataSource);
   }
+}
+
   // Api calling for newBookings
   function getBooking() {
     setLoading(true);
+    setRefreshing(false);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
     console.log('parm booking in newBookingpage~~~~~~~~~', myForm);
@@ -69,26 +70,28 @@ const NewBookingTab = (props) => {
       myForm,
       Constants.ApiAction.staffnewbookin,
       (res) => {
-        console.log(' booking data--------', res);
+       // console.log(' booking data--------', res);
         if (res[1].data == true) {
           setLoading(false);
+          setRefreshing(false);
           setData(res[1].response);
           setMasterDataSource(res[1].response);
         } else {
           setData(res.data);
           setLoading(false);
+          setRefreshing(false);
         }
       },
     );
   }
 
-   // Api calling for newBookings
-   function getStatus(id,st) {
+  // Api calling for newBookings
+  function getStatus(id,st) {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('order_item_id',id);
     myForm.append('staff_id',userInfo.user_id);
-    myForm.append('order_status',st)
+    myForm.append('order_status',st);
     console.log('parm booking status~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(
       userInfo.token,
@@ -99,22 +102,19 @@ const NewBookingTab = (props) => {
         console.log(' booking data status--------', res);
         if (res[1].data == true) {
           setLoading(false);
-          if(st == "R"){
+          if (st == "R") {
             props.navigation.navigate('Home');
-            getBooking()
-          }
-          else if(st == "AC")
-          props.navigation.navigate('OngoingTab');
-          getBooking()
+            getBooking();
+          } else if (st == "AC"){ props.navigation.navigate('OngoingTab');
+          getBooking();}
         } else {
-         
           setLoading(false);
         }
       },
     );
   }
   function noItemDisplay() {
-   // setLoading(false);
+    // setLoading(false);
     return (
       <View
         style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
@@ -126,13 +126,20 @@ const NewBookingTab = (props) => {
   }
 
   return (
+    <SafeAreaView style={styles.container}>
     <View style={styles.container}>
-      <ScrollView style={{flex: 1}}>
+      
         <View style={{justifyContent: 'center', flex: 1}}>
           <MySpinner size="large" visible={loagind} />
+          {refreshing ? (
+            <ActivityIndicator style={{color: Color.AppColor}} />
+          ) : null}
           <FlatList
-            ListEmptyComponent={loagind == false ? noItemDisplay() :null}
+          
+            ListEmptyComponent={loagind == false  && refreshing == false ? noItemDisplay() : null}
             data={data}
+           // inverted={true}
+            keyExtractor={(item) => item.id}
             renderItem={({item, index}) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
@@ -148,15 +155,81 @@ const NewBookingTab = (props) => {
                   <Text style={styles.textDate_dis}>
                     {moment(item.booking_date).format('DD MMM YYYY')}
                   </Text>
-                  <Text style={styles.bookingTimeText}>{moment(item.booking_time, 'HH:mm:ss').format('LT')}</Text>
-                  <Text style={styles.textstatus_dis}>{item.order_status}</Text>
+                  <Text style={styles.bookingTimeText}>
+                    {moment(item.booking_time, 'HH:mm:ss').format('LT')}
+                  </Text>
+                  {item.order_status != null && item.order_status == 'CNF' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Confirm</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'P' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Pending</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'AC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Accept</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'OW' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>On The Way</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'WS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Work Started</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'C' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Canceled</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'RSS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'RSA' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'RSC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'CC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Cancel by Client</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'CO' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Completed</Text>
+                    </View>
+                  ) : null}
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>
                     <Text style={styles.textDate_time}>
                       {String.MyBookingTab.servicest}
                     </Text>
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textTime_dis} key={item.service.service_name}>
                       {item.service == null ? null : item.service.service_name}
                     </Text>
                   </View>
@@ -199,14 +272,14 @@ const NewBookingTab = (props) => {
                           {currencyFormatter.format(
                             item.total_cost,
                             {code: currency},
-                            {locale: currencyFrm},
+                           // {locale: currencyFrm},
                           )}
                         </Text>
                       ) : (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
                             item.total_cost,
-                            {locale: currencyFrm},
+                           // {locale: currencyFrm},
                             {code: currency},
                           )}
                         </Text>
@@ -241,10 +314,18 @@ const NewBookingTab = (props) => {
                   </View>
                 </View>
               </View>
-            )}></FlatList>
+            )}
+            refreshControl={
+              <RefreshControl
+                //refresh control used for the Pull to Refresh
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
+            contentContainerStyle={styles.list}></FlatList>
         </View>
-      </ScrollView>
-    </View>
+     
+    </View></SafeAreaView>
   );
 };
 export default NewBookingTab;

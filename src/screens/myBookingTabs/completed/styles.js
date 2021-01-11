@@ -1,19 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,Dimensions } from 'react-native';
 import { Matrics,Color } from '../../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+const widthConst = Dimensions.get('screen').width;
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Color.white,
+        
       },
       
       header:{
         width:wp('30%'),
         marginStart:wp('15%')
+      },
+      list: {
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: widthConst,
       },
       mainView:{
         
@@ -73,7 +79,7 @@ export default StyleSheet.create({
         fontWeight:'800',
         marginBottom:Matrics.Scale(4),
         marginTop:Matrics.Scale(6),
-        marginLeft:"7%"
+        marginLeft:wp("5%")
       },
       textTime_dis:{
         color:Color.ligthGray,
@@ -84,7 +90,7 @@ export default StyleSheet.create({
       bookingTimeText:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
-        width:wp('30%'),
+        width:wp('25%'),
         fontWeight:'800',
         marginBottom:Matrics.Scale(4),
         marginTop:Matrics.Scale(6),
@@ -100,11 +106,12 @@ export default StyleSheet.create({
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('25%'),
+        marginEnd:wp('5%')
        
       },
       service_btn_mainview:{
         flexDirection:'row',
-        width:wp('80%'),
+        width:wp('85%'),
         alignSelf:'center',
         justifyContent:'center'
       },
@@ -122,6 +129,7 @@ export default StyleSheet.create({
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.AppColor,
         justifyContent:'center',
+        marginLeft:wp('3%'),
         marginTop:Matrics.Scale(8)
       },
       btnViewAccept:{

@@ -93,9 +93,9 @@ const CompletDetails = (props) => {
               {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
               <View style={{flexDirection:"row",marginLeft:"4%"}}> 
                 <Text style={styles.textDate_dis}>
-                  {moment(data.booking_date).format('DD MMM YYYY')}
+                  {moment(data.booking_date).format('DD MMM YYYY')}{","}
                 </Text>
-                <Text style={styles.textTime_dis}>{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
+                <Text style={styles.textTime_dis}>{" "}{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
               </View>
               <View> 
               <Text style={styles.textstatus_dis}>{data.order_status=='CO'?'Completed':data.order_status}</Text>
@@ -146,14 +146,14 @@ const CompletDetails = (props) => {
                       {currencyFormatter.format(
                         data.total_cost,
                         {code: currency},
-                        {locale: currencyFrm},
+                      //  {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                        {locale: currencyFrm},
+                      //  {locale: currencyFrm},
                         {code: currency},
                       )}
                     </Text>
@@ -225,13 +225,18 @@ const CompletDetails = (props) => {
                 {data.customer == null ? null : data.customer.phone}
               </Text>
             </View>
-            {data.service && data.service.servicesubType == 'at-home' ? (
+            {/* {data.service && data.service.servicesubType == 'at-home' ? (
               <View style={styles.address_View}>
                 <Icon name="enviroment" style={styles.call_icon} />
                 <Text style={styles.textAddress}>{data.customer.address}</Text>
               </View>
-            ) : null}
-            <View style={styles.viewLine} />
+            ) : null} */}
+             <View style={styles.address_View}>
+                <Icon name="enviroment" style={styles.call_icon} />
+                <Text style={styles.textAddress}>{data.customer != null? data.customer.address:"Address not defiend"}</Text>
+              </View>
+             {data.status_notes !== null ? 
+            <View style={styles.viewLine} />:null}
             {data.status_notes !== null ? (
               <View style={styles.note_View}>
                 <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>

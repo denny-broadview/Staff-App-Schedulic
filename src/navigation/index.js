@@ -128,7 +128,7 @@ export default App = () => {
     return (
       <Tab.Navigator tabBar={(props) => <BottomBar {...props} />}>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="NewBookingTab" component={BookingStackScreen} />
+        <Tab.Screen name="BookingStackScreen" component={BookingStackScreen} />
         <Tab.Screen name="MyAccount" component={MyAccount} />
       </Tab.Navigator>
     );
@@ -136,11 +136,11 @@ export default App = () => {
   const BookingStackScreen = () => {
     return (
       <BookingStack.Navigator>
-        <BookingStack.Screen name="NewBookingTab" component={TopTabs} options={{ headerShown: false }} />
+        <BookingStack.Screen name="TopTabs" component={TopTabs} options={{ headerShown: false }} />
         <BookingStack.Screen name="NewBookingDetails" component={NewBookingDetails} options={{ headerShown: false }} />
-        <BookingStack.Screen name="OngoingTab" component={TopTabs} options={{ headerShown: false }} />
+        {/* <BookingStack.Screen name="OngoingTab" component={TopTabs} options={{ headerShown: false }} /> */}
         <BookingStack.Screen name="onGoingDetails" component={onGoingDetails} options={{ headerShown: false }} />
-        <BookingStack.Screen name="CompletedTab" component={TopTabs} options={{ headerShown: false }} />
+        {/* <BookingStack.Screen name="CompletedTab" component={TopTabs} options={{ headerShown: false }} /> */}
         <BookingStack.Screen name="CompletDetails" component={CompletDetails} options={{ headerShown: false }} />
       </BookingStack.Navigator>
     )
@@ -152,7 +152,7 @@ export default App = () => {
         tabBar={props => <MyBookingMainView {...props} />}
         swipeEnabled={false}>
         <TopTab.Screen name="NewBookingTab" component={NewBookingTab} />
-        <TopTab.Screen name="OngoingTab" component={OngoingTab} />
+        <TopTab.Screen name="OngoingTab" component={OngoingTab}  />
         <TopTab.Screen name="CompletedTab" component={CompletedTab} />
       </TopTab.Navigator>
   

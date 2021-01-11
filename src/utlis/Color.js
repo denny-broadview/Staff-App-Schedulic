@@ -17,6 +17,7 @@ export default {
   pink:'#FF0088',
   yellow:'#FFA000',
   blue:'#272E96',
-  ligthGreen:'#0ECCC5'
+  ligthGreen:'#0ECCC5',
+  line:'#E2E2E2'
   
 };

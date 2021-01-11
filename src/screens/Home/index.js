@@ -9,7 +9,9 @@ import {MySpinner} from '../../component/MySpinner';
 import {Auth, Constants} from '@global';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { useNavigation } from '@react-navigation/native';
 const Home = (props) => {
+  const navigation = useNavigation()
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
   console.log('userInfo====================================',userInfo);
@@ -152,7 +154,7 @@ const Home = (props) => {
 
               <View style={{marginTop: 20}}>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={()=> props.navigation.navigate('NewBookingTab')}>
+                <TouchableOpacity style={styles.btnCard} onPress={()=> navigation.navigate('BookingStackScreen',{screen:'NewBookingTab'})}>
                   <View>
                     <Image
                       source={require('../../assets/images/NewBookings.png')}
@@ -175,7 +177,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={()=> props.navigation.navigate('OngoingTab')}>
+                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('BookingStackScreen')}>
                   <View>
                     <Image
                       source={require('../../assets/images/Ongoing.png')}
@@ -200,7 +202,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={()=> props.navigation.navigate('CompletedTab')}>
+                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('NewBookingTab',{ screen:'CompletedTab'})}>
                   <View>
                     <Image
                       source={require('../../assets/images/TaskCompleted.png')}

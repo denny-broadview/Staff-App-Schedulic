@@ -1,12 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TextInput, TouchableOpacity,} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import HeaderView from '../../../component/headerTab';
-import { MySpinner } from '../../../component/MySpinner';
+import {MySpinner} from '../../../component/MySpinner';
 import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {String} from '../../../utlis/String.js';
 import styles from './style';
-import { Auth, Constants } from '@global';
+import {Auth, Constants} from '@global';
 import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -15,7 +21,7 @@ import {
   setUserImage,
   setUserId,
 } from '../../../store/actions';
-import Validate from '../../../utlis/Validate'
+import Validate from '../../../utlis/Validate';
 import firebase from 'react-native-firebase';
 
 var fcmToken;
@@ -28,9 +34,7 @@ const LoginMain = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
     _checkPermission();
-   
   }, []);
   async function _checkPermission() {
     const enabled = await firebase.messaging().hasPermission();
@@ -39,7 +43,7 @@ const LoginMain = (props) => {
 
   async function _getToken() {
     fcmToken = await firebase.messaging().getToken();
-    console.log('fcmtoken------------',fcmToken)
+    console.log('fcmtoken------------', fcmToken);
     await AsyncStorage.setItem('fcmToken', fcmToken);
     const channel = new firebase.notifications.Android.Channel(
       'general',
@@ -50,13 +54,12 @@ const LoginMain = (props) => {
   }
 
   function mobileLogin() {
-    
     let myForm = new FormData();
     myForm.append('email', email);
     myForm.append('password', password);
-    myForm.append('device_token',fcmToken)
+    myForm.append('device_token', fcmToken);
     console.log('mobileLogin req =====>', myForm);
-    setLoding(true)
+    setLoding(true);
     Auth.PostServiceAuth(myForm, Constants.ApiAction.mobileLogin, (res) => {
       setLoding(false);
       console.log('mobileLogin api=====>', res);
@@ -68,10 +71,10 @@ const LoginMain = (props) => {
         onSetUserToken(res[1].response.token);
         onSetUserImage(res[1].response.image);
         console.log('onSetUserToken---', onSetUserToken(res[1].response.token));
-      
-        props.navigation.navigate('Home')
+
+        props.navigation.navigate('Home');
       } else {
-        Auth.ToastMessage(res[1].response.response_message);
+        Auth.ToastMessage(res[1].response);
       }
     });
   }
@@ -84,22 +87,22 @@ const LoginMain = (props) => {
   function validation() {
     if (Validate.isEmpty(email) && Validate.isEmpty(password)) {
       setLoding(false);
-      Auth.ToastMessage(String.login.error_message_allFieldsManatory);
+      Auth.ToastMessage(String.loginmain.error_message_allFieldsManatory);
     } else if (Validate.isEmpty(email)) {
       setLoding(false);
-      Auth.ToastMessage(String.login.error_message_email);
+      Auth.ToastMessage(String.loginmain.error_message_email);
     } else if (!Validate.isEmail(email)) {
       setLoding(false);
-      Auth.ToastMessage(String.login.error_message_email_valid);
+      Auth.ToastMessage(String.loginmain.error_message_email_valid);
     } else if (Validate.isEmpty(password)) {
       setLoding(false);
-      Auth.ToastMessage(String.login.error_message_password);
+      Auth.ToastMessage(String.loginmain.error_message_password);
     } else if (Validate.isLessThen(password)) {
       setLoding(false);
-      Auth.ToastMessage(String.login.error_message_password_length);
+      Auth.ToastMessage(String.loginmain.error_message_password_length);
     } else {
       setLoding(true);
-     mobileLogin();
+      mobileLogin();
     }
   }
   return (
@@ -112,46 +115,46 @@ const LoginMain = (props) => {
         headertext={String.loginmain.LoginButtom}
         searchClick={false}
       />
-
-      <View style={styles.loginmainarea}>
-        <MySpinner size="large" visible={loding} />
-        <View style={styles.loginTopHeading}>
-          <Text style={styles.loginTopText}>
-            {String.loginmain.loginAccount}
-          </Text>
-          <Text style={styles.loginTextDetail}>
-            {String.loginmain.loginDeatils}
-          </Text>
-        </View>
-        <View style={styles.bottomLoginFeilds}>
-          <View style={styles.inputBordePass}>
-            <TextInput
-              style={styles.textInpute}
-              placeholder={String.loginmain.loginplaceholderEmail}
-              onChangeText={(text) => {
-                setEmail(text);
-              }}
-              keyboardType="email-address"
-            />
+      <ScrollView>
+        <View style={styles.loginmainarea}>
+          <MySpinner size="large" visible={loding} />
+          <View style={styles.loginTopHeading}>
+            <Text style={styles.loginTopText}>
+              {String.loginmain.loginAccount}
+            </Text>
+            <Text style={styles.loginTextDetail}>
+              {String.loginmain.loginDeatils}
+            </Text>
           </View>
-          <View style={styles.inputBordePass}>
-            <TextInput
-              secureTextEntry={hidePass ? true : false}
-              style={styles.textInpute}
-              onChangeText={(text) => {
-                setPassword(text);
-              }}
-              keyboardType="default"
-              placeholder={String.loginmain.loginplaceholderPassword}
-              minLength={8}
-              maxLength={20}
-            />
-            <Icon
-              name={hidePass ? 'eyeo' : 'eye'}
-              style={styles.icon}
-              onPress={() => setHidePass(!hidePass)}></Icon>
-          </View>
-          <View
+          <View style={styles.bottomLoginFeilds}>
+            <View style={styles.inputBordePass}>
+              <TextInput
+                style={styles.textInpute}
+                placeholder={String.loginmain.loginplaceholderEmail}
+                onChangeText={(text) => {
+                  setEmail(text);
+                }}
+                keyboardType="email-address"
+              />
+            </View>
+            <View style={styles.inputBordePass}>
+              <TextInput
+                secureTextEntry={hidePass ? true : false}
+                style={styles.textInpute}
+                onChangeText={(text) => {
+                  setPassword(text);
+                }}
+                keyboardType="default"
+                placeholder={String.loginmain.loginplaceholderPassword}
+                minLength={8}
+                maxLength={20}
+              />
+              <Icon
+                name={hidePass ? 'eyeo' : 'eye'}
+                style={styles.icon}
+                onPress={() => setHidePass(!hidePass)}></Icon>
+            </View>
+            {/* <View
             style={{
               flex: 1,
               flexDirection: 'row',
@@ -164,18 +167,19 @@ const LoginMain = (props) => {
               onValueChange={(newValue) => setToggleCheckBox(newValue)}
             />
             <Text style={styles.checkText}>{String.loginmain.Rememberme}</Text>
+          </View> */}
+          </View>
+          <View style={styles.buttoView}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => validation()}>
+              <Text style={styles.buttonText}>
+                {String.loginmain.LoginButtom}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.buttoView}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => validation()}>
-            <Text style={styles.buttonText}>
-              {String.loginmain.LoginButtom}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };

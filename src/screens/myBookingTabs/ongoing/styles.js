@@ -1,19 +1,25 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet,Dimensions } from 'react-native';
 import { Matrics,Color } from '../../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-
+const widthConst = Dimensions.get('screen').width;
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Color.white,
+       
       },
       
       header:{
         width:wp('30%'),
         marginStart:wp('15%')
+      },
+      list: {
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: widthConst,
       },
       mainView:{
         
