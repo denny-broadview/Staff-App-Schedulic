@@ -62,7 +62,7 @@ export const String = {
     category: 'Category',
     postlCode: 'Postal Codes',
     workinghr: 'Working Hours',
-    breaks: 'Breaks',
+    breaks: ' Breaks',
     timeoff: 'Time Off',
     shareApp: 'Share App',
     rateus: 'Rate Us',

@@ -110,15 +110,14 @@ const renderTopBar = ({ navigation ,arshad}) => {
         renderItem={({ item, index }) => {
           return (
             <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPressItem(index, { navigation, data, setdata },arshad)}>
-              <Text style={[styles.txtxname, { color: item.selected ? Color.AppColor : Color.gray }]}>{item.name}</Text>
+              <Text style={[styles.txtxname, { color: item.selected ? Color.AppColor : Color.iconAccount}]}>{item.name}</Text>
               {item.selected && <View style={styles.underLine} />}
             </TouchableOpacity>
           )
         }}
       />
-      <View style={{ width: '90%', height: 1, backgroundColor: Color.gray, alignSelf: 'center' }}></View>
+      <View style={{ width: '90%', height: 1, backgroundColor: Color.linecolor, alignSelf: 'center' }}></View>
     </View>
   )
 }
-
 export default MyBookingMainView;

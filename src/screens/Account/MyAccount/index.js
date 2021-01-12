@@ -122,10 +122,9 @@ const MyAccount = (props) => {
                             <IconFontAwesome5 name="utensils" style={styles.menu}></IconFontAwesome5>
                             <Text style={styles.menuname}>{String.account.breaks}</Text>
                         </TouchableOpacity>
-
                     </View>
                     <View style={styles.viewBoder}></View>
-                    <View >
+                    <View>
                         <TouchableOpacity style={styles.menuView} onPress={()=> props.navigation.navigate('TimeOff')}>
                             <IconTimeOff name="timer-off-outline" style={styles.menu}></IconTimeOff>
                             <Text style={styles.menuname}>{String.account.timeoff}</Text>

@@ -13,10 +13,10 @@ export default {
   workstarted:'#007BFF',
   aqeva:'#00B9FF',
   ligthGreen:'#169A23',
-  iconAccount:'#868686',
-  pink:'#FF0088',
+  iconAccount:'#868686', 
+  pink:'#FF005E', 
   yellow:'#FFA000',
   blue:'#272E96',
-  ligthGreen:'#0ECCC5'
-  
+  ligthGreen:'#0ECCC5',
+  linecolor:"#E2E2E2"
 };

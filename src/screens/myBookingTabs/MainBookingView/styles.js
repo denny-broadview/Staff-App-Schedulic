@@ -22,7 +22,7 @@ export default StyleSheet.create({
   underLine: {
     height: 4,
     borderRadius: 50,
-    marginTop: 5,
+    marginTop:6,
     width: 100,
     alignItems: 'center',
     backgroundColor: Color.AppColor
@@ -37,7 +37,6 @@ export default StyleSheet.create({
     shadowRadius: 1,
     shadowOffset: { width: 0, height: 2 },
     borderRadius: Matrics.Scale(10),
-
   },
   topView: {
     flexDirection: 'row',

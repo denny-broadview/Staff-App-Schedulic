@@ -64,9 +64,7 @@ const Breaks = (props) => {
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
               <Text style={styles.menuname}>{item.days}</Text>
-
-                {item.break_start_time == null && item.break_end_time == null ? <Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{item.break_start_time} {String.account.to} {item.break_end_time }</Text>}
-           
+                {item.break_start_time == null && item.break_end_time == null ? <Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{item.break_start_time} {String.account.to} {item.break_end_time }</Text>}         
               </TouchableOpacity>
             </View>
           )}></FlatList>

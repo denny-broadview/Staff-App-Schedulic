@@ -111,7 +111,7 @@ const Home = (props) => {
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={'Home'}
       />
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{flex: 1,position:"relative"}}>
         <View style={styles.topprofiledeatils}>
         <MySpinner size="large" visible={loagind} />
           <View style={styles.profileimage}>

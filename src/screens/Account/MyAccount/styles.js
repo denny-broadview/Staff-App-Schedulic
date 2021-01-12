@@ -80,9 +80,9 @@ export default StyleSheet.create({
         marginLeft: wp('2%'),
     },
     menuname:{
-            color:Color.gray,    
-            justifyContent:'center',
-            alignSelf:'center'
+        color:Color.gray,    
+        justifyContent:'center',
+        alignSelf:'center',
     },
     menunameLogout:{
         color:Color.pink,    

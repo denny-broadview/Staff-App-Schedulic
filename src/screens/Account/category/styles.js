@@ -53,8 +53,9 @@ export default StyleSheet.create({
   categoryText:{
     color:Color.darkGray,
     fontSize:16,
-    fontWeight:'500',
+    fontWeight:'bold',
     justifyContent:'center',
     alignItems:'center',
-    margin:hp('2%')  }
+    margin:Matrics.Scale(20)
+    }
 });

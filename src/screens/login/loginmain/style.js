@@ -16,12 +16,13 @@ export default StyleSheet.create({
     },
     loginTopText:{
       color: Color.darkGray, 
-      fontSize: 20
+      fontSize: 20,
+      fontFamily:"Bahnschrift"
     },
     loginTextDetail:{
       color: Color.ligthGray, 
-      fontSize: 18,
-       marginTop: 4
+      fontSize: 16,
+      fontFamily:"BAHNSCHRIFT"
     },
     checkboxContainer: {
      flexDirection: "row",
@@ -33,7 +34,7 @@ export default StyleSheet.create({
      padding: 12,
      borderRadius:6,
      width:wp('90%'),
-     marginBottom:40
+     marginBottom:40,
    },
    inputBordePass:{
       flexDirection:'row',
@@ -47,8 +48,8 @@ export default StyleSheet.create({
       justifyContent:'center', 
       color:Color.bleck,
       width: wp('80%'),
-      marginLeft:wp('2%')
-     
+      marginLeft:wp('2%'),
+      fontFamily:"BAHNSCHRIFT",   
     },
     icon: {
       alignSelf:'center',
@@ -58,7 +59,8 @@ export default StyleSheet.create({
   },
   checkText:{
     color: Color.darkGray, 
-    fontSize: 16
+    fontSize: 16,
+    fontFamily:"BAHNSCHRIFT",   
   },
   buttoView:{
    alignSelf:'center',

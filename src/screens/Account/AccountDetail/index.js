@@ -186,9 +186,7 @@ const AccountDetails = (props) => {
                   value={email}
                   // onChangeText={(text) => {
                   //   setEmail(text);
-                   
                   // }}
-
                   onChangeText={(text) => setEmail(text)}
                   placeholder={String.loginmain.loginplaceholderEmail}
                   keyboardType="email-address"
