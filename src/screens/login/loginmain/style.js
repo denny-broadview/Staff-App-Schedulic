@@ -17,12 +17,11 @@ export default StyleSheet.create({
     loginTopText:{
       color: Color.darkGray, 
       fontSize: 20,
-      fontFamily:"Bahnschrift"
+     
     },
     loginTextDetail:{
       color: Color.ligthGray, 
       fontSize: 16,
-      fontFamily:"BAHNSCHRIFT"
     },
     checkboxContainer: {
      flexDirection: "row",
@@ -49,7 +48,6 @@ export default StyleSheet.create({
       color:Color.bleck,
       width: wp('80%'),
       marginLeft:wp('2%'),
-      fontFamily:"BAHNSCHRIFT",   
     },
     icon: {
       alignSelf:'center',
@@ -60,7 +58,6 @@ export default StyleSheet.create({
   checkText:{
     color: Color.darkGray, 
     fontSize: 16,
-    fontFamily:"BAHNSCHRIFT",   
   },
   buttoView:{
    alignSelf:'center',
