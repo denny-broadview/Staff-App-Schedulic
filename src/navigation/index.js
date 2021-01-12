@@ -6,6 +6,8 @@ import {
   StyleSheet,
   YellowBox,
   Dimensions,
+  View,
+  TouchableOpacity
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -43,6 +45,8 @@ import Notification from '../screens/Notification';
 import { useDispatch,useSelector } from 'react-redux';
 import { Auth, Constants } from '@global'
 import { setSetting,setTax,setBusiness} from '../store/actions'
+import Icon from 'react-native-vector-icons/Feather';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
 const {width} = Dimensions.get('window');
 const Stack = createStackNavigator();
 YellowBox.ignoreWarnings(['']);
@@ -126,10 +130,10 @@ export default App = () => {
   }
   const BottomTabs = () => {
     return (
-      <Tab.Navigator tabBar={(props) => <BottomBar {...props} />}>
+      <Tab.Navigator tabBar={(props) =>  <AdminOrdersTabBar {...props} />}>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="BookingStackScreen" component={BookingStackScreen} />
-        <Tab.Screen name="MyAccount" component={MyAccount} />
+        <Tab.Screen name="My Bookings" component={BookingStackScreen} />
+        <Tab.Screen name="Account" component={MyAccount} />
       </Tab.Navigator>
     );
   };
@@ -144,6 +148,86 @@ export default App = () => {
         <BookingStack.Screen name="CompletDetails" component={CompletDetails} options={{ headerShown: false }} />
       </BookingStack.Navigator>
     )
+  }
+  function AdminOrdersTabBar({ state, descriptors, navigation }) {
+    return (
+      <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0,}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          {state.routes.map((route, index) => {
+            const { options } = descriptors[route.key];
+            const label =
+              options.tabBarLabel !== undefined
+                ? options.tabBarLabel
+                : options.title !== undefined
+                  ? options.title
+                  : route.name;
+  
+            const isFocused = state.index === index;
+            let icon = null;
+        
+            const onPress = () => {
+              const event = navigation.emit({
+                type: 'tabPress',
+                target: route.key,
+              });
+  
+              if (!isFocused && !event.defaultPrevented) {
+                navigation.navigate(route.name);
+              }
+            };
+  
+            const onLongPress = () => {
+              navigation.emit({
+                type: 'tabLongPress',
+                target: route.key,
+              });
+            };
+  
+            
+            return (
+              <TouchableOpacity
+                key={index.toString()}
+                accessibilityRole="button"
+                accessibilityStates={isFocused ? ['selected'] : []}
+                accessibilityLabel={options.tabBarAccessibilityLabel}
+                testID={options.tabBarTestID}
+                onPress={onPress}
+                onLongPress={onLongPress}
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
+                }}
+              >
+                {index === 0 ?
+                <Text style={[{
+                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  size: 20,
+                }]}><Icon name="home" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+              :null}
+              {index === 1 ?
+                <Text style={[{
+                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  size: 20,
+                }]}><Icon name="calendar" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+              :null}
+              {index === 2 ?
+                <Text style={[{
+                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  size: 20,
+                }]}><Icon name="user" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+              :null}
+                <Text style={[{
+                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  size: 12,
+                }]}>
+                  {label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View></View>
+    );
   }
   function TopTabs() {
     return (
