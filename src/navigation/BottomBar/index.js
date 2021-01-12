@@ -22,7 +22,7 @@ const BottomBar = (props) => {
  
   const [data, setdata] = useState([
     { img: HOME, name: "Home", selected: true },
-    { img: MYBOOKING, name: "My Bookings", selected: false },
+    { img: MYBOOKING, name: "MyBooking", selected: false },
     { img: MYACCOUNT, name: "Account", selected: false },
   ])
 
@@ -39,10 +39,11 @@ const BottomBar = (props) => {
     if (curruntindex == 0) {
       props.navigation.navigate('Home')
     } else if (curruntindex == 1) {
-      props.navigation.navigate('BookingStackScreen')
+      props.navigation.navigate('NewBookingTab')
     } else if (curruntindex == 2) {
       props.navigation.navigate('MyAccount')
     }
+    
 
   }
   return (
