@@ -7,6 +7,7 @@ import {Matrics, Color} from '../../../utlis';
 import {Auth, Constants} from '@global';
 import {MySpinner} from '../../../component/MySpinner';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 const WorkingHours = (props) => {
   const userInfo = useSelector(state => state.user.user)
   const [data, setData] = useState([]);
@@ -64,7 +65,7 @@ const WorkingHours = (props) => {
               <TouchableOpacity style={styles.menuView}>
                 <Text style={styles.menuname}>{item.days}</Text>
                 {/* <Text style={styles.menu}>{item.day_start_time == 'null' ? null :item.day_start_time}</Text> */}
-               {item.day_start_time == null && item.day_end_time == null && item.off_day == 'Y' ?<Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{item.day_start_time} {String.account.to} {item.day_end_time}</Text>}
+               {item.day_start_time == null && item.day_end_time == null && item.off_day == 'Y' ?<Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{moment(item.day_start_time, 'HH:mm:ss').format('LT')} {String.account.to} {moment(item.day_end_time, 'HH:mm:ss').format('LT')}</Text>}
                
                 {/* <Icon name="right" style={styles.menu} /> */}
               </TouchableOpacity>

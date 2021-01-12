@@ -11,6 +11,7 @@ const Category = (props) => {
   const userInfo = useSelector(state => state.user.user)
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
+  console.log("userInfo-----------",userInfo);
   useEffect(() => {
     getService();
   }, []);

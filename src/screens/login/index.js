@@ -5,13 +5,11 @@ import {
   StatusBar,
   Image,
   ImageBackground,
-  KeyboardAvoidingView,
   SafeAreaView,
-  StyleSheet,
-  YellowBox,
   TouchableOpacity,
-  Dimensions,
+  ScrollView
 } from 'react-native';
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -22,10 +20,12 @@ import styles from './style';
 
 const Login = (props) => {
   return (
+    <SafeAreaView style={{flex: 1}}>
+   
     <ImageBackground
       source={require('../../assets/images/login-bg.png')}
       style={styles.backgroundImage}>
-      <SafeAreaView style={{flex: 1}}>
+     
         <StatusBar barStyle={'light-content'} backgroundColor={'#424DE4'} />
         <View style={styles.mainView}>
           <View style={styles.loginLogo}>
@@ -72,8 +72,10 @@ const Login = (props) => {
             </TouchableOpacity>
           </View>
         </View>
-      </SafeAreaView>
+      
     </ImageBackground>
+   
+    </SafeAreaView>
   );
 };
 export default Login;

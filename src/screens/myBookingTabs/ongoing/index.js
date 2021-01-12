@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity, SafeAreaView,
+  RefreshControl,
+  ActivityIndicator} from 'react-native';
 import styles from './styles';
 import {String} from '../../../utlis/String';
 import {Color, Matrics} from '../../../utlis';
@@ -10,7 +12,13 @@ import moment from 'moment';
 const OngoingTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState(true);
   const [loagind, setLoading] = useState(false);
+
+
+  useEffect(()=>{
+    console.log("======================================>",props.route);
+  },[])
 
   //time
   const [curTime, setCurTime] = useState('');
@@ -50,6 +58,10 @@ const OngoingTab = (props) => {
 
     getOnGoing();
   }, []);
+  const onRefresh = () => {
+    setData([]);
+    getOnGoing();
+  };
   useEffect(() => {
     console.log(
       'Data from redux searchKeyFromProbs ~~~~~~',
@@ -61,7 +73,7 @@ const OngoingTab = (props) => {
   function searchFilterFunction(text) {
     if (text) {
       const newData = masterDataSource.filter(function (item) {
-        const itemData = item.service.service_name
+        const itemData = item.service.service_name != null
           ? item.service.service_name.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
@@ -124,6 +136,7 @@ const OngoingTab = (props) => {
   // Api calling for onGoing
   function getOnGoing() {
     setLoading(true);
+    setRefreshing(false);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
     console.log('parm in tabonGoing~~~~~~~~~', myForm);
@@ -136,11 +149,13 @@ const OngoingTab = (props) => {
         console.log(' ongoing data--------', res);
         if (res[1].data == true) {
           setLoading(false);
+          setRefreshing(false);
           setData(res[1].response);
           setMasterDataSource(res[1].response);
         } else {
           setData(res.data);
           setLoading(false);
+          setRefreshing(false);
         }
       },
     );
@@ -172,13 +187,17 @@ const OngoingTab = (props) => {
     );
   }
   return (
+    <SafeAreaView style={{flex: 1}}>
     <View style={styles.container}>
-      <ScrollView style={{flex: 1}}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <MySpinner size="large" visible={loagind} />
+          {refreshing ? (
+            <ActivityIndicator style={{color: Color.AppColor}} />
+          ) : null}
           <FlatList
-            ListEmptyComponent={loagind == false ? noItemDisplay() : null}
+             ListEmptyComponent={loagind == false  && refreshing == false ? noItemDisplay() : null}
             data={data}
+           // inverted={true}
             renderItem={({item, index}) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
@@ -195,7 +214,71 @@ const OngoingTab = (props) => {
                     {moment(item.booking_date).format('DD MMM YYYY')}
                   </Text>
                   <Text style={styles.bookingTimeText}>{moment(item.booking_time, 'HH:mm:ss').format('LT')}</Text>
-                  <Text style={styles.textstatus_dis}>{item.order_status=='OW'?'On The Way':null}</Text>
+                  {item.order_status != null && item.order_status == 'CNF' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Confirm</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'P' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Pending</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'AC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Accept</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'OW' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>On The Way</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'WS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Work Started</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'C' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Canceled</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'RSS' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'RSA' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'RSC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'ITR' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Intrupted</Text>
+                    </View>
+                  ) : null}
+                   {item.order_status != null && item.order_status == 'CC' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Cancel by Client</Text>
+                    </View>
+                  ) : null}
+                  {item.order_status != null && item.order_status == 'CO' ? (
+                    <View>
+                      <Text style={styles.textstatus_dis}>Completed</Text>
+                    </View>
+                  ) : null}
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>
@@ -295,14 +378,14 @@ const OngoingTab = (props) => {
                           {currencyFormatter.format(
                             item.total_cost,
                             {code: currency},
-                            {locale: currencyFrm},
+                            //{locale: currencyFrm},
                           )}
                         </Text>
                       ) : (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
                             item.total_cost,
-                            {locale: currencyFrm},
+                           // {locale: currencyFrm},
                             {code: currency},
                           )}
                         </Text>
@@ -350,10 +433,19 @@ const OngoingTab = (props) => {
                   </View>
                 </View>
               </View>
-            )}></FlatList>
+            )}
+             refreshControl={
+              <RefreshControl
+                //refresh control used for the Pull to Refresh
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }
+            contentContainerStyle={styles.list}></FlatList>
         </View>
-      </ScrollView>
+   
     </View>
+    </SafeAreaView>
   );
 };
 export default OngoingTab;

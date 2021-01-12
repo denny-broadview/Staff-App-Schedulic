@@ -27,6 +27,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     padding:hp('1%'),
     margin:hp('1%'),
+    paddingLeft:hp('3%')
   },
   menuname:{
     color: Color.iconAccount,

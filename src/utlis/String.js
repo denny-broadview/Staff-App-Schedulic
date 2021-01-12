@@ -87,7 +87,7 @@ export const String = {
     pay: 'Pay',
     amount: 'Amount',
     customer: 'Customer',
-    customer_detail: 'Customer Details',
+    customer_detail: 'Customer Detail',
     note: 'Note :',
     tracknow: 'Track Now',
     servicetype: 'Service Type',

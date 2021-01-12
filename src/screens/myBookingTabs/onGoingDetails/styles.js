@@ -43,7 +43,7 @@ export default StyleSheet.create({
   service_customer: {
     width: wp('50%'),
     marginTop: hp('1%'),
-    marginLeft: wp('5%'),
+    marginLeft: wp('3%'),
   },
   btnView: {
     borderRadius: Matrics.Scale(5),
@@ -91,55 +91,57 @@ export default StyleSheet.create({
   },
   textDate_time: {
     color: Color.AppColor,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('60%'),
     fontWeight: '800',
   },
   textDate_dis: {
     color: Color.ligthGray,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('30%'),
     fontWeight: '800',
   },
   textBook_Time_dis: {
-    marginTop: hp('2%'),
+    //marginTop: hp('2%'),
     color: Color.ligthGray,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('50%'),
     fontWeight: '800',
+   // backgroundColor:'red',
+    //marginEnd:wp('2%')
+
   },
   textTime_dis: {
     color: Color.ligthGray,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('30%'),
     fontWeight: '800',
   },
   textstatus: {
     color: Color.AppColor,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
   },
   textstatus_dis: {
     color: Color.ligthGray,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('25%'),
   },
   service_btn_mainview: {
     flexDirection: 'row',
     width: wp('80%'),
-
     marginTop: hp('2%'),
   },
   service_dis_book: {
     width: wp('50%'),
-    marginLeft: wp('5%'),
+    marginLeft: wp('4%'),
     marginTop: hp('1%'),
   },
   service_dis: {
     width: wp('40%'),
-    marginLeft: wp('5%'),
+    marginLeft: wp('3%'),
     marginTop: hp('1%'),
   },
 
@@ -176,7 +178,7 @@ export default StyleSheet.create({
   },
   text_amount: {
     color: Color.AppColor,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     justifyContent: 'center',
     alignSelf: 'center',
     width: wp('30%'),
@@ -184,7 +186,7 @@ export default StyleSheet.create({
   },
   text_staff: {
     color: Color.AppColor,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     justifyContent: 'center',
     alignSelf: 'center',
     width: wp('20%'),
@@ -197,7 +199,7 @@ export default StyleSheet.create({
   },
   text_amount_dis: {
     color: Color.ligthGray,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('30%'),
     fontWeight: '800',
   },
@@ -239,14 +241,13 @@ export default StyleSheet.create({
   textBookingDetails: {
     margin: wp('5%'),
     color: Color.AppColor,
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     width: wp('60%'),
     fontWeight: '800',
   },
   imgView: {
     backgroundColor: Color.white,
     marginLeft: wp('2%'),
-
     flexDirection: 'row',
     width: wp('70%'),
   },
@@ -293,7 +294,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     color: Color.AppColor,
     padding: Matrics.Scale(10),
-    fontSize: Matrics.Scale(24),
+    fontSize: Matrics.Scale(20),
     fontWeight: '900',
   },
   textCall: {
@@ -322,7 +323,7 @@ export default StyleSheet.create({
   textNote: {
     color: Color.AppColor,
     marginTop: hp('1%'),
-    fontSize: Matrics.Scale(20),
+    fontSize: Matrics.Scale(16),
     fontWeight: '900',
   },
   trackView: {
@@ -336,7 +337,7 @@ export default StyleSheet.create({
     backgroundColor: 'rgba(66, 77, 228, 1)',
     borderRadius: Matrics.Scale(5),
     width: wp('90%'),
-    height: Platform.OS == 'ios' ? hp('6%') : hp('8%'),
+    height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
@@ -346,7 +347,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     color: Color.white,
     fontWeight: '500',
-    fontSize: Matrics.Scale(18),
+    fontSize: Matrics.Scale(16),
     textAlign: 'center',
     top: Platform.OS === 'ios' ? hp('1%') : hp('2%'),
   },

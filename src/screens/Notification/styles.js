@@ -34,6 +34,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginLeft: wp('5%'),
+    fontSize:Matrics.Scale(16),
+    marginVertical: hp('2%'),
   },
   menu: {
     justifyContent: 'center',
