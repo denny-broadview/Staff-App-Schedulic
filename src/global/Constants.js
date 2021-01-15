@@ -34,7 +34,8 @@ const Constants = {
     getListTiming:'list-availabel-timings',
     resedule:'staff-resedule-bookings',
     emailCheck:'admin-staff-email-check',
-    getBusiness:'get-business'
+    getBusiness:'get-business',
+    getCategoryService:'staff-category-service'
   },
   SplashScreen: {
     Duration: 2000,

@@ -333,8 +333,7 @@ const onGoingDetails = (props) => {
               </View>
             </View>
           </View>
-
-          <View style={styles.mainView}>
+          <View style={[styles.mainView,styles.mainCustomerDetails]}>
             <Text style={styles.textBookingDetails}>
               {String.MyBookingTab.customer_detail}
             </Text>

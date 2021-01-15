@@ -47,42 +47,42 @@ const BottomBar = (props) => {
 
   }
   return (
-    // <View>
-    //   <ImageBackground source={require('../../assets/images/bottomview.png')} style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#fff',}}>
-    //     <FlatList
-    //       data={data}
-    //       showsHorizontalScrollIndicator={false}
-    //       style={{flex:1}}
-    //       horizontal
-    //       renderItem={({ item, index }) => {
-    //         return (
-    //           <TouchableOpacity style={{ flex:1,alignItems: "center",justifyContent:'space-between',marginHorizontal:wp('10%')}} onPress={() => onPressItem(index)}>
-    //             <Text style={[{size:10, color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.img}</Text>
-    //             <Text style={[{ size:10,color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.name}</Text>
-    //           </TouchableOpacity>
-    //         )
-    //       }}
-    //     />
+    <View>
+      <ImageBackground source={require('../../assets/images/bottomview.png')} style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#fff',}}>
+        <FlatList
+          data={data}
+          showsHorizontalScrollIndicator={false}
+          style={{flex:1}}
+          horizontal
+          renderItem={({ item, index }) => {
+            return (
+              <TouchableOpacity style={{ flex:1,alignItems: "center",justifyContent:'space-between',marginHorizontal:wp('10%')}} onPress={() => onPressItem(index)}>
+                <Text style={[{size:10, color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.img}</Text>
+                <Text style={[{ size:10,color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.name}</Text>
+              </TouchableOpacity>
+            )
+          }}
+        />
         
-    //   </ImageBackground>
-    // </View>
-   
-      <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0,}}> 
-      <FlatList
-        data={data}
-        showsHorizontalScrollIndicator={false}
-        style={{flex:1}}
-        horizontal
-        renderItem={({ item, index }) => {
-          return (
-            <TouchableOpacity style={{ flex:1,alignItems: "center",justifyContent:'space-between',marginHorizontal:wp('10%')}} onPress={() => onPressItem(index)}>
-              <Text style={[{size:10, color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.img}</Text>
-              <Text style={[{ size:10,color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.name}</Text>
-            </TouchableOpacity>
-          )
-        }}
-      />
+      </ImageBackground>
     </View>
+   
+    //   <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0,}}> 
+    //   <FlatList
+    //     data={data}
+    //     showsHorizontalScrollIndicator={false}
+    //     style={{flex:1}}
+    //     horizontal
+    //     renderItem={({ item, index }) => {
+    //       return (
+    //         <TouchableOpacity style={{ flex:1,alignItems: "center",justifyContent:'space-between',marginHorizontal:wp('10%')}} onPress={() => onPressItem(index)}>
+    //           <Text style={[{size:10, color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.img}</Text>
+    //           <Text style={[{ size:10,color: item.selected ? Color.AppColor : Color.gray ,size:10}]}>{item.name}</Text>
+    //         </TouchableOpacity>
+    //       )
+    //     }}
+    //   />
+    // </View>
   )
 }
 export default BottomBar

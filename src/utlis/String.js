@@ -1,7 +1,7 @@
 export const String = {
   app: {
     App: 'Schedulic Staff',
-    datanotfound: 'No data found',
+    datanotfound: 'No Recode Found',
     Nointernet: 'No Internet Connection!',
   },
   login: {

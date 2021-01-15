@@ -30,6 +30,9 @@ export default StyleSheet.create({
         borderRadius: Matrics.Scale(10),
         padding:Matrics.Scale(5)
       },
+      mainCustomerDetails:{
+        marginBottom:'24%'
+    },
       topView:{
         flexDirection:'row',
         width:wp('80%'),

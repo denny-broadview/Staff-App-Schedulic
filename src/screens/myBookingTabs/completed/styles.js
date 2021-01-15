@@ -7,7 +7,7 @@ import {
 const widthConst = Dimensions.get('screen').width;
 export default StyleSheet.create({
     container: {
-        flex: 1,
+      height:"94%",
         backgroundColor: Color.white,
       },
       

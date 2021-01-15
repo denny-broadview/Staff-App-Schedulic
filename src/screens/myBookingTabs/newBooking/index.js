@@ -128,14 +128,12 @@ const NewBookingTab = (props) => {
   return (
     <SafeAreaView style={styles.container}>
     <View style={styles.container}>
-      
         <View style={{justifyContent: 'center', flex: 1}}>
           <MySpinner size="large" visible={loagind} />
           {refreshing ? (
             <ActivityIndicator style={{color: Color.AppColor}} />
           ) : null}
           <FlatList
-          
             ListEmptyComponent={loagind == false  && refreshing == false ? noItemDisplay() : null}
             data={data}
            // inverted={true}

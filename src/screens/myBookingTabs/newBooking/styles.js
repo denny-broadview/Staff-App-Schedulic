@@ -7,7 +7,7 @@ import {
 const widthConst = Dimensions.get('screen').width;
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    height:"94%",
     backgroundColor: Color.white,
   },
   header: {
@@ -17,13 +17,11 @@ export default StyleSheet.create({
   list: {
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     width: widthConst,
   },
   mainView: {
     backgroundColor: Color.white,
     justifyContent: 'center',
-    alignSelf: 'center',
     width: wp('90%'),
     margin: wp('2%'),
     elevation: 4,

@@ -31,6 +31,9 @@ export default StyleSheet.create({
         padding:Matrics.Scale(5),
         paddingBottom:"5%"
       },
+      mainCustomerDetails:{
+        marginBottom:'24%'
+    },
       topView:{
         flexDirection:'row',
         width:wp('80%'),

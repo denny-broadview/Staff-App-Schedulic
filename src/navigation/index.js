@@ -7,7 +7,8 @@ import {
   YellowBox,
   Dimensions,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -132,7 +133,12 @@ export default App = () => {
     return (
       <Tab.Navigator tabBar={(props) =>  <AdminOrdersTabBar {...props} />}>
         <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="My Bookings" component={BookingStackScreen} />
+        <Tab.Screen name="My Bookings" component={BookingStackScreen} listeners={({ navigation, route }) => ({
+          blur: () => navigation.setParams({ screen: undefined }),
+          tabPress: e => {
+            navigation.navigate('NewBookingTab');
+          },
+        })}/>
         <Tab.Screen name="Account" component={MyAccount} />
       </Tab.Navigator>
     );
@@ -140,7 +146,7 @@ export default App = () => {
   const BookingStackScreen = () => {
     return (
       <BookingStack.Navigator>
-        <BookingStack.Screen name="TopTabs" component={TopTabs} options={{ headerShown: false }} />
+        <BookingStack.Screen name="TopTabs" component={TopTabs} options={{ headerShown: false }}  />
         <BookingStack.Screen name="NewBookingDetails" component={NewBookingDetails} options={{ headerShown: false }} />
         {/* <BookingStack.Screen name="OngoingTab" component={TopTabs} options={{ headerShown: false }} /> */}
         <BookingStack.Screen name="onGoingDetails" component={onGoingDetails} options={{ headerShown: false }} />
@@ -151,7 +157,8 @@ export default App = () => {
   }
   function AdminOrdersTabBar({ state, descriptors, navigation }) {
     return (
-      <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0,}}>
+      // <View style={{}}>
+      <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0}}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
@@ -226,9 +233,93 @@ export default App = () => {
               </TouchableOpacity>
             );
           })}
-        </View></View>
+        </View>
+        </View>
+        // </View>
     );
   }
+
+  // function AdminOrdersTabBar({ state, descriptors, navigation }) {
+  //   return (
+  //     <ImageBackground source={require('../assets/images/bottomview.png')} style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#fff',}}>
+  //       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+  //         {state.routes.map((route, index) => {
+  //           const { options } = descriptors[route.key];
+  //           const label =
+  //             options.tabBarLabel !== undefined
+  //               ? options.tabBarLabel
+  //               : options.title !== undefined
+  //                 ? options.title
+  //                 : route.name;
+  
+  //           const isFocused = state.index === index;
+  //           let icon = null;
+        
+  //           const onPress = () => {
+  //             const event = navigation.emit({
+  //               type: 'tabPress',
+  //               target: route.key,
+  //             });
+  
+  //             if (!isFocused && !event.defaultPrevented) {
+  //               navigation.navigate(route.name);
+  //             }
+  //           };
+  
+  //           const onLongPress = () => {
+  //             navigation.emit({
+  //               type: 'tabLongPress',
+  //               target: route.key,
+  //             });
+  //           };
+  
+            
+  //           return (
+  //             <TouchableOpacity
+  //               key={index.toString()}
+  //               accessibilityRole="button"
+  //               accessibilityStates={isFocused ? ['selected'] : []}
+  //               accessibilityLabel={options.tabBarAccessibilityLabel}
+  //               testID={options.tabBarTestID}
+  //               onPress={onPress}
+  //               onLongPress={onLongPress}
+  //               style={{
+  //                 flex: 1,
+  //                 alignItems: 'center',
+  //                 justifyContent: 'space-around',
+  //               }}
+  //             >
+  //               {index === 0 ?
+  //               <Text style={[{
+  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
+  //                 size: 20,
+  //               }]}><Icon name="home" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+  //             :null}
+  //             {index === 1 ?
+  //               <Text style={[{
+  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
+  //                 size: 20,
+  //               }]}><Icon name="calendar" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+  //             :null}
+  //             {index === 2 ?
+  //               <Text style={[{
+  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
+  //                 size: 20,
+  //               }]}><Icon name="user" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+  //             :null}
+  //               <Text style={[{
+  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
+  //                 size: 12,
+  //               }]}>
+  //                 {label}
+  //               </Text>
+  //             </TouchableOpacity>
+  //           );
+  //         })}
+  //       </View>
+  //       </ImageBackground>
+  //   );
+  // }
   function TopTabs() {
     return (
   

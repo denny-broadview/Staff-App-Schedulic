@@ -7,7 +7,7 @@ import {
 
 export default StyleSheet.create({
   container: {
-    flex: 1,
+    height:"94%", 
     backgroundColor: Color.white,
   },
 
@@ -29,6 +29,10 @@ export default StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     borderRadius: Matrics.Scale(10),
     padding: Matrics.Scale(5),
+    height:"94%",
+  },
+  mainCustomerDetails:{
+      marginBottom:'14%'
   },
   topView: {
     flexDirection: 'row',

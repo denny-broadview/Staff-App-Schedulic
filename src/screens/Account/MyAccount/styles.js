@@ -7,7 +7,7 @@ import {
 
 export default StyleSheet.create({
     container: {
-        flex: 1,
+        height:"92%",
         backgroundColor: Color.white,
       },
     title:{

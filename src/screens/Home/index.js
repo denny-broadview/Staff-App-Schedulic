@@ -10,7 +10,7 @@ import {Auth, Constants} from '@global';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
-const Home = (props) => {
+const Home = ({ navigation: { navigate } }) => {
   const navigation = useNavigation()
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
@@ -113,7 +113,7 @@ const Home = (props) => {
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={'Home'}
       />
-      <ScrollView style={{flex: 1,position:"relative"}}>
+      <ScrollView style={{flex: 1,}}>
         <View style={styles.topprofiledeatils}>
         <MySpinner size="large" visible={loagind} />
           <View style={styles.profileimage}>
@@ -152,9 +152,10 @@ const Home = (props) => {
                 <Text style={styles.dateTex}>  {moment().utcOffset('+05:30').format('DD MMM YYYY')}</Text>
               </View>
 
-              <View style={{marginTop: 20}}>
+              <View style={{marginTop: 20,marginBottom:60}}>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={()=> navigation.navigate('BookingStackScreen',{screen:'NewBookingTab'})}>
+                <TouchableOpacity style={styles.btnCard} onPress={()=> navigation.navigate('My Bookings',{screen:'NewBookingTab'})}>
+                {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
                   <View>
                     <Image
                       source={require('../../assets/images/NewBookings.png')}
@@ -177,7 +178,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('BookingStackScreen')}>
+                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('My Bookings',{screen:'OngoingTab'})}>
                   <View>
                     <Image
                       source={require('../../assets/images/Ongoing.png')}
@@ -202,7 +203,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('NewBookingTab',{ screen:'CompletedTab'})}>
+                <TouchableOpacity style={styles.btnCard} onPress={() => navigation.navigate('My Bookings',{screen:'CompletedTab'})}>
                   <View>
                     <Image
                       source={require('../../assets/images/TaskCompleted.png')}

@@ -60,9 +60,7 @@ export default StyleSheet.create({
         },
      
      bgimagehome:{
-          height:hp('70%'),
           width:wp('100%'),
-         
      },
      dateTex:{
           fontSize:20,
@@ -79,7 +77,6 @@ export default StyleSheet.create({
           fontWeight:'bold'
       },
       bottomMainprofile:{
-           marginBottom:"14%"
       },
       commonProfile:{
           backgroundColor:Color.white,
