@@ -36,6 +36,12 @@ const NewBookingTab = (props) => {
     searchFilterFunction(searchKeyFromProbs);
   }, [searchKeyFromProbs]);
  
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      getBooking();
+    });
+    return unsubscribe;
+  }, [props.navigation]);
   const onRefresh = () => {
     setData([]);
     getBooking();

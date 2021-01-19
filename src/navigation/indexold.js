@@ -48,8 +48,6 @@ import { Auth, Constants } from '@global'
 import { setSetting,setTax,setBusiness} from '../store/actions'
 import Icon from 'react-native-vector-icons/Feather';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
-import AsyncStorage from '@react-native-async-storage/async-storage';  // Task#1: import AsyncStorage
-
 const {width} = Dimensions.get('window');
 const Stack = createStackNavigator();
 YellowBox.ignoreWarnings(['']);
@@ -137,8 +135,7 @@ export default App = () => {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="My Bookings" component={BookingStackScreen} listeners={({ navigation, route }) => ({
           blur: () => navigation.setParams({ screen: undefined }),
-          tabPress: async (e) => {
-            await AsyncStorage.setItem('goToTab', '0'); // Task#1: Set value in AsyncStorage
+          tabPress: e => {
             navigation.navigate('NewBookingTab');
           },
         })}/>

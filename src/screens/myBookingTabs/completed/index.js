@@ -51,6 +51,12 @@ const CompletedTab = (props) => {
     );
     searchFilterFunction(searchKeyFromProbs);
   }, [searchKeyFromProbs]);
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      getComplteTask();
+    });
+    return unsubscribe;
+  }, [props.navigation]);
   //search start
   function searchFilterFunction(text) {
     if (text) {

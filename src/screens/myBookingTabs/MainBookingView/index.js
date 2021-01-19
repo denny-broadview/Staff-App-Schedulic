@@ -1,17 +1,19 @@
-import React, {Component, useState} from 'react';
-import {View, Text, Alert, FlatList, TouchableOpacity} from 'react-native';
+import React, { Component, useState } from 'react';
+import { View, Text, Alert, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
+import { String } from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 
-import {Color, Matrics} from '../../../utlis';
+import { Color, Matrics } from '../../../utlis';
 import { useDispatch } from 'react-redux';
-import { setSearchKey } from '../../../store/actions'
-const MyBookingMainView = ({navigation}) => {
-  return renderMainView({navigation});
+import { setSearchKey } from '../../../store/actions';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1: import AsyncStorage
+
+const MyBookingMainView = ({ navigation }) => {
+  return renderMainView({ navigation });
 };
 
-const onPressItem = (curruntindex, {navigation, data, setdata}) => {
+const onPressItem = async (curruntindex, { navigation, data, setdata }) => {
   let temparr = data;
   temparr.forEach((ele, index) => {
     if (index == curruntindex) {
@@ -24,18 +26,21 @@ const onPressItem = (curruntindex, {navigation, data, setdata}) => {
 
   if (curruntindex == 0) {
     navigation.navigate('NewBookingTab');
+    await AsyncStorage.setItem('goToTab', '0'); // Task#1: Set value in AsyncStorage
   } else if (curruntindex == 1) {
     navigation.navigate('OngoingTab');
+    await AsyncStorage.setItem('goToTab', '1'); // Task#1: Set value in AsyncStorage
   } else if (curruntindex == 2) {
     navigation.navigate('CompletedTab');
+    await AsyncStorage.setItem('goToTab', '2'); // Task#1: Set value in AsyncStorage
   }
 };
 
-const renderMainView = ({navigation}) => {
+const renderMainView = ({ navigation }) => {
   return (
     <View>
-      {renderHeader({navigation})}
-      {renderTopBar({navigation})}
+      {renderHeader({ navigation })}
+      {renderTopBar({ navigation })}
     </View>
   );
 };
@@ -46,9 +51,9 @@ const renderHeader = (props) => {
   let [enable] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const dispatch = useDispatch();
-  
-   // searchbar 
-   const fnSearchEnable = () => {
+
+  // searchbar 
+  const fnSearchEnable = () => {
     setEnableSearch(!enable)
     // console.log(enableSearch);
   }
@@ -87,15 +92,52 @@ const renderHeader = (props) => {
   );
 };
 
-const renderTopBar = ({navigation, arshad}) => {
+const renderTopBar = ({ navigation, arshad }) => {
   const [data, setdata] = useState([
-    {name: 'New Bookings', selected: true},
-    {name: 'Ongoing', selected: false},
-    {name: 'Completed', selected: false},
+    { name: 'New Bookings', selected: true },
+    { name: 'Ongoing', selected: false },
+    { name: 'Completed', selected: false },
   ]);
 
+  // Task#1: Get AsyncStorage value and based on that update data array
+  const getTabData = async () => {
+    let tabIndex = await AsyncStorage.getItem('goToTab'); // Get AsyncStorage value
+    if (tabIndex !== null || tabIndex !== undefined) {
+      let tempData = data;
+      if (tabIndex === '0') {
+        tempData = [
+          { name: 'New Bookings', selected: true },
+          { name: 'Ongoing', selected: false },
+          { name: 'Completed', selected: false },
+        ]
+      } else if (tabIndex === '1') {
+        tempData = [
+          { name: 'New Bookings', selected: false },
+          { name: 'Ongoing', selected: true },
+          { name: 'Completed', selected: false },
+        ]
+      } else if (tabIndex === '2') {
+        tempData = [
+          { name: 'New Bookings', selected: false },
+          { name: 'Ongoing', selected: false },
+          { name: 'Completed', selected: true },
+        ]
+      }
+      setdata([...tempData]);
+    }
+  }
+
+  // Task#1: Use this block for focus
+  React.useEffect(() => {
+    navigation.addListener('focus', getTabData);
+    return () => {
+      navigation.removeListener('focus', getTabData)
+    }
+  }, [])
+
+
   return (
-    <View style={{backgroundColor: Color.white}}>
+    <View style={{ backgroundColor: Color.white }}>
       <FlatList
         data={data}
         horizontal
@@ -105,10 +147,10 @@ const renderTopBar = ({navigation, arshad}) => {
           backgroundColor: Color.white,
           marginTop: 10,
         }}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
-            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPressItem(index, { navigation, data, setdata },arshad)}>
-              <Text style={[styles.txtxname, { color: item.selected ? Color.AppColor : Color.iconAccount}]}>{item.name}</Text>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPressItem(index, { navigation, data, setdata }, arshad)}>
+              <Text style={[styles.txtxname, { color: item.selected ? Color.AppColor : Color.iconAccount }]}>{item.name}</Text>
               {item.selected && <View style={styles.underLine} />}
             </TouchableOpacity>
           );

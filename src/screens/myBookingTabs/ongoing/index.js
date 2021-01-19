@@ -69,6 +69,12 @@ const OngoingTab = (props) => {
     );
     searchFilterFunction(searchKeyFromProbs);
   }, [searchKeyFromProbs]);
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener('focus', () => {
+      getOnGoing();
+    });
+    return unsubscribe;
+  }, [props.navigation]);
   //search start
   function searchFilterFunction(text) {
     if (text) {
