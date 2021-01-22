@@ -42,6 +42,10 @@ const NewBookingTab = (props) => {
     });
     return unsubscribe;
   }, [props.navigation]);
+  const onTabNavigate = async (screenname, tabIndex) => {
+    await AsyncStorage.setItem('goToTab', tabIndex);  // Set value in AsyncStorage
+    navigation.navigate('My Bookings', { screen: 'TopTabs', params: { screen: screenname } });  // Proper do nested navigation
+  }
   const onRefresh = () => {
     setData([]);
     getBooking();
@@ -111,7 +115,9 @@ const NewBookingTab = (props) => {
           if (st == "R") {
             props.navigation.navigate('Home');
             getBooking();
-          } else if (st == "AC"){ props.navigation.navigate('OngoingTab');
+          } else if (st == "AC"){ 
+           // props.navigation.navigate('OngoingTab');
+           // onTabNavigate('OngoingTab', 1)
           getBooking();}
         } else {
           setLoading(false);
@@ -174,7 +180,7 @@ const NewBookingTab = (props) => {
                   ) : null}
                    {item.order_status != null && item.order_status == 'AC' ? (
                     <View>
-                      <Text style={styles.textstatus_dis}>Accept</Text>
+                      <Text style={styles.textstatus_dis}>Accepted</Text>
                     </View>
                   ) : null}
                   {item.order_status != null && item.order_status == 'OW' ? (

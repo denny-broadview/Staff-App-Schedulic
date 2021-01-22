@@ -232,7 +232,7 @@ const OngoingTab = (props) => {
                   ) : null}
                    {item.order_status != null && item.order_status == 'AC' ? (
                     <View>
-                      <Text style={styles.textstatus_dis}>Accept</Text>
+                      <Text style={styles.textstatus_dis}>Accepted</Text>
                     </View>
                   ) : null}
                   {item.order_status != null && item.order_status == 'OW' ? (
@@ -317,7 +317,8 @@ const OngoingTab = (props) => {
                             style={styles.btnViewDetails}
                             onPress={() => {
                               getStatus(item.id, 'CO'),
-                                props.navigation.navigate('Payment', {
+                              // some time chenge redirect Payment screen but demo kind home screen redirect
+                                props.navigation.navigate('Home', {
                                   datapass: item,
                                   image: item.customer.image,
                                 });

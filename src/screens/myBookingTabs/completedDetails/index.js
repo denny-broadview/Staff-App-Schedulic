@@ -105,7 +105,7 @@ const CompletDetails = (props) => {
               <View style={styles.service_dis_book}>
                 <Text style={styles.textBook_Time_dis}>
                   Booked on {moment(data.booking_date).format('DD MMM YYYY')}&nbsp; 
-                   @{moment(data.booking_time, 'HH:mm:ss').format('LT')}
+                   @ {moment(data.booking_time, 'HH:mm:ss').format('LT')}
                 </Text>
               </View>
               <View style={{marginTop:Matrics.Scale(10)}}>
@@ -116,7 +116,7 @@ const CompletDetails = (props) => {
                     name="md-call-outline"
                     style={styles.staff_call_icon}
                   />
-                  <Text style={styles.staff_text_phone}>{userInfo.phone}</Text>
+                  <Text style={styles.staff_text_phone}> {userInfo.phone}</Text>
                 </View>
               </View>
             </View>

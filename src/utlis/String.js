@@ -1,7 +1,7 @@
 export const String = {
   app: {
     App: 'Schedulic Staff',
-    datanotfound: 'No Recode Found',
+    datanotfound: 'No Recods Found',
     Nointernet: 'No Internet Connection!',
   },
   login: {
@@ -18,12 +18,12 @@ export const String = {
     Rememberme: 'Remember Me',
     LoginButtom: 'Login',
     error_message_allFieldsManatory: 'All Fields Are Mandatory',
-    error_message_email: 'Please Enter Email',
-    error_message_email_valid: 'Please Enter Valid Email-id',
+    error_message_email: 'Please Enter Email Address',
+    error_message_email_valid: 'Please Enter Valid Email Address',
     error_message_password: 'Please Enter Password',
-    error_message_password_length: 'Please Enter 8 Digit Password',
+    error_message_password_length: 'Please Enter 8 characters Password',
     error_message_phone_no: 'Please Enter Phone number',
-    error_message_phone_length: 'Please Enter 10 Digit mobile number',
+    error_message_phone_length: 'Please Enter 10 characters mobile number',
     error_message_fname: 'Please Enter Firstname',
     error_message_lname: 'Please Enter Lastname',
   },

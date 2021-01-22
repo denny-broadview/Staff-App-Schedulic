@@ -158,7 +158,7 @@ const onGoingDetails = (props) => {
                   ) : null}
                    {data.order_status != null && data.order_status == 'AC' ? (
                     <View>
-                      <Text style={styles.textstatus_dis}>Accept</Text>
+                      <Text style={styles.textstatus_dis}>Accepted</Text>
                     </View>
                   ) : null}
                   {data.order_status != null && data.order_status == 'OW' ? (
@@ -300,7 +300,7 @@ const onGoingDetails = (props) => {
                   </TouchableOpacity>
                 ) : null}
                 {data.order_status == 'OW' &&
-                data.service.service_sub_type == 'at-home' ? (
+                data.service.service_sub_type == 'at_home' ? (
                   <TouchableOpacity
                     style={styles.btnViewMap}
                     onPress={() =>

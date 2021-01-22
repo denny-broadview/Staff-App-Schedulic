@@ -39,6 +39,8 @@ const CashPaymantDetails = (props) => {
   let amountGST = 0;
   let amountCGST = 0;
   let [grantTotal, setGrantTotal] = useState('');
+  let tempsArr = [];
+  
 
   const [payment, setPayment] = useState([]);
 
@@ -46,6 +48,7 @@ const CashPaymantDetails = (props) => {
   const [method, setMethod] = useState([]);
   let subtotal = props.route.params.datapass.total_cost;
   let taxSub = 0;
+  let GstSgstArr1 = [];
   useEffect(() => {
    
     if (props.route.params !== null) {
@@ -90,19 +93,17 @@ const CashPaymantDetails = (props) => {
 
   const taxCal = () => {
     // setAllTax(taxArray);
-    let tempsArr = [];
-    let GstSgstArr = [];
+   
 
-    for (var i in taxArray) {
-      if (i == 0) {
+    for (var ii in taxArray) {
+      if (ii == 0) {
         amountGST =
           (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr.push({amount: amountGST});
+          GstSgstArr1.push({amount: amountGST});
         taxSub = taxSub + amountGST;
-      } else if (i == 1) {
-        amountCGST =
-          (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr.push({amount: amountCGST});
+      } else if (ii == 1) {
+        amountCGST = (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
+        GstSgstArr1.push({amount:amountCGST});
         taxSub = taxSub + amountCGST;
       }
     }
@@ -110,7 +111,7 @@ const CashPaymantDetails = (props) => {
       tempsArr.push({
         name: taxArray[i].name,
         value: taxArray[i].value,
-        amount: GstSgstArr[i].amount,
+        amount: GstSgstArr1[i].amount
       });
     }
     setCalTaxArray(tempsArr);
@@ -205,7 +206,7 @@ const CashPaymantDetails = (props) => {
       .catch(function (error) {
         console.log(error);
         setLoading(false);
-        Auth.ToastMessage('Error! while order Bookign.');
+        Auth.ToastMessage('Error! while order Booking.');
       });
   };
   return (
@@ -240,14 +241,14 @@ const CashPaymantDetails = (props) => {
                 {currencyFormatter.format(
                   data.total_cost,
                   {code: currency},
-                  {locale: currencyFrm},
+                  //{locale: currencyFrm},
                 )}
               </Text>
             ) : (
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
                   data.total_cost,
-                  {locale: currencyFrm},
+                 // {locale: currencyFrm},
                   {code: currency},
                 )}
               </Text>
@@ -262,14 +263,14 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 data.total_cost,
                 {code: currency},
-                {locale: currencyFrm},
+               // {locale: currencyFrm},
               )}
             </Text>
           ) : (
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-                {locale: currencyFrm},
+               // {locale: currencyFrm},
                 {code: currency},
               )}
             </Text>
@@ -288,14 +289,14 @@ const CashPaymantDetails = (props) => {
                       {currencyFormatter.format(
                         item.amount,
                         {code: currency},
-                        {locale: currencyFrm},
+                       // {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
                         item.amount,
-                        {locale: currencyFrm},
+                       // {locale: currencyFrm},
                         {code: currency},
                       )}
                     </Text>
