@@ -31,7 +31,7 @@ export const String = {
     Helloword: 'Hello!',
     Newbooking: 'New Bookings',
     Describtion: 'Lorem ipsum dolor',
-    Ongoing: 'Ongoing',
+    Ongoing: 'Upcoming',
     TaskCompleted: 'Task Completed',
     home: 'Home',
   },

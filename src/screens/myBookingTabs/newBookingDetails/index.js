@@ -16,6 +16,7 @@ import moment from 'moment';
 import {useSelector} from 'react-redux';
 import {Auth, Constants} from '@global';
 import {MySpinner} from '../../../component/MySpinner';
+import Snackbar from 'react-native-snackbar';
 const NewBookingDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
  
@@ -55,11 +56,28 @@ const NewBookingDetails = (props) => {
         console.log(' booking data status--------', res);
         if (res[1].data == true) {
           setLoading(false);
+         
           if(st == "R"){
-            props.navigation.navigate('Home');
+            
+            setTimeout(() => {
+              Snackbar.show({
+                text: 'Appointment Updated',
+                duration: Snackbar.LENGTH_SHORT,
+              });
+              props.navigation.navigate('Home');
+          }, 1000);
+            
           }
-          else if(st == "AC")
-          props.navigation.navigate('OngoingTab');
+          else if(st == "AC"){
+            
+            setTimeout(() => {
+              Snackbar.show({
+                text: 'Appointment Updated',
+                duration: Snackbar.LENGTH_SHORT
+              });
+              props.navigation.navigate('NewBookingTab');
+          }, 1000);
+          }
         } else {
          
           setLoading(false);

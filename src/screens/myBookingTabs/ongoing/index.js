@@ -9,6 +9,7 @@ import {MySpinner} from '../../../component/MySpinner';
 import {Auth, Constants} from '@global';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
+import Snackbar from 'react-native-snackbar';
 const OngoingTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
@@ -185,7 +186,14 @@ const OngoingTab = (props) => {
         console.log(' ongoing data status--------', res);
         if (res[1].data == true) {
           setLoading(false);
-          getOnGoing();
+          setTimeout(() => {
+            Snackbar.show({
+              text: 'Appointment Updated',
+              duration: Snackbar.LENGTH_SHORT
+            });
+            getOnGoing();
+        }, 1000);
+          
         } else {
           setLoading(false);
         }
@@ -270,11 +278,7 @@ const OngoingTab = (props) => {
                       <Text style={styles.textstatus_dis}>Intrupted</Text>
                     </View>
                   ) : null}
-                   {item.order_status != null && item.order_status == 'ITR' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Intrupted</Text>
-                    </View>
-                  ) : null}
+                   
                    {item.order_status != null && item.order_status == 'CC' ? (
                     <View>
                       <Text style={styles.textstatus_dis}>Cancel by Client</Text>
@@ -318,7 +322,7 @@ const OngoingTab = (props) => {
                             onPress={() => {
                               getStatus(item.id, 'CO'),
                               // some time chenge redirect Payment screen but demo kind home screen redirect
-                                props.navigation.navigate('Home', {
+                                props.navigation.navigate('Payment', {
                                   datapass: item,
                                   image: item.customer.image,
                                 });

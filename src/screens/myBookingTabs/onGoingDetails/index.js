@@ -15,8 +15,7 @@ import {MySpinner} from '../../../component/MySpinner';
 import moment from 'moment';
 import {Auth, Constants} from '@global';
 import {useSelector} from 'react-redux';
-// siddharth.variya@broadviewinnovations.in
-// #Broadview1922&
+import Snackbar from 'react-native-snackbar';
 const onGoingDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [onTheWayClieck, setOnTheWayClieck] = useState(true);
@@ -112,7 +111,14 @@ const onGoingDetails = (props) => {
         console.log(' ongoing data status--------', res);
         if (res[1].data == true) {
           setLoading(false);
-          props.navigation.navigate('OngoingTab');
+          setTimeout(() => {
+            Snackbar.show({
+              text: 'Appointment Updated',
+              duration: Snackbar.LENGTH_SHORT
+            });
+            props.navigation.navigate('OngoingTab');
+        }, 1000);
+          
         } else {
           setLoading(false);
         }

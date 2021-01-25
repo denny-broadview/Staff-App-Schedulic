@@ -58,7 +58,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         width: wp('90%'),
-        bottom: hp('-1%'),
+        bottom: hp('-5%'),
        
       },
       buttonStylupdate: {
@@ -68,7 +68,7 @@ export default StyleSheet.create({
         backgroundColor: Color.AppColor,
         borderRadius: Matrics.Scale(5),
         width: wp('90%'),
-        height: Platform.OS == 'ios' ? hp('6%') : hp('8%'),
+        height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
         alignItems: 'center',
         alignContent: 'center',
         alignSelf: 'center',
@@ -78,9 +78,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         color: '#fff',
         fontWeight: '500',
-        fontSize: Matrics.Scale(18),
+        fontSize: Matrics.Scale(16),
         textAlign: 'center',
-        top: Platform.OS === 'ios' ? hp('1%') : hp('2%'),
+        top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
       },
 
 })

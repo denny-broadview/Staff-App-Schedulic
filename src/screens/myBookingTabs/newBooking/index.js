@@ -9,6 +9,7 @@ import {Color, Matrics} from '../../../utlis';
 import {MySpinner} from '../../../component/MySpinner';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
+import Snackbar from 'react-native-snackbar';
 const NewBookingTab = (props) => {
   const [refreshing, setRefreshing] = useState(true);
   const userInfo = useSelector((state) => state.user.user);
@@ -113,12 +114,27 @@ const NewBookingTab = (props) => {
         if (res[1].data == true) {
           setLoading(false);
           if (st == "R") {
-            props.navigation.navigate('Home');
-            getBooking();
+            setTimeout(() => {
+              Snackbar.show({
+                text: 'Appointment Updated',
+                duration: Snackbar.LENGTH_SHORT
+              });
+              props.navigation.navigate('Home');
+          }, 1000);
+            //props.navigation.navigate('Home');
+            //getBooking();
           } else if (st == "AC"){ 
            // props.navigation.navigate('OngoingTab');
            // onTabNavigate('OngoingTab', 1)
-          getBooking();}
+           setTimeout(() => {
+            Snackbar.show({
+              text: 'Appointment Updated',
+              duration: Snackbar.LENGTH_SHORT
+            });
+            getBooking();
+        }, 1000);
+          //getBooking();
+        }
         } else {
           setLoading(false);
         }
@@ -214,11 +230,6 @@ const NewBookingTab = (props) => {
                     </View>
                   ) : null}
                   {item.order_status != null && item.order_status == 'ITR' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Intrupted</Text>
-                    </View>
-                  ) : null}
-                   {item.order_status != null && item.order_status == 'ITR' ? (
                     <View>
                       <Text style={styles.textstatus_dis}>Intrupted</Text>
                     </View>

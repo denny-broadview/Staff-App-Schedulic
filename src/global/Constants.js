@@ -35,7 +35,8 @@ const Constants = {
     resedule:'staff-resedule-bookings',
     emailCheck:'admin-staff-email-check',
     getBusiness:'get-business',
-    getCategoryService:'staff-category-service'
+    getCategoryService:'staff-category-service',
+    getCatgorywithService:'staff-category-services'
   },
   SplashScreen: {
     Duration: 2000,

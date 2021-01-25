@@ -27,7 +27,7 @@ const Home = (props) => {
     getBooking();
     getOnGoing();
     getComplteTask();
-    setStarCount(userInfo.avgRatings[0].aggregate)
+    setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Home = (props) => {
     getBooking();
     getOnGoing();
     getComplteTask();
-    setStarCount(userInfo.avgRatings[0].aggregate)
+   // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
     });
     return unsubscribe;
   }, [props.navigation]);
@@ -96,9 +96,7 @@ const Home = (props) => {
       }
     });
   }
-  const _onStarRatingPress = (rating) => {
-    setStarCount(rating);
-  };
+ 
   const fnSearchEnable = () => {
     setEnableSearch(!enable);
     // console.log(enableSearch);

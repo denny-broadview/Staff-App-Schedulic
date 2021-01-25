@@ -111,7 +111,7 @@ const CashPaymantDetails = (props) => {
       tempsArr.push({
         name: taxArray[i].name,
         value: taxArray[i].value,
-        amount: GstSgstArr1[i].amount
+        amount: GstSgstArr1[0].amount
       });
     }
     setCalTaxArray(tempsArr);
@@ -283,7 +283,7 @@ const CashPaymantDetails = (props) => {
               data={calTaxArray}
               renderItem={({item, index}) => (
                 <View style={styles.amountView}>
-                  <Text style={styles.text_amount}>{item.name}</Text>
+                  <Text style={styles.text_amount}>{item.name}{"("}{item.value}{"%)"}</Text>
                   {currencySymbolePosition == 'left' ? (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
@@ -344,14 +344,14 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 grantTotal,
                 {code: currency},
-                {locale: currencyFrm},
+               // {locale: currencyFrm},
               )}
             </Text>
           ) : (
             <Text style={styles.textTotalRs}>
               {currencyFormatter.format(
                 grantTotal,
-                {locale: currencyFrm},
+               // {locale: currencyFrm},
                 {code: currency},
               )}
             </Text>

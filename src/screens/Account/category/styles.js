@@ -25,13 +25,14 @@ export default StyleSheet.create({
   menuView: {
     flexDirection: 'row',
     width: wp('90%'),
-    padding:Matrics.Scale('12')
+    //padding:Matrics.Scale('5')
   },
   menuname: {
     width: wp('80%'),
     color: Color.iconAccount,
     justifyContent: 'center',
-    alignSelf: 'center',
+    //alignSelf: 'center',
+    padding:wp('2'),
     marginLeft: wp('5%'),
   },
   menu: {
