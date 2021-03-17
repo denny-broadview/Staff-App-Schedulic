@@ -194,13 +194,13 @@ const AccountDetails = (props) => {
               </View>
               <View style={styles.inputBorde}>
                 <TextInput
-                  style={styles.textMobileNumber}
+                  style={styles.textCode}
                   value={Phonenumber}
                   onChangeText={(text) => {
                     setPhonenumber(text);
                   }}
                   placeholder={String.account.mobileNumber}
-                  keyboardType="number-pad"
+                    keyboardType="email-address"
                   maxLength={12}
                 />
               </View>

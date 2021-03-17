@@ -46,13 +46,13 @@ export default StyleSheet.create({
      hollText:{
           fontSize: 24, 
           color: Color.AppColor,
-          fontFamily:"BAHNSCHRIFT",
+          // fontFamily:"BAHNSCHRIFT",
      },
      userText:{
           color: Color.bleck, 
           fontSize: 16,
           marginTop:8,
-          fontFamily:"BAHNSCHRIFT",
+          // fontFamily:"BAHNSCHRIFT",
           textTransform:"capitalize"
      },
      rating: {
@@ -100,20 +100,20 @@ export default StyleSheet.create({
       cardTextTitel:{
           fontSize: 18, 
           color: Color.darkGray,
-          fontFamily:"BAHNSCHRIFT", 
+          // fontFamily:"BAHNSCHRIFT", 
       },
       cardSubTextTitle:{
           color: Color.silver,
           fontSize: 14,
           marginTop:Matrics.Scale(1),
           fontWeight:"500",
-          fontFamily:"BAHNSCHRIFT",
+          // fontFamily:"BAHNSCHRIFT",
       },
       bookingCount:{
           fontSize:28,
           color:Color.pink,
           fontWeight:'bold',
-          fontFamily:"BAHNSCHRIFT",
+          // fontFamily:"BAHNSCHRIFT",
       },
       ongoingCount:{
           fontSize:28,

@@ -15,7 +15,6 @@ const Home = ({ navigation: { navigate } }) => {
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
   console.log('userInfo====================================',userInfo);
- 
   const [starCount, setStarCount] = useState(0);
   const [bookingdata,setBookingData]= useState([]);
   const [onGoingdata,setonGoingData]=useState([]);
@@ -25,7 +24,7 @@ const Home = ({ navigation: { navigate } }) => {
     getBooking();
     getOnGoing();
     getComplteTask();
-    setStarCount(userInfo.avgRatings[0].aggregate)
+    // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
   }, []);
 
    // Api calling for newBookings

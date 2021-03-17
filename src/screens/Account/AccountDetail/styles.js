@@ -52,13 +52,13 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
   textMobileNumber: {
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignSelf: 'flex-start',
     color: Color.bleck,
     fontSize: Matrics.Scale(18),
     fontWeight: '400',
     fontStyle: 'normal',
-    marginLeft: Matrics.Scale(20),
+    marginLeft: Matrics.Scale(10),
   },
   containerPhone: {
     height: Matrics.Scale(30),

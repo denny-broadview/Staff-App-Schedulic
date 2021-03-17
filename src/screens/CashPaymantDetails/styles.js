@@ -38,6 +38,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     width: wp('90%'),
     borderRadius: Matrics.Scale(10),
+    // borderWidth:1,
     elevation: 1,
     shadowOpacity: 0.5,
     shadowRadius: 1,
@@ -158,6 +159,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     width: wp('35%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+    paddingLeft:10
   },
   couponIconView: {
     backgroundColor: Color.AppColor,

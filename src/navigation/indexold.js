@@ -77,11 +77,11 @@ export default App = () => {
   function allSettingApi() {
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm--',myForm)
+    // console.log('parm--',myForm)
     Auth.PostServiceAuth(myForm,Constants.ApiAction.timeSetting,
       (res) => {
         if (res[1].data == true) {
-          console.log('settingdata------',res[1].response)
+          // console.log('settingdata------',res[1].response)
           onSetSetting(res[1].response);
           (res[1].response);
         } else {

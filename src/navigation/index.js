@@ -83,7 +83,7 @@ export default App = () => {
     Auth.PostServiceAuth(myForm,Constants.ApiAction.timeSetting,
       (res) => {
         if (res[1].data == true) {
-          console.log('settingdata------',res[1].response)
+          // console.log('settingdata------',res[1].response)
           onSetSetting(res[1].response);
           (res[1].response);
         } else {

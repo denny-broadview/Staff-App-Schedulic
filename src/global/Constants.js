@@ -6,7 +6,7 @@ const {width, height} = Dimensions.get('window');
 
 const Constants = {
   showStatusBar: true,
-  businessid: 147,
+  businessid: 24,
   businessname: 'BI',
   ApiBaseUrl: 'https://api.schedulic.com/api/',
 
@@ -36,7 +36,8 @@ const Constants = {
     emailCheck:'admin-staff-email-check',
     getBusiness:'get-business',
     getCategoryService:'staff-category-service',
-    getCatgorywithService:'staff-category-services'
+    getCatgorywithService:'staff-category-services',
+    addReferenceKey:'add-refrence-key'
   },
   SplashScreen: {
     Duration: 2000,

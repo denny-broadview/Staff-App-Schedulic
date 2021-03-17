@@ -1,11 +1,15 @@
 import {
   SET_SERVICE_LIST,
-  SEARCH_KEY
+  SEARCH_KEY,
+  SET_ONGOING_DATA,
+  SET_LOCATION
 } from '../actions/actionTypes';
 
 const initialState = {
   serviceList: [],
-  serachKey: ''
+  serachKey: '',
+  onGoingData:{},
+  staffLocation:{}
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +23,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         serachKey: action.data,
       };
+    case SET_ONGOING_DATA:
+      return { 
+        ...state, 
+        onGoingData: action.data
+    };
+    case SET_LOCATION:
+      return { 
+        ...state, 
+        staffLocation: action.data
+    };
     default:
       return state;
   }

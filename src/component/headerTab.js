@@ -13,27 +13,30 @@ const HeaderTab = (props) => {
     const { onPress, onPressSearch, onPressNoti, header, headertext, search, searchClick, searchTerm, onChangeSearch, onSearchClear, notification, back } = props;
 
     return (
-        <View style={[styles.container,{ flexDirection: 'row',
-        alignItems: 'center',
-       
-        justifyContent:searchClick? 'flex-start':'flex-end'}]}>
+        <View style={[styles.container, {
+            flexDirection: 'row',
+            alignItems: 'center', justifyContent: searchClick ? 'flex-start' : 'flex-end'
+        }]}>
             <StatusBar backgroundColor={Color.AppColor} barStyle='light-content' />
-           
+
             {back == true ?
-                (<TouchableOpacity style={[styles.backimg,{ alignItems: 'center', alignSelf: 'center' }]} onPress={onPress}>
+                (<TouchableOpacity style={[styles.backimg, { alignItems: 'center', alignSelf: 'center' }]} onPress={onPress}>
                     <Icon name="arrowleft" style={styles.icon} ></Icon>
                 </TouchableOpacity>) : null
             }
             {header == true && searchClick == false ?
                 <View style={styles.titleView}>
                     <Text style={styles.text}>{headertext}</Text>
-               </View> : null
+                </View> : null
             }
             {search == true && searchClick == true ?
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'flex-start',}}>
+                    alignSelf: 'flex-end',
+                    marginBottom: 5,
+                    justifyContent: 'flex-start',
+                }}>
                     <SearchComponent
                         customSearchInputStyle={{ backgroundColor: '#fff' }}
                         cancelColor='#fff'
@@ -41,9 +44,9 @@ const HeaderTab = (props) => {
                         onChange={onChangeSearch}
                         onSearchClear={onSearchClear}
                     />
-                </View> 
+                </View>
                 : null
-                }
+            }
 
             {search == true && searchClick == false ?
                 <View style={styles.flexDir}>
@@ -56,7 +59,8 @@ const HeaderTab = (props) => {
             }
 
             {notification == true && searchClick == false ?
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', 
+                justifyContent: 'flex-end', alignSelf: 'flex-end', marginBottom: 18, }}>
                     <TouchableOpacity onPress={onPressNoti}>
                         <IconNotification name="bell" style={styles.iconbell} />
                     </TouchableOpacity>
@@ -93,11 +97,11 @@ const styles = StyleSheet.create({
     },
     titleView: {
         // width: wp('20%'),
-        flex:1,
+        flex: 1,
         marginLeft: 10,
         justifyContent: 'flex-start',
         alignSelf: 'center',
-       
+
     },
     text: {
         color: Color.white,
@@ -105,7 +109,7 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignSelf: 'flex-start',
         fontWeight: 'bold',
-        marginTop: Platform.OS === 'ios' ? hp('3%') : null 
+        marginTop: Platform.OS === 'ios' ? hp('3%') : null
 
     },
     endIconView:

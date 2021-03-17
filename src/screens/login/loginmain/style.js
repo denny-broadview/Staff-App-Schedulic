@@ -42,6 +42,7 @@ export default StyleSheet.create({
       borderRadius:5,
       marginTop:20,
       width: wp('90%'),
+      height:45
    },
    textInpute:{
       justifyContent:'center', 

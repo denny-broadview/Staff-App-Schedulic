@@ -55,6 +55,7 @@ function PostServiceAuth(data,action, cb) {
   }
 
   function ToastMessage(message) {
+    console.log('log from toast');
     return (
     Alert.alert(
         String.app.App,

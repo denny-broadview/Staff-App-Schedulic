@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  
 } from 'react-native';
 import HeaderView from '../../../component/headerTab';
 import {MySpinner} from '../../../component/MySpinner';
@@ -22,7 +23,7 @@ import {
   setUserId,
 } from '../../../store/actions';
 import Validate from '../../../utlis/Validate';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
 
 var fcmToken;
 const LoginMain = (props) => {
@@ -34,24 +35,24 @@ const LoginMain = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    _checkPermission();
+    // _checkPermission();
   }, []);
   async function _checkPermission() {
-    const enabled = await firebase.messaging().hasPermission();
-    _getToken();
+    // const enabled = await firebase.messaging().hasPermission();
+    // _getToken();
   }
 
-  async function _getToken() {
-    fcmToken = await firebase.messaging().getToken();
-    console.log('fcmtoken------------', fcmToken);
-    await AsyncStorage.setItem('fcmToken', fcmToken);
-    const channel = new firebase.notifications.Android.Channel(
-      'general',
-      'General',
-      firebase.notifications.Android.Importance.Max,
-    ).setDescription('general notification channel');
-    firebase.notifications().android.createChannel(channel);
-  }
+  // async function _getToken() {
+  //   fcmToken = await firebase.messaging().getToken();
+  //   console.log('fcmtoken------------', fcmToken);
+  //   await AsyncStorage.setItem('fcmToken', fcmToken);
+  //   const channel = new firebase.notifications.Android.Channel(
+  //     'general',
+  //     'General',
+  //     firebase.notifications.Android.Importance.Max,
+  //   ).setDescription('general notification channel');
+  //   firebase.notifications().android.createChannel(channel);
+  // }
 
   function mobileLogin() {
     let myForm = new FormData();
@@ -63,17 +64,18 @@ const LoginMain = (props) => {
     Auth.PostServiceAuth(myForm, Constants.ApiAction.mobileLogin, (res) => {
       setLoding(false);
       console.log('mobileLogin api=====>', res);
-      console.log('mobileLogin api true=====>', res[1].data);
+      console.log('mobileLogin api status=====>', res[1].data);
 
-      if (res[1].data == true) {
+      if (res[1].data === true) {
         onSetUserId(res[1].response.user_id);
         onSetUserData(res[1].response);
         onSetUserToken(res[1].response.token);
         onSetUserImage(res[1].response.image);
         console.log('onSetUserToken---', onSetUserToken(res[1].response.token));
 
-        props.navigation.navigate('Home');
+        props.navigation.navigate('Home'); 
       } else {
+        // console.log('else ',res[1].response);
         Auth.ToastMessage(res[1].response);
       }
     });

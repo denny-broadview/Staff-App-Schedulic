@@ -27,8 +27,12 @@ const Home = (props) => {
     getBooking();
     getOnGoing();
     getComplteTask();
-    setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
   }, []);
+
+  useEffect(() => {
+    console.log('In Userinfo by Arshad ',userInfo);
+    // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
+  }, [userInfo])
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -157,7 +161,7 @@ const Home = (props) => {
             </View>
           </View>
         </View>
-        <View style={styles.bottomMainprofile}>
+        <View style={styles.bottomMainprofile}> 
           <ImageBackground
             imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
             source={require('../../assets/images/Homebg.png')}
