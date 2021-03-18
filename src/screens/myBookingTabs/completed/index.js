@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
-import {Color, Matrics} from '../../../utlis';
-import {Auth, Constants} from '@global';
-import {MySpinner} from '../../../component/MySpinner';
-import {useSelector} from 'react-redux';
+import { String } from '../../../utlis/String';
+import { Color, Matrics } from '../../../utlis';
+import { Auth, Constants } from '@global';
+import { MySpinner } from '../../../component/MySpinner';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 const CompletedTab = (props) => {
@@ -109,8 +109,8 @@ const CompletedTab = (props) => {
     // setLoading(false);
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>
           {String.app.datanotfound}
         </Text>
       </View>
@@ -122,15 +122,15 @@ const CompletedTab = (props) => {
       <View style={styles.container}>
         <MySpinner size="large" visible={loagind} />
         {refreshing ? (
-          <ActivityIndicator style={{color: Color.AppColor}} />
+          <ActivityIndicator style={{ color: Color.AppColor }} />
         ) : null}
         <FlatList
           ListEmptyComponent={
             loagind == false && refreshing == false ? noItemDisplay() : null
           }
           data={data}
-         // inverted={true}
-          renderItem={({item, index}) => (
+          // inverted={true}
+          renderItem={({ item, index }) => (
             <View style={styles.mainView}>
               <View style={styles.topView}>
                 <Text style={styles.bookingTextDate}>
@@ -142,15 +142,19 @@ const CompletedTab = (props) => {
               </View>
               <View style={styles.topView_dis}>
                 {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                <Text style={styles.textDate_dis}>
-                  {moment(item.booking_date).format('DD MMM YYYY')}
-                </Text>
-                <Text style={styles.bookingTimeText}>
-                  {moment(item.booking_time, 'HH:mm:ss').format('LT')}
-                </Text>
-                <Text style={styles.textstatus_dis}>
-                  {item.order_status == 'CO' ? 'Completed' : item.order_status}
-                </Text>
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={styles.textDate_dis}>
+                    {moment(item.booking_date).format('DD MMM YYYY')}
+                  </Text>
+                  <Text style={styles.bookingTimeText}>
+                    {moment(item.booking_time, 'HH:mm:ss').format('LT')}
+                  </Text>
+                </View>
+                <View style={styles.statusView}>
+                  <Text style={styles.textstatus_dis}>
+                    {item.order_status == 'CO' ? 'Completed' : item.order_status}
+                  </Text>
+                </View>
               </View>
               <View style={styles.service_btn_mainview}>
                 <View style={styles.service_dis}>
@@ -177,7 +181,7 @@ const CompletedTab = (props) => {
                 </View>
               </View>
 
-              <View style={{marginLeft: 15}}>
+              <View style={{ marginLeft: 15 }}>
                 <View style={styles.service_dis}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
@@ -186,7 +190,7 @@ const CompletedTab = (props) => {
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         item.total_cost,
-                        {code: currency},
+                        { code: currency },
                         // {locale: currencyFrm},
                       )}
                     </Text>
@@ -195,7 +199,7 @@ const CompletedTab = (props) => {
                       {currencyFormatter.format(
                         item.total_cost,
                         // {locale: currencyFrm},
-                        {code: currency},
+                        { code: currency },
                       )}
                     </Text>
                   )}

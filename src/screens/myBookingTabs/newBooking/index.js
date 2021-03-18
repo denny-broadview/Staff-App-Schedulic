@@ -180,72 +180,78 @@ const NewBookingTab = (props) => {
                 </View>
                 <View style={styles.topView_dis}>
                   {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                  <Text style={styles.textDate_dis}>
-                    {moment(item.booking_date).format('DD MMM YYYY')}
-                  </Text>
-                  <Text style={styles.bookingTimeText}>
-                    {moment(item.booking_time, 'HH:mm:ss').format('LT')}
-                  </Text>
-                  {item.order_status != null && item.order_status == 'CNF' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Confirm</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'P' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Pending</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'AC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Accepted</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'OW' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>On The Way</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'WS' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Work Started</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'C' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Canceled</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'RSS' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'RSA' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'RSC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'ITR' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Intrupted</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'CC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Cancel by Client</Text>
-                    </View>
-                  ) : null}
-                  {item.order_status != null && item.order_status == 'CO' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Completed</Text>
-                    </View>
-                  ) : null}
+                  <View style={{ flexDirection: 'column' }}>
+                    <Text style={styles.textDate_dis}>
+                      {moment(item.booking_date).format('DD MMM YYYY')}
+                    </Text>
+                    <Text style={styles.bookingTimeText}>
+                      {moment(item.booking_time, 'HH:mm:ss').format('LT')}
+                    </Text>
+                  </View>
+
+                  <View style={styles.statusView}>
+                    {item.order_status != null && item.order_status == 'CNF' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Confirm</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'P' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Pending</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'AC' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Accepted</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'OW' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>On The Way</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'WS' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Work Started</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'C' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Canceled</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'RSS' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'RSA' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'RSC' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'ITR' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Intrupted</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'CC' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Cancel by Client</Text>
+                      </View>
+                    ) : null}
+                    {item.order_status != null && item.order_status == 'CO' ? (
+                      <View>
+                        <Text style={styles.textstatus_dis}>Completed</Text>
+                      </View>
+                    ) : null}
+                  </View>
+
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>

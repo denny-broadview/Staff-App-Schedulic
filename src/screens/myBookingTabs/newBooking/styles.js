@@ -51,7 +51,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('1%'),
-    marginStart: wp('5%'),
+    // marginStart: wp('5%'),
+    justifyContent:'space-between'
   },
   textDate_time: {
     color: Color.AppColor,
@@ -78,7 +79,7 @@ export default StyleSheet.create({
   textTime_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
-    width: wp('30%'),
+    width: wp('45%'),
     fontWeight: '800',
   },
   bookingTimeText: {
@@ -87,18 +88,23 @@ export default StyleSheet.create({
     width: wp('30%'),
     fontWeight: '800',
     marginBottom: Matrics.Scale(4),
+    alignItems:'flex-end',
+    
   },
   textstatus: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
+    textAlign:'right',
+
   },
   textstatus_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('25%'),
+    width: wp('40'),
+    textAlign:'right',
   },
   service_btn_mainview: {
     flexDirection: 'row',
@@ -228,5 +234,8 @@ export default StyleSheet.create({
     padding: 10,
     fontSize: 14,
     fontWeight: '900',
+  },
+  statusView:{
+    alignContent:'flex-end',alignItems:'flex-end',flex:1
   },
 });

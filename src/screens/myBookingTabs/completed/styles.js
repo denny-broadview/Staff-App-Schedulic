@@ -79,7 +79,7 @@ export default StyleSheet.create({
         fontWeight:'800',
         marginBottom:Matrics.Scale(4),
         marginTop:Matrics.Scale(6),
-        marginLeft:wp("5%")
+        // marginLeft:wp("5%")
       },
       textTime_dis:{
         color:Color.ligthGray,
@@ -99,14 +99,16 @@ export default StyleSheet.create({
         color:Color.AppColor,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('20%')
+        width:wp('20%'),
+        textAlign:'right'
       },
       textstatus_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('25%'),
-        marginEnd:wp('5%')
+        // marginEnd:wp('5%'),
+        textAlign:'right',
        
       },
       service_btn_mainview:{
@@ -242,5 +244,8 @@ iconbell:{
   padding:10,
   fontSize:14,
   fontWeight:'900',
+},
+statusView:{
+  alignContent:'flex-end',alignItems:'flex-end',flex:1
 },
 })

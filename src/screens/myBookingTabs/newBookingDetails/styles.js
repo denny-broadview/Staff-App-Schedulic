@@ -81,11 +81,11 @@ export default StyleSheet.create({
       },
       topView_dis:{
         flexDirection:'row',
-        width:wp('90%'),
+        width:wp('80%'),
         justifyContent:'center',
         alignSelf:'center',
         marginTop:hp('1%'),
-        marginStart:wp('5%')
+        // marginStart:wp('5%')
       },
       textDate_time:{
         color:Color.AppColor,
@@ -111,20 +111,23 @@ export default StyleSheet.create({
       textTime_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
-        width:wp('30%'),
+        width:wp('40%'),
         fontWeight:'800',
       },
       textstatus:{
         color:Color.AppColor,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('20%')
+        width:wp('20%'),
+        textAlign:'right'
+
       },
       textstatus_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('25%'),
+        textAlign:'right'
        
       },
       service_btn_mainview:{
@@ -132,11 +135,11 @@ export default StyleSheet.create({
         width:wp('80%'),
        
         marginTop:hp('2%'),
+        paddingBottom:hp('2%'),
       },
       service_dis_book:{
         width:wp('50%'),
         marginLeft: wp('5%'),
-      
       },
       service_dis:{
         width:wp('40%'),
@@ -352,5 +355,8 @@ imgView: {
     fontSize:Matrics.Scale(18),
     textAlign: "center",
     top: Platform.OS === 'ios' ? hp('1%') : hp('2%'), 
+  },
+  statusView:{
+    alignContent:'flex-end',alignItems:'flex-end',flex:1
   },
 })

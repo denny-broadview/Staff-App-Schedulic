@@ -1,9 +1,7 @@
 import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
-
 // var serviceCart= [];
-
 const Constants = {
   showStatusBar: true,
   businessid: 24,

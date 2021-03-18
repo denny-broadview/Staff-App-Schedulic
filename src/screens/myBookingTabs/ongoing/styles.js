@@ -55,7 +55,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('1%'),
-    marginStart: wp('5%')
+    // marginStart: wp('5%')
+
   },
   textDate_time: {
     color: Color.AppColor,
@@ -97,13 +98,15 @@ export default StyleSheet.create({
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('20%')
+    width: wp('20%'),
+    textAlign:'right'
   },
   textstatus_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('25%'),
+    textAlign:'right'
 
   },
   service_btn_mainview: {
@@ -258,5 +261,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '900',
   },
-
+  statusView:{
+    alignContent:'flex-end',alignItems:'flex-end',flex:1
+  },
 })
