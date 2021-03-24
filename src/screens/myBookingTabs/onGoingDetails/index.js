@@ -294,9 +294,11 @@ const onGoingDetails = (props) => {
                   </TouchableOpacity>
                 ) : null}
 
-                {data.order_status == 'AC' &&
-                data.booking_date == currentdate &&
-                bookingtimecurrenttime(crtime, data.booking_time) < 60 ? (
+                {data.order_status == 'AC' 
+                // &&
+                // data.booking_date == currentdate &&
+                // bookingtimecurrenttime(crtime, data.booking_time) < 60 
+                ? (
                   <TouchableOpacity
                     style={styles.btnViewOntheWay}
                     onPress={() => getStatus('OW')}>
@@ -304,7 +306,7 @@ const onGoingDetails = (props) => {
                       {String.MyBookingTab.ontheway}
                     </Text>
                   </TouchableOpacity>
-                ) : null}
+                 ) : null}
                 {data.order_status == 'OW' &&
                 data.service.service_sub_type == 'at_home' ? (
                   <TouchableOpacity

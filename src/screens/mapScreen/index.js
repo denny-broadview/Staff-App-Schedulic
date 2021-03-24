@@ -40,6 +40,7 @@ const MapScreen = (props) => {
   const staffLocation = useSelector(
     (state) => state.BookingService.staffLocation,
   );
+  // console.log('stafflocation REDUX -------------',staffLocation)
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
