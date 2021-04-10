@@ -18,7 +18,7 @@ import { logout } from '../../../store/actions'
 const MyAccount = (props) => {
     const userInfo = useSelector(state => state.user.user)
     const [loagind, setLoading] = useState(false);
-    console.log('userdata===',userInfo);
+    // console.log('userdata===',userInfo);
     const dispatch = useDispatch()
     const signOut = () =>{
         dispatch(dispatch(logout()))

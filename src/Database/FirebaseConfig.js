@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 const firebaseConfig = {
     apiKey: "AIzaSyAcBzmEj5U2TvXauk8dRBelLdp3uhlBMXc",
     authDomain: "appointment-20a10.firebaseapp.com",
+    databaseURL: "https://appointment-20a10-default-rtdb.firebaseio.com",
     projectId: "appointment-20a10",
     storageBucket: "appointment-20a10.appspot.com",
     messagingSenderId: "1072321180720",

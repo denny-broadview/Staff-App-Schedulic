@@ -14,7 +14,7 @@ const Home = ({ navigation: { navigate } }) => {
   const navigation = useNavigation()
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
-  console.log('userInfo====================================',userInfo);
+  // console.log('userInfo====================================',userInfo);
   const [starCount, setStarCount] = useState(0);
   const [bookingdata,setBookingData]= useState([]);
   const [onGoingdata,setonGoingData]=useState([]);
