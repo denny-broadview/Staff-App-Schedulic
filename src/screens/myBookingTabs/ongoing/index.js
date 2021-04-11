@@ -375,71 +375,71 @@ const OngoingTab = (props) => {
             },
         );
     }
-    const getStaffLatLng = () => {
-        if (Platform.OS === 'android' && foregroundService) {
-            startForegroundService();
-        }
-        if (!updatesEnabled && watchId === null) {
+    // const getStaffLatLng = () => {
+    //     if (Platform.OS === 'android' && foregroundService) {
+    //         startForegroundService();
+    //     }
+    //     if (!updatesEnabled && watchId === null) {
 
-            let watchIdTemp =
-                Geolocation.watchPosition(
-                    (position) => {
-                        setLocation(position)
-                    },
-                    (error) => {
-                        console.log(error);
-                    }, {
-                    accuracy: {
-                        android: 'balanced',
-                        ios: 'hundredMeters',
-                    },
-                    enableHighAccuracy: true,
-                    distanceFilter: 0,
-                    interval: 5000,
-                    fastestInterval: 2000,
-                    forceRequestLocation: true,
-                    showLocationDialog: true,
-                    useSignificantChanges: false,
-                },
-                );
-            setWatchId(watchIdTemp)
-        }
-    };
+    //         let watchIdTemp =
+    //             Geolocation.watchPosition(
+    //                 (position) => {
+    //                     setLocation(position)
+    //                 },
+    //                 (error) => {
+    //                     console.log(error);
+    //                 }, {
+    //                 accuracy: {
+    //                     android: 'balanced',
+    //                     ios: 'hundredMeters',
+    //                 },
+    //                 enableHighAccuracy: true,
+    //                 distanceFilter: 0,
+    //                 interval: 5000,
+    //                 fastestInterval: 2000,
+    //                 forceRequestLocation: true,
+    //                 showLocationDialog: true,
+    //                 useSignificantChanges: false,
+    //             },
+    //             );
+    //         setWatchId(watchIdTemp)
+    //     }
+    // };
 
-    const startForegroundService = () => {
-        if (Platform.Version >= 26) {
-            VIForegroundService.createNotificationChannel({
-                id: 'locationChannel',
-                name: 'Location Tracking Channel',
-                description: 'Tracks location of user',
-                enableVibration: false,
-            });
-        }
+    // const startForegroundService = () => {
+    //     if (Platform.Version >= 26) {
+    //         VIForegroundService.createNotificationChannel({
+    //             id: 'locationChannel',
+    //             name: 'Location Tracking Channel',
+    //             description: 'Tracks location of user',
+    //             enableVibration: false,
+    //         });
+    //     }
 
-        return VIForegroundService.startService({
-            channelId: 'locationChannel',
-            id: 420,
-            title: "Schedulics",
-            text: 'Tracking location updates lat --> ' + staffLocation.lat + " Lng --> " + staffLocation.lng,
-            icon: 'ic_launcher',
-        });
-    };
+    //     return VIForegroundService.startService({
+    //         channelId: 'locationChannel',
+    //         id: 420,
+    //         title: "Schedulics",
+    //         text: 'Tracking location updates lat --> ' + staffLocation.lat + " Lng --> " + staffLocation.lng,
+    //         icon: 'ic_launcher',
+    //     });
+    // };
 
-    const removeLocationUpdates = () => {
+    // const removeLocationUpdates = () => {
 
-        if (watchId !== null) {
-            stopForegroundService();
-            Geolocation.clearWatch(watchId);
-            setWatchId(null);
-            setUpdatesEnabled(false)
-        }
-    };
+    //     if (watchId !== null) {
+    //         stopForegroundService();
+    //         Geolocation.clearWatch(watchId);
+    //         setWatchId(null);
+    //         setUpdatesEnabled(false)
+    //     }
+    // };
 
-    const stopForegroundService = () => {
-        if (foregroundService) {
-            VIForegroundService.stopService().catch((err) => err);
-        }
-    };
+    // const stopForegroundService = () => {
+    //     if (foregroundService) {
+    //         VIForegroundService.stopService().catch((err) => err);
+    //     }
+    // };
 
 
     return (

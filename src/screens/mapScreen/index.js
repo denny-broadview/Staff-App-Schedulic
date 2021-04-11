@@ -58,6 +58,7 @@ const MapScreen = (props) => {
       setCustomerImage(props.route.params.image)
       console.log('item ongoing map-----------', receivedData);
       // console.log('item ongoing Order Item-----------', props.route.params.datapass.);
+      console.log('Map location address ++++++++++++-----------', receivedData.orders_info.booking_address);
     }
     addCoordinates()
   }, []);
@@ -99,16 +100,17 @@ const MapScreen = (props) => {
   }
 
   useEffect(() => {
-    // let locAddress=data.orders_info.booking_address;
-    // let locCity=data.orders_info.booking_city;
-    // let locState=data.orders_info.booking_state;
-    // let locZip=data.orders_info.booking_zipcode;
+    let receivedData = props.route.params.datapass
+    let locAddress=receivedData.orders_info.booking_address;
+    let locCity=receivedData.orders_info.booking_city;
+    let locState=receivedData.orders_info.booking_state;
+    let locZip=receivedData.orders_info.booking_zipcode;
 
-    let locAddress = "piyush point";
-    let locCity = "Surat";
-    let locState = "Gujarat";
-    let locZip = "394601";
-
+    // let locAddress = "piyush point";
+    // let locCity = "Surat";
+    // let locState = "Gujarat";
+    // let locZip = "394601";
+    
     Geocoder.from(locAddress + ", " + locCity + ", " + locState + ", " + locZip)
       .then(json => {
         var location = json.results[0].geometry.location;
@@ -116,7 +118,7 @@ const MapScreen = (props) => {
         setDestination({ latitude: location.lat, longitude: location.lng })
       })
       .catch(error => console.warn(error));
-    setOrderId(data.order_id);
+    setOrderId(receivedData.order_id);
 
   }, [data]);
 

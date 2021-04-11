@@ -69,7 +69,7 @@ const Home = (props) => {
   const getOneTimeLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        console.log('****Startup coordinates*********',position);
+        // console.log('****Startup coordinates*********',position);
         const currentLongitude = 
           JSON.stringify(position.coords.longitude);
         const currentLatitude = 
@@ -92,7 +92,7 @@ const Home = (props) => {
   const subscribeLocationLocation = () => {
     watchID = Geolocation.watchPosition(
       (position) => {
-        console.log('Location coordinates after change ***********',position);
+        // console.log('Location coordinates after change ***********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude = 
