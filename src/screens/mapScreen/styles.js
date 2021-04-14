@@ -70,19 +70,27 @@ export default StyleSheet.create({
     alignSelf: 'flex-end',
     // marginTop: 25,
     position: 'absolute',
-    // top: hp('1%'),
-    left: wp('72%'),
+    top: hp('5%'),
+    left: wp('80%'),
     width: wp('25%'),
     height: hp('5%')
 
+  },
+  btnPhoneView: {
+    backgroundColor: Color.AppColor,
+    borderRadius: 25, 
+    width: wp('10%'), 
+    height: wp('10%'), 
+    alignItems: 'center', 
+    justifyContent: 'center'
   },
   iconbell: {
     justifyContent: 'center',
     alignSelf: 'center',
     alignItems: 'center',
     color: Color.white,
-    backgroundColor: Color.AppColor,
-    borderRadius: 20,
+    // backgroundColor: Color.AppColor,
+    // borderRadius: 20,
     padding: 10,
     fontSize: 14,
     fontWeight: '900',

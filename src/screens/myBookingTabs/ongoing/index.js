@@ -25,16 +25,17 @@ import Snackbar from 'react-native-snackbar';
 import Geolocation from 'react-native-geolocation-service';
 import VIForegroundService from '@voximplant/react-native-foreground-service';
 import database from '@react-native-firebase/database';
+import firebaseApp from '@database/FirebaseConfig';
 const OngoingTab = (props) => {
     const userInfo = useSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const [refreshing, setRefreshing] = useState(true);
-    const [loagind, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [foregroundService, setForegroundService] = useState(true)
     const [updatesEnabled, setUpdatesEnabled] = useState(false)
     const [location, setLocation] = useState({})
     const [watchId, setWatchId] = useState(false)
-    const [OrderId, setOrderId] = useState('')
+    const [orderId, setOrderId] = useState('')
     const [reference, setReference] = useState('')
     const onGoingFromRedux = useSelector(
         (state) => state.BookingService.onGoingData,
@@ -43,7 +44,7 @@ const OngoingTab = (props) => {
         (state) => state.BookingService.staffLocation,
     );
     const dispatch = useDispatch();
-
+    // console.log('order id on ongoing open --- ', data);
     //time
     const [curTime, setCurTime] = useState('');
     var timeconvert;
@@ -73,53 +74,107 @@ const OngoingTab = (props) => {
     const currentdate = moment().utcOffset('+05:30').format('YYYY-MM-DD');
     const crtime = moment().utcOffset('+05:30').format('HH:mm:ss');
 
-
     useEffect(() => {
         console.log('onGoingFromRedux --- ', onGoingFromRedux);
         console.log('staffLocation --- ', staffLocation);
-    })
+    },[])
     useEffect(() => {
 
-        if (location?.coords?.latitude != undefined && location?.coords?.longitude != undefined) {
+        // if (location?.coords?.latitude != undefined && location?.coords?.longitude != undefined) {
 
-            let currentData = {
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-                sId: userInfo.id,
-                orderId: OrderId,
-            }
-            database().ref('trackOrder/currentLocation/').orderByChild("orderId").equalTo(OrderId).once('value').then(function (snapshot) {
-                console.log('------------location-------------');
-                if (snapshot.val() !== null) {
-                    console.log("orderId exists")
-                    // handle error
-                    updateLocation(currentData);
-                } else {
-                    console.log("orderId do not exists")
-                    // push record to Firebase
-                    addLocation(currentData);
-                }
-            });
-        }
+        //     let currentData = {
+        //         lat: 21.1515, 
+        //         lng: 72.8543,
+        //         // lat: location.coords.latitude,
+        //         // lng: location.coords.longitude,
+        //         // sId: userInfo.id,
+        //         orderId: orderId,
+        //     }
+        //     let key = props.route.params.datapass.id
+        //     var postListRef = firebaseApp.database()
+        //     //  database()
+        //             .ref('trackOrder/currentLocation/')
+        //             // .orderByChild("orderId")
+        //             // .equalTo(orderId)
+        //             postListRef.child(key).set(
+        //                 { currentData }
+        //               )
+        //             //   .set('value')
+        //             .then(function (snapshot) {
+        //         console.log('------------location-------------', JSON.stringify(snapshot.val()));
+        //         if (snapshot.val() !== null) {
+        //             console.log("orderId exists")
+        //             // handle error
+        //             updateLocation(currentData);
+        //         } else {
+        //             console.log("orderId do not exists")
+        //             // push record to Firebase
+        //             addLocation(currentData);
+        //         }
+        //     });
+        // }
     }, [location])
 
-    const addLocation = data => {
-        let refData = database()
-            .ref('trackOrder')
-            .child('currentLocation')
-            .push(data, response => {
-                response
-            }).key;
-        if (refData) {
-            let reduxData = {
-                reference: refData,
-                OrderId: OrderId
-            }
-            dispatch(setGoingOnData(reduxData))
-            dispatch(setStaffLocation(data))
-            setReference(refData);
-        }
-    };
+    // const addLocation = data => {
+    //     let refData = firebaseApp.database()
+    //         .ref('trackOrder/currentLocation/')
+    //                 // .orderByChild("orderId")
+    //                 // .equalTo(orderId)
+    //         refData.child(key).set(
+    //                     { data }
+    //                   )
+    //         // .push(data, response => {
+    //         //     response
+    //         // }).key;
+    //     if (refData) {
+    //         let reduxData = {
+    //             reference: refData,
+    //             orderId: orderId
+    //         }
+    //         dispatch(setGoingOnData(reduxData))
+    //         dispatch(setStaffLocation(data))
+    //         setReference(refData);
+    //     }
+    // };
+    // const addLocation = () => {
+    //     // if (location?.coords?.latitude != undefined && location?.coords?.longitude != undefined) {
+    //         console.log('Order ID addlocation: ', orderId)
+    //         let key = orderId
+    //         let currentData = {
+    //             lat: 21.1515, 
+    //             lng: 72.8543,
+    //             // lat: location.coords.latitude,
+    //             // lng: location.coords.longitude,
+    //             // sId: userInfo.id,
+    //             orderId: 235
+    //             // orderId,
+    //         }
+    //         let latitude = 21.1515 
+    //         let longitude= 72.8543
+    //         var refData = firebaseApp.database()
+    //         .ref('trackOrder/currentLocation/')
+    //                 // .orderByChild("orderId")
+    //                 // .equalTo(orderId)
+    //         refData
+    //         // .child(key)
+    //         .set(
+    //                     { latitude, longitude , orderId }
+    //                   )
+    //                   console.log('User snapshot data: ', refData)
+    //         // .push(data, response => {
+    //         //     response
+    //         // }).key;
+    //     // if (refData) {
+    //     //     let reduxData = {
+    //     //         reference: refData,
+    //     //         orderId: orderId
+    //     //     }
+    //     //     dispatch(setGoingOnData(reduxData))
+    //     //     dispatch(setStaffLocation(data))
+    //     //     setReference(refData);
+    //     //  }
+    // // }
+    // };
 
     const updateLocation = data => {
         console.log('In Update ', reference)
@@ -137,10 +192,10 @@ const OngoingTab = (props) => {
     };
 
     const updateReferenceKeyToDatabaseRT = () => {
-        if (OrderId !== '') {
+        if (orderId !== '') {
             let myForm = new FormData();
             myForm.append('business_id', Constants.businessid);
-            myForm.append('order_item_id', OrderId);
+            myForm.append('order_item_id', orderId);
             myForm.append('refrence_key', reference);
             console.log('parm in updateReferenceKeyToDatabaseRT~~~~~~~~~', myForm);
             Auth.PostCustomerTokenAuth(
@@ -149,7 +204,7 @@ const OngoingTab = (props) => {
                 myForm,
                 Constants.ApiAction.addReferenceKey,
                 (res) => {
-                    console.log(' ongoing data--------', res);
+                    console.log(' ongoing data--------', JSON.stringify(res));
                     if (res[1].data == true) { }
                 },
             );
@@ -259,12 +314,12 @@ const OngoingTab = (props) => {
             myForm,
             Constants.ApiAction.staffOnGoing,
             (res) => {
-                console.log(' ongoing data Res--------', res);
-                console.log(' ongoing data arshad--------', res[1].response);
+                // console.log(' ongoing data Res--------', res);
+                // console.log(' ongoing data arshad--------', res[1].response);
                 if (res[1].data === true) {
 
                     let tempdata = JSON.stringify(res[1].response);
-                    console.log('ongoing else -------------', tempdata);
+                    // console.log('ongoing else -------------', tempdata);
                     setLoading(false);
                     setRefreshing(false);
                     setData(JSON.parse(tempdata));
@@ -282,7 +337,7 @@ const OngoingTab = (props) => {
     // Api calling for newBookings
     function getStatus(id, st, sType) {
 
-        setOrderId(id);
+        // setOrderId(id);
         console.log('usertoken----', userInfo.token);
         setLoading(true);
         let myForm = new FormData();
@@ -320,71 +375,71 @@ const OngoingTab = (props) => {
             },
         );
     }
-    const getStaffLatLng = () => {
-        if (Platform.OS === 'android' && foregroundService) {
-            startForegroundService();
-        }
-        if (!updatesEnabled && watchId === null) {
+    // const getStaffLatLng = () => {
+    //     if (Platform.OS === 'android' && foregroundService) {
+    //         startForegroundService();
+    //     }
+    //     if (!updatesEnabled && watchId === null) {
 
-            let watchIdTemp =
-                Geolocation.watchPosition(
-                    (position) => {
-                        setLocation(position)
-                    },
-                    (error) => {
-                        console.log(error);
-                    }, {
-                    accuracy: {
-                        android: 'balanced',
-                        ios: 'hundredMeters',
-                    },
-                    enableHighAccuracy: true,
-                    distanceFilter: 0,
-                    interval: 5000,
-                    fastestInterval: 2000,
-                    forceRequestLocation: true,
-                    showLocationDialog: true,
-                    useSignificantChanges: false,
-                },
-                );
-            setWatchId(watchIdTemp)
-        }
-    };
+    //         let watchIdTemp =
+    //             Geolocation.watchPosition(
+    //                 (position) => {
+    //                     setLocation(position)
+    //                 },
+    //                 (error) => {
+    //                     console.log(error);
+    //                 }, {
+    //                 accuracy: {
+    //                     android: 'balanced',
+    //                     ios: 'hundredMeters',
+    //                 },
+    //                 enableHighAccuracy: true,
+    //                 distanceFilter: 0,
+    //                 interval: 5000,
+    //                 fastestInterval: 2000,
+    //                 forceRequestLocation: true,
+    //                 showLocationDialog: true,
+    //                 useSignificantChanges: false,
+    //             },
+    //             );
+    //         setWatchId(watchIdTemp)
+    //     }
+    // };
 
-    const startForegroundService = () => {
-        if (Platform.Version >= 26) {
-            VIForegroundService.createNotificationChannel({
-                id: 'locationChannel',
-                name: 'Location Tracking Channel',
-                description: 'Tracks location of user',
-                enableVibration: false,
-            });
-        }
+    // const startForegroundService = () => {
+    //     if (Platform.Version >= 26) {
+    //         VIForegroundService.createNotificationChannel({
+    //             id: 'locationChannel',
+    //             name: 'Location Tracking Channel',
+    //             description: 'Tracks location of user',
+    //             enableVibration: false,
+    //         });
+    //     }
 
-        return VIForegroundService.startService({
-            channelId: 'locationChannel',
-            id: 420,
-            title: "Schedulics",
-            text: 'Tracking location updates lat --> ' + staffLocation.lat + " Lng --> " + staffLocation.lng,
-            icon: 'ic_launcher',
-        });
-    };
+    //     return VIForegroundService.startService({
+    //         channelId: 'locationChannel',
+    //         id: 420,
+    //         title: "Schedulics",
+    //         text: 'Tracking location updates lat --> ' + staffLocation.lat + " Lng --> " + staffLocation.lng,
+    //         icon: 'ic_launcher',
+    //     });
+    // };
 
-    const removeLocationUpdates = () => {
+    // const removeLocationUpdates = () => {
 
-        if (watchId !== null) {
-            stopForegroundService();
-            Geolocation.clearWatch(watchId);
-            setWatchId(null);
-            setUpdatesEnabled(false)
-        }
-    };
+    //     if (watchId !== null) {
+    //         stopForegroundService();
+    //         Geolocation.clearWatch(watchId);
+    //         setWatchId(null);
+    //         setUpdatesEnabled(false)
+    //     }
+    // };
 
-    const stopForegroundService = () => {
-        if (foregroundService) {
-            VIForegroundService.stopService().catch((err) => err);
-        }
-    };
+    // const stopForegroundService = () => {
+    //     if (foregroundService) {
+    //         VIForegroundService.stopService().catch((err) => err);
+    //     }
+    // };
 
 
     return (
@@ -392,13 +447,13 @@ const OngoingTab = (props) => {
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center', flex: 1 }} >
                     <MySpinner size="large"
-                        visible={loagind} />
+                        visible={loading} />
                     {
                         refreshing ?
                             <ActivityIndicator style={{ color: Color.AppColor }} />
                             : null
                     }
-                    <FlatList ListEmptyComponent={loagind == false && refreshing == false ? noItemDisplay() : null}
+                    <FlatList ListEmptyComponent={loading == false && refreshing == false ? noItemDisplay() : null}
                         data={data}
                         // inverted={true}
                         renderItem={({ item, index }) => (
@@ -432,11 +487,11 @@ const OngoingTab = (props) => {
                                                 <Text style={styles.textstatus_dis} > Accepted </Text>
                                             </View>
                                             : null}
-                                        {item.order_status != null && item.order_status == 'OW' ?
+                                        {/* {item.order_status != null && item.order_status == 'OW' ? */}
                                             <View>
                                                 <Text style={styles.textstatus_dis} > On The Way </Text>
                                             </View>
-                                            : null}
+                                            {/* : null} */}
                                         {item.order_status != null && item.order_status == 'WS' ?
                                             <View>
                                                 <Text style={styles.textstatus_dis} > Work Started </Text>

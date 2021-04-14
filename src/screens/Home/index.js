@@ -7,27 +7,117 @@ import { String } from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 import { MySpinner } from '../../component/MySpinner';
 import { Auth, Constants } from '@global';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1: import AsyncStorage
+import Geolocation from '@react-native-community/geolocation';
+import { setStaffLocation } from '../../store/actions';
 
 const Home = (props) => {
   const navigation = useNavigation()
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
-  console.log('userInfo====================================', userInfo);
-
+  // console.log('userInfo====================================', userInfo);
+  const dispatch = useDispatch()
   const [starCount, setStarCount] = useState(0);
   const [bookingdata, setBookingData] = useState([]);
   const [onGoingdata, setonGoingData] = useState([]);
   const [completeTask, setCompletedTaskData] = useState([]);
-  const [loagind, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  let latitude = 0;
+  let longitude = 0;
+
   useEffect(() => {
     getBooking();
     getOnGoing();
     getComplteTask();
+    requestLocationPermission();
+    return () => {
+      Geolocation.clearWatch(watchID);
+    };
   }, []);
+
+  const requestLocationPermission = async () => {
+    
+    if (Platform.OS === 'ios') {
+      Geolocation.requestAuthorization();
+      getOneTimeLocation();
+      subscribeLocationLocation();
+    } else {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Location Access Required',
+            message: 'This App needs to Access your location',
+          },
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          //To Check, If Permission is granted
+          getOneTimeLocation();
+          subscribeLocationLocation();
+        } else {
+          alert('Permission Denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
+
+  const getOneTimeLocation = () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        // console.log('****Startup coordinates*********',position);
+        const currentLongitude = 
+          JSON.stringify(position.coords.longitude);
+        const currentLatitude = 
+          JSON.stringify(position.coords.latitude);
+          longitude=currentLongitude;
+          latitude=currentLatitude;
+          sendLocationCoordinates()
+      },
+      (error) => {
+        alert(error.message);
+      },
+      {
+        enableHighAccuracy: false,
+        timeout: 30000,
+        maximumAge: 1000
+      },
+    );
+  };
+
+  const subscribeLocationLocation = () => {
+    watchID = Geolocation.watchPosition(
+      (position) => {
+        // console.log('Location coordinates after change ***********',position);
+        const currentLongitude =
+          JSON.stringify(position.coords.longitude);
+        const currentLatitude = 
+          JSON.stringify(position.coords.latitude);
+          longitude=currentLongitude;
+          latitude=currentLatitude;
+          sendLocationCoordinates()
+      },
+      (error) => {
+        alert(error.message);
+      },
+      {
+        enableHighAccuracy: false,
+        maximumAge: 1000
+      },
+    );
+  };
+
+  const sendLocationCoordinates = ()=>{
+    let dd = {}
+    dd['latitude'] = latitude
+    dd['longitude'] = longitude
+    console.log('Current location from home', dd)
+      dispatch(setStaffLocation(dd))
+  }
 
   useEffect(() => {
     console.log('In Userinfo by Arshad ',userInfo);
@@ -39,6 +129,7 @@ const Home = (props) => {
     getBooking();
     getOnGoing();
     getComplteTask();
+    sendLocationCoordinates()
    // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
     });
     return unsubscribe;
@@ -135,7 +226,7 @@ const Home = (props) => {
       />
       <ScrollView style={{ flex: 1, }}>
         <View style={styles.topprofiledeatils}>
-          <MySpinner size="large" visible={loagind} />
+          <MySpinner size="large" visible={loading} />
           <View style={styles.profileimage}>
             <Image
               style={styles.imageStyle}
