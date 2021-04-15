@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity, PermissionsAndroid, DeviceEventEmitter } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -13,6 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1: import AsyncStorage
 import Geolocation from '@react-native-community/geolocation';
 import { setStaffLocation } from '../../store/actions';
+import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 
 const Home = (props) => {
   const navigation = useNavigation()
@@ -34,49 +35,72 @@ const Home = (props) => {
     getComplteTask();
     requestLocationPermission();
     return () => {
-      Geolocation.clearWatch(watchID);
+      if (watchID) {
+        Geolocation.clearWatch(watchID);
+      }
     };
   }, []);
 
   const requestLocationPermission = async () => {
-    
+
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization();
       getOneTimeLocation();
       subscribeLocationLocation();
     } else {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Location Access Required',
-            message: 'This App needs to Access your location',
-          },
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          //To Check, If Permission is granted
-          getOneTimeLocation();
-          subscribeLocationLocation();
-        } else {
-          alert('Permission Denied');
-        }
-      } catch (err) {
-        console.warn(err);
-      }
+      LocationServicesDialogBox.checkLocationServicesIsEnabled({
+        message: "<h2>Use Location?</h2> \
+                    This app wants to change your device settings:<br/><br/>\
+                    Use GPS for location<br/><br/>",
+        ok: "YES",
+        cancel: "NO"
+      }).then(function (success) {
+        console.log('success ',success);
+        // setLatlong();
+      }.bind(this)
+      ).catch((error) => {
+        console.log(error.message);
+      });
+
+      DeviceEventEmitter.addListener('locationProviderStatusChange', function (status) { // only trigger when "providerListener" is enabled
+        console.log(status); //  status => {enabled: false, status: "disabled"} or {enabled: true, status: "enabled"}
+      });
+     
     }
   };
+
+  const setLatlong =async()=>{
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Access Required',
+          message: 'This App needs to Access your location',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        //To Check, If Permission is granted
+        getOneTimeLocation();
+        subscribeLocationLocation();
+      } else {
+        alert('Permission Denied');
+      }
+    } catch (err) {
+      console.warn(err);
+    }
+  }
 
   const getOneTimeLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
         // console.log('****Startup coordinates*********',position);
-        const currentLongitude = 
+        const currentLongitude =
           JSON.stringify(position.coords.longitude);
-        const currentLatitude = 
+        const currentLatitude =
           JSON.stringify(position.coords.latitude);
-          longitude=currentLongitude;
-          latitude=currentLatitude;
-          sendLocationCoordinates()
+        longitude = currentLongitude;
+        latitude = currentLatitude;
+        sendLocationCoordinates()
       },
       (error) => {
         alert(error.message);
@@ -95,11 +119,11 @@ const Home = (props) => {
         // console.log('Location coordinates after change ***********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
-        const currentLatitude = 
+        const currentLatitude =
           JSON.stringify(position.coords.latitude);
-          longitude=currentLongitude;
-          latitude=currentLatitude;
-          sendLocationCoordinates()
+        longitude = currentLongitude;
+        latitude = currentLatitude;
+        sendLocationCoordinates()
       },
       (error) => {
         alert(error.message);
@@ -111,26 +135,26 @@ const Home = (props) => {
     );
   };
 
-  const sendLocationCoordinates = ()=>{
+  const sendLocationCoordinates = () => {
     let dd = {}
     dd['latitude'] = latitude
     dd['longitude'] = longitude
     console.log('Current location from home', dd)
-      dispatch(setStaffLocation(dd))
+    dispatch(setStaffLocation(dd))
   }
 
   useEffect(() => {
-    console.log('In Userinfo by Arshad ',userInfo);
+    console.log('In Userinfo by Arshad ', userInfo);
     // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
   }, [userInfo])
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
-    getBooking();
-    getOnGoing();
-    getComplteTask();
-    sendLocationCoordinates()
-   // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
+      getBooking();
+      getOnGoing();
+      getComplteTask();
+      sendLocationCoordinates()
+      // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
     });
     return unsubscribe;
   }, [props.navigation]);
@@ -191,7 +215,7 @@ const Home = (props) => {
       }
     });
   }
- 
+
   const fnSearchEnable = () => {
     setEnableSearch(!enable);
     // console.log(enableSearch);
@@ -206,7 +230,7 @@ const Home = (props) => {
     setSearchTerm('');
     setEnableSearch(false);
   };
-  
+
   // Task#1: Create onTabNavigate method and call on onPress
   const onTabNavigate = async (screenname, tabIndex) => {
     await AsyncStorage.setItem('goToTab', tabIndex);  // Set value in AsyncStorage
@@ -252,7 +276,7 @@ const Home = (props) => {
             </View>
           </View>
         </View>
-        <View style={styles.bottomMainprofile}> 
+        <View style={styles.bottomMainprofile}>
           <ImageBackground
             imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
             source={require('../../assets/images/Homebg.png')}
@@ -266,7 +290,7 @@ const Home = (props) => {
               <View style={{ marginTop: 20, marginBottom: 60 }}>
                 <View style={styles.commonProfile}>
                   <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('NewBookingTab', '0')} >
-                  {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
+                    {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
                     <View>
                       <Image
                         source={require('../../assets/images/NewBookings.png')}
@@ -289,7 +313,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('OngoingTab', '1')} >
+                  <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('OngoingTab', '1')} >
                     <View>
                       <Image
                         source={require('../../assets/images/Ongoing.png')}

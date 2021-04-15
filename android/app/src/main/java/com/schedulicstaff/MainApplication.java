@@ -10,6 +10,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+// import com.showlocationservicesdialogbox.LocationServicesDialogBoxPackage;
 // import io.invertase.firebase.messaging.RNFirebaseMessagingPackage; // <-- Add this line
 // import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 public class MainApplication extends Application implements ReactApplication {
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           // packages.add(new MyReactNativePackage());
           //  packages.add(new RNFirebaseMessagingPackage()); // <-- Add this line
           //  packages.add(new RNFirebaseNotificationsPackage()); // <-- Add this line
+          // packages.add(new LocationServicesDialogBoxPackage()); // <== this 
           return packages;
         }
 
