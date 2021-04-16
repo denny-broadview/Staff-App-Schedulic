@@ -26,6 +26,9 @@ import VIForegroundService from '@voximplant/react-native-foreground-service';
 import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = (props) => {
+  const staffLocation = useSelector(
+    (state) => state.BookingService.staffLocation
+  );
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
   Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
 
@@ -34,12 +37,14 @@ const MapScreen = (props) => {
   const [orderId, setOrderId] = useState(0)
   const [coordinates, setCoordinates] = useState([])
   const [distanceMeter, setDistanceMeter] = useState([])
-  const [destination, setDestination] = useState({ latitude: null, longitude: null })
+  const [destination, setDestination] = useState({ latitude: 0, longitude: 0 })
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
-  const LATITUDE_DELTA = 0.0922;
-  const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+  // const LATITUDE_DELTA = 0.0922;
+  // const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
   
+  const LATITUDE_DELTA = 0;
+  const LONGITUDE_DELTA = 0;
   let mapView = useRef(null);
   let sdd = coordinates.data
   let dd = null;
@@ -47,11 +52,10 @@ const MapScreen = (props) => {
     dd = {"latitude": sdd[0], "longitude": sdd[1]}
   }
   let origin = dd
-  const staffLocation = useSelector(
-    (state) => state.BookingService.staffLocation,
-  );
-  console.log('stafflocation REDUX -------------',staffLocation)
+  
+ // console.log('stafflocation REDUX -------------',staffLocation)
   useEffect(() => {
+  
     if (props.route.params !== null) {
       let receivedData = props.route.params.datapass
       setData(receivedData);
@@ -64,6 +68,7 @@ const MapScreen = (props) => {
   }, []);
 
   const addCoordinates = () => {
+   
     let latitude = staffLocation.latitude
     let longitude = staffLocation.longitude
     let orderId = props.route.params.datapass.order_id
@@ -160,8 +165,7 @@ const MapScreen = (props) => {
         searchClick={false}
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.map.map}
-        onPress={() => props.navigation.goBack()}
-      />
+        onPress={() => props.navigation.goBack()}/>
       {console.log(' origin  ====>', origin)}
       {console.log(' coordinates index  ====>', coordinates)}
       {console.log(' destination  ====>', destination)}
@@ -169,10 +173,14 @@ const MapScreen = (props) => {
       {destination.latitude !== null ? (
         <MapView
           initialRegion={{
-            latitude: origin.latitude,
-            longitude: origin.longitude,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
+            // latitude: (origin.latitude == null ? 0 : origin.latitude),
+            // longitude: (origin.longitude == null ? 0 : origin.longitude),
+            // latitudeDelta: LATITUDE_DELTA,
+            // longitudeDelta: LONGITUDE_DELTA,
+            latitude: 0,
+            longitude: 0,
+            latitudeDelta: 0,
+            longitudeDelta: 0,
           }}
           style={styles.mapStyle}
           ref={mapView}

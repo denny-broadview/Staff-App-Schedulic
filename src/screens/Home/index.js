@@ -56,7 +56,7 @@ const Home = (props) => {
         cancel: "NO"
       }).then(function (success) {
         console.log('success ',success);
-        // setLatlong();
+        setLatlong();
       }.bind(this)
       ).catch((error) => {
         console.log(error.message);
@@ -69,7 +69,7 @@ const Home = (props) => {
     }
   };
 
-  const setLatlong =async()=>{
+  const setLatlong = async () =>{
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,

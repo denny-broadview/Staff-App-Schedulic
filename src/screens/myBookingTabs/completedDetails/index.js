@@ -19,6 +19,7 @@ import {useSelector} from 'react-redux';
 import { Matrics } from '../../../utlis';
 const CompletDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
+  console.log("userInfo==========",userInfo)
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [disable, setdisable] = useState(false);
   const [starCount, setStarCount] = useState(0);
@@ -45,7 +46,7 @@ const CompletDetails = (props) => {
 
   function getinvoice() {
     let myForm = new FormData();
-    myForm.append('order_item_id', props.route.params.datapass.id);
+    myForm.append('order_item_id', data.id);
     console.log('parm invoice===', myForm);
     Auth.PostCustomerTokenAuth(
       userInfo.token,
@@ -57,17 +58,47 @@ const CompletDetails = (props) => {
         if (res[1].data == true) {
           setInvoice(res[1].response);
           props.navigation.navigate('Invoice', {
-            id: res[1].response,
+            id: res[1].response, 
             email: props.route.params.datapass.customer.email,
-            orderid: props.route.params.datapass.id,
+            orderid: props.route.params.datapass.id
           });
         } else {
-          setLoading(false);
+        
           setInvoice(res.data);
         }
       },
     );
   }
+
+
+  // function getinvoice() {
+  //   setLoading(true);
+  //   let myForm = new FormData();
+  //   myForm.append('order_item_id', props.route.params.id);
+  //   console.log('parm invoice===', myForm);
+  //   Auth.PostCustomerTokenAuth(
+  //     userInfo.token,
+  //     userInfo.user_id,
+  //     myForm,
+  //     Constants.ApiAction.invoice,
+  //     (res) => {
+  //       console.log(' invoice--------', res);
+  //       if (res[1].data == true) {
+  //         setLoading(false);
+  //         setInvoice(res[1].response);
+  //         props.navigation.navigate('Invoice', {
+  //           id: res[1].response, 
+  //           email: props.route.params.datapass.customer.email,
+  //           orderid: props.route.params.datapass.id
+  //         });
+  //       } else {
+  //         setLoading(false);
+  //         setInvoice(res.data);
+  //       }
+  //     },
+  //   );
+  // }
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -78,8 +109,7 @@ const CompletDetails = (props) => {
         searchClick={false}
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.MyBookingTab.details}
-        onPress={() => props.navigation.goBack()}
-      /> 
+        onPress={() => props.navigation.goBack()}/> 
       <ScrollView style={{flex: 1}}>
         <View style={{justifyContent: 'center', flex: 1}}>
           <View style={styles.mainView}>

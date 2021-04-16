@@ -204,7 +204,7 @@ const OngoingTab = (props) => {
                 myForm,
                 Constants.ApiAction.addReferenceKey,
                 (res) => {
-                    console.log(' ongoing data--------', JSON.stringify(res));
+                  //  console.log(' ongoing data--------', JSON.stringify(res));
                     if (res[1].data == true) { }
                 },
             );
@@ -215,7 +215,6 @@ const OngoingTab = (props) => {
 
     useEffect(() => {
         time_convert();
-
         getOnGoing();
     }, []);
     const onRefresh = () => {
@@ -268,13 +267,14 @@ const OngoingTab = (props) => {
     function covertDateTime(val1, val2) {
         var str = val1 + ' ' + val2;
         const bDate = moment(str, 'YYYY-MM-DD HH:mm:ss');
+       
         return bDate;
     }
 
     function bookingtimecurrenttime(val1, val2) {
         //  var str = val1 + ' ' + val2;
-        var startTime = moment(val2, "HH:mm:ss");
-        var endTime = moment(val1, "HH:mm:ss");
+        var startTime = moment(val1, "HH:mm:ss");
+        var endTime = moment(val2, "HH:mm:ss");
         var duration = moment.duration(endTime.diff(startTime));
         // duration in hours
         var hours = parseInt(duration.asHours());
@@ -317,9 +317,9 @@ const OngoingTab = (props) => {
                 // console.log(' ongoing data Res--------', res);
                 // console.log(' ongoing data arshad--------', res[1].response);
                 if (res[1].data === true) {
-
                     let tempdata = JSON.stringify(res[1].response);
-                    // console.log('ongoing else -------------', tempdata);
+                    console.log('ongoing else -------------', tempdata);
+                    
                     setLoading(false);
                     setRefreshing(false);
                     setData(JSON.parse(tempdata));
@@ -549,7 +549,7 @@ const OngoingTab = (props) => {
                                     <View style={styles.service_dis_btn} >
                                         {item.order_status == 'OW' &&
                                             item.booking_date == currentdate &&
-                                            bookingtimecurrenttime(crtime, item.booking_time) < 30 ?
+                                            bookingtimecurrenttime(crtime, item.booking_time) <= 15 ?
                                             <TouchableOpacity style={styles.btnViewWorkstarted}
                                                 onPress={
                                                     () => {
@@ -565,13 +565,12 @@ const OngoingTab = (props) => {
                                                 {item.payment.payment_status == 'unpaid' ?
                                                     <TouchableOpacity style={styles.btnViewDetails}
                                                         onPress={() => {
-                                                            getStatus(item.id, 'CO', item.service.service_sub_type),
+                                                            getStatus(item.id, 'WS', item.service.service_sub_type),
                                                                 props.navigation.navigate('Payment', {
                                                                     datapass: item,
-                                                                    image: item.customer.image,
+                                                                    image: item.customer.image
                                                                 });
-                                                        }}
-                                                    >
+                                                        }}>
                                                         <Text style={styles.btnText} >
                                                             {String.MyBookingTab.completed}
                                                         </Text>
@@ -585,14 +584,14 @@ const OngoingTab = (props) => {
                                                                 removeLocationUpdates()
                                                             }
                                                         } >
-                                                        <Text style={styles.btnText} > {String.MyBookingTab.completed} </Text>
+                                                        <Text style={styles.btnText}> {String.MyBookingTab.completed} </Text>
                                                     </TouchableOpacity>
                                                 }
                                             </View>
                                             : null}
                                         {item.order_status == 'AC' &&
                                             item.booking_date == currentdate &&
-                                            bookingtimecurrenttime(crtime, item.booking_time) < 60 ?
+                                            bookingtimecurrenttime(crtime, item.booking_time) <= 60 ?
                                             <TouchableOpacity style={styles.btnViewOntheWay}
                                                 onPress={
                                                     () => {
@@ -613,22 +612,10 @@ const OngoingTab = (props) => {
                                                     <Text style={styles.btnText} > {String.MyBookingTab.map} </Text>
                                                 </TouchableOpacity>
                                                 :
-                                                <TouchableOpacity
-                                                    style={styles.btnViewMap}
-                                                    onPress={
-                                                        () =>
-                                                            props.navigation.navigate('MapScreen', {
-                                                                datapass: item,
-                                                                image: item.customer.image,
-                                                            })
-                                                    } >
-                                                    <Text style={styles.btnText} > {String.MyBookingTab.map}</Text>
-                                                </TouchableOpacity>}
+                                                null}
                                         </View>
                                     </View>
-
                                 </View>
-
                                 <View style={styles.service_btn_mainview} >
                                     <View >
                                         <View style={styles.service_dis} >
@@ -667,6 +654,7 @@ const OngoingTab = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         {covertDateTime(item.booking_date, item.booking_time).diff(currenttime) >= timeconvert ? (
+                                         
                                             <View style={styles.btnViewReject} >
                                                 <TouchableOpacity onPress={() =>
                                                     props.navigation.navigate('Reshedul', {
@@ -675,8 +663,8 @@ const OngoingTab = (props) => {
                                                 } >
                                                     <Text style={styles.btnText}> Reshedul</Text>
                                                 </TouchableOpacity>
-                                            </View>
-                                        ) : null
+                                            </View>)
+                                         : null
                                         }
                                     </View>
                                 </View>
@@ -692,7 +680,6 @@ const OngoingTab = (props) => {
                         contentContainerStyle={styles.list} >
                     </FlatList>
                 </View>
-
             </View>
         </SafeAreaView>
     );
