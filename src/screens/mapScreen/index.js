@@ -26,6 +26,9 @@ import VIForegroundService from '@voximplant/react-native-foreground-service';
 import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = (props) => {
+  const staffLocation = useSelector(
+    (state) => state.BookingService.staffLocation
+  );
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
   Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
 
@@ -53,6 +56,7 @@ const MapScreen = (props) => {
   );
   console.log('stafflocation REDUX -------------', staffLocation)
   useEffect(() => {
+  
     if (props.route.params !== null) {
       let receivedData = props.route.params.datapass
       setData(receivedData);
@@ -65,6 +69,7 @@ const MapScreen = (props) => {
   }, []);
 
   const addCoordinates = () => {
+   
     let latitude = staffLocation.latitude
     let longitude = staffLocation.longitude
     let orderId = props.route.params.datapass.order_id
@@ -167,8 +172,7 @@ const MapScreen = (props) => {
         searchClick={false}
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={String.map.map}
-        onPress={() => props.navigation.goBack()}
-      />
+        onPress={() => props.navigation.goBack()}/>
       {console.log(' origin  ====>', origin)}
       {console.log(' coordinates index  ====>', coordinates)}
       {console.log(' destination  ====>', destination)}

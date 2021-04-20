@@ -70,7 +70,7 @@ const Home = (props) => {
     }
   };
 
-  const setLatlong =async()=>{
+  const setLatlong = async () =>{
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,

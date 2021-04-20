@@ -16,7 +16,7 @@ class Invoice extends Component {
       id: props.route.params.id,
       email: props.route.params.email,
       orderid:props.route.params.orderid,
-      userProfileData: props.userProfileData,
+      userProfileData: props.userProfileData
 
       
     };
@@ -47,6 +47,8 @@ class Invoice extends Component {
       );
     }
 
+
+    
     return (
       <View style={styles.container}>
         <HeaderView
