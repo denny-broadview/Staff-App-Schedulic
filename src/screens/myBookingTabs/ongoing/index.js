@@ -607,7 +607,7 @@ const OngoingTab = (props) => {
                                             {item.order_status == 'OW' && item.service.service_sub_type == 'at_home' ?
                                                 <TouchableOpacity style={styles.btnViewMap}
                                                     onPress={() => props.navigation.navigate('MapScreen', {
-                                                        datapass: item,
+                                                        datapass: item, 
                                                         image: item.customer.image,
                                                     })} >
                                                     <Text style={styles.btnText} > {String.MyBookingTab.map} </Text>

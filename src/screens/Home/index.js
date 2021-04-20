@@ -56,7 +56,7 @@ const Home = (props) => {
         cancel: "NO"
       }).then(function (success) {
         console.log('success ',success);
-        // setLatlong();
+        setLatlong();
       }.bind(this)
       ).catch((error) => {
         console.log(error.message);
@@ -64,6 +64,7 @@ const Home = (props) => {
 
       DeviceEventEmitter.addListener('locationProviderStatusChange', function (status) { // only trigger when "providerListener" is enabled
         console.log(status); //  status => {enabled: false, status: "disabled"} or {enabled: true, status: "enabled"}
+        setLatlong();
       });
      
     }

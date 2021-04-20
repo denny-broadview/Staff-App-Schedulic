@@ -33,24 +33,25 @@ const MapScreen = (props) => {
   const [customerImage, setCustomerImage] = useState('')
   const [orderId, setOrderId] = useState(0)
   const [coordinates, setCoordinates] = useState([])
-  const [distanceMeter, setDistanceMeter] = useState([])
-  const [destination, setDestination] = useState({ latitude: null, longitude: null })
+  const [distanceMeter, setDistanceMeter] = useState(0)
+  const [destination, setDestination] = useState({ latitude: 0, longitude: 0 })
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-  
   let mapView = useRef(null);
+
   let sdd = coordinates.data
   let dd = null;
-  if(sdd && sdd.length>0){
-    dd = {"latitude": sdd[0], "longitude": sdd[1]}
+  if (sdd && sdd.length > 0) {
+    dd = { "latitude": parseFloat(sdd[0]), "longitude": parseFloat(sdd[1]) }
   }
   let origin = dd
+
   const staffLocation = useSelector(
     (state) => state.BookingService.staffLocation,
   );
-  console.log('stafflocation REDUX -------------',staffLocation)
+  console.log('stafflocation REDUX -------------', staffLocation)
   useEffect(() => {
     if (props.route.params !== null) {
       let receivedData = props.route.params.datapass
@@ -70,15 +71,15 @@ const MapScreen = (props) => {
     var postListRef = firebaseApp.database()
       .ref('trackOrder/currentLocation/')
     postListRef.child(orderId).set(
-      { latitude, longitude , orderId}
+      { latitude, longitude, orderId }
     )
       .then((data) => {
-        // readCoordinateData(data)
+        readCoordinateData(data)
       }).catch((error) => {
         console.log('error ', error)
       })
   }
-  snapshotToArray = obj => {
+  const snapshotToArray = obj => {
     let returnArr = [];
 
     obj.forEach(childSnapshot => {
@@ -94,30 +95,37 @@ const MapScreen = (props) => {
     let key = props.route.params.datapass.order_id
     firebaseApp.database().ref('trackOrder/currentLocation/' + key)
       .on('value', function (snapshot) {
-        console.log('Response = ', JSON.stringify(snapshot.val()))
+
+        console.log('Response FB COOOOOOOR### ', JSON.stringify(snapshot.val()))
         setCoordinates({ data: snapshotToArray(snapshot) })
       });
   }
 
   useEffect(() => {
     let receivedData = props.route.params.datapass
-    let locAddress=receivedData.orders_info.booking_address;
-    let locCity=receivedData.orders_info.booking_city;
-    let locState=receivedData.orders_info.booking_state;
-    let locZip=receivedData.orders_info.booking_zipcode;
+    let locAddress = receivedData.orders_info.booking_address;
+    let locCity = receivedData.orders_info.booking_city;
+    let locState = receivedData.orders_info.booking_state;
+    let locZip = receivedData.orders_info.booking_zipcode;
 
     // let locAddress = "piyush point";
     // let locCity = "Surat";
     // let locState = "Gujarat";
     // let locZip = "394601";
-    
-    Geocoder.from(locAddress + ", " + locCity + ", " + locState + ", " + locZip)
-      .then(json => {
-        var location = json.results[0].geometry.location;
-        console.log('Map location-----------', location);
-        setDestination({ latitude: location.lat, longitude: location.lng })
-      })
-      .catch(error => console.warn(error));
+    console.log('Destination Address -', locAddress + ", " + locCity + ", " + locState + ", " + locZip);
+    if (locAddress !== null && locCity !== null) {
+      Geocoder.from(locAddress + ", " + locCity + ", " + locState + ", " + locZip)
+        .then(json => {
+          var location = json.results[0].geometry.location;
+          console.log('Map location-----------', location);
+          setDestination({ latitude: location.lat, longitude: location.lng })
+        })
+        .catch(error => console.warn(error));
+    }else{
+      Alert.alert("Booking address is not available! So you can't find Route.");
+      setDestination({ latitude: 0, longitude: 0 })
+    }
+
     setOrderId(receivedData.order_id);
 
   }, [data]);
@@ -127,7 +135,6 @@ const MapScreen = (props) => {
     readCoordinateData()
 
   }, [destination])
-
 
   function callNow(phone) {
     let phoneNumber = phone;
@@ -149,7 +156,7 @@ const MapScreen = (props) => {
       })
       .catch((err) => console.log(err));
   }
-  
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -166,43 +173,44 @@ const MapScreen = (props) => {
       {console.log(' coordinates index  ====>', coordinates)}
       {console.log(' destination  ====>', destination)}
       {console.log(' orderid  ====>', orderId)}
-      {destination.latitude !== null ? (
+      {/* {alert(origin.latitude)} */}
+      { destination.latitude !== null && origin !== null ? (
         <MapView
           initialRegion={{
-            latitude: origin.latitude,
-            longitude: origin.longitude,
+            latitude: parseFloat(origin.latitude),
+            longitude: parseFloat(origin.longitude),
             latitudeDelta: LATITUDE_DELTA,
             longitudeDelta: LONGITUDE_DELTA,
           }}
           style={styles.mapStyle}
           ref={mapView}
           onPress={() => null} >
-              <View>
-                <MapView.Marker 
-                  coordinate={origin}>
-                  <View style={{ marginTop: 30, marginLeft: 10 }}>
-                    <View style={styles.courseImgView}>
-                      <TextAvatar
-                        backgroundColor={'#ffff00'}
-                        textColor={'#0000ff'}
-                        size={60}
-                        type={'circle'} // optional
-                      >{'Staff'}</TextAvatar>
-                    </View>
-                  </View>
-                </MapView.Marker>
-                <MapView.Marker
-                  coordinate={destination}>
-                  <View style={{ marginTop: 30, marginLeft: 10 }}>
-                    <View style={styles.courseImgView}>
-                      <Image
-                        source={{ uri: customerImage }}
-                        style={styles.courseImg}
-                      />
-                    </View>
-                  </View>
-                </MapView.Marker>
+          <View>
+            <MapView.Marker
+              coordinate={origin}>
+              <View style={{ marginTop: 30, marginLeft: 10 }}>
+                <View style={styles.courseImgView}>
+                  <TextAvatar
+                    backgroundColor={'#ffff00'}
+                    textColor={'#0000ff'}
+                    size={60}
+                    type={'circle'} // optional
+                  >{'Staff'}</TextAvatar>
+                </View>
               </View>
+            </MapView.Marker>
+            <MapView.Marker
+              coordinate={destination}>
+              <View style={{ marginTop: 30, marginLeft: 10 }}>
+                <View style={styles.courseImgView}>
+                  <Image
+                    source={{ uri: customerImage }}
+                    style={styles.courseImg}
+                  />
+                </View>
+              </View>
+            </MapView.Marker>
+          </View>
           <MapViewDirections
             origin={origin}
             destination={destination}
@@ -245,9 +253,9 @@ const MapScreen = (props) => {
         <TouchableOpacity
           style={styles.btnPhone}
           onPress={() => callNow(props.route.params.datapass.customer.phone_office)}>
-        <View style={styles.btnPhoneView}>
-          <IconCall name="md-call-sharp" style={styles.iconbell} />
-        </View>
+          <View style={styles.btnPhoneView}>
+            <IconCall name="md-call-sharp" style={styles.iconbell} />
+          </View>
         </TouchableOpacity>
         <View style={styles.staffView}>
           <Text style={styles.text_diatance}>{String.map.customer}</Text>
