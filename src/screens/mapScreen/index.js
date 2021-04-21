@@ -26,9 +26,7 @@ import VIForegroundService from '@voximplant/react-native-foreground-service';
 import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = (props) => {
-  const staffLocation = useSelector(
-    (state) => state.BookingService.staffLocation
-  );
+
   const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
   Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
 

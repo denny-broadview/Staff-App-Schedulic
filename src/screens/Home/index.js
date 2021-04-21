@@ -71,6 +71,7 @@ const Home = (props) => {
   };
 
   const setLatlong = async () =>{
+   
     try {
       const granted = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -92,9 +93,11 @@ const Home = (props) => {
   }
 
   const getOneTimeLocation = () => {
+   
     Geolocation.getCurrentPosition(
       (position) => {
         // console.log('****Startup coordinates*********',position);
+      
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude =
@@ -108,7 +111,7 @@ const Home = (props) => {
       },
       {
         enableHighAccuracy: false,
-        timeout: 30000,
+        timeout: 20000,
         maximumAge: 1000
       },
     );
@@ -117,7 +120,7 @@ const Home = (props) => {
   const subscribeLocationLocation = () => {
     watchID = Geolocation.watchPosition(
       (position) => {
-        // console.log('Location coordinates after change ***********',position);
+        console.log('Location coordinates after change ***********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude =
@@ -130,8 +133,9 @@ const Home = (props) => {
         alert(error.message);
       },
       {
-        enableHighAccuracy: false,
-        maximumAge: 1000
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        distanceFilter: 10
       },
     );
   };
