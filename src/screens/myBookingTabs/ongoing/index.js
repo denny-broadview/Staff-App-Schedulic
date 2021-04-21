@@ -77,6 +77,7 @@ const OngoingTab = (props) => {
     useEffect(() => {
         console.log('onGoingFromRedux --- ', onGoingFromRedux);
         console.log('staffLocation --- ', staffLocation);
+        console.log('order ID --- ', orderId);
     },[])
     useEffect(() => {
 
@@ -337,10 +338,10 @@ const OngoingTab = (props) => {
     // Api calling for newBookings
     function getStatus(id, st, sType) {
 
-        // setOrderId(id);
+        setOrderId(id);
         console.log('usertoken----', userInfo.token);
         setLoading(true);
-        let myForm = new FormData();
+        let myForm = new FormData();    
         myForm.append('order_item_id', id);
         myForm.append('staff_id', userInfo.user_id);
         myForm.append('order_status', st);

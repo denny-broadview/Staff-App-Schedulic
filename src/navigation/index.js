@@ -8,7 +8,8 @@ import {
   Dimensions,
   View,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
+  LogBox
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -52,7 +53,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';  // Task#1
 
 const {width} = Dimensions.get('window');
 const Stack = createStackNavigator();
-YellowBox.ignoreWarnings(['']);
+LogBox.ignoreLogs([''])
+// YellowBox.ignoreWarnings(['']);
 const Tab = createBottomTabNavigator();
 const TopTab = createMaterialTopTabNavigator();
 

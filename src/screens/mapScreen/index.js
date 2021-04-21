@@ -22,8 +22,7 @@ import TextAvatar from 'react-native-text-avatar';
 import { Color } from '../../utlis';
 import { useSelector, useDispatch } from 'react-redux';
 import firebaseApp from '@database/FirebaseConfig';
-import VIForegroundService from '@voximplant/react-native-foreground-service';
-import Geolocation from 'react-native-geolocation-service';
+import CustomOrderID from '../../utlis/CustomOrderID';
 
 const MapScreen = (props) => {
 
@@ -48,18 +47,18 @@ const MapScreen = (props) => {
     dd = { "latitude": parseFloat(sdd[0]), "longitude": parseFloat(sdd[1]) }
   }
   let origin = dd
-
+  
   const staffLocation = useSelector(
     (state) => state.BookingService.staffLocation,
   );
-  console.log('stafflocation REDUX -------------', staffLocation)
+  // console.log('stafflocation REDUX -------------', staffLocation)
   useEffect(() => {
   
     if (props.route.params !== null) {
       let receivedData = props.route.params.datapass
       setData(receivedData);
       setCustomerImage(props.route.params.image)
-      console.log('item ongoing map-----------', receivedData);
+      // console.log('item ongoing map-----------', receivedData);
       // console.log('item ongoing Order Item-----------', props.route.params.datapass.);
       console.log('Map location address ++++++++++++-----------', receivedData.orders_info.booking_address);
     }
@@ -71,6 +70,7 @@ const MapScreen = (props) => {
     let latitude = staffLocation.latitude
     let longitude = staffLocation.longitude
     let orderId = props.route.params.datapass.order_id
+    CustomOrderID.setOrderID(orderId)
     var postListRef = firebaseApp.database()
       .ref('trackOrder/currentLocation/')
     postListRef.child(orderId).set(
@@ -175,7 +175,6 @@ const MapScreen = (props) => {
       {console.log(' coordinates index  ====>', coordinates)}
       {console.log(' destination  ====>', destination)}
       {console.log(' orderid  ====>', orderId)}
-      {/* {alert(origin.latitude)} */}
       { destination.latitude !== null && origin !== null ? (
         <MapView
           initialRegion={{

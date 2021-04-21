@@ -14,6 +14,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1:
 import Geolocation from '@react-native-community/geolocation';
 import { setStaffLocation } from '../../store/actions';
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
+import CustomOrderID from '../../utlis/CustomOrderID';
+import firebaseApp from '@database/FirebaseConfig';
 
 const Home = (props) => {
   const navigation = useNavigation()
@@ -26,6 +28,9 @@ const Home = (props) => {
   const [onGoingdata, setonGoingData] = useState([]);
   const [completeTask, setCompletedTaskData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const staffLocation = useSelector(
+    (state) => state.BookingService.staffLocation,
+);
   let latitude = 0;
   let longitude = 0;
 
@@ -147,6 +152,26 @@ const Home = (props) => {
     console.log('Current location from home', dd)
     dispatch(setStaffLocation(dd))
   }
+
+  useEffect(() => {
+    let orderId = CustomOrderID.getOrderID()
+    console.log('order ID after update staff location', orderId)
+    console.log('staff location at Home from REDUX', staffLocation)
+    if(orderId!==null){
+    let latitude = staffLocation.latitude
+    let longitude = staffLocation.longitude
+    var postListRef = firebaseApp.database()
+      .ref('trackOrder/currentLocation/')
+    postListRef.child(orderId).set(
+      { latitude, longitude, orderId }
+    )
+      .then((data) => {
+        // readCoordinateData(data)
+      }).catch((error) => {
+        console.log('error ', error)
+      })
+    }
+  }, [staffLocation])
 
   useEffect(() => {
     console.log('In Userinfo by Arshad ', userInfo);
