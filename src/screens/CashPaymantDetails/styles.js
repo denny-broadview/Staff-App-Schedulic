@@ -100,32 +100,46 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   amountView: {
+    flex:1,
     marginTop:hp('2%'),
     flexDirection: 'row',
     justifyContent:'center',
     alignSelf:'center',
-    width: wp('100%'),
   },
- 
+  amountAlertView: {
+    marginTop:hp('1%'),
+    justifyContent:'center',
+    width: wp('90%'),
+    fontSize: Matrics.Scale(16),
+    fontWeight: '500',
+    padding: Matrics.Scale(5),
+    marginHorizontal: 20,
+    color: 'red'
+  },
   text_amount: {
+    flex:1,
     color: Color.bleck,
-    width: wp('70%'),
+    marginLeft: Matrics.Scale(20),
     fontSize: Matrics.Scale(16),
     fontWeight: '600',
+    alignSelf: 'center'
+
   },
   text_rs: {
+    flex: 1,
     color: Color.bleck,
-    width: wp('20%'),
+    marginRight: Matrics.Scale(20),
     fontSize: Matrics.Scale(16),
     fontWeight: '600',
-    alignSelf: 'flex-end',
-    justifyContent: 'flex-end',
+    alignSelf: 'center',
   },
   text_coupon: {
+    flex: 1,
     color: Color.bleck,
-    width: wp('45%'),
+    marginLeft: Matrics.Scale(20),
     fontSize: Matrics.Scale(16),
     fontWeight: '600',
+    alignSelf: 'center',
   },
   text_coupon_applied: {
     color: Color.AppColor,
@@ -133,7 +147,8 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '600',
   },
-  coiponView: {
+  couponView: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -141,10 +156,10 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(187, 187, 187, 1)',
     borderRadius: Matrics.Scale(5),
-    width: wp('45%'),
+    marginRight: Matrics.Scale(20),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
   },
-  coiponViewApp: {
+  couponViewApp: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -202,18 +217,18 @@ export default StyleSheet.create({
     fontWeight: '900',
   },
   textTotalRs: {
-    justifyContent: 'center',
+    flex: 3,
     alignSelf: 'center',
-    width: wp('30%'),
+    textAlign: 'right',
     fontSize: Matrics.Scale(16),
-    marginLeft: wp('15%'),
+    marginRight: wp('2%'),
     fontWeight: '900',
   },
   add_more_serviceMainView: {
     justifyContent: 'center',
     alignSelf: 'center',
     width: wp('90%'),
-    marginTop: hp('20%'),
+    marginTop: hp('25%'),
   },
   buttonStylpass: {
 
@@ -221,25 +236,27 @@ export default StyleSheet.create({
     borderRadius: Matrics.Scale(5),
     width: wp('90%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-    alignItems: 'center',
-    alignContent: 'center',
-    alignSelf: 'center',
+  },
+  buttonTextView: {
+    justifyContent: 'center',
+    height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+    borderRadius: Matrics.Scale(5),
+    width: wp('90%'),
     textAlign: 'center',
   },
   textChange: {
-    justifyContent: 'center',
     color: Color.white,
     fontWeight: '500',
     fontSize: Matrics.Scale(16),
+    width: wp('90%'),
     textAlign: 'center',
-    top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
   },
   proceedtocheckMainView: {
     justifyContent: 'center',
     alignSelf: 'center',
     width: wp('90%'),
-    marginTop: hp('3%'),
-    marginBottom: hp('3%'),
+    marginTop: hp('1.5%'),
+    marginBottom: hp('2%'),
   },
   buttonStylupdate: {
     borderWidth: 1,
@@ -255,11 +272,30 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   textUpdate: {
-    justifyContent: 'center',
     color: Color.AppColor,
     fontWeight: '500',
     fontSize: Matrics.Scale(16),
     textAlign: 'center',
-    top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
   },
+  currencySymbolView:{
+    flex: 1,
+    flexDirection: 'row', 
+    padding: 10,
+    marginRight: wp('5%'),
+    marginLeft: wp('3%'),
+    borderWidth: 1,
+    borderRadius: Matrics.Scale(5),
+    borderColor: 'rgba(187, 187, 187, 1)',
+  },
+  currencySymbolAmount:{
+    flex: .1,
+    textAlign: 'right', 
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingTop: 5,
+    paddingRight: 2,
+    fontSize: Matrics.Scale(16),
+    fontWeight: '600',
+    backgroundColor: 'white'
+  }
 });

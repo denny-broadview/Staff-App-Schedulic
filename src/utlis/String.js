@@ -120,6 +120,7 @@ export const String = {
     paid: 'Paid',
     paymantlink: 'Send Paymant link to customer',
     cancel: 'Cancel',
+    amountValidation:'Amount must be equal or grater than actual amount.'
   },
   success: {
     paymantdone: 'Paymant Done Successfully',
