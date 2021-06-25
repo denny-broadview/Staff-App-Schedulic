@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1072321180720-aq6fmcpc7l0a7ifvgj4q0kcvn3kr2elm.apps.googleusercontent.com</string>
+	<string>914032289146-p59oeen7a3edu8c2cplqcie8lji5qj9a.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1072321180720-aq6fmcpc7l0a7ifvgj4q0kcvn3kr2elm</string>
+	<string>com.googleusercontent.apps.914032289146-p59oeen7a3edu8c2cplqcie8lji5qj9a</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDc0CVUTfdTpry1qDwAR7bWVNK6zuLJ0zQ</string>
+	<string>AIzaSyAsepjv8_Yqornpqq4KWz-8ygVsBranmWA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1072321180720</string>
+	<string>914032289146</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.bi.lakshya</string>
+	<string>com.schedulicsAdmin</string>
 	<key>PROJECT_ID</key>
-	<string>appointment-20a10</string>
+	<string>schedulic-63c65</string>
 	<key>STORAGE_BUCKET</key>
-	<string>appointment-20a10.appspot.com</string>
+	<string>schedulic-63c65.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1072321180720:ios:3d93c46232aa65ff27a9f5</string>
+	<string>1:914032289146:ios:32c27bb8ca585a321122c3</string>
+	<key>DATABASE_URL</key>
+	<string>https://schedulic-63c65-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

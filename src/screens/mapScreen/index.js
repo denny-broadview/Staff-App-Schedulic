@@ -26,8 +26,10 @@ import CustomOrderID from '../../utlis/CustomOrderID';
 
 const MapScreen = (props) => {
 
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
-  Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
+  // const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk';
+  Geocoder.init('AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk');
+  // Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
 
   const [data, setData] = useState({});
   const [customerImage, setCustomerImage] = useState('')
@@ -79,7 +81,7 @@ const MapScreen = (props) => {
       .then((data) => {
         readCoordinateData(data)
       }).catch((error) => {
-        console.log('error ', error)
+        console.log('error ---', error)
       })
   }
   const snapshotToArray = obj => {
