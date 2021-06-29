@@ -70,35 +70,6 @@ const CompletDetails = (props) => {
     );
   }
 
-
-  // function getinvoice() {
-  //   setLoading(true);
-  //   let myForm = new FormData();
-  //   myForm.append('order_item_id', props.route.params.id);
-  //   console.log('parm invoice===', myForm);
-  //   Auth.PostCustomerTokenAuth(
-  //     userInfo.token,
-  //     userInfo.user_id,
-  //     myForm,
-  //     Constants.ApiAction.invoice,
-  //     (res) => {
-  //       console.log(' invoice--------', res);
-  //       if (res[1].data == true) {
-  //         setLoading(false);
-  //         setInvoice(res[1].response);
-  //         props.navigation.navigate('Invoice', {
-  //           id: res[1].response, 
-  //           email: props.route.params.datapass.customer.email,
-  //           orderid: props.route.params.datapass.id
-  //         });
-  //       } else {
-  //         setLoading(false);
-  //         setInvoice(res.data);
-  //       }
-  //     },
-  //   );
-  // }
-
   return (
     <View style={styles.container}>
       <HeaderView
@@ -140,7 +111,7 @@ const CompletDetails = (props) => {
               </View>
               <View style={{marginTop:Matrics.Scale(10)}}>
                 <Text style={styles.text_rat}>{String.MyBookingTab.staff}</Text>
-                <Text style={[styles.textTime_dis,styles.textRight]}>{userInfo.full_name}</Text>
+                <Text style={[styles.staffName,styles.textRight]}>{userInfo.full_name}</Text>
                 <View style={styles.staff_call_View}>
                   <IconCall
                     name="md-call-outline"
@@ -156,10 +127,10 @@ const CompletDetails = (props) => {
                 <Text style={styles.textDate_time}>
                   {String.MyBookingTab.servicest}
                 </Text>
-                <Text style={styles.textTime_dis}>
+                <Text style={styles.textDisplay}>
                   {data.service == null ? null : data.service.service_name}
                   </Text>
-                  <Text style={styles.textTime_dis}>
+                  <Text style={styles.textDisplay}>
                   Duration {data.service == null ? null : data.service.service_time}&nbsp; min
                   </Text>
               </View>
@@ -172,7 +143,7 @@ const CompletDetails = (props) => {
                     {String.MyBookingTab.amount}
                   </Text>
                   {currencySymbolePosition == 'left' ? (
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textDisplay}>
                       {currencyFormatter.format(
                         data.total_cost,
                         {code: currency},
@@ -180,7 +151,7 @@ const CompletDetails = (props) => {
                       )}
                     </Text>
                   ) : (
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textDisplay}>
                       {currencyFormatter.format(
                         data.total_cost,
                       //  {locale: currencyFrm},
@@ -193,7 +164,7 @@ const CompletDetails = (props) => {
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.customer}
                   </Text>
-                  <Text style={styles.textTime_dis}>
+                  <Text style={styles.textDisplay}>
                     
                     {data.customer == null ? null : data.customer.fullname}
                   </Text>

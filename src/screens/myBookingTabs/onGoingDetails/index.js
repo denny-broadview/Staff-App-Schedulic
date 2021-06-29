@@ -229,19 +229,19 @@ const onGoingDetails = (props) => {
                 <Text style={styles.textDate_time}>
                   {String.cashpaymant.service}
                 </Text>
-                <Text style={styles.textTime_dis}>
+                <Text style={styles.textDisplay}>
                   {data.service == null ? null : data.service.service_name}
                 </Text>
               </View>
             </View>
             <View style={styles.service_btn_mainview}>
-              <View style={{marginLeft: 5}}>
+              <View style={{marginLeft: 4}}>
                 <View style={styles.service_dis}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
                   </Text>
                   {currencySymbolePosition == 'left' ? (
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textDisplay}>
                       {currencyFormatter.format(
                         data.total_cost,
                         {code: currency},
@@ -249,7 +249,7 @@ const onGoingDetails = (props) => {
                       )}
                     </Text>
                   ) : (
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textDisplay}>
                       {currencyFormatter.format(
                         data.total_cost,
                         //  {locale: currencyFrm},
@@ -262,7 +262,7 @@ const onGoingDetails = (props) => {
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.customer}
                   </Text>
-                  <Text style={styles.textTime_dis}>
+                  <Text style={styles.textDisplay}>
                     {data.customer == null ? null : data.customer.fullname}
                   </Text>
                 </View>

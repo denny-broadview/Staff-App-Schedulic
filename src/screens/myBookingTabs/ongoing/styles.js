@@ -37,10 +37,8 @@ export default StyleSheet.create({
   topView: {
     flexDirection: 'row',
     width: wp('80%'),
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginTop: hp('2%')
-
+    marginTop: hp('2%'),
+    marginLeft: wp('3%')
   },
   amount_view: {
     flexDirection: 'row',
@@ -61,25 +59,28 @@ export default StyleSheet.create({
   textDate_time: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
-    width: wp('60%'),
+    width: wp('45%'),
     fontWeight: '800',
-    marginBottom: Matrics.Scale(2),
+    marginBottom: Matrics.Scale(5),
     marginTop: Matrics.Scale(8),
 
   },
   bookingTextDate: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
-    width: wp('60%'),
+    width: wp('45%'),
     fontWeight: '800',
-    marginTop: Matrics.Scale(4),
+    // marginTop: Matrics.Scale(4),
+    // backgroundColor: 'red'
   },
   textDate_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
-    width: wp('30%'),
+    width: wp('28%'),
     fontWeight: '800',
     marginBottom: Matrics.Scale(4),
+    marginLeft: wp('16%'),
+
   },
   textTime_dis: {
     color: Color.ligthGray,
@@ -90,7 +91,7 @@ export default StyleSheet.create({
   bookingTimeText: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
-    width: wp('30%'),
+    width: wp('20%'),
     fontWeight: '800',
     marginBottom: Matrics.Scale(4),
   },
@@ -98,15 +99,17 @@ export default StyleSheet.create({
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('20%'),
-    textAlign:'right'
+    width: wp('35%'),
+    textAlign:'right',
+    marginLeft: wp('-1%'),
   },
   textstatus_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('25%'),
-    textAlign:'right'
+    width: wp('30%'),
+    textAlign:'right',
+    marginRight: wp('17%'),
 
   },
   service_btn_mainview: {
@@ -123,6 +126,7 @@ export default StyleSheet.create({
   },
   service_dis_btn: {
     width: wp('30%'),
+    marginTop: wp('5%')
   },
   btnView: {
     borderRadius: Matrics.Scale(5),
@@ -262,6 +266,8 @@ export default StyleSheet.create({
     fontWeight: '900',
   },
   statusView:{
-    alignContent:'flex-end',alignItems:'flex-end',flex:1
+    alignContent:'flex-end',
+    alignItems:'flex-end',
+    // flex:1
   },
 })

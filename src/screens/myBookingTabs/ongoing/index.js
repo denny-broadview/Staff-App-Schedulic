@@ -464,7 +464,7 @@ const OngoingTab = (props) => {
                                     <Text style={styles.textstatus} > {String.MyBookingTab.satus}</Text>
                                 </View>
                                 <View style={styles.topView_dis} >
-                                    <View style={{ flexDirection: 'column' }}>
+                                    <View style={{ flexDirection: 'row' }}>
                                         <Text style={styles.textDate_dis} >
                                             {moment(item.booking_date).format('DD MMM YYYY')}
                                         </Text>

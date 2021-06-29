@@ -37,17 +37,17 @@ export default StyleSheet.create({
   topView: {
     flexDirection: 'row',
     width: wp('80%'),
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginLeft: hp('2%'),
     marginTop: hp('2%'),
   },
   service_dis_btn: {
     width: wp('30%'),
+    marginLeft: wp('-1%')
   },
   service_customer: {
     width: wp('50%'),
     marginTop: hp('1%'),
-    marginLeft: wp('3%'),
+    marginLeft: wp('4%'),
   },
   btnView: {
     borderRadius: Matrics.Scale(5),
@@ -88,16 +88,16 @@ export default StyleSheet.create({
   topView_dis: {
     flexDirection: 'row',
     width: wp('80%'),
-    justifyContent: 'center',
-    alignSelf: 'center',
     marginTop: hp('1%'),
-    marginStart: wp('5%'),
+    marginLeft: wp('4%'),
   },
   textDate_time: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
-    width: wp('60%'),
+    width: wp('50%'),
     fontWeight: '800',
+    marginBottom: wp('1%'),
+    // backgroundColor: 'yellow'
   },
   textDate_dis: {
     color: Color.ligthGray,
@@ -111,27 +111,32 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     width: wp('50%'),
     fontWeight: '800',
-   // backgroundColor:'red',
+    // marginLeft: wp('3%'),
+    // backgroundColor:'red',
     //marginEnd:wp('2%')
 
   },
   textTime_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
-    width: wp('30%'),
+    width: wp('20%'),
     fontWeight: '800',
   },
   textstatus: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('20%'),
+    width: wp('30%'),
+    marginLeft:wp('-1%'),
+    textAlign: 'right',
   },
   textstatus_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
-    width: wp('25%'),
+    width: wp('30%'),
+    textAlign: 'right',
+    marginLeft: wp('-1%'),
   },
   service_btn_mainview: {
     flexDirection: 'row',
@@ -145,7 +150,7 @@ export default StyleSheet.create({
   },
   service_dis: {
     width: wp('40%'),
-    marginLeft: wp('3%'),
+    marginLeft: wp('4%'),
     marginTop: hp('1%'),
   },
 
@@ -177,7 +182,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: wp('50%'),
     justifyContent: 'center',
-    marginLeft: wp('5%'),
+    marginLeft: wp('4%'),
     marginTop: hp('2%'),
   },
   text_amount: {
@@ -199,7 +204,7 @@ export default StyleSheet.create({
   amountView_dis: {
     flexDirection: 'row',
     width: wp('50%'),
-    marginStart: wp('5%'),
+    marginLeft: wp('4%'),
   },
   text_amount_dis: {
     color: Color.ligthGray,
@@ -210,7 +215,7 @@ export default StyleSheet.create({
   can_reschedulic_View: {
     flexDirection: 'row',
     width: wp('50%'),
-    marginLeft: wp('3%'),
+    marginLeft: wp('4%'),
   },
   inc_dec_icon: {
     justifyContent: 'center',
@@ -258,12 +263,12 @@ export default StyleSheet.create({
   courseImg: {
     width: Matrics.Scale(80),
     height: Matrics.Scale(80),
-    borderRadius: 80 / 2,
+    borderRadius: 50,
     resizeMode: 'cover',
   },
   courseImgView: {
     backgroundColor: 'lightgray',
-    borderRadius: 80 / 2,
+    borderRadius: 50,
     zIndex: 0,
   },
   dataname: {
@@ -293,9 +298,6 @@ export default StyleSheet.create({
     marginBottom: hp('5%'),
   },
   call_icon: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
     color: Color.AppColor,
     padding: Matrics.Scale(10),
     fontSize: Matrics.Scale(20),
@@ -311,7 +313,6 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: Color.gray,
-    marginTop: hp('1%'),
     width: wp('80%'),
     justifyContent: 'center',
     alignSelf: 'center',
@@ -326,7 +327,7 @@ export default StyleSheet.create({
   },
   textNote: {
     color: Color.AppColor,
-    marginTop: hp('1%'),
+    // marginTop: hp('1%'),
     fontSize: Matrics.Scale(16),
     fontWeight: '900',
   },
@@ -486,5 +487,11 @@ textBtnStyle: {
   fontWeight: "bold",
   textAlign: "center",
   fontSize: 16
+},
+textDisplay: {
+  color: Color.ligthGray,
+  fontSize: Matrics.Scale(16),
+  width: wp('45%'),
+  fontWeight: '800',
 },
 });

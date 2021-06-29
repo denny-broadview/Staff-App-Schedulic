@@ -49,7 +49,7 @@ export default StyleSheet.create({
       service_customer:{
         width:wp('50%'),
         marginTop:hp('1%'),
-        marginLeft:wp('4%')
+        marginLeft:wp('3%')
       },
       btnView:{
         borderRadius: Matrics.Scale(5),
@@ -66,12 +66,15 @@ export default StyleSheet.create({
       },
       rating: {
         width: wp('20%'),
+        marginLeft: wp('2%'),
+        marginTop: wp('2%'),
+
       },
       btnViewInvoice:{
         borderRadius: Matrics.Scale(5),
         backgroundColor:Color.AppColor,
         justifyContent:'center',
-        marginTop:hp('3%'),
+        marginTop:hp('1.5%'),
       
       },
       amount_view:{
@@ -112,14 +115,13 @@ export default StyleSheet.create({
         marginTop:hp('2%'),
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
-        width:wp('50%'),
+        width:wp('48%'),
         fontWeight:'800',
       },
       textTime_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        
       },
       textRight:{
         textAlign:'right',
@@ -179,7 +181,7 @@ export default StyleSheet.create({
         flexDirection:'row',
         width:wp('50%'),
         justifyContent:'center',
-        marginLeft:wp('5%'),
+        marginLeft:wp('4%'),
         marginTop:hp('2%')
       },
       text_amount:{
@@ -201,7 +203,7 @@ export default StyleSheet.create({
       amountView_dis:{
         flexDirection:'row',
         width:wp('50%'),
-        marginStart:wp('5%')
+        marginStart:wp('4%')
       },
       text_amount_dis:{
         color:Color.ligthGray,
@@ -246,7 +248,7 @@ textcancel:{
   alignItems:'center',
 },
 textBookingDetails:{
-  margin:wp('5%'),
+  margin:wp('4%'),
   color:Color.AppColor,
   fontSize:Matrics.Scale(16),
   width:wp('60%'),
@@ -285,7 +287,7 @@ imgView: {
   },
   call_View:{
     flexDirection:'row',
-    marginLeft:wp('5%'),
+    marginLeft:wp('4%'),
     marginTop:hp('2%'),
    
   },
@@ -295,12 +297,12 @@ imgView: {
   },
   address_View:{
     flexDirection:'row',
-    marginLeft:wp('5%'),
-    
+    marginLeft:wp('4%'),
+    alignItems: 'center'
   },
   note_View:{
     flexDirection:'row',
-    marginLeft:wp('5%'),
+    marginLeft:wp('4%'),
     marginBottom:hp('5%'),
   },
   call_icon:{
@@ -310,11 +312,13 @@ imgView: {
     fontWeight:'900',
   },
   staff_call_icon:{
-    justifyContent:'center',
+    // justifyContent:'center',
     alignSelf:'center',
     color:Color.ligthGray,
     fontSize:Matrics.Scale(16),
-    fontWeight:'900',
+    marginLeft: wp('-2%'),
+    // backgroundColor: 'red'
+    // fontWeight:'900',
   },
   textCall:{
     alignSelf: 'center',
@@ -368,5 +372,17 @@ imgView: {
     fontSize:Matrics.Scale(16),
     textAlign: "center",
     top: Platform.OS === 'ios' ? hp('1%') : hp('2%'), 
+  },
+  textDisplay:{
+    color:Color.ligthGray,
+    fontSize:Matrics.Scale(16),
+    fontWeight:'800',
+  },
+  staffName:{
+    color:Color.ligthGray,
+    fontSize:Matrics.Scale(16),
+    fontWeight:'800',
+    width: wp('32%'),
+    marginLeft: wp('-2%'),
   },
 })
