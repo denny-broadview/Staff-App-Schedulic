@@ -109,7 +109,7 @@ const NewBookingDetails = (props) => {
             </View>
             <View style={styles.topView_dis}>
               {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-              <View style={{ flexDirection: 'column',marginLeft:3 }}>
+              <View style={{ flexDirection: 'row',marginLeft:3 }}>
                 <Text style={styles.textDate_dis}>
                   {moment(data.booking_date).format('DD MMM YYYY')}
                 </Text>
@@ -194,7 +194,7 @@ const NewBookingDetails = (props) => {
                 <Text style={styles.textDate_time}>
                   {String.MyBookingTab.servicest}
                 </Text>
-                <Text style={styles.textTime_dis}>
+                <Text style={styles.textDisplay}>
                   {data.service == null ? null : data.service.service_name}
                 </Text>
               </View>
@@ -207,7 +207,7 @@ const NewBookingDetails = (props) => {
                     {String.MyBookingTab.amount}
                   </Text>
                   {currencySymbolePosition == 'left' ? (
-                    <Text style={styles.textTime_dis}>
+                    <Text style={styles.textDisplay}>
                       {currencyFormatter.format(
                         data.total_cost,
                         { code: currency },
@@ -228,7 +228,7 @@ const NewBookingDetails = (props) => {
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.customer}
                   </Text>
-                  <Text style={styles.textTime_dis}>
+                  <Text style={styles.textDisplay}>
                     {data.customer == null ? null : data.customer.fullname}
                   </Text>
                 </View>

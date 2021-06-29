@@ -47,7 +47,7 @@ export default StyleSheet.create({
         alignItems:'center',
         color: Color.white,
         backgroundColor:Color.AppColor,
-        borderRadius:20,
+        borderRadius:18,
         padding:10,
         fontSize:14,
         fontWeight:'900',

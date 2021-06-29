@@ -180,7 +180,7 @@ const NewBookingTab = (props) => {
                 </View>
                 <View style={styles.topView_dis}>
                   {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                  <View style={{ flexDirection: 'column' }}>
+                  <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.textDate_dis}>
                       {moment(item.booking_date).format('DD MMM YYYY')}
                     </Text>
@@ -255,7 +255,7 @@ const NewBookingTab = (props) => {
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>
-                    <Text style={styles.textDate_time}>
+                    <Text style={styles.itemText}>
                       {String.MyBookingTab.servicest}
                     </Text>
                     {item.service !== null ?
@@ -294,7 +294,7 @@ const NewBookingTab = (props) => {
                 <View style={styles.service_btn_mainview}>
                   <View>
                     <View style={styles.service_dis}>
-                      <Text style={styles.textDate_time}>
+                      <Text style={styles.itemText}>
                         {String.MyBookingTab.amount}
                       </Text>
                       {currencySymbolePosition == 'left' ? (
@@ -306,7 +306,7 @@ const NewBookingTab = (props) => {
                           )}
                         </Text>
                       ) : (
-                        <Text style={styles.textTime_dis}>
+                        <Text style={styles.itemText}>
                           {currencyFormatter.format(
                             item.total_cost,
                             // {locale: currencyFrm},
@@ -316,7 +316,7 @@ const NewBookingTab = (props) => {
                       )}
                     </View>
                     <View style={styles.service_customer}>
-                      <Text style={styles.textDate_time}>
+                      <Text style={styles.itemText}>
                         {String.MyBookingTab.customer}
                       </Text>
                       <Text style={styles.textTime_dis}>

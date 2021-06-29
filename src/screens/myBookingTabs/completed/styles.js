@@ -100,7 +100,9 @@ export default StyleSheet.create({
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
         width:wp('20%'),
-        textAlign:'right'
+        textAlign:'right',
+        marginBottom:Matrics.Scale(4),
+        marginTop:Matrics.Scale(6),
       },
       textstatus_dis:{
         color:Color.ligthGray,
@@ -109,7 +111,8 @@ export default StyleSheet.create({
         width:wp('25%'),
         // marginEnd:wp('5%'),
         textAlign:'right',
-       
+        marginBottom:Matrics.Scale(4),
+        marginTop:Matrics.Scale(6),
       },
       service_btn_mainview:{
         flexDirection:'row',

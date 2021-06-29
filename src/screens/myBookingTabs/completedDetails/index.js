@@ -240,7 +240,7 @@ const CompletDetails = (props) => {
               </View>
               <View>
                 <Text style={styles.dataname}>
-                  {' '}
+                  {''}
                   {data.customer == null ? null : data.customer.fullname}
                 </Text>
                 <Text style={styles.datars}>
@@ -251,7 +251,7 @@ const CompletDetails = (props) => {
             <View style={styles.call_View}>
               <IconCall name="md-call-sharp" style={styles.call_icon} />
               <Text style={styles.textCall}>
-                {' '}
+                {''}
                 {data.customer == null ? null : data.customer.phone}
               </Text>
             </View>

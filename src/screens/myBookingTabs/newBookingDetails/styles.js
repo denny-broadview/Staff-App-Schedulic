@@ -90,9 +90,9 @@ export default StyleSheet.create({
       textDate_time:{
         color:Color.AppColor,
         fontSize:Matrics.Scale(16),
-        width:wp('60%'),
-        fontWeight:'800'
-        
+        width:wp('50%'),
+        fontWeight:'800',
+        marginBottom: wp('1%'),
       },
       textDate_dis:{
         color:Color.ligthGray,
@@ -111,24 +111,22 @@ export default StyleSheet.create({
       textTime_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
-        width:wp('40%'),
+        width:wp('20%'),
         fontWeight:'800',
       },
       textstatus:{
         color:Color.AppColor,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('20%'),
-        textAlign:'right'
-
+        width:wp('30%'),
+        textAlign:'right',
       },
       textstatus_dis:{
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('25%'),
-        textAlign:'right'
-       
+        width:wp('30%'),
+        textAlign:'right',
       },
       service_btn_mainview:{
         flexDirection:'row',
@@ -254,12 +252,12 @@ imgView: {
   courseImg: {
     width: Matrics.Scale(80),
     height:Matrics.Scale(80),
-    borderRadius: 80/2,
+    borderRadius: 50,
     resizeMode:'cover',
   },
   courseImgView: {
     backgroundColor: 'lightgray',
-    borderRadius: 80/2,
+    borderRadius: 50,
     zIndex: 0,
   },
   dataname:{
@@ -278,7 +276,7 @@ imgView: {
     flexDirection:'row',
     marginLeft:wp('5%'),
     marginTop:hp('2%'),
-   
+    alignItems: 'center'
   },
   address_View:{
     flexDirection:'row',
@@ -300,17 +298,14 @@ imgView: {
     fontWeight:'900',
   },
   textCall:{
-  
     fontSize:16,
     fontWeight:'500',
     color:Color.gray,
-    marginTop:hp('1%')
   } ,
   textAddress:{
     fontSize:16,
     fontWeight:'500',
     color:Color.gray,
-    marginTop:hp('1%'),
     width:wp('80%'),
     justifyContent:'center',
     alignSelf:'center'
@@ -358,5 +353,11 @@ imgView: {
   },
   statusView:{
     alignContent:'flex-end',alignItems:'flex-end',flex:1
+  },
+  textDisplay:{
+    color:Color.ligthGray,
+    fontSize:Matrics.Scale(16),
+    width:wp('40%'),
+    fontWeight:'800',
   },
 })

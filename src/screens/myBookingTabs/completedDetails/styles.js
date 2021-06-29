@@ -263,12 +263,12 @@ imgView: {
   courseImg: {
     width: Matrics.Scale(80),
     height:Matrics.Scale(80),
-    borderRadius: 80/2,
+    borderRadius: 50,
     resizeMode:'cover',
   },
   courseImgView: {
     backgroundColor: 'lightgray',
-    borderRadius: 80/2,
+    borderRadius: 50,
     zIndex: 0,
   },
   dataname:{
@@ -304,9 +304,6 @@ imgView: {
     marginBottom:hp('5%'),
   },
   call_icon:{
-    justifyContent:'center',
-    alignSelf:'center',
-    alignItems:'center',
     color:Color.AppColor,
     padding:Matrics.Scale(10),
     fontSize:Matrics.Scale(24),
@@ -320,20 +317,16 @@ imgView: {
     fontWeight:'900',
   },
   textCall:{
-  
+    alignSelf: 'center',
     fontSize:16,
     fontWeight:'500',
     color:Color.gray,
-    marginTop:hp('1%')
   } ,
   textAddress:{
     fontSize:16,
     fontWeight:'500',
     color:Color.gray,
-    marginTop:hp('1%'),
     width:wp('80%'),
-    justifyContent:'center',
-    alignSelf:'center'
   },
   viewLine:{
     width:wp('80%'),

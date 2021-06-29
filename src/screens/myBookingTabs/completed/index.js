@@ -142,7 +142,7 @@ const CompletedTab = (props) => {
               </View>
               <View style={styles.topView_dis}>
                 {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                <View style={{ flexDirection: 'column' }}>
+                <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.textDate_dis}>
                     {moment(item.booking_date).format('DD MMM YYYY')}
                   </Text>
