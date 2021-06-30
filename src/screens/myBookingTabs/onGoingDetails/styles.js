@@ -53,13 +53,13 @@ export default StyleSheet.create({
     borderRadius: Matrics.Scale(5),
     backgroundColor: Color.AppColor,
     justifyContent: 'center',
-    marginTop: hp('5%'),
+    // marginTop: hp('5%'),
   },
   btnViewWorkstarted: {
     borderRadius: Matrics.Scale(5),
     backgroundColor: Color.workstarted,
     justifyContent: 'center',
-    marginTop: hp('5%'),
+    // marginTop: hp('5%'),
   },
   btnViewDetails: {
     borderRadius: Matrics.Scale(5),

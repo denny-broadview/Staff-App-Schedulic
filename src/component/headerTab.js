@@ -30,13 +30,7 @@ const HeaderTab = (props) => {
                 </View> : null
             }
             {search == true && searchClick == true ?
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    alignSelf: 'flex-end',
-                    marginBottom: 5,
-                    justifyContent: 'flex-start',
-                }}>
+                <View style={styles.searchIconView}>
                     <SearchComponent
                         customSearchInputStyle={{ backgroundColor: '#fff' }}
                         cancelColor='#fff'
@@ -59,8 +53,7 @@ const HeaderTab = (props) => {
             }
 
             {notification == true && searchClick == false ?
-                <View style={{ flexDirection: 'row', alignItems: 'center', 
-                justifyContent: 'flex-end', alignSelf: 'flex-end', marginBottom: 18, }}>
+                <View style={styles.notifIconView}>
                     <TouchableOpacity onPress={onPressNoti}>
                         <IconNotification name="bell" style={styles.iconbell} />
                     </TouchableOpacity>
@@ -90,7 +83,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         color: Color.white,
-        fontSize: 20,
+        fontSize: Matrics.Scale(20),
         marginLeft: Matrics.Scale(10),
         marginTop: Platform.OS === 'ios' ? Matrics.Scale(12) : null,
         fontWeight: 'bold'
@@ -98,14 +91,14 @@ const styles = StyleSheet.create({
     titleView: {
         // width: wp('20%'),
         flex: 1,
-        marginLeft: 10,
+        marginLeft: Matrics.Scale(10),
         justifyContent: 'flex-start',
         alignSelf: 'center',
 
     },
     text: {
         color: Color.white,
-        fontSize: 18,
+        fontSize: Matrics.Scale(18),
         justifyContent: 'flex-start',
         alignSelf: 'flex-start',
         fontWeight: 'bold',
@@ -120,44 +113,57 @@ const styles = StyleSheet.create({
         marginEnd: wp('2%'),
         marginTop: Platform.OS === 'ios' ? hp('3%') : null
     },
+    searchIconView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'flex-end',
+        marginBottom: Matrics.Scale(5),
+        justifyContent: 'flex-start',
+    },
     iconSearch: {
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
         color: Color.AppColor,
         backgroundColor: Color.white,
-        borderRadius: Matrics.Scale(17),
+        borderRadius: Matrics.Scale(18),
         padding: Matrics.Scale(10),
-        fontSize: 14,
-        fontWeight: '900',
-        marginLeft: wp('2%'),
+        fontSize: Matrics.Scale(14),
+        fontWeight: '900', 
+        width: Matrics.Scale(35), 
+        height: Matrics.Scale(35),
         overflow: "hidden"
-
+    },
+    notifIconView: { 
+        flexDirection: 'row', 
+        alignItems: 'flex-end',
+        justifyContent: 'center', 
+        alignSelf: 'flex-end',
+        marginRight: Matrics.Scale(10),
+        marginBottom: Matrics.Scale(14.5), 
     },
     iconbell: {
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignItems: 'center',
+        textAlign: 'center',
         color: Color.AppColor,
         backgroundColor: Color.white,
-        borderRadius: Matrics.Scale(16.5),
+        borderRadius: Matrics.Scale(18),
         padding: Matrics.Scale(10),
-        fontSize: 14,
+        fontSize: Matrics.Scale(14),
         fontWeight: '900',
-        marginLeft: wp('1%'),
+        width: Matrics.Scale(35), 
+        height: Matrics.Scale(35),
         overflow: "hidden",
-        marginEnd: wp('2%'),
     },
     searchbarStyle: {
         justifyContent: 'center',
         alignSelf: 'center',
         alignItems: 'center',
-
     },
     flexDir: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        // justifyContent: 'flex-end',
+        height: Matrics.Scale(35),
     },
     flexDirSearch: {
         flexDirection: 'row',

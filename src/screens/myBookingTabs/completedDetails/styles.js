@@ -65,10 +65,10 @@ export default StyleSheet.create({
         marginTop:hp('5%'),
       },
       rating: {
-        width: wp('20%'),
-        marginLeft: wp('2%'),
+        width: wp('35%'),
         marginTop: wp('2%'),
-
+        alignSelf: 'flex-end',
+        // backgroundColor: 'red'
       },
       btnViewInvoice:{
         borderRadius: Matrics.Scale(5),
@@ -130,6 +130,7 @@ export default StyleSheet.create({
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
+        textAlign: 'right',
       },
       textstatus:{
         color:Color.AppColor,
@@ -293,7 +294,8 @@ imgView: {
   },
   staff_call_View:{
     flexDirection:'row',
-    
+    alignSelf: 'flex-end',
+    // backgroundColor: 'gray'
   },
   address_View:{
     flexDirection:'row',

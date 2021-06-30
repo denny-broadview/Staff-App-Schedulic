@@ -24,11 +24,9 @@ export default StyleSheet.create({
   },
   cardView: {
     backgroundColor: 'white',
-    // marginHorizontal: Matrics.Scale(10),
     width: wp('85%'),
 
     borderRadius: Matrics.Scale(15),
-    // top: Platform.OS == 'android' ? Matrics.Scale(120) : Matrics.Scale(220),
     bottom: hp('5%'),
     position: 'absolute',
     elevation: 4,
@@ -63,18 +61,10 @@ export default StyleSheet.create({
   staffView: {
     flexDirection: 'row',
     width: wp('80%'),
-    // marginTop: hp('1%'),
-    // marginBottom: hp('1%')
   },
   btnPhone: {
-    alignSelf: 'flex-end',
-    // marginTop: 25,
     position: 'absolute',
-    top: hp('5%'),
     left: wp('80%'),
-    width: wp('25%'),
-    height: hp('5%')
-
   },
   btnPhoneView: {
     backgroundColor: Color.AppColor,
@@ -85,34 +75,23 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   iconbell: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-    alignItems: 'center',
     color: Color.white,
-    // backgroundColor: Color.AppColor,
-    // borderRadius: 20,
     padding: 10,
     fontSize: 14,
     fontWeight: '900',
-
   },
   courseImgView: {
-
     borderRadius: 90 / 2,
     borderWidth: 4,
     borderColor: Color.white,
     shadowColor: Color.AppColor,
-
     shadowOffset: {
       width: 0,
       height: 4,
     },
     shadowOpacity: 0.30,
     shadowRadius: 4.65,
-
     elevation: 8,
-
-
   },
   courseImg: {
     width: Matrics.Scale(70),
