@@ -34,7 +34,7 @@ const NewBookingDetails = (props) => {
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
-      console.log('item booking data-----------', props.route.params.datapass);
+      console.log('orderid  ====> -----------', props.route.params.datapass);
     }
     console.log('pic-----------', props.route.params.image);
   }, []);

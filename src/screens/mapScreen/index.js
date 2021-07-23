@@ -71,7 +71,7 @@ const MapScreen = (props) => {
    
     let latitude = staffLocation.latitude
     let longitude = staffLocation.longitude
-    let orderId = props.route.params.datapass.order_id
+    let orderId = props.route.params.datapass.id
     CustomOrderID.setOrderID(orderId)
     var postListRef = firebaseApp.database()
       .ref('trackOrder/currentLocation/')
@@ -97,7 +97,7 @@ const MapScreen = (props) => {
   };
 
   const readCoordinateData = () => {
-    let key = props.route.params.datapass.order_id
+    let key = props.route.params.datapass.id
     firebaseApp.database().ref('trackOrder/currentLocation/' + key)
       .on('value', function (snapshot) {
 
@@ -131,7 +131,7 @@ const MapScreen = (props) => {
       setDestination({ latitude: 0, longitude: 0 })
     }
 
-    setOrderId(receivedData.order_id);
+    setOrderId(receivedData.id);
 
   }, [data]);
 
