@@ -36,6 +36,7 @@ export default StyleSheet.create({
         alignSelf:'center'
     },
     descriptionText:{
+      marginTop:hp('1%'),
         fontSize:14,
         color:Color.ligthGray,
         justifyContent:'center',
@@ -62,25 +63,17 @@ export default StyleSheet.create({
        
       },
       buttonStylupdate: {
-        borderWidth: 1,
-        borderColor: 'rgba(66, 77, 228, 1)',
         borderRadius: Matrics.Scale(5),
         backgroundColor: Color.AppColor,
-        borderRadius: Matrics.Scale(5),
         width: wp('90%'),
         height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
         alignItems: 'center',
-        alignContent: 'center',
-        alignSelf: 'center',
-        textAlign: 'center',
+        justifyContent: 'center'
       },
       textUpdate: {
-        justifyContent: 'center',
         color: '#fff',
         fontWeight: '500',
         fontSize: Matrics.Scale(16),
-        textAlign: 'center',
-        top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
       },
 
 })

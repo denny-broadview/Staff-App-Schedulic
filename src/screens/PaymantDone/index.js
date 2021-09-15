@@ -8,12 +8,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 import {Auth, Constants} from '@global';
 const PaymantDone = (props) => {
-  const orderId = props.route.params.id;
+  const orderId = props.route.params.order_id;
   const userInfo = useSelector((state) => state.user.user);
   const [loading, setLoading] = useState(false)
+  // console.log('props ---  ',props);
+
   useEffect(() => {
    console.log('orderId ---  ',orderId);
-  }, []);
+  }, [orderId]);
 
     // Api calling for newBookings
     function getStatus() {

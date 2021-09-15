@@ -123,10 +123,10 @@ export const String = {
     amountValidation:'Amount must be equal or grater than actual amount.'
   },
   success: {
-    paymantdone: 'Paymant Done Successfully',
+    paymantdone: 'Payment Done Successfully',
     bookDes:
       'Paymant Completed. An Email.with Details of \n Your booking and invoice has been send to you.',
-    orderid: 'Order Id :',
+    orderid: 'Order Id : ',
     done: 'Done',
   },
   map: {
