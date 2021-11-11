@@ -57,6 +57,18 @@
 		<string>Octicons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>Fontisto.ttf</string>
+		<string>Astronout.ttf</string>
+		<string>Bahnschrift.TTF</string>
+		<string>Braga.ttf</string>
+		<string>Camp Kids.ttf</string>
+		<string>DIN Mittelschrift.ttf</string>
+		<string>EastSeaDokdo-Regular.ttf</string>
+		<string>HachiMaruPop-Regular.ttf</string>
+		<string>Leonetta-Serif.otf</string>
+		<string>Pacifico-Regular.ttf</string>
+		<string>PottaOne-Regular.ttf</string>
+		<string>Scriptorama Tradeshow JF Regular.ttf</string>
+		<string>Segoe UI.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

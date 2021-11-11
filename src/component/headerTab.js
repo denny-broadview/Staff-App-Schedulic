@@ -17,7 +17,7 @@ const HeaderTab = (props) => {
             flexDirection: 'row',
             alignItems: 'center', justifyContent: searchClick ? 'flex-start' : 'flex-end'
         }]}>
-            <StatusBar backgroundColor={Color.AppColor} barStyle='light-content' />
+            <StatusBar backgroundColor={'#00A89B'} barStyle='light-content' />
 
             {back == true ?
                 (<TouchableOpacity style={[styles.backimg, { alignItems: 'center', alignSelf: 'center' }]} onPress={onPress}>

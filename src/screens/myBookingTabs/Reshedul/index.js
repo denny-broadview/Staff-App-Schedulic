@@ -414,12 +414,12 @@ const Reshedul = (props) => {
                       justifyContent: 'center',
                       alignContent: 'center',
                     }}
-                    weekdaysColor="#424DE4"
+                    weekdaysColor={Color.AppColor}
                     weekdays={['S', 'M', 'T', 'W', 'T', 'F', 'S']}
                     previousTitle="<"
                     nextTitle=">"
                     onDateChange={_onDateChange}
-                    selectedDayColor="#424DE4"
+                    selectedDayColor={Color.AppColor}
                     selectedDayTextColor="#FFFFFF"
                     minDate={calenderClick == true ? minDate : limit}
                     maxDate={addDays(new Date(), hourss)}

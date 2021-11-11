@@ -1,5 +1,5 @@
 export default {
-  AppColor:'#424DE4',
+  AppColor:'#00A89B',
   white: "#FFFFFF",
   ligthGray:"#A3A3A3",
   darkGray:'#484848',

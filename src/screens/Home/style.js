@@ -45,7 +45,7 @@ export default StyleSheet.create({
      },
      hollText:{
           fontSize: 24, 
-          color: Color.AppColor,
+          color: '#00A89B',
           // fontFamily:"BAHNSCHRIFT",
      },
      userText:{

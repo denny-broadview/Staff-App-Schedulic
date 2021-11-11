@@ -3,6 +3,7 @@ import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
+import { Color } from '../../utlis';
 
 export default StyleSheet.create({
     mainView:{
@@ -36,7 +37,7 @@ export default StyleSheet.create({
     },
     button: {
         alignItems: "center",
-        backgroundColor: "#424DE4",
+        backgroundColor: Color.AppColor,
         padding: 12,
         borderRadius:6,
         width:wp('90%'),

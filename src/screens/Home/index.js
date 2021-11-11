@@ -16,6 +16,7 @@ import { setStaffLocation } from '../../store/actions';
 import LocationServicesDialogBox from "react-native-android-location-services-dialog-box";
 import CustomOrderID from '../../utlis/CustomOrderID';
 import firebaseApp from '@database/FirebaseConfig';
+import Loader from '../../global/Loader';
 
 const Home = (props) => {
   const navigation = useNavigation()
@@ -280,7 +281,8 @@ const Home = (props) => {
       />
       <ScrollView style={{ flex: 1, }}>
         <View style={styles.topprofiledeatils}>
-          <MySpinner size="large" visible={loading} />
+          {/* <MySpinner size="large" visible={loading} /> */}
+          {loading ? <Loader {...props} /> : null}
           <View style={styles.profileimage}>
             <Image
               style={styles.imageStyle}

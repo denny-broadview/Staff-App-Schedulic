@@ -5,7 +5,7 @@ export default StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#424DE4'
+        backgroundColor:'#00A89B'
     },
     
     logo:{
