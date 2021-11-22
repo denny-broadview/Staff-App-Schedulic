@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "914032289146",
-    "firebase_url": "https://schedulic-63c65-default-rtdb.firebaseio.com",
-    "project_id": "schedulic-63c65",
-    "storage_bucket": "schedulic-63c65.appspot.com"
+    "project_number": "627663640380",
+    "project_id": "schedulicstaff-6d9e1",
+    "storage_bucket": "schedulicstaff-6d9e1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:914032289146:android:dedc5a9dd4f8d7b61122c3",
+        "mobilesdk_app_id": "1:627663640380:android:33ce177046c6a3b8e6f039",
         "android_client_info": {
-          "package_name": "com.schedulicsadmin"
+          "package_name": "com.schedulicstaff"
         }
       },
       "oauth_client": [
         {
-          "client_id": "914032289146-jvjce30ps22vv85vp2285ag4heqe1kak.apps.googleusercontent.com",
+          "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6qzYO4hVgnZc5h8zlrzUuh7ibMhoRo7U"
+          "current_key": "AIzaSyASjlGgwvL4DF8i_FH6-Wpfhn-emazNW1Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "914032289146-jvjce30ps22vv85vp2285ag4heqe1kak.apps.googleusercontent.com",
+              "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "914032289146-p59oeen7a3edu8c2cplqcie8lji5qj9a.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.schedulicsAdmin"
-              }
             }
           ]
         }
