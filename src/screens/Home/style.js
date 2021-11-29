@@ -67,8 +67,8 @@ export default StyleSheet.create({
           color:Color.white
      },
      imageIcon:{
-          width: 70,
-          height: 70
+          width: 44,
+          height: 44
      },
      icon: {
           alignSelf:'center',
@@ -98,13 +98,14 @@ export default StyleSheet.create({
           justifyContent:'space-between'
       },
       cardTextTitel:{
-          fontSize: 18, 
-          color: Color.darkGray,
+          fontSize: 14, 
+          color: Color.smokeyBlack,
+          fontWeight: '700'
           // fontFamily:"BAHNSCHRIFT", 
       },
       cardSubTextTitle:{
           color: Color.silver,
-          fontSize: 14,
+          fontSize: 12,
           marginTop:Matrics.Scale(1),
           fontWeight:"500",
           // fontFamily:"BAHNSCHRIFT",

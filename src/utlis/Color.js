@@ -18,5 +18,7 @@ export default {
   yellow:'#FFA000',
   blue:'#272E96',
   ligthGreen:'#0ECCC5',
-  linecolor:"#E2E2E2"
+  linecolor:"#E2E2E2",
+  smokeyBlack: "#0E0E0E",
+  lightYellow: "#FFD74B"
 };
