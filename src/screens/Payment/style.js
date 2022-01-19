@@ -31,7 +31,7 @@ export default StyleSheet.create({
     width:wp('5%'), height: hp('5%')
   },
   commonpayment: {
-    backgroundColor: '#424de414',
+    backgroundColor: '#00A89B14',
     padding: 16,
     borderRadius: 8,
     flexDirection: 'row',
@@ -42,7 +42,7 @@ export default StyleSheet.create({
   },
   button: {
     alignItems: 'center',
-    backgroundColor: '#424DE4',
+    backgroundColor: '#00A89B',
     padding: 12,
     borderRadius: 6,
     width: wp('90%'),

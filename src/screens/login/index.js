@@ -26,7 +26,7 @@ const Login = (props) => {
       source={require('../../assets/images/login-bg.png')}
       style={styles.backgroundImage}>
      
-        <StatusBar barStyle={'light-content'} backgroundColor={'#424DE4'} />
+        <StatusBar barStyle={'light-content'} backgroundColor={'#00A89B'} />
         <View style={styles.mainView}>
           <View style={styles.loginLogo}>
             <Image

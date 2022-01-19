@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "1072321180720",
-    "project_id": "appointment-20a10",
-    "storage_bucket": "appointment-20a10.appspot.com"
+    "project_number": "627663640380",
+    "project_id": "schedulicstaff-6d9e1",
+    "storage_bucket": "schedulicstaff-6d9e1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1072321180720:android:83c95b4bd8d4322027a9f5",
+        "mobilesdk_app_id": "1:627663640380:android:33ce177046c6a3b8e6f039",
         "android_client_info": {
-          "package_name": "com.schedulic"
+          "package_name": "com.schedulicstaff"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1072321180720-240tlj6fceln66na1b6krgvfbd0q16h8.apps.googleusercontent.com",
+          "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDhnMxqpd8Du5suJJfdz4_zxAT6nEva8iQ"
+          "current_key": "AIzaSyASjlGgwvL4DF8i_FH6-Wpfhn-emazNW1Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1072321180720-240tlj6fceln66na1b6krgvfbd0q16h8.apps.googleusercontent.com",
+              "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "1072321180720-aq6fmcpc7l0a7ifvgj4q0kcvn3kr2elm.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.bi.lakshya"
-              }
             }
           ]
         }

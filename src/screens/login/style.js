@@ -36,7 +36,7 @@ export default StyleSheet.create({
     },
     button: {
         alignItems: "center",
-        backgroundColor: "#424DE4",
+        backgroundColor: "#00A89B",
         padding: 12,
         borderRadius:6,
         width:wp('90%'),

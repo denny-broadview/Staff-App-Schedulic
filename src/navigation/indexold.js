@@ -208,24 +208,24 @@ export default App = () => {
               >
                 {index === 0 ?
                 <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  color: !isFocused ? '#9C9C9C' : '#00A89B',
                   size: 20,
-                }]}><Icon name="home" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+                }]}><Icon name="home" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
               :null}
               {index === 1 ?
                 <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  color: !isFocused ? '#9C9C9C' : '#00A89B',
                   size: 20,
-                }]}><Icon name="calendar" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+                }]}><Icon name="calendar" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
               :null}
               {index === 2 ?
                 <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  color: !isFocused ? '#9C9C9C' : '#00A89B',
                   size: 20,
-                }]}><Icon name="user" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
+                }]}><Icon name="user" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
               :null}
                 <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#424DE4',
+                  color: !isFocused ? '#9C9C9C' : '#00A89B',
                   size: 12,
                 }]}>
                   {label}
