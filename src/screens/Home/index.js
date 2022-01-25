@@ -27,6 +27,7 @@ const Home = (props) => {
   const [loading, setLoading] = useState(false);
   let latitude = 0;
   let longitude = 0;
+  let watchID = null
 
   useEffect(() => {
     getBooking();

@@ -72,7 +72,7 @@ const Notification = (props) => {
             //<TouchableOpacity onPress={() => props.navigation.replace('BookingServiceDetails', {htitle:item.title.find((i)=>i.title)})}>
 
             <TouchableOpacity style={styles.menuView}>
-              {item.customer !== null ? (
+              {item.customer !== null && item.customer !== '' ? (
                 <Text style={styles.menuname}>{item.customer.fullname}</Text>
               ) : (
                 <Text style={styles.menuname}>null</Text>
