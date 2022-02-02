@@ -42,18 +42,6 @@ const LoginMain = (props) => {
     // _getToken();
   }
 
-  // async function _getToken() {
-  //   fcmToken = await firebase.messaging().getToken();
-  //   console.log('fcmtoken------------', fcmToken);
-  //   await AsyncStorage.setItem('fcmToken', fcmToken);
-  //   const channel = new firebase.notifications.Android.Channel(
-  //     'general',
-  //     'General',
-  //     firebase.notifications.Android.Importance.Max,
-  //   ).setDescription('general notification channel');
-  //   firebase.notifications().android.createChannel(channel);
-  // }
-
   function mobileLogin() {
     let myForm = new FormData();
     myForm.append('email', email);
@@ -75,7 +63,7 @@ const LoginMain = (props) => {
 
         props.navigation.navigate('Home'); 
       } else {
-        // console.log('else ',res[1].response);
+        console.log('else ',res[1]);
         Auth.ToastMessage(res[1].response);
       }
     });

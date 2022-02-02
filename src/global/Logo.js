@@ -25,7 +25,7 @@ function AppLogo(props) {
           transform="translate(99 85)"
           fill="#0e0e0e"
           fontSize={37}
-          fontFamily="SegoeUI"
+          // fontFamily="SegoeUI"
         >
           <TSpan x={0} y={0}>
             {"Schedulic"}
