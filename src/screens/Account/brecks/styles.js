@@ -45,9 +45,11 @@ export default StyleSheet.create({
   border: {
     justifyContent: 'center',
     width: wp('90%'),
-    height: hp('0.1%'),
+    height:0.5,
     backgroundColor: Color.ligthGray,
     marginLeft: wp('5%'),
+    marginTop:5,
+    opacity:0.5,
   },
   categoryText:{
     color:Color.darkGray,

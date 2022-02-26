@@ -61,7 +61,7 @@ const LoginMain = (props) => {
         onSetUserImage(res[1].response.image);
         console.log('onSetUserToken---', onSetUserToken(res[1].response.token));
 
-        props.navigation.navigate('Home'); 
+        props.navigation.replace('Home'); 
       } else {
         console.log('else ',res[1]);
         Auth.ToastMessage(res[1].response);

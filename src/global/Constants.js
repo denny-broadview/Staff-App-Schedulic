@@ -4,7 +4,7 @@ const {width, height} = Dimensions.get('window');
 // var serviceCart= [];
 const Constants = {
   showStatusBar: true,
-  businessid: 24,
+  businessid: 119,
   businessname: 'BI',
   ApiBaseUrl: 'https://api.schedulic.com/api/',
 

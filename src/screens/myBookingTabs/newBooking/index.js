@@ -160,7 +160,7 @@ const NewBookingTab = (props) => {
       <View style={styles.container}>
         <View style={{ justifyContent: 'center', flex: 1 }}>
           <MySpinner size="large" visible={loagind} />
-          {refreshing ? (
+          {refreshing && !loagind ? (
             <ActivityIndicator style={{ color: Color.AppColor }} />
           ) : null}
           <FlatList

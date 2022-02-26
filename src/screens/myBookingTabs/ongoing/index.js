@@ -77,7 +77,7 @@ const OngoingTab = (props) => {
     useEffect(() => {
         console.log('onGoingFromRedux --- ', onGoingFromRedux);
         console.log('staffLocation --- ', staffLocation);
-    },[])
+    }, [])
     useEffect(() => {
 
         // if (location?.coords?.latitude != undefined && location?.coords?.longitude != undefined) {
@@ -441,6 +441,29 @@ const OngoingTab = (props) => {
     //     }
     // };
 
+    const gotoMap = async (item) => {
+        try {
+            console.log('gotoMap press');
+            const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                {
+                    'title': 'Schedulics Geolocation Permission',
+                    'message': 'Schedulics needs access to your current location so you can share or track for a ride'
+                });
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                props.navigation.navigate('MapScreen', {
+                    datapass: item,
+                    image: item.customer.image,
+                })
+            } else {
+                console.log("Geolocation permission denied");
+                Alert.alert('Geolocation permission denied');
+            }
+        } catch (err) {
+            console.warn(err)
+        }
+    }
+
 
     return (
         <SafeAreaView style={styles.container} >
@@ -488,10 +511,10 @@ const OngoingTab = (props) => {
                                             </View>
                                             : null}
                                         {/* {item.order_status != null && item.order_status == 'OW' ? */}
-                                            <View>
-                                                <Text style={styles.textstatus_dis} > On The Way </Text>
-                                            </View>
-                                            {/* : null} */}
+                                        <View>
+                                            <Text style={styles.textstatus_dis} > On The Way </Text>
+                                        </View>
+                                        {/* : null} */}
                                         {item.order_status != null && item.order_status == 'WS' ?
                                             <View>
                                                 <Text style={styles.textstatus_dis} > Work Started </Text>
@@ -606,24 +629,10 @@ const OngoingTab = (props) => {
                                         <View>
                                             {item.order_status == 'OW' && item.service.service_sub_type == 'at_home' ?
                                                 <TouchableOpacity style={styles.btnViewMap}
-                                                    onPress={() => props.navigation.navigate('MapScreen', {
-                                                        datapass: item,
-                                                        image: item.customer.image,
-                                                    })} >
+                                                    onPress={() => gotoMap(item)} >
                                                     <Text style={styles.btnText} > {String.MyBookingTab.map} </Text>
                                                 </TouchableOpacity>
-                                                :
-                                                <TouchableOpacity
-                                                    style={styles.btnViewMap}
-                                                    onPress={
-                                                        () =>
-                                                            props.navigation.navigate('MapScreen', {
-                                                                datapass: item,
-                                                                image: item.customer.image,
-                                                            })
-                                                    } >
-                                                    <Text style={styles.btnText} > {String.MyBookingTab.map}</Text>
-                                                </TouchableOpacity>}
+                                                : null}
                                         </View>
                                     </View>
 

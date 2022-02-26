@@ -40,7 +40,7 @@ const MapScreen = (props) => {
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
   
-  let mapView = useRef(null);
+  let mapView = useRef(null); 
   let sdd = coordinates.data
   let dd = null;
   if(sdd && sdd.length>0){
