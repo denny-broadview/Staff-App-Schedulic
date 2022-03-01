@@ -8,10 +8,7 @@ import {
     RefreshControl,
     PermissionsAndroid,
     ActivityIndicator,
-    ToastAndroid,
     Alert,
-    Linking,
-    Platform
 } from 'react-native';
 import styles from './styles';
 import { String } from '../../../utlis/String';
@@ -19,20 +16,15 @@ import { Color, Matrics } from '../../../utlis';
 import { MySpinner } from '../../../component/MySpinner';
 import { Auth, Constants } from '@global';
 import { useSelector, useDispatch } from 'react-redux';
-import { setGoingOnData, setStaffLocation } from '../../../store/actions';
+import {setStaffLocation } from '../../../store/actions';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
-import Geolocation from 'react-native-geolocation-service';
-import VIForegroundService from '@voximplant/react-native-foreground-service';
 import database from '@react-native-firebase/database';
-import firebaseApp from '@database/FirebaseConfig';
 const OngoingTab = (props) => {
     const userInfo = useSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const [refreshing, setRefreshing] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [foregroundService, setForegroundService] = useState(true)
-    const [updatesEnabled, setUpdatesEnabled] = useState(false)
     const [location, setLocation] = useState({})
     const [watchId, setWatchId] = useState(false)
     const [orderId, setOrderId] = useState('')
@@ -215,7 +207,6 @@ const OngoingTab = (props) => {
 
     useEffect(() => {
         time_convert();
-
         getOnGoing();
     }, []);
     const onRefresh = () => {

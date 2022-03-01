@@ -83,7 +83,7 @@ const NewBookingTab = (props) => {
       myForm,
       Constants.ApiAction.staffnewbookin,
       (res) => {
-        console.log(' booking data--------', JSON.stringify(res));
+        // console.log(' booking data--------', JSON.stringify(res));
         if (res[1].data == true) {
           setLoading(false);
           setRefreshing(false);

@@ -24,33 +24,32 @@ import { useSelector, useDispatch } from 'react-redux';
 import firebaseApp from '@database/FirebaseConfig';
 import VIForegroundService from '@voximplant/react-native-foreground-service';
 import Geolocation from 'react-native-geolocation-service';
+import Constants from '../../global/Constants';
 
 const MapScreen = (props) => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg';
-  Geocoder.init('AIzaSyCgvbox9d8q_3iQX_GqtABbyTtDzNsKBvg');
-
+  const GOOGLE_MAPS_APIKEY = Constants.GOOGLE_MAPS_APIKEY;
+  Geocoder.init(Constants.GOOGLE_MAPS_APIKEY);
   const [data, setData] = useState({});
   const [customerImage, setCustomerImage] = useState('')
   const [orderId, setOrderId] = useState(0)
   const [coordinates, setCoordinates] = useState([])
   const [distanceMeter, setDistanceMeter] = useState([])
-  const [destination, setDestination] = useState({ latitude: null, longitude: null })
+  const [destination, setDestination] = useState({ latitude:  21.134345, longitude: 72.85722345 })
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-  
-  let mapView = useRef(null); 
+
+  let mapView = useRef(null);
   let sdd = coordinates.data
-  let dd = null;
-  if(sdd && sdd.length>0){
-    dd = {"latitude": sdd[0], "longitude": sdd[1]}
+  let dd = { "latitude": 21.134464, "longitude": 72.857223 }
+  if (sdd && sdd.length > 0) {
+    dd = { "latitude": sdd[0], "longitude": sdd[1] }
   }
   let origin = dd
   const staffLocation = useSelector(
     (state) => state.BookingService.staffLocation,
   );
-  console.log('stafflocation REDUX -------------',staffLocation)
   useEffect(() => {
     if (props.route.params !== null) {
       let receivedData = props.route.params.datapass
@@ -70,7 +69,7 @@ const MapScreen = (props) => {
     var postListRef = firebaseApp.database()
       .ref('trackOrder/currentLocation/')
     postListRef.child(orderId).set(
-      { latitude, longitude , orderId}
+      { latitude, longitude, orderId }
     )
       .then((data) => {
         // readCoordinateData(data)
@@ -78,7 +77,7 @@ const MapScreen = (props) => {
         console.log('error ', error)
       })
   }
-  snapshotToArray = obj => {
+  const snapshotToArray = obj => {
     let returnArr = [];
 
     obj.forEach(childSnapshot => {
@@ -101,20 +100,19 @@ const MapScreen = (props) => {
 
   useEffect(() => {
     let receivedData = props.route.params.datapass
-    let locAddress=receivedData.orders_info.booking_address;
-    let locCity=receivedData.orders_info.booking_city;
-    let locState=receivedData.orders_info.booking_state;
-    let locZip=receivedData.orders_info.booking_zipcode;
+    let locAddress = receivedData.orders_info.booking_address;
+    let locCity = receivedData.orders_info.booking_city;
+    let locState = receivedData.orders_info.booking_state;
+    let locZip = receivedData.orders_info.booking_zipcode;
 
     // let locAddress = "piyush point";
     // let locCity = "Surat";
     // let locState = "Gujarat";
     // let locZip = "394601";
-    
+
     Geocoder.from(locAddress + ", " + locCity + ", " + locState + ", " + locZip)
       .then(json => {
         var location = json.results[0].geometry.location;
-        console.log('Map location-----------', location);
         setDestination({ latitude: location.lat, longitude: location.lng })
       })
       .catch(error => console.warn(error));
@@ -149,7 +147,7 @@ const MapScreen = (props) => {
       })
       .catch((err) => console.log(err));
   }
-  
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -162,10 +160,6 @@ const MapScreen = (props) => {
         headertext={String.map.map}
         onPress={() => props.navigation.goBack()}
       />
-      {console.log(' origin  ====>', origin)}
-      {console.log(' coordinates index  ====>', coordinates)}
-      {console.log(' destination  ====>', destination)}
-      {console.log(' orderid  ====>', orderId)}
       {destination.latitude !== null ? (
         <MapView
           initialRegion={{
@@ -177,32 +171,32 @@ const MapScreen = (props) => {
           style={styles.mapStyle}
           ref={mapView}
           onPress={() => null} >
-              <View>
-                <MapView.Marker 
-                  coordinate={origin}>
-                  <View style={{ marginTop: 30, marginLeft: 10 }}>
-                    <View style={styles.courseImgView}>
-                      <TextAvatar
-                        backgroundColor={'#ffff00'}
-                        textColor={'#0000ff'}
-                        size={60}
-                        type={'circle'} // optional
-                      >{'Staff'}</TextAvatar>
-                    </View>
-                  </View>
-                </MapView.Marker>
-                <MapView.Marker
-                  coordinate={destination}>
-                  <View style={{ marginTop: 30, marginLeft: 10 }}>
-                    <View style={styles.courseImgView}>
-                      <Image
-                        source={{ uri: customerImage }}
-                        style={styles.courseImg}
-                      />
-                    </View>
-                  </View>
-                </MapView.Marker>
+          <View>
+            <MapView.Marker
+              coordinate={origin}>
+              <View style={{ marginTop: 30, marginLeft: 10 }}>
+                <View style={styles.courseImgView}>
+                  <TextAvatar
+                    backgroundColor={'#ffff00'}
+                    textColor={'#0000ff'}
+                    size={60}
+                    type={'circle'} // optional
+                  >{'Staff'}</TextAvatar>
+                </View>
               </View>
+            </MapView.Marker>
+            <MapView.Marker
+              coordinate={destination}>
+              <View style={{ marginTop: 30, marginLeft: 10 }}>
+                <View style={styles.courseImgView}>
+                  <Image
+                    source={{ uri: customerImage }}
+                    style={styles.courseImg}
+                  />
+                </View>
+              </View>
+            </MapView.Marker>
+          </View>
           <MapViewDirections
             origin={origin}
             destination={destination}
@@ -245,9 +239,9 @@ const MapScreen = (props) => {
         <TouchableOpacity
           style={styles.btnPhone}
           onPress={() => callNow(props.route.params.datapass.customer.phone_office)}>
-        <View style={styles.btnPhoneView}>
-          <IconCall name="md-call-sharp" style={styles.iconbell} />
-        </View>
+          <View style={styles.btnPhoneView}>
+            <IconCall name="md-call-sharp" style={styles.iconbell} />
+          </View>
         </TouchableOpacity>
         <View style={styles.staffView}>
           <Text style={styles.text_diatance}>{String.map.customer}</Text>

@@ -1,33 +1,91 @@
 {
   "project_info": {
-    "project_number": "627663640380",
-    "project_id": "schedulicstaff-6d9e1",
-    "storage_bucket": "schedulicstaff-6d9e1.appspot.com"
+    "project_number": "128112215628",
+    "project_id": "schedulics-95d4e",
+    "storage_bucket": "schedulics-95d4e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:627663640380:android:33ce177046c6a3b8e6f039",
+        "mobilesdk_app_id": "1:128112215628:android:0c15d9ed061e30f20d56e9",
         "android_client_info": {
-          "package_name": "com.schedulicstaff"
+          "package_name": "com.scheduliccustomer"
         }
       },
       "oauth_client": [
         {
-          "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
+          "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyASjlGgwvL4DF8i_FH6-Wpfhn-emazNW1Y"
+          "current_key": "AIzaSyAa9iYGYkhhcYW-MyDGzgp6NkaxanIeboo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "627663640380-54q4h31194jfhr5ehtot0sssll10knsb.apps.googleusercontent.com",
+              "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128112215628:android:2a02c72887bc19a10d56e9",
+        "android_client_info": {
+          "package_name": "com.schedulics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa9iYGYkhhcYW-MyDGzgp6NkaxanIeboo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128112215628:android:95e39c583482bad30d56e9",
+        "android_client_info": {
+          "package_name": "com.schedulicstaff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa9iYGYkhhcYW-MyDGzgp6NkaxanIeboo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128112215628-qp1up56ohj2ceop1dakkoi9a5k5iobek.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

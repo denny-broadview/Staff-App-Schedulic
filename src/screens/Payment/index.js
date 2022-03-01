@@ -11,10 +11,7 @@ const Payment = (props) => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
       setPayJson(props.route.params.datapass.payment);
-      console.log('item Payment in paymant screen-----------', props.route.params.datapass);
     }
-    console.log('Payment pic-----------', props.route.params.image);
-   
   }, []);
   useEffect(()=>{
     if (payJson && payJson != null && payJson != undefined) {
@@ -27,7 +24,6 @@ const Payment = (props) => {
         "paymentnotes": payJson.payment_notes
       }
       setPayment(js)
-      console.log('Payment arr-----------', js);
     }
    
   },[data])
@@ -101,9 +97,6 @@ const Payment = (props) => {
           </View>
         </ScrollView>
       </View>
-      {/* <TouchableOpacity style={styles.button}>
-        <Text style={styles.btnText}>{String.payment.Next}</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };

@@ -171,7 +171,7 @@ const CompletedTab = (props) => {
                     onPress={() =>
                       props.navigation.navigate('CompletDetails', {
                         datapass: item,
-                        image: item.customer.image,
+                        image: item.customer ? item.customer.image:'',
                       })
                     }>
                     <Text style={styles.btnText}>
