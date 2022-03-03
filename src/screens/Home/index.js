@@ -18,7 +18,6 @@ const Home = (props) => {
   const navigation = useNavigation()
   const userImage = useSelector(state => state.user.userImage)
   const userInfo = useSelector(state => state.user.user)
-  // console.log('userInfo====================================', userInfo);
   const dispatch = useDispatch()
   const [starCount, setStarCount] = useState(0);
   const [bookingdata, setBookingData] = useState([]);
@@ -70,7 +69,6 @@ const Home = (props) => {
   const getOneTimeLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        // console.log('****Startup coordinates*********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude =
@@ -93,7 +91,6 @@ const Home = (props) => {
   const subscribeLocationLocation = () => {
     watchID = Geolocation.watchPosition(
       (position) => {
-        // console.log('Location coordinates after change ***********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude =
@@ -116,13 +113,11 @@ const Home = (props) => {
     let dd = {}
     dd['latitude'] = latitude
     dd['longitude'] = longitude
-    console.log('Current location from home', dd)
     dispatch(setStaffLocation(dd))
   }
 
   useEffect(() => {
-    console.log('In Userinfo by Arshad ', userInfo);
-    // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
+    setStarCount(userInfo.avgRatings.length > 0 ? userInfo.avgRatings[0].aggregate : 0)
   }, [userInfo])
 
   useEffect(() => {
@@ -140,13 +135,10 @@ const Home = (props) => {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm booking~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffnewbookin, (res) => {
-      console.log(' booking data--------', res);
       if (res[1].data == true) {
         setLoading(false);
         setBookingData(res[1].response);
-        console.log('legth booking---', bookingdata.length)
       } else {
         setBookingData(res.data);
         setLoading(false);
@@ -158,13 +150,10 @@ const Home = (props) => {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm onGoing~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffOnGoing, (res) => {
-      console.log(' ongoing data--------', res);
       if (res[1].data == true) {
         setLoading(false);
         setonGoingData(res[1].response);
-        console.log('legth ongoing---', onGoingdata.length)
       } else {
         setonGoingData(res.data);
         setLoading(false);
@@ -179,34 +168,16 @@ const Home = (props) => {
     myForm.append('business_id', Constants.businessid);
     myForm.append('staff_id', userInfo.user_id);
     myForm.append('status', 'CO')
-    console.log('parm complted~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.completTask, (res) => {
-      console.log('complete data--------', res);
       if (res[1].data == true) {
         setLoading(false);
         setCompletedTaskData(res[1].response);
-        console.log('legth complted---', completeTask.length)
       } else {
         setCompletedTaskData(res.data);
         setLoading(false);
       }
     });
   }
-
-  const fnSearchEnable = () => {
-    setEnableSearch(!enable);
-    // console.log(enableSearch);
-  };
-  // searchbar
-  const onChange = (e) => {
-    setSearchTerm(e?.nativeEvent?.text);
-    searchFilterFunction(e?.nativeEvent?.text);
-  };
-  const onSearchClear = () => {
-    console.log('onSearchClear');
-    setSearchTerm('');
-    setEnableSearch(false);
-  };
 
   // Task#1: Create onTabNavigate method and call on onPress
   const onTabNavigate = async (screenname, tabIndex) => {

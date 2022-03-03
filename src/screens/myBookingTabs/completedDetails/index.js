@@ -188,7 +188,7 @@ const CompletDetails = (props) => {
               </View>
             </View>
           </View>
-          {props.route.params.datapasscustomer &&
+          {props.route.params.datapass &&
             <View style={[styles.mainView, styles.mainCustomerDetails]}>
               <Text style={styles.textBookingDetails}>
                 {String.MyBookingTab.customer_detail}

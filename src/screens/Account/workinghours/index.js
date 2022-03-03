@@ -49,7 +49,7 @@ const WorkingHours = (props) => {
         search={false}
         notification={false}
         searchClick={false}
-        onPress={() => props.navigation.navigate('MyAccount')}
+        onPress={() => props.navigation.goBack()}
         headertext={String.account.workinghr}
       />
       <View style={{justifyContent: 'center'}}>

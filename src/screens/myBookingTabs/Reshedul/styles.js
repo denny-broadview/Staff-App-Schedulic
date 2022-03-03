@@ -349,11 +349,13 @@ export default StyleSheet.create({
     top: Platform.OS === 'ios' ? hp('1%') : hp('2%'),
   },
   centeredView: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
   },
   modalView: {
+    justifyContent: 'center',
+    alignSelf: 'center',
     height: hp('65%'),
     width: wp('95%'),
     backgroundColor: 'white',
@@ -367,21 +369,39 @@ export default StyleSheet.create({
     },
     elevation: 3,
   },
+  modalViewTomer: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: hp('60%'),
+    width: wp('95%'),
+    backgroundColor: 'white',
+    borderRadius: Matrics.Scale(10),
+    paddingHorizontal: wp('3%'),
+    shadowColor: Color.ligthGray,
+    marginTop: hp('20%'),
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    elevation: 3,
+  },
   closeButton: {
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
     color: Color.white,
-    position: 'absolute',
+    // marginTop:20,
+    // position: 'absolute',
     fontSize: 16,
   },
   textseledat_tim:{
     flexDirection: 'row', 
-    width: wp('45%')
+    // width: wp('45%')
   },
   textSelectedTextDia: {
+    marginLeft:wp('4%'),
     color: Color.darkGray,
     fontSize: 20,
-    width: wp('85%'),
+    // width: wp('85%'),
   },
   textService: {
     color: Color.ligthGray,
@@ -392,32 +412,40 @@ export default StyleSheet.create({
     justifyContent: 'center',
     color: Color.ligthGray,
     padding: 10,
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: '900',
   },
   textDesDialog: {
-    marginTop: hp('1%'),
     color: Color.ligthGray,
     fontSize: 16,
+  },
+  title: {
+    marginVertical: hp('2%'),
+    marginHorizontal: hp('2%'),
+    color: Color.ligthGray,
+    fontSize: 25,
+    color:Color.bleck
   },
   servicenametext: {
     justifyContent: 'flex-end',
     alignSelf: 'flex-end',
     color: Color.darkGray,
     position: 'absolute',
-    fontSize: 16,
+    fontSize: 20,
   },
   priseView: {
     flexDirection: 'row',
-    width: wp('90%'),
-    marginTop:hp('1%')
+    // width: wp('90%'),
+    justifyContent: 'space-between',
+    marginTop:hp('6%'),
+    paddingHorizontal:wp('1%'),
+    marginHorizontal:wp('4%'),
    
   },
   topTitle: {
-    marginTop: hp('5%'),
-    marginLeft: wp('3%'),
+    marginBottom: hp('1%'),
     color: Color.bleck,
-    fontSize: 16,
+    fontSize: 18,
   },
   menuView: {
     flexDirection: 'row',
@@ -425,21 +453,22 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderRadius: Matrics.Scale(5),
     borderColor: Color.ligthGray,
-    marginLeft: wp('4%'),
+    // marginLeft: wp('4%'),
+    alignSelf: 'center',
+   
   },
   timeDateIcon: {
     justifyContent: 'center',
-
     color: Color.ligthGray,
     padding: 5,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '900',
   },
   textDate: {
     color: Color.darkGray,
     justifyContent: 'center',
-    alignItems:'center',
-    fontSize: 14,
+    fontSize: 16,
+    padding: 5,
   },
   inputBordeNote: {
   
@@ -447,10 +476,11 @@ export default StyleSheet.create({
     borderColor: Color.ligthGray,
     borderRadius: Matrics.Scale(5),
     marginTop:hp('2%'),
-    width: wp('85%'),
+    // width: wp('85%'),
     height: Platform.OS == 'ios'? hp('6%') : hp('20%'),
-    justifyContent:'center',
-    alignSelf:'center'
+    // justifyContent:'center',
+    // alignSelf:'center',
+    marginHorizontal:hp('1%'),
 },
 textCodeAddress:{
     
@@ -490,10 +520,11 @@ textStyle: {
 }, 
  textdateshow:{
   color:Color.bleck,
-  width:wp('30%'),
-  fontSize:16,
+  // width:wp('30%'),
+  fontSize:20,
   justifyContent:'center',
-  alignSelf:'center'
+  alignSelf:'center',
+  fontWeight:'bold'
 },
 listManu:{
   justifyContent:'center',
@@ -518,9 +549,30 @@ textListData:{
     padding:hp('1%'),
     justifyContent:'flex-end',
     alignSelf:'flex-end',
-    marginTop:hp('1%'),
-    marginEnd:wp('2%'),
+    // marginTop:hp('1%'),
+    // marginEnd:wp('2%'),
+    marginVertical:wp('4%'),
    
     borderRadius: Matrics.Scale(40)
   },
+  timeList:{
+    flex:1,
+    // height: hp('38%'),
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  serviceView:{
+    marginTop:hp('2%'),
+    paddingHorizontal:wp('1%'),
+    marginHorizontal:wp('4%'),
+    flexDirection: 'row',
+    justifyContent:'space-between',
+    padding:10
+  },
+  noteView:{
+    marginTop:hp('2%'),
+    paddingHorizontal:wp('1%'),
+    marginHorizontal:wp('2%'),
+    padding:10
+  }
 });

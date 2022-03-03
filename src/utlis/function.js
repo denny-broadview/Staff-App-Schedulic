@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { Dimensions } from 'react-native';
 
 // Grab the window object from that native screen size.
@@ -19,5 +20,10 @@ const baselineHeight = screenHeight < 750 ? 680 : 800;
 
 // Scales the item based on the screen height and baselineHeight
 export const scale = value => Math.floor((screenHeight / baselineHeight) * value);
-
+export const isRecheduleTimeIsAvailable = (bookingDatetime, endtime) => {
+  let currentDate = moment();
+  let durationtime = parseInt(endtime);
+  let diffMinut = moment(bookingDatetime).diff(currentDate, 'minutes');
+  return durationtime <= diffMinut;
+}
 export default null;

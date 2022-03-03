@@ -46,7 +46,7 @@ const Category = (props) => {
         search={false}
         notification={false}
         searchClick={false}
-        onPress={() => props.navigation.navigate('MyAccount')}
+        onPress={() => props.navigation.goBack()}
         headertext={String.account.category}
       />
       <View style={{ justifyContent: 'center' }}>

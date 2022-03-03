@@ -325,13 +325,12 @@ export default App = () => {
   // }
   function TopTabs() {
     return (
-
       <TopTab.Navigator
         tabBar={props => <MyBookingMainView {...props} />}
         swipeEnabled={false}>
-        <TopTab.Screen name="NewBookingTab" component={NewBookingTab} />
-        <TopTab.Screen name="OngoingTab" component={OngoingTab} />
-        <TopTab.Screen name="CompletedTab" component={CompletedTab} />
+        <TopTab.Screen name="NewBookingTab" options={{ title: 'New Bookings' }} component={NewBookingTab} />
+        <TopTab.Screen name="OngoingTab" options={{ title: 'Upcoming' }} component={OngoingTab} />
+        <TopTab.Screen name="CompletedTab" options={{ title: 'Completed' }} component={CompletedTab} />
       </TopTab.Navigator>
 
     );

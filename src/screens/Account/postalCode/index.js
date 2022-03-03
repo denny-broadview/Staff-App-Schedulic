@@ -49,7 +49,7 @@ const PostalCode = (props) => {
         search={false}
         notification={false}
         searchClick={false}
-        onPress={() => props.navigation.navigate('MyAccount')}
+        onPress={() => props.navigation.goBack()}
         headertext={String.account.postlCode}
       />
       <View style={{justifyContent: 'center'}}>

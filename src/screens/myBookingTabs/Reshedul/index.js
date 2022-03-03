@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,17 +10,16 @@ import {
   FlatList,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
+import { String } from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
-import IconCall from 'react-native-vector-icons/Ionicons';
 import TimeIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
 import CalendarPicker from 'react-native-calendar-picker';
-import {useSelector} from 'react-redux';
-import {Matrics, Color} from '../../../utlis';
-import {Auth, Constants} from '@global';
-import {MySpinner} from '../../../component/MySpinner';
+import { useSelector } from 'react-redux';
+import { Matrics, Color } from '../../../utlis';
+import { Auth, Constants } from '@global';
+import { MySpinner } from '../../../component/MySpinner';
 const Reshedul = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [modalVisible, setModalVisible] = useState(false);
@@ -58,16 +57,14 @@ const Reshedul = (props) => {
   useEffect(() => {
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
-      console.log('item ongoing  re-----------', props.route.params.datapass);
     }
-
     getHoliday();
     offdays(offdayindex);
     dates = new Date().getDate(); //Current Date
     month = new Date().getMonth() + 1; //Current Month
     year = new Date().getFullYear(); //Current Year
-    var date = moment().utcOffset('+05:30').format('DD-MM-YYYY');
     setCurTime(dates + '/' + month + '/' + year);
+
   }, []);
 
   const _startFinal = (date) => {
@@ -88,7 +85,6 @@ const Reshedul = (props) => {
     setfdate(firstDate);
     setFinalDate(firstDate);
     setDateShow(setectDay + ',' + selectstartmonth + '' + selectstartdate);
-    console.log('firstdate~~~~~~~~', firstDate);
   };
 
   function _onDateChange(date) {
@@ -129,27 +125,33 @@ const Reshedul = (props) => {
     setHours(rhours);
     return num + ' minutes = ' + rhours + ' hour(s) and ';
   }
-  
+
   // api call holiday and Offday
   function getHoliday() {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('holiday parm----', myForm);
     Auth.PostServiceAuth(myForm, Constants.ApiAction.listHoliday, (res) => {
+      setLoading(false);
       if (res[1].data == true) {
-        setLoading(false);
-        console.log('holiday api call--------', res);
+        let resObj = res[1].response;
+        console.log('resObj ', resObj);
         timeConvert(maxBookingRes);
-
-        setHolidayData(res[1].response.holidays);
-        setOffdata(res[1].response.offday[0]);
-
-        setOffDayIndex(res[1].response.offday[0]);
-        offdays(res[1].response.offday[0]);
-        offdays(offdayindex);
+        if (resObj.holidays.length > 0) {
+          setHolidayData(resObj.holidays);
+        } else {
+          setHolidayData([]);
+        }
+        if (resObj.offday.length > 0) {
+          setOffdata(resObj.offday[0]);
+          setOffDayIndex(resObj.offday[0]);
+          offdays(resObj.offday[0]);
+        } else {
+          setOffdata([]);
+          setOffDayIndex(1);
+          offdays(1);
+        }
       } else {
-        setLoading(false);
         setHolidayData(res.data);
       }
     });
@@ -162,6 +164,7 @@ const Reshedul = (props) => {
       setModeltimeVisible(true);
       setcalenderClick(true);
       getTimeList();
+      console.log('Select tme Clicked');
     }
   }
 
@@ -172,14 +175,11 @@ const Reshedul = (props) => {
     myForm.append('business_id', Constants.businessid);
     myForm.append('selected_date', finaldate);
     myForm.append('api_type', 'app');
-    console.log('time sloat parm------', myForm);
     Auth.PostServiceAuth(myForm, Constants.ApiAction.getListTiming, (res) => {
+      setLoading(false);
       if (res[1].data == true) {
-        console.log('time res----', res);
-        setLoading(false);
         setDataTime(res[1].response);
       } else {
-        setLoading(false);
         setDataTime(res.data);
       }
     });
@@ -194,16 +194,15 @@ const Reshedul = (props) => {
     myForm.append('book_date', sDate);
     myForm.append('book_time', sTime);
     myForm.append('book_notes', note);
-    console.log(' parm reshedul--------', myForm);
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
       Constants.ApiAction.resedule,
       (res) => {
-        console.log(' Reshedu--------', res);
+        setLoading(false);
         if (res[1].data == true) {
-          setLoading(false);
+
           props.navigation.navigate('NewBookingTab');
           setselectTime('');
           setStartDate('');
@@ -214,7 +213,6 @@ const Reshedul = (props) => {
           setStaffShow(false);
           // setData(res[1].response);
         } else {
-          setLoading(false);
           ToastMessage();
         }
       },
@@ -227,8 +225,8 @@ const Reshedul = (props) => {
   function noItemDisplay() {
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>No data found</Text>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>No data found</Text>
       </View>
     );
   }
@@ -244,13 +242,27 @@ const Reshedul = (props) => {
         headertext={String.MyBookingTab.reschedule}
         onPress={() => props.navigation.goBack()}
       />
-      <ScrollView style={{flex: 1}}>
-        <View style={styles.mainView}>
-          <MySpinner size="large" visible={loagind} />
-          <Text style={styles.textDesDialog}>
-            Work can&apos;t be completed due to some{'\n'}resone
+      <MySpinner size="large" visible={loagind} />
+      <ScrollView >
+        <View style={{
+          justifyContent: 'center', margin: 10, shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          elevation: 3,
+          backgroundColor:'white',
+          borderRadius:10
+        }}>
+          <Text style={styles.title}>
+            Reschedule
           </Text>
-          <View style={{flexDirection: 'row', marginTop: 10}}>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={styles.textDesDialog}>
+              Work can&apos;t be completed due to some{'\n'}resone
+            </Text>
+          </View>
+
+          <View style={styles.serviceView}>
             <View>
               <Text style={styles.textService}>
                 {String.MyBookingTab.services}
@@ -262,7 +274,7 @@ const Reshedul = (props) => {
               </Text>
             </View>
           </View>
-          <View style={styles.priseView}>
+          {/* <View style={styles.priseView}>
             <View style={styles.textseledat_tim}>
               <Text style={styles.topTitle}>
                 {String.MyBookingTab.select_date}
@@ -273,13 +285,16 @@ const Reshedul = (props) => {
                 {String.MyBookingTab.select_time}
               </Text>
             </View>
-          </View>
+          </View> */}
           <View style={styles.priseView}>
             <View>
+              <Text style={styles.topTitle}>
+                {String.MyBookingTab.select_date}
+              </Text>
               <TouchableOpacity
                 style={styles.menuView}
                 onPress={() => {
-                  setModalVisible(true), setcalenderClick(true),getHoliday();
+                  setModalVisible(true), setcalenderClick(true), getHoliday();
                   offdays(offdayindex);
                 }}>
                 <Icon name="calendar" style={styles.timeDateIcon} />
@@ -300,8 +315,10 @@ const Reshedul = (props) => {
                 )}
               </TouchableOpacity>
             </View>
-
-            <View>
+            <View >
+              <Text style={styles.topTitle}>
+                {String.MyBookingTab.select_time}
+              </Text>
               <TouchableOpacity
                 style={styles.menuView}
                 onPress={() => timeListClick()}>
@@ -318,6 +335,7 @@ const Reshedul = (props) => {
                 )}
               </TouchableOpacity>
             </View>
+
           </View>
           {/* time dialog */}
           <View style={styles.centeredView}>
@@ -326,9 +344,9 @@ const Reshedul = (props) => {
               transparent={true}
               visible={modalTimeVisible}>
               <View style={styles.centeredView}>
-                <View style={styles.modalView}>
+                <View style={styles.modalViewTomer}>
                   <TouchableHighlight
-                    style={{...styles.closeButton}}
+                    style={{ ...styles.closeButton }}
                     onPress={() => {
                       setModeltimeVisible(!modalTimeVisible);
                     }}>
@@ -340,13 +358,13 @@ const Reshedul = (props) => {
                     </Text>
                   </View>
                   <Text style={styles.textdateshow}>{dateshow}</Text>
-                  <View style={styles.fltList}>
+                  <View style={styles.timeList}>
                     <FlatList
                       //keyExtractor={(item) => item.id.toString()}
                       ListEmptyComponent={noItemDisplay}
                       data={datatime}
                       numColumns={3}
-                      renderItem={({item, index}) => (
+                      renderItem={({ item, index }) => (
                         <TouchableOpacity
                           style={[
                             styles.listManu,
@@ -369,8 +387,9 @@ const Reshedul = (props) => {
                             {item.value}
                           </Text>
                         </TouchableOpacity>
-                      )}></FlatList>
+                      )} />
                   </View>
+
                   <TouchableHighlight
                     style={{
                       ...styles.confirmButton,
@@ -397,7 +416,7 @@ const Reshedul = (props) => {
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <TouchableHighlight
-                    style={{...styles.closeButton}}
+                    style={{ ...styles.closeButton }}
                     onPress={() => {
                       setModalVisible(!modalVisible);
                     }}>
@@ -441,32 +460,38 @@ const Reshedul = (props) => {
               </View>
             </Modal>
           </View>
-          <Text style={styles.addnoteText}>{String.MyBookingTab.addnote}</Text>
-          <View style={styles.inputBordeNote}>
-            <TextInput
-              style={styles.textCodeAddress}
-              onChangeText={(text) => {
-                setNote(text);
-              }}
-              placeholder={String.MyBookingTab.addnote}
-              numberOfLines={5}
-              multiline={true}
-              keyboardType="default"
-            />
+          <View style={styles.noteView}>
+            <View>
+              <Text style={styles.addnoteText}>{String.MyBookingTab.addnote}</Text>
+              <View style={styles.inputBordeNote}>
+                <TextInput
+                  style={styles.textCodeAddress}
+                  onChangeText={(text) => {
+                    setNote(text);
+                  }}
+                  placeholder={String.MyBookingTab.addnote}
+                  numberOfLines={5}
+                  multiline={true}
+                  keyboardType="default"
+                />
+              </View>
+              <TouchableHighlight
+                style={styles.nextButton}
+                onPress={() => {
+                  selectTime == '' && finaldate == '' && note == ''
+                    ? Auth.ToastMessage(
+                      String.loginmain.error_message_allFieldsManatory,
+                    )
+                    : reshedul(finaldate, selectTime);
+                }}>
+                <Text style={styles.textBtnStyle}>
+                  {String.MyBookingTab.reschedule}
+                </Text>
+              </TouchableHighlight>
+            </View>
+
           </View>
-          <TouchableHighlight
-            style={styles.nextButton}
-            onPress={() => {
-              selectTime == '' && finaldate == '' && note == ''
-                ? Auth.ToastMessage(
-                    String.loginmain.error_message_allFieldsManatory,
-                  )
-                : reshedul(finaldate, selectTime);
-            }}>
-            <Text style={styles.textBtnStyle}>
-              {String.MyBookingTab.reschedule}
-            </Text>
-          </TouchableHighlight>
+
         </View>
       </ScrollView>
     </View>

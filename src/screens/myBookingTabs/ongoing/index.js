@@ -20,26 +20,21 @@ import { setStaffLocation } from '../../../store/actions';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 import database from '@react-native-firebase/database';
+import { isRecheduleTimeIsAvailable } from '../../../utlis/function';
 const OngoingTab = (props) => {
     const userInfo = useSelector((state) => state.user.user);
     const [data, setData] = useState([]);
     const [refreshing, setRefreshing] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [location, setLocation] = useState({})
-    const [watchId, setWatchId] = useState(false)
     const [orderId, setOrderId] = useState('')
     const [reference, setReference] = useState('')
     const onGoingFromRedux = useSelector(
         (state) => state.BookingService.onGoingData,
     );
-    const staffLocation = useSelector(
-        (state) => state.BookingService.staffLocation,
+    const { min_advance_booking_time } = useSelector(
+        (state) => state.setting.setting,
     );
     const dispatch = useDispatch();
-    // console.log('order id on ongoing open --- ', data);
-    //time
-    const [curTime, setCurTime] = useState('');
-    var timeconvert;
     // search
     const [masterDataSource, setMasterDataSource] = useState([]);
     const searchKeyFromProbs = useSelector(
@@ -52,60 +47,12 @@ const OngoingTab = (props) => {
         (state) => state.setting.setting.currency_symbol_position,
     );
 
-    const currencyFrm = useSelector(
-        (state) => state.setting.setting.currency_format,
-    );
-
     const settingreshedultime = useSelector(
         (state) => state.setting.setting.min_reseduling_time,
     );
-    const currenttime = moment()
-        .utcOffset('+05:30')
-        .format('YYYY-MM-DD HH:mm:ss');
 
     const currentdate = moment().utcOffset('+05:30').format('YYYY-MM-DD');
     const crtime = moment().utcOffset('+05:30').format('HH:mm:ss');
-
-    useEffect(() => {
-        console.log('onGoingFromRedux --- ', onGoingFromRedux);
-        console.log('staffLocation --- ', staffLocation);
-    }, [])
-    useEffect(() => {
-
-        // if (location?.coords?.latitude != undefined && location?.coords?.longitude != undefined) {
-
-        //     let currentData = {
-        //         lat: 21.1515, 
-        //         lng: 72.8543,
-        //         // lat: location.coords.latitude,
-        //         // lng: location.coords.longitude,
-        //         // sId: userInfo.id,
-        //         orderId: orderId,
-        //     }
-        //     let key = props.route.params.datapass.id
-        //     var postListRef = firebaseApp.database()
-        //     //  database()
-        //             .ref('trackOrder/currentLocation/')
-        //             // .orderByChild("orderId")
-        //             // .equalTo(orderId)
-        //             postListRef.child(key).set(
-        //                 { currentData }
-        //               )
-        //             //   .set('value')
-        //             .then(function (snapshot) {
-        //         console.log('------------location-------------', JSON.stringify(snapshot.val()));
-        //         if (snapshot.val() !== null) {
-        //             console.log("orderId exists")
-        //             // handle error
-        //             updateLocation(currentData);
-        //         } else {
-        //             console.log("orderId do not exists")
-        //             // push record to Firebase
-        //             addLocation(currentData);
-        //         }
-        //     });
-        // }
-    }, [location])
 
     // const addLocation = data => {
     //     let refData = firebaseApp.database()
@@ -206,7 +153,6 @@ const OngoingTab = (props) => {
     }
 
     useEffect(() => {
-        time_convert();
         getOnGoing();
     }, []);
     const onRefresh = () => {
@@ -214,10 +160,6 @@ const OngoingTab = (props) => {
         getOnGoing();
     };
     useEffect(() => {
-        console.log(
-            'Data from redux searchKeyFromProbs ~~~~~~',
-            searchKeyFromProbs,
-        );
         searchFilterFunction(searchKeyFromProbs);
     }, [searchKeyFromProbs]);
     useEffect(() => {
@@ -237,15 +179,12 @@ const OngoingTab = (props) => {
                 return itemData.indexOf(textData) > -1;
             });
             setData(newData);
-            // setSearchTerm(text);
         } else {
             setData(masterDataSource);
-            // setSearchTerm(text); 
         }
     }
 
     function noItemDisplay() {
-        // setLoading(false);
         return (
             <View style={
                 { flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }} >
@@ -256,12 +195,6 @@ const OngoingTab = (props) => {
         );
     }
 
-    function covertDateTime(val1, val2) {
-        var str = val1 + ' ' + val2;
-        const bDate = moment(str, 'YYYY-MM-DD HH:mm:ss');
-        return bDate;
-    }
-
     function bookingtimecurrenttime(val1, val2) {
         //  var str = val1 + ' ' + val2;
         var startTime = moment(val2, "HH:mm:ss");
@@ -270,27 +203,7 @@ const OngoingTab = (props) => {
         // duration in hours
         var hours = parseInt(duration.asHours());
         var minutes = parseInt(duration.asMinutes()) % 60;
-
-        console.log('current time~~~~~~~~~~~~~~', val1);
-        console.log('booking time~~~~~~~~~~~~~~', val2);
-        //  console.log('difference ~~~~~~~~~~~', difference);
-        console.log('diff========', (minutes + (hours * 60)));
-
         return (minutes + (hours * 60));
-    }
-
-    function time_convert() {
-        const num = settingreshedultime;
-
-        var hours = Math.floor(num / 60);
-        var minutes = num % 60;
-        var seconds = Math.floor(num * 60 - hours * 3600 - minutes * 60);
-
-        timeconvert = hours + ':' + minutes + ':' + seconds;
-        const bDate1 = moment(timeconvert).format('HH:mm:ss');
-        console.log('timeconvert-----------', timeconvert);
-        console.log('second-----------', seconds);
-        return hours + ':' + minutes;
     }
     // Api calling for onGoing
     function getOnGoing() {
@@ -298,19 +211,15 @@ const OngoingTab = (props) => {
         setRefreshing(false);
         let myForm = new FormData();
         myForm.append('business_id', Constants.businessid);
-        console.log('parm in tabonGoing~~~~~~~~~', myForm);
         Auth.PostCustomerTokenAuth(
             userInfo.token,
             userInfo.user_id,
             myForm,
             Constants.ApiAction.staffOnGoing,
             (res) => {
-                // console.log(' ongoing data Res--------', res);
-                // console.log(' ongoing data arshad--------', res[1].response);
                 if (res[1].data === true) {
 
                     let tempdata = JSON.stringify(res[1].response);
-                    // console.log('ongoing else -------------', tempdata);
                     setLoading(false);
                     setRefreshing(false);
                     setData(JSON.parse(tempdata));
@@ -366,71 +275,6 @@ const OngoingTab = (props) => {
             },
         );
     }
-    // const getStaffLatLng = () => {
-    //     if (Platform.OS === 'android' && foregroundService) {
-    //         startForegroundService();
-    //     }
-    //     if (!updatesEnabled && watchId === null) {
-
-    //         let watchIdTemp =
-    //             Geolocation.watchPosition(
-    //                 (position) => {
-    //                     setLocation(position)
-    //                 },
-    //                 (error) => {
-    //                     console.log(error);
-    //                 }, {
-    //                 accuracy: {
-    //                     android: 'balanced',
-    //                     ios: 'hundredMeters',
-    //                 },
-    //                 enableHighAccuracy: true,
-    //                 distanceFilter: 0,
-    //                 interval: 5000,
-    //                 fastestInterval: 2000,
-    //                 forceRequestLocation: true,
-    //                 showLocationDialog: true,
-    //                 useSignificantChanges: false,
-    //             },
-    //             );
-    //         setWatchId(watchIdTemp)
-    //     }
-    // };
-
-    // const startForegroundService = () => {
-    //     if (Platform.Version >= 26) {
-    //         VIForegroundService.createNotificationChannel({
-    //             id: 'locationChannel',
-    //             name: 'Location Tracking Channel',
-    //             description: 'Tracks location of user',
-    //             enableVibration: false,
-    //         });
-    //     }
-
-    //     return VIForegroundService.startService({
-    //         channelId: 'locationChannel',
-    //         id: 420,
-    //         title: "Schedulics",
-    //         text: 'Tracking location updates lat --> ' + staffLocation.lat + " Lng --> " + staffLocation.lng,
-    //         icon: 'ic_launcher',
-    //     });
-    // };
-
-    // const removeLocationUpdates = () => {
-
-    //     if (watchId !== null) {
-    //         stopForegroundService();
-    //         Geolocation.clearWatch(watchId);
-    //         setWatchId(null);
-    //         setUpdatesEnabled(false)
-    //     }
-    // };
-
-    // const stopForegroundService = () => {
-    //     if (foregroundService) {
-    //         VIForegroundService.stopService().catch((err) => err);
-    //     }
-    // };
 
     const gotoMap = async (item) => {
         try {
@@ -606,7 +450,7 @@ const OngoingTab = (props) => {
                                             : null}
                                         {item.order_status == 'AC' &&
                                             item.booking_date == currentdate &&
-                                            bookingtimecurrenttime(crtime, item.booking_time) < 60 ?
+                                            bookingtimecurrenttime(crtime, item.booking_time) < parseInt(min_advance_booking_time) ?
                                             <TouchableOpacity style={styles.btnViewOntheWay}
                                                 onPress={
                                                     () => {
@@ -666,7 +510,8 @@ const OngoingTab = (props) => {
                                                 <Text style={styles.btnText} > {String.MyBookingTab.details}</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        {covertDateTime(item.booking_date, item.booking_time).diff(currenttime) >= timeconvert ? (
+                                        {(isRecheduleTimeIsAvailable(item.booking_date + ' ' + item.booking_time, settingreshedultime)) ? (
+                                            // {covertDateTime(item.booking_date, item.booking_time).diff(currenttime) >= timeconvert ? (
                                             <View style={styles.btnViewReject} >
                                                 <TouchableOpacity onPress={() =>
                                                     props.navigation.navigate('Reshedul', {
