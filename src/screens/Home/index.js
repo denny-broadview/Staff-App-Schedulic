@@ -40,7 +40,7 @@ const Home = (props) => {
   }, []);
 
   const requestLocationPermission = async () => {
-    
+
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization();
       getOneTimeLocation();
@@ -71,13 +71,13 @@ const Home = (props) => {
     Geolocation.getCurrentPosition(
       (position) => {
         // console.log('****Startup coordinates*********',position);
-        const currentLongitude = 
+        const currentLongitude =
           JSON.stringify(position.coords.longitude);
-        const currentLatitude = 
+        const currentLatitude =
           JSON.stringify(position.coords.latitude);
-          longitude=currentLongitude;
-          latitude=currentLatitude;
-          sendLocationCoordinates()
+        longitude = currentLongitude;
+        latitude = currentLatitude;
+        sendLocationCoordinates()
       },
       (error) => {
         alert(error.message);
@@ -96,11 +96,11 @@ const Home = (props) => {
         // console.log('Location coordinates after change ***********',position);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
-        const currentLatitude = 
+        const currentLatitude =
           JSON.stringify(position.coords.latitude);
-          longitude=currentLongitude;
-          latitude=currentLatitude;
-          sendLocationCoordinates()
+        longitude = currentLongitude;
+        latitude = currentLatitude;
+        sendLocationCoordinates()
       },
       (error) => {
         alert(error.message);
@@ -112,26 +112,26 @@ const Home = (props) => {
     );
   };
 
-  const sendLocationCoordinates = ()=>{
+  const sendLocationCoordinates = () => {
     let dd = {}
     dd['latitude'] = latitude
     dd['longitude'] = longitude
     console.log('Current location from home', dd)
-      dispatch(setStaffLocation(dd))
+    dispatch(setStaffLocation(dd))
   }
 
   useEffect(() => {
-    console.log('In Userinfo by Arshad ',userInfo);
+    console.log('In Userinfo by Arshad ', userInfo);
     // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
   }, [userInfo])
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
-    getBooking();
-    getOnGoing();
-    getComplteTask();
-    sendLocationCoordinates()
-   // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
+      getBooking();
+      getOnGoing();
+      getComplteTask();
+      sendLocationCoordinates()
+      // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
     });
     return unsubscribe;
   }, [props.navigation]);
@@ -192,7 +192,7 @@ const Home = (props) => {
       }
     });
   }
- 
+
   const fnSearchEnable = () => {
     setEnableSearch(!enable);
     // console.log(enableSearch);
@@ -207,7 +207,7 @@ const Home = (props) => {
     setSearchTerm('');
     setEnableSearch(false);
   };
-  
+
   // Task#1: Create onTabNavigate method and call on onPress
   const onTabNavigate = async (screenname, tabIndex) => {
     await AsyncStorage.setItem('goToTab', tabIndex);  // Set value in AsyncStorage
@@ -253,7 +253,7 @@ const Home = (props) => {
             </View>
           </View>
         </View>
-        <View style={styles.bottomMainprofile}> 
+        <View style={styles.bottomMainprofile}>
           <ImageBackground
             imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
             source={require('../../assets/images/Homebg.png')}
@@ -267,7 +267,7 @@ const Home = (props) => {
               <View style={{ marginTop: 20, marginBottom: 60 }}>
                 <View style={styles.commonProfile}>
                   <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('NewBookingTab', '0')} >
-                  {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
+                    {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
                     <View>
                       <Image
                         source={require('../../assets/images/NewBookings.png')}
@@ -290,7 +290,7 @@ const Home = (props) => {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('OngoingTab', '1')} >
+                  <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('OngoingTab', '1')} >
                     <View>
                       <Image
                         source={require('../../assets/images/Ongoing.png')}

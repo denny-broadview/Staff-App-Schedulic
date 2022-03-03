@@ -1,17 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import HeaderView from '../../component/headerTab';
-import {String} from '../../utlis/String';
-import {Matrics, Color} from '../../utlis';
+import { String } from '../../utlis/String';
+import { Matrics, Color } from '../../utlis';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {Theme, Auth, Constants} from '@global';
-import {MySpinner} from '../../component/MySpinner';
-import {useSelector} from 'react-redux';
+import { Theme, Auth, Constants } from '@global';
+import { MySpinner } from '../../component/MySpinner';
+import { useSelector } from 'react-redux';
 const Notification = (props) => {
   const userInfo = useSelector((state) => state.user.user);
 
   const [data, setData] = useState([]);
+  console.log("data", data)
   const [loagind, setLoading] = useState(false);
   useEffect(() => {
     getNotification();
@@ -44,8 +45,8 @@ const Notification = (props) => {
   function noItemDisplay() {
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>
           {String.app.datanotfound}
         </Text>
       </View>
@@ -62,13 +63,13 @@ const Notification = (props) => {
         onPress={() => props.navigation.navigate('Home')}
         headertext={String.account.notification}
       />
-      <View style={{justifyContent: 'center'}}>
+      <View style={{ justifyContent: 'center' }}>
         <MySpinner size="large" visible={loagind} />
         <FlatList
           style={styles.list}
           ListEmptyComponent={noItemDisplay}
           data={data}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             //<TouchableOpacity onPress={() => props.navigation.replace('BookingServiceDetails', {htitle:item.title.find((i)=>i.title)})}>
 
             <TouchableOpacity style={styles.menuView}>
@@ -77,7 +78,6 @@ const Notification = (props) => {
               ) : (
                 <Text style={styles.menuname}>null</Text>
               )}
-
               <Icon name="right" style={styles.menu} />
             </TouchableOpacity>
           )}></FlatList>

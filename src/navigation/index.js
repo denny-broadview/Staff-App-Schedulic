@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
@@ -10,11 +10,11 @@ import {
   TouchableOpacity,
   ImageBackground
 } from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import {String} from '../utlis/String';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { String } from '../utlis/String';
 import NetInfo from '@react-native-community/netinfo';
 import BottomBar from './BottomBar';
 import Spalsh from '../screens/spalsh';
@@ -43,14 +43,14 @@ import CompletDetails from '../screens/myBookingTabs/completedDetails';
 import Reshedul from '../screens/myBookingTabs/Reshedul';
 import Invoice from '../screens/myBookingTabs/invoice';
 import Notification from '../screens/Notification';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Auth, Constants } from '@global'
-import { setSetting,setTax,setBusiness} from '../store/actions'
+import { setSetting, setTax, setBusiness } from '../store/actions'
 import Icon from 'react-native-vector-icons/Feather';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
 import AsyncStorage from '@react-native-async-storage/async-storage';  // Task#1: import AsyncStorage
 
-const {width} = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const Stack = createStackNavigator();
 YellowBox.ignoreWarnings(['']);
 const Tab = createBottomTabNavigator();
@@ -69,18 +69,18 @@ export default App = () => {
       }
     });
   });
-  useEffect(()=>{
+  useEffect(() => {
     allSettingApi();
     getAllTax();
     getBusiness();
-  },[])
+  }, [])
 
   //Get All setting
   function allSettingApi() {
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm--',myForm)
-    Auth.PostServiceAuth(myForm,Constants.ApiAction.timeSetting,
+    console.log('parm--', myForm)
+    Auth.PostServiceAuth(myForm, Constants.ApiAction.timeSetting,
       (res) => {
         if (res[1].data == true) {
           // console.log('settingdata------',res[1].response)
@@ -91,10 +91,10 @@ export default App = () => {
       },
     );
   }
-  const onSetSetting = data =>{
+  const onSetSetting = data => {
     dispatch(setSetting(data))
   }
-  const getAllTax=()=>{
+  const getAllTax = () => {
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
 
@@ -105,26 +105,26 @@ export default App = () => {
         if (res[1].data == true) {
           res[1].response
           // console.log(res[1].response)
-          onSetTax( res[1].response)
-        } 
+          onSetTax(res[1].response)
+        }
       },
     );
   }
-  const onSetTax = data =>{
+  const onSetTax = data => {
     dispatch(setTax(data))
   }
 
-  const onSetBusiness = data =>{
+  const onSetBusiness = data => {
     dispatch(setBusiness(data))
   }
-   // get business api call use of paymant url
-   function getBusiness() {
-    
+  // get business api call use of paymant url
+  function getBusiness() {
+
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
     Auth.PostServiceAuth(myForm, Constants.ApiAction.getBusiness, (res) => {
       if (res[1].data == true) {
-        console.log('business------',res[1].response)
+        console.log('business------', res[1].response)
         onSetBusiness(res[1].response);
       } else {
         Auth.ToastMessage(res[1].data);
@@ -133,7 +133,7 @@ export default App = () => {
   }
   const BottomTabs = () => {
     return (
-      <Tab.Navigator tabBar={(props) =>  <AdminOrdersTabBar {...props} />}>
+      <Tab.Navigator tabBar={(props) => <AdminOrdersTabBar {...props} />}>
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="My Bookings" component={BookingStackScreen} listeners={({ navigation, route }) => ({
           blur: () => navigation.setParams({ screen: undefined }),
@@ -141,7 +141,7 @@ export default App = () => {
             await AsyncStorage.setItem('goToTab', '0'); // Task#1: Set value in AsyncStorage
             navigation.navigate('NewBookingTab');
           },
-        })}/>
+        })} />
         <Tab.Screen name="Account" component={MyAccount} />
       </Tab.Navigator>
     );
@@ -149,7 +149,7 @@ export default App = () => {
   const BookingStackScreen = () => {
     return (
       <BookingStack.Navigator>
-        <BookingStack.Screen name="TopTabs" component={TopTabs} options={{ headerShown: false }}  />
+        <BookingStack.Screen name="TopTabs" component={TopTabs} options={{ headerShown: false }} />
         <BookingStack.Screen name="NewBookingDetails" component={NewBookingDetails} options={{ headerShown: false }} />
         {/* <BookingStack.Screen name="OngoingTab" component={TopTabs} options={{ headerShown: false }} /> */}
         <BookingStack.Screen name="onGoingDetails" component={onGoingDetails} options={{ headerShown: false }} />
@@ -161,7 +161,7 @@ export default App = () => {
   function AdminOrdersTabBar({ state, descriptors, navigation }) {
     return (
       // <View style={{}}>
-      <View style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#EFEFEF',borderTopLeftRadius:20,borderTopRightRadius:20,position:'absolute',bottom:0}}>
+      <View style={{ height: hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row', backgroundColor: '#EFEFEF', borderTopLeftRadius: 20, borderTopRightRadius: 20, position: 'absolute', bottom: 0 }}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
@@ -171,29 +171,29 @@ export default App = () => {
                 : options.title !== undefined
                   ? options.title
                   : route.name;
-  
+
             const isFocused = state.index === index;
             let icon = null;
-        
+
             const onPress = () => {
               const event = navigation.emit({
                 type: 'tabPress',
                 target: route.key,
               });
-  
+
               if (!isFocused && !event.defaultPrevented) {
                 navigation.navigate(route.name);
               }
             };
-  
+
             const onLongPress = () => {
               navigation.emit({
                 type: 'tabLongPress',
                 target: route.key,
               });
             };
-  
-            
+
+
             return (
               <TouchableOpacity
                 key={index.toString()}
@@ -210,23 +210,23 @@ export default App = () => {
                 }}
               >
                 {index === 0 ?
-                <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#00A89B',
-                  size: 20,
-                }]}><Icon name="home" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
-              :null}
-              {index === 1 ?
-                <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#00A89B',
-                  size: 20,
-                }]}><Icon name="calendar" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
-              :null}
-              {index === 2 ?
-                <Text style={[{
-                  color: !isFocused ? '#9C9C9C' : '#00A89B',
-                  size: 20,
-                }]}><Icon name="user" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
-              :null}
+                  <Text style={[{
+                    color: !isFocused ? '#9C9C9C' : '#00A89B',
+                    size: 20,
+                  }]}><Icon name="home" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
+                  : null}
+                {index === 1 ?
+                  <Text style={[{
+                    color: !isFocused ? '#9C9C9C' : '#00A89B',
+                    size: 20,
+                  }]}><Icon name="calendar" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
+                  : null}
+                {index === 2 ?
+                  <Text style={[{
+                    color: !isFocused ? '#9C9C9C' : '#00A89B',
+                    size: 20,
+                  }]}><Icon name="user" fill={isFocused ? '#00A89B' : '#A3A3A3'} size={20} /></Text>
+                  : null}
                 <Text style={[{
                   color: !isFocused ? '#9C9C9C' : '#00A89B',
                   size: 12,
@@ -237,8 +237,8 @@ export default App = () => {
             );
           })}
         </View>
-        </View>
-        // </View>
+      </View>
+      // </View>
     );
   }
 
@@ -254,29 +254,29 @@ export default App = () => {
   //               : options.title !== undefined
   //                 ? options.title
   //                 : route.name;
-  
+
   //           const isFocused = state.index === index;
   //           let icon = null;
-        
+
   //           const onPress = () => {
   //             const event = navigation.emit({
   //               type: 'tabPress',
   //               target: route.key,
   //             });
-  
+
   //             if (!isFocused && !event.defaultPrevented) {
   //               navigation.navigate(route.name);
   //             }
   //           };
-  
+
   //           const onLongPress = () => {
   //             navigation.emit({
   //               type: 'tabLongPress',
   //               target: route.key,
   //             });
   //           };
-  
-            
+
+
   //           return (
   //             <TouchableOpacity
   //               key={index.toString()}
@@ -325,68 +325,68 @@ export default App = () => {
   // }
   function TopTabs() {
     return (
-  
+
       <TopTab.Navigator
         tabBar={props => <MyBookingMainView {...props} />}
         swipeEnabled={false}>
         <TopTab.Screen name="NewBookingTab" component={NewBookingTab} />
-        <TopTab.Screen name="OngoingTab" component={OngoingTab}  />
+        <TopTab.Screen name="OngoingTab" component={OngoingTab} />
         <TopTab.Screen name="CompletedTab" component={CompletedTab} />
       </TopTab.Navigator>
-  
+
     );
   }
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : null}>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
             name="Spalsh"
             component={Spalsh}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
             initialRouteName="Spalsh"
           />
           <Stack.Screen
             name="LoginMain"
             component={LoginMain}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="Home"
             component={BottomTabs}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="Category"
             component={Category}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="PostalCode"
             component={PostalCode}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="WorkingHours"
             component={WorkingHours}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="Breaks"
             component={Breaks}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="TimeOff"
             component={TimeOff}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="AccountDetails"
             component={AccountDetails}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           {/* <Stack.Screen
             name="NewBookingTab"
@@ -406,27 +406,27 @@ export default App = () => {
           <Stack.Screen
             name="Payment"
             component={Payment}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="CashPaymantDetails"
             component={CashPaymantDetails}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="OnlinePaymantDetails"
             component={OnlinePaymantDetails}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="PaymantDone"
             component={PaymantDone}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name="MapScreen"
             component={MapScreen}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
           {/* <Stack.Screen
             name="NewBookingDetails"
@@ -446,11 +446,11 @@ export default App = () => {
           <Stack.Screen
             name="Invoice"
             component={Invoice}
-            options={{headerShown: false}}
+            options={{ headerShown: false }}
           />
-           <Stack.Screen name="MyAccount" component={BottomTabs} options={{headerShown: false}}/>
-           <Stack.Screen  name="Notification" component={Notification} options={{headerShown:false}}/>
-           <Stack.Screen name="Reshedul" component={Reshedul} options={{headerShown: false}}/>
+          <Stack.Screen name="MyAccount" component={BottomTabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Notification" component={Notification} options={{ headerShown: false }} />
+          <Stack.Screen name="Reshedul" component={Reshedul} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
       {isConnected == true ? null : (

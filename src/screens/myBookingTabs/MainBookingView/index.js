@@ -149,7 +149,7 @@ const renderTopBar = ({ navigation, arshad }) => {
         }}
         renderItem={({ item, index }) => {
           return (
-            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPressItem(index, { navigation, data, setdata }, arshad)}>
+            <TouchableOpacity style={{ alignItems: 'center' }} onPress={() => onPressItem(index, { navigation, data, setdata })}>
               <Text style={[styles.txtxname, { color: item.selected ? Color.AppColor : Color.iconAccount }]}>{item.name}</Text>
               {item.selected && <View style={styles.underLine} />}
             </TouchableOpacity>

@@ -16,7 +16,7 @@ import { Color, Matrics } from '../../../utlis';
 import { MySpinner } from '../../../component/MySpinner';
 import { Auth, Constants } from '@global';
 import { useSelector, useDispatch } from 'react-redux';
-import {setStaffLocation } from '../../../store/actions';
+import { setStaffLocation } from '../../../store/actions';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 import database from '@react-native-firebase/database';
@@ -501,11 +501,11 @@ const OngoingTab = (props) => {
                                                 <Text style={styles.textstatus_dis} > Accepted </Text>
                                             </View>
                                             : null}
-                                        {/* {item.order_status != null && item.order_status == 'OW' ? */}
-                                        <View>
-                                            <Text style={styles.textstatus_dis} > On The Way </Text>
-                                        </View>
-                                        {/* : null} */}
+                                        {item.order_status != null && item.order_status == 'OW' ?
+                                            <View>
+                                                <Text style={styles.textstatus_dis} > On The Way </Text>
+                                            </View>
+                                            : null}
                                         {item.order_status != null && item.order_status == 'WS' ?
                                             <View>
                                                 <Text style={styles.textstatus_dis} > Work Started </Text>

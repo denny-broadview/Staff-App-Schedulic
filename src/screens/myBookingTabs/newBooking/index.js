@@ -188,7 +188,6 @@ const NewBookingTab = (props) => {
                       {moment(item.booking_time, 'HH:mm:ss').format('LT')}
                     </Text>
                   </View>
-
                   <View style={styles.statusView}>
                     {item.order_status != null && item.order_status == 'CNF' ? (
                       <View>
@@ -300,16 +299,16 @@ const NewBookingTab = (props) => {
                       {currencySymbolePosition == 'left' ? (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
-                            item.total_cost,
+                            item.subtotal,
                             { code: currency },
-                            // {locale: currencyFrm},
+                            // {locale: currencyFrm}, {/* item.total_cost, */}
                           )}
                         </Text>
                       ) : (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
-                            item.total_cost,
-                            // {locale: currencyFrm},
+                            item.subtotal,
+                            // {locale: currencyFrm},item.total_cost,
                             { code: currency },
                           )}
                         </Text>

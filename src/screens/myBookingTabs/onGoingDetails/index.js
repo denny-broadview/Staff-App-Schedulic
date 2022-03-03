@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,14 @@ import {
   ScrollView
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
+import { String } from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
-import {MySpinner} from '../../../component/MySpinner';
+import { MySpinner } from '../../../component/MySpinner';
 import moment from 'moment';
-import {Auth, Constants} from '@global';
-import {useSelector} from 'react-redux';
+import { Auth, Constants } from '@global';
+import { useSelector } from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 const onGoingDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
@@ -68,7 +68,7 @@ const onGoingDetails = (props) => {
 
     console.log('current time~~~~~~~~~~~~~~', val1);
     console.log('booking time~~~~~~~~~~~~~~', val2);
-   
+
     console.log('diff========', minutes + hours * 60);
 
     return minutes + hours * 60;
@@ -117,8 +117,8 @@ const onGoingDetails = (props) => {
               duration: Snackbar.LENGTH_SHORT
             });
             props.navigation.navigate('OngoingTab');
-        }, 1000);
-          
+          }, 1000);
+
         } else {
           setLoading(false);
         }
@@ -137,8 +137,8 @@ const onGoingDetails = (props) => {
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
       />
-      <ScrollView style={{flex: 1}}>
-        <View style={{justifyContent: 'center', flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ justifyContent: 'center', flex: 1 }}>
           <View style={styles.mainView}>
             <MySpinner size="large" visible={loagind} />
             <View style={styles.topView}>
@@ -153,70 +153,70 @@ const onGoingDetails = (props) => {
               </Text>
               <Text style={styles.textTime_dis}>{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
               {data.order_status != null && data.order_status == 'CNF' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Confirm</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'P' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Pending</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'AC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Accepted</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'OW' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>On The Way</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'WS' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Work Started</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'C' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Canceled</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'RSS' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'RSA' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'RSC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'ITR' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Intrupted</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'ITR' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Intrupted</Text>
-                    </View>
-                  ) : null}
-                   {data.order_status != null && data.order_status == 'CC' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Cancel by Client</Text>
-                    </View>
-                  ) : null}
-                  {data.order_status != null && data.order_status == 'CO' ? (
-                    <View>
-                      <Text style={styles.textstatus_dis}>Completed</Text>
-                    </View>
-                  ) : null}
+                <View>
+                  <Text style={styles.textstatus_dis}>Confirm</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'P' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Pending</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'AC' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Accepted</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'OW' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>On The Way</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'WS' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Work Started</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'C' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Canceled</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'RSS' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'RSA' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'RSC' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'ITR' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Intrupted</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'ITR' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Intrupted</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'CC' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Cancel by Client</Text>
+                </View>
+              ) : null}
+              {data.order_status != null && data.order_status == 'CO' ? (
+                <View>
+                  <Text style={styles.textstatus_dis}>Completed</Text>
+                </View>
+              ) : null}
             </View>
             <View style={styles.service_dis_book}>
               <Text style={styles.textBook_Time_dis}>
@@ -234,7 +234,7 @@ const onGoingDetails = (props) => {
               </View>
             </View>
             <View style={styles.service_btn_mainview}>
-              <View style={{marginLeft: 5}}>
+              <View style={{ marginLeft: 5 }}>
                 <View style={styles.service_dis}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
@@ -243,16 +243,16 @@ const onGoingDetails = (props) => {
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                        {code: currency},
-                       // {locale: currencyFrm},
+                        { code: currency },
+                        // {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                      //  {locale: currencyFrm},
-                        {code: currency},
+                        //  {locale: currencyFrm},
+                        { code: currency },
                       )}
                     </Text>
                   )}
@@ -268,8 +268,8 @@ const onGoingDetails = (props) => {
               </View>
               <View style={styles.service_dis_btn}>
                 {data.order_status == 'OW' &&
-                data.booking_date == currentdate &&
-                bookingtimecurrenttime(crtime, data.booking_time) < 30 ? (
+                  data.booking_date == currentdate &&
+                  bookingtimecurrenttime(crtime, data.booking_time) < 30 ? (
                   <TouchableOpacity
                     style={styles.btnViewWorkstarted}
                     onPress={() => getStatus('WS')}>
@@ -294,21 +294,21 @@ const onGoingDetails = (props) => {
                   </TouchableOpacity>
                 ) : null}
 
-                {data.order_status == 'AC' 
-                // &&
-                // data.booking_date == currentdate &&
-                // bookingtimecurrenttime(crtime, data.booking_time) < 60 
-                ? (
-                  <TouchableOpacity
-                    style={styles.btnViewOntheWay}
-                    onPress={() => getStatus('OW')}>
-                    <Text style={styles.btnText}>
-                      {String.MyBookingTab.ontheway}
-                    </Text>
-                  </TouchableOpacity>
-                 ) : null}
+                {data.order_status == 'AC'
+                  // &&
+                  // data.booking_date == currentdate &&
+                  // bookingtimecurrenttime(crtime, data.booking_time) < 60 
+                  ? (
+                    <TouchableOpacity
+                      style={styles.btnViewOntheWay}
+                      onPress={() => getStatus('OW')}>
+                      <Text style={styles.btnText}>
+                        {String.MyBookingTab.ontheway}
+                      </Text>
+                    </TouchableOpacity>
+                  ) : null}
                 {data.order_status == 'OW' &&
-                data.service.service_sub_type == 'at_home' ? (
+                  data.service.service_sub_type == 'at_home' ? (
                   <TouchableOpacity
                     style={styles.btnViewMap}
                     onPress={() =>
@@ -341,14 +341,14 @@ const onGoingDetails = (props) => {
               </View>
             </View>
           </View>
-          <View style={[styles.mainView,styles.mainCustomerDetails]}>
+          <View style={[styles.mainView, styles.mainCustomerDetails]}>
             <Text style={styles.textBookingDetails}>
               {String.MyBookingTab.customer_detail}
             </Text>
             <View style={styles.imgView}>
               <View style={styles.courseImgView}>
                 <Image
-                  source={{uri: props.route.params.image}}
+                  source={{ uri: props.route.params.image }}
                   style={styles.courseImg}
                 />
               </View>
@@ -374,11 +374,11 @@ const onGoingDetails = (props) => {
               </View>
             ) : null} */}
             <View style={styles.address_View}>
-                <Icon name="enviroment" style={styles.call_icon} />
-                <Text style={styles.textAddress}>{data.customer !=null ? data.customer.address:"Address not defiend"}</Text>
-              </View>
-            {data.status_notes !== null ? 
-            <View style={styles.viewLine} />:null}
+              <Icon name="enviroment" style={styles.call_icon} />
+              <Text style={styles.textAddress}>{data.customer != null ? data.customer.address : "Address not defiend"}</Text>
+            </View>
+            {data.status_notes !== null ?
+              <View style={styles.viewLine} /> : null}
             {data.status_notes !== null ? (
               <View style={styles.note_View}>
                 <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>
