@@ -117,7 +117,7 @@ const Home = (props) => {
   }
 
   useEffect(() => {
-    setStarCount(userInfo.avgRatings.length > 0 ? userInfo.avgRatings[0].aggregate : 0)
+    setStarCount(userInfo?.avgRatings?.length > 0 ? userInfo?.avgRatings[0]?.aggregate : 0)
   }, [userInfo])
 
   useEffect(() => {

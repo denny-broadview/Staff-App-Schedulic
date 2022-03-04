@@ -351,7 +351,9 @@ const NewBookingTab = (props) => {
                 onRefresh={onRefresh}
               />
             }
-            contentContainerStyle={styles.list}></FlatList>
+            contentContainerStyle={styles.list}>
+
+          </FlatList>
         </View>
 
       </View></SafeAreaView>

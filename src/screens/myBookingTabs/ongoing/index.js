@@ -299,7 +299,6 @@ const OngoingTab = (props) => {
         }
     }
 
-
     return (
         <SafeAreaView style={styles.container} >
             <View style={styles.container}>

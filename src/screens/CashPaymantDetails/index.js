@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,13 @@ import {
   TextInput,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../utlis/String';
+import { String } from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useSelector} from 'react-redux';
-import {ScrollView} from 'react-native-gesture-handler';
-import {MySpinner} from '../../component/MySpinner';
-import {Auth, Constants} from '@global';
+import { useSelector } from 'react-redux';
+import { ScrollView } from 'react-native-gesture-handler';
+import { MySpinner } from '../../component/MySpinner';
+import { Auth, Constants } from '@global';
 const axios = require('axios').default;
 const CashPaymantDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
@@ -40,7 +40,7 @@ const CashPaymantDetails = (props) => {
   let amountCGST = 0;
   let [grantTotal, setGrantTotal] = useState('');
   let tempsArr = [];
-  
+
 
   const [payment, setPayment] = useState([]);
 
@@ -50,7 +50,7 @@ const CashPaymantDetails = (props) => {
   let taxSub = 0;
   let GstSgstArr1 = [];
   useEffect(() => {
-   
+
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
       setPayment(props.route.params.payment);
@@ -68,7 +68,7 @@ const CashPaymantDetails = (props) => {
     console.log('txtTotla in useEffect  - ', val);
   }, [discountType]);
 
- 
+
   // coupon code api calling
   function couponeCodeapi() {
     setLoading(true);
@@ -93,17 +93,17 @@ const CashPaymantDetails = (props) => {
 
   const taxCal = () => {
     // setAllTax(taxArray);
-   
+
 
     for (var ii in taxArray) {
       if (ii == 0) {
         amountGST =
           (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
-          GstSgstArr1.push({amount: amountGST});
+        GstSgstArr1.push({ amount: amountGST });
         taxSub = taxSub + amountGST;
       } else if (ii == 1) {
         amountCGST = (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr1.push({amount:amountCGST});
+        GstSgstArr1.push({ amount: amountCGST });
         taxSub = taxSub + amountCGST;
       }
     }
@@ -198,7 +198,7 @@ const CashPaymantDetails = (props) => {
 
         if (dataSatus == true) {
           console.log(response.data.response);
-          props.navigation.replace('PaymantDone', {order_id: data.id});
+          props.navigation.replace('PaymantDone', { order_id: data.id });
         } else {
           Auth.ToastMessage('Error! while payment Update.');
         }
@@ -228,30 +228,32 @@ const CashPaymantDetails = (props) => {
           <View style={styles.imgView}>
             <View style={styles.courseImgView}>
               <Image
-                source={{uri: props.route.params.image}}
+                // source={{ uri: props.route.params.image }}
+                source={{ uri: data.service == null ? null : data.service.service_image }}
                 style={styles.courseImg}
               />
             </View>
             <Text style={styles.userNameSyl}>
-              {data.customer == null ? null : data.customer.fullname}
+              {/* {data.customer == null ? null : data.customer.fullname} */}
+              {data.service == null ? null : data.service.service_name}
             </Text>
 
             {currencySymbolePosition == 'left' ? (
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
-                  data.total_cost,
-                  {code: currency},
+                  data.service_cost,
+                  { code: currency },
                   //{locale: currencyFrm},
                 )}
-              </Text>
+              </Text> //data.total_cost,
             ) : (
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
-                  data.total_cost,
-                 // {locale: currencyFrm},
-                  {code: currency},
+                  data.service_cost,
+                  // {locale: currencyFrm},
+                  { code: currency },
                 )}
-              </Text>
+              </Text> //data.total_cost,
             )}
           </View>
         </View>
@@ -262,16 +264,16 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-                {code: currency},
-               // {locale: currencyFrm},
+                { code: currency },
+                // {locale: currencyFrm},
               )}
             </Text>
           ) : (
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-               // {locale: currencyFrm},
-                {code: currency},
+                // {locale: currencyFrm},
+                { code: currency },
               )}
             </Text>
           )}
@@ -281,23 +283,23 @@ const CashPaymantDetails = (props) => {
           <View>
             <FlatList
               data={calTaxArray}
-              renderItem={({item, index}) => (
+              renderItem={({ item, index }) => (
                 <View style={styles.amountView}>
                   <Text style={styles.text_amount}>{item.name}{"("}{item.value}{"%)"}</Text>
                   {currencySymbolePosition == 'left' ? (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
                         item.amount,
-                        {code: currency},
-                       // {locale: currencyFrm},
+                        { code: currency },
+                        // {locale: currencyFrm},
                       )}
                     </Text>
                   ) : (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
                         item.amount,
-                       // {locale: currencyFrm},
-                        {code: currency},
+                        // {locale: currencyFrm},
+                        { code: currency },
                       )}
                     </Text>
                   )}
@@ -343,16 +345,16 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.textTotalRs}>
               {currencyFormatter.format(
                 grantTotal,
-                {code: currency},
-               // {locale: currencyFrm},
+                { code: currency },
+                // {locale: currencyFrm},
               )}
             </Text>
           ) : (
             <Text style={styles.textTotalRs}>
               {currencyFormatter.format(
                 grantTotal,
-               // {locale: currencyFrm},
-                {code: currency},
+                // {locale: currencyFrm},
+                { code: currency },
               )}
             </Text>
           )}
