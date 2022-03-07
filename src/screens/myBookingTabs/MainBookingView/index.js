@@ -32,7 +32,7 @@ function MyBookingMainView(props) {
     onSetSearchkey(e?.nativeEvent?.text)
   };
 
-  // const onSetSearchkey = key => dispatch(setSearchKey(key))
+  const onSetSearchkey = key => dispatch(setSearchKey(key))
   return (
     <View style={styles.container}>
       <HeaderView

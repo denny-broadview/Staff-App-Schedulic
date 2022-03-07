@@ -23,6 +23,7 @@ const MyAccount = (props) => {
     const signOut = () => {
         dispatch(dispatch(logout()))
         props.navigation.replace('LoginMain');
+      
     }
     const myCustomShare = async () => {
         const shareOptions = {
@@ -47,7 +48,7 @@ const MyAccount = (props) => {
                 [
 
                     { text: 'Cancel', onPress: () => console.log('Cancel Pressed!') },
-                    { text: 'Yes', onPress: () => signOut() }
+                    { text: 'Yes', onPress: () => logOut() }
 
                 ],
 
@@ -55,23 +56,24 @@ const MyAccount = (props) => {
         )
     }
     function logOut() {
-        setLoading(true);
-        Auth.PostCustomerTokenAuth(
-            userInfo.token,
-            userInfo.user_id,
-            '',
-            Constants.ApiAction.logout,
-            (res) => {
-                if (res[1].data == true) {
-                    setLoading(false);
-                    signOut()
+        signOut();
+        // setLoading(true);
+        // Auth.PostCustomerTokenAuth(
+        //     userInfo.token,
+        //     userInfo.user_id,
+        //     '',
+        //     Constants.ApiAction.logout,
+        //     (res) => {
+        //         if (res[1].data == true) {
+        //             setLoading(false);
+        //             signOut()
 
-                } else {
-                    setLoading(false);
+        //         } else {
+        //             setLoading(false);
 
-                }
-            },
-        );
+        //         }
+        //     },
+        // );
     }
 
     return (

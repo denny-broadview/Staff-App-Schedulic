@@ -13,11 +13,14 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 const NewBookingTab = (props) => {
-  const [refreshing, setRefreshing] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
   const [masterDataSource, setMasterDataSource] = useState([]);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
+
   const searchKeyFromProbs = useSelector(
     (state) => state.BookingService.serachKey,
   );
@@ -31,29 +34,34 @@ const NewBookingTab = (props) => {
   const currencyFrm = useSelector(
     (state) => state.setting.setting.currency_format,
   );
+
   useEffect(() => {
-    getBooking();
-  }, []);
-  useEffect(() => {
-    console.log('Data from redux searchKeyFromProbs ~~~~~~', searchKeyFromProbs);
-    searchFilterFunction(searchKeyFromProbs);
+    if (searchKeyFromProbs) {
+      setPage(1)
+      getBooking()
+    }
   }, [searchKeyFromProbs]);
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
       getBooking();
+      setPage(page + 1);
     });
     return unsubscribe;
   }, [props.navigation]);
-  const onTabNavigate = async (screenname, tabIndex) => {
-    await AsyncStorage.setItem('goToTab', tabIndex);  // Set value in AsyncStorage
-    navigation.navigate('My Bookings', { screen: 'TopTabs', params: { screen: screenname } });  // Proper do nested navigation
-  }
+
   const onRefresh = () => {
     setData([]);
-    getBooking();
+    setPage(1)
+    getBooking(1);
+    setRefreshing(true)
   };
-
+  const loadMoreData = () => {
+    if (page <= lastPage) {
+      getBooking();
+      setPage(page + 1);
+    }
+  }
   //search start
   function searchFilterFunction(text) {
     if (text) {
@@ -71,28 +79,34 @@ const NewBookingTab = (props) => {
   }
 
   // Api calling for newBookings
-  function getBooking() {
-    setLoading(true);
-    setRefreshing(false);
+  function getBooking(pageRef) {
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    console.log('parm booking in newBookingpage~~~~~~~~~', myForm);
+    myForm.append('search', '');
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
-      Constants.ApiAction.staffnewbookin,
+      Constants.ApiAction.staffnewbookin + '?page=' + (pageRef === 1 ? 1 : page),
       (res) => {
-        // console.log(' booking data--------', JSON.stringify(res));
+        setRefreshing(false)
         if (res[1].data == true) {
-          setLoading(false);
-          setRefreshing(false);
-          setData(res[1].response);
-          setMasterDataSource(res[1].response);
+          let dataRes = res[1].response.data;
+          let lastPage = res[1].response.last_page;
+          if (dataRes.length > 0) {
+            if (pageRef === 1) {
+              setData(dataRes)
+            } else {
+              page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
+            }
+          }
+          setLastPage(lastPage)
+          // let resData = res[1].response;
+          // setLastPage(res[1].response.last_page)
+          // setData(resData.data);
+          // setMasterDataSource(resData.data);
         } else {
           setData(res.data);
-          setLoading(false);
-          setRefreshing(false);
         }
       },
     );
@@ -105,16 +119,14 @@ const NewBookingTab = (props) => {
     myForm.append('order_item_id', id);
     myForm.append('staff_id', userInfo.user_id);
     myForm.append('order_status', st);
-    console.log('parm booking status~~~~~~~~~', myForm);
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
       Constants.ApiAction.status_update,
       (res) => {
-        console.log(' booking data status--------', res);
+        setLoading(false);
         if (res[1].data == true) {
-          setLoading(false);
           if (st == "R") {
             setTimeout(() => {
               Snackbar.show({
@@ -123,11 +135,7 @@ const NewBookingTab = (props) => {
               });
               props.navigation.navigate('Home');
             }, 1000);
-            //props.navigation.navigate('Home');
-            //getBooking();
           } else if (st == "AC") {
-            // props.navigation.navigate('OngoingTab');
-            // onTabNavigate('OngoingTab', 1)
             setTimeout(() => {
               Snackbar.show({
                 text: 'Appointment Updated',
@@ -135,10 +143,7 @@ const NewBookingTab = (props) => {
               });
               getBooking();
             }, 1000);
-            //getBooking();
           }
-        } else {
-          setLoading(false);
         }
       },
     );
@@ -154,12 +159,13 @@ const NewBookingTab = (props) => {
       </View>
     );
   }
-
+  const renderFooter = () => {
+    return (loagind && <View style={{ flex: 1, height: 50, marginBottom: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         <View style={{ justifyContent: 'center', flex: 1 }}>
-          <MySpinner size="large" visible={loagind} />
           {refreshing && !loagind ? (
             <ActivityIndicator style={{ color: Color.AppColor }} />
           ) : null}
@@ -351,6 +357,9 @@ const NewBookingTab = (props) => {
                 onRefresh={onRefresh}
               />
             }
+            onEndReached={loadMoreData}
+            onEndReachedThreshold={0.01}
+            ListFooterComponent={renderFooter}
             contentContainerStyle={styles.list}></FlatList>
         </View>
 

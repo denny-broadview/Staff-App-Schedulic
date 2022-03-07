@@ -29,9 +29,6 @@ const Home = (props) => {
   let watchID = null
 
   useEffect(() => {
-    getBooking();
-    getOnGoing();
-    getComplteTask();
     requestLocationPermission();
     return () => {
       Geolocation.clearWatch(watchID);
@@ -117,7 +114,8 @@ const Home = (props) => {
   }
 
   useEffect(() => {
-    setStarCount(userInfo.avgRatings.length > 0 ? userInfo.avgRatings[0].aggregate : 0)
+    console.log('userInfo.avgRatings, ', userInfo.avgRatings);
+    userInfo && setStarCount(userInfo.avgRatings && userInfo.avgRatings.length > 0 ? userInfo.avgRatings[0].aggregate : 0)
   }, [userInfo])
 
   useEffect(() => {
@@ -138,9 +136,9 @@ const Home = (props) => {
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffnewbookin, (res) => {
       if (res[1].data == true) {
         setLoading(false);
-        setBookingData(res[1].response);
+        setBookingData(res[1].response.data);
       } else {
-        setBookingData(res.data);
+        setBookingData([]);
         setLoading(false);
       }
     });
@@ -153,9 +151,9 @@ const Home = (props) => {
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffOnGoing, (res) => {
       if (res[1].data == true) {
         setLoading(false);
-        setonGoingData(res[1].response);
+        setonGoingData(res[1].response.data);
       } else {
-        setonGoingData(res.data);
+        setonGoingData([]);
         setLoading(false);
       }
     });
@@ -171,9 +169,9 @@ const Home = (props) => {
     Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.completTask, (res) => {
       if (res[1].data == true) {
         setLoading(false);
-        setCompletedTaskData(res[1].response);
+        setCompletedTaskData(res[1].response.data);
       } else {
-        setCompletedTaskData(res.data);
+        setCompletedTaskData([]);
         setLoading(false);
       }
     });
@@ -255,7 +253,7 @@ const Home = (props) => {
                         </Text>
                       </View>
                       <View>
-                        <Text style={styles.bookingCount}>{bookingdata != null && bookingdata.length > 0 ? bookingdata.length : 0}</Text>
+                        <Text style={styles.bookingCount}>{bookingdata && bookingdata != null && bookingdata.length > 0 ? bookingdata.length : 0}</Text>
                       </View>
                     </View>
                   </TouchableOpacity>

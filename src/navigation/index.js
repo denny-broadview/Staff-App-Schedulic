@@ -139,10 +139,10 @@ export default App = () => {
           blur: () => navigation.setParams({ screen: undefined }),
           tabPress: async (e) => {
             await AsyncStorage.setItem('goToTab', '0'); // Task#1: Set value in AsyncStorage
-            navigation.navigate('NewBookingTab');
+            // navigation.navigate('NewBookingTab');
           },
         })} />
-        <Tab.Screen name="Account" component={MyAccount} />
+        <Tab.Screen name="Account" component={MyAccount} /> 
       </Tab.Navigator>
     );
   };
@@ -242,87 +242,6 @@ export default App = () => {
     );
   }
 
-  // function AdminOrdersTabBar({ state, descriptors, navigation }) {
-  //   return (
-  //     <ImageBackground source={require('../assets/images/bottomview.png')} style={{ height:hp('10%'), alignItems: 'center', width: wp('100%'), flexDirection: 'row',backgroundColor:'#fff',}}>
-  //       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-  //         {state.routes.map((route, index) => {
-  //           const { options } = descriptors[route.key];
-  //           const label =
-  //             options.tabBarLabel !== undefined
-  //               ? options.tabBarLabel
-  //               : options.title !== undefined
-  //                 ? options.title
-  //                 : route.name;
-
-  //           const isFocused = state.index === index;
-  //           let icon = null;
-
-  //           const onPress = () => {
-  //             const event = navigation.emit({
-  //               type: 'tabPress',
-  //               target: route.key,
-  //             });
-
-  //             if (!isFocused && !event.defaultPrevented) {
-  //               navigation.navigate(route.name);
-  //             }
-  //           };
-
-  //           const onLongPress = () => {
-  //             navigation.emit({
-  //               type: 'tabLongPress',
-  //               target: route.key,
-  //             });
-  //           };
-
-
-  //           return (
-  //             <TouchableOpacity
-  //               key={index.toString()}
-  //               accessibilityRole="button"
-  //               accessibilityStates={isFocused ? ['selected'] : []}
-  //               accessibilityLabel={options.tabBarAccessibilityLabel}
-  //               testID={options.tabBarTestID}
-  //               onPress={onPress}
-  //               onLongPress={onLongPress}
-  //               style={{
-  //                 flex: 1,
-  //                 alignItems: 'center',
-  //                 justifyContent: 'space-around',
-  //               }}
-  //             >
-  //               {index === 0 ?
-  //               <Text style={[{
-  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
-  //                 size: 20,
-  //               }]}><Icon name="home" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
-  //             :null}
-  //             {index === 1 ?
-  //               <Text style={[{
-  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
-  //                 size: 20,
-  //               }]}><Icon name="calendar" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
-  //             :null}
-  //             {index === 2 ?
-  //               <Text style={[{
-  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
-  //                 size: 20,
-  //               }]}><Icon name="user" fill={isFocused ? '#424DE4' : '#A3A3A3'} size={20} /></Text>
-  //             :null}
-  //               <Text style={[{
-  //                 color: !isFocused ? '#9C9C9C' : '#424DE4',
-  //                 size: 12,
-  //               }]}>
-  //                 {label}
-  //               </Text>
-  //             </TouchableOpacity>
-  //           );
-  //         })}
-  //       </View>
-  //       </ImageBackground>
-  //   );
-  // }
   function TopTabs() {
     return (
       <TopTab.Navigator

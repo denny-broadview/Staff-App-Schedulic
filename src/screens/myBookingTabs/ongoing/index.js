@@ -28,6 +28,9 @@ const OngoingTab = (props) => {
     const [loading, setLoading] = useState(false);
     const [orderId, setOrderId] = useState('')
     const [reference, setReference] = useState('')
+    const [page, setPage] = useState(1);
+    const [lastPage, setLastPage] = useState(1);
+
     const onGoingFromRedux = useSelector(
         (state) => state.BookingService.onGoingData,
     );
@@ -152,19 +155,28 @@ const OngoingTab = (props) => {
         }
     }
 
-    useEffect(() => {
-        getOnGoing();
-    }, []);
     const onRefresh = () => {
         setData([]);
-        getOnGoing();
+        setPage(1)
+        getOnGoing(1);
+        setRefreshing(true)
     };
+    const loadMoreData = () => {
+        if (page <= lastPage) {
+            getOnGoing();
+            setPage(page + 1);
+        }
+    }
     useEffect(() => {
-        searchFilterFunction(searchKeyFromProbs);
+        if (searchKeyFromProbs) {
+            setPage(1)
+            getOnGoing()
+          }
     }, [searchKeyFromProbs]);
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             getOnGoing();
+            setPage(page + 1);
         });
         return unsubscribe;
     }, [props.navigation]);
@@ -206,7 +218,7 @@ const OngoingTab = (props) => {
         return (minutes + (hours * 60));
     }
     // Api calling for onGoing
-    function getOnGoing() {
+    function getOnGoing(pageRef) {
         setLoading(true);
         setRefreshing(false);
         let myForm = new FormData();
@@ -215,15 +227,27 @@ const OngoingTab = (props) => {
             userInfo.token,
             userInfo.user_id,
             myForm,
-            Constants.ApiAction.staffOnGoing,
+            Constants.ApiAction.staffOnGoing+ '?page=' + (pageRef === 1 ? 1 : page),
             (res) => {
                 if (res[1].data === true) {
+                    setRefreshing(false)
+                    setLoading(false)
+                    let dataRes = res[1].response.data;
+                    let lastPage = res[1].response.last_page;
+                    if (dataRes.length > 0) {
+                      if (pageRef === 1) {
+                        setData(dataRes)
+                      }else {
+                        page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
+                      }
+                    }
+                    setLastPage(lastPage)
 
-                    let tempdata = JSON.stringify(res[1].response);
-                    setLoading(false);
-                    setRefreshing(false);
-                    setData(JSON.parse(tempdata));
-                    setMasterDataSource(res[1].response);
+                    // let tempdata = JSON.stringify(res[1].response);
+                    // setLoading(false);
+                    // setRefreshing(false);
+                    // setData(JSON.parse(tempdata));
+                    // setMasterDataSource(res[1].response);
                 } else {
 
                     setData(res.data);
@@ -261,10 +285,10 @@ const OngoingTab = (props) => {
                         });
                         getOnGoing();
                         if (st === 'OW' && sType === 'at_home') {
-                            getStaffLatLng();
+                            // getStaffLatLng();
                         }
                         if (st === 'CO' && sType === 'at_home') {
-                            removeLocationUpdates()
+                            // removeLocationUpdates()
                         }
 
                     }, 1000);
@@ -299,13 +323,15 @@ const OngoingTab = (props) => {
         }
     }
 
-
+    const renderFooter = () => {
+        return (loading && !refreshing && <View style={{ flex: 1, height: 50,}}><ActivityIndicator color={Color.AppColor} /></View>);
+    }
     return (
         <SafeAreaView style={styles.container} >
             <View style={styles.container}>
                 <View style={{ justifyContent: 'center', flex: 1 }} >
-                    <MySpinner size="large"
-                        visible={loading} />
+                    {/* <MySpinner size="large"
+                        visible={loading} /> */}
                     {
                         refreshing ?
                             <ActivityIndicator style={{ color: Color.AppColor }} />
@@ -440,7 +466,7 @@ const OngoingTab = (props) => {
                                                             () => {
                                                                 getStatus(item.id, 'CO', item.service.service_sub_type),
                                                                     props.navigation.navigate('Home');
-                                                                removeLocationUpdates()
+                                                                // removeLocationUpdates()
                                                             }
                                                         } >
                                                         <Text style={styles.btnText} > {String.MyBookingTab.completed} </Text>
@@ -534,6 +560,9 @@ const OngoingTab = (props) => {
                                 onRefresh={onRefresh}
                             />
                         }
+                        onEndReached={loadMoreData}
+                        onEndReachedThreshold={0.01}
+                        ListFooterComponent={renderFooter}
                         contentContainerStyle={styles.list} >
                     </FlatList>
                 </View>

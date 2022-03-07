@@ -34,7 +34,7 @@ const MapScreen = (props) => {
   const [orderId, setOrderId] = useState(0)
   const [coordinates, setCoordinates] = useState([])
   const [distanceMeter, setDistanceMeter] = useState([])
-  const [destination, setDestination] = useState({ latitude:  21.134345, longitude: 72.85722345 })
+  const [destination, setDestination] = useState({ latitude: 21.134345, longitude: 72.85722345 })
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
@@ -127,15 +127,13 @@ const MapScreen = (props) => {
   }, [destination])
 
 
-  function callNow(phone) {
-    let phoneNumber = phone;
+  function callNow(item) {
+    let ph = item.customer.phone;
+    let phoneNumber = ph;
     if (Platform.OS !== 'android') {
-      phoneNumber = `telprompt:${phone}`;
-      //phoneNumber='9727024373'
-      console.log('callNumber ----> ', phoneNumber);
+      phoneNumber = `telprompt:${ph}`;
     } else {
-      phoneNumber = `tel:${phone}`;
-      console.log('call android-------', phoneNumber);
+      phoneNumber = `tel:${ph}`;
     }
     Linking.canOpenURL(phoneNumber)
       .then((supported) => {
@@ -238,7 +236,7 @@ const MapScreen = (props) => {
         </View>
         <TouchableOpacity
           style={styles.btnPhone}
-          onPress={() => callNow(props.route.params.datapass.customer.phone_office)}>
+          onPress={() => callNow(props.route.params.datapass)}>
           <View style={styles.btnPhoneView}>
             <IconCall name="md-call-sharp" style={styles.iconbell} />
           </View>

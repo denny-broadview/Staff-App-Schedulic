@@ -21,6 +21,8 @@ const CompletedTab = (props) => {
   const [refreshing, setRefreshing] = useState(true);
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [lastPage, setLastPage] = useState(1);
   // search
   const [masterDataSource, setMasterDataSource] = useState([]);
   const searchKeyFromProbs = useSelector(
@@ -37,19 +39,26 @@ const CompletedTab = (props) => {
     (state) => state.setting.setting.currency_format,
   );
 
-  useEffect(() => {
-    getComplteTask();
-  }, []);
+
+  const loadMoreData = () => {
+    if (page <= lastPage) {
+      getComplteTask();
+      setPage(page + 1);
+    }
+  }
+
   const onRefresh = () => {
     setData([]);
-    getComplteTask();
+    setPage(1)
+    getComplteTask(1);
+    setRefreshing(true)
   };
   useEffect(() => {
-    console.log(
-      'Data from redux searchKeyFromProbs ~~~~~~',
-      searchKeyFromProbs,
-    );
-    searchFilterFunction(searchKeyFromProbs);
+    if (searchKeyFromProbs) {
+      setPage(1)
+      getComplteTask()
+    }
+
   }, [searchKeyFromProbs]);
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -57,49 +66,38 @@ const CompletedTab = (props) => {
     });
     return unsubscribe;
   }, [props.navigation]);
-  //search start
-  function searchFilterFunction(text) {
-    if (text) {
-      const newData = masterDataSource.filter(function (item) {
-        const itemData =
-          item.service.service_name != null
-            ? item.service.service_name.toUpperCase()
-            : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setData(newData);
-      // setSearchTerm(text);
-    } else {
-      setData(masterDataSource);
-      // setSearchTerm(text);
-    }
-  }
+  
   // Api calling for complteTask
-  function getComplteTask() {
+  function getComplteTask(pageRef) {
     setLoading(true);
-    setRefreshing(false);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
     myForm.append('staff_id', userInfo.user_id);
     myForm.append('status', 'CO');
-    console.log('parm Tabcomplted~~~~~~~~~', myForm);
+    myForm.append('search', '');
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
-      Constants.ApiAction.completTask,
+      Constants.ApiAction.completTask + '?page=' + (pageRef === 1 ? 1 : page),
       (res) => {
-        console.log('completetab data--------', res);
         if (res[1].data == true) {
           setLoading(false);
           setRefreshing(false);
-          setData(res[1].response);
-          setMasterDataSource(res[1].response);
-        } else {
-          setData(res.data);
-          setLoading(false);
-          setRefreshing(false);
+
+          let dataRes = res[1].response.data;
+          let lastPage = res[1].response.last_page;
+          if (dataRes.length > 0) {
+            if (pageRef === 1) {
+              setData(dataRes)
+            } else {
+              page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
+            }
+          }
+          setLastPage(lastPage)
+          // setRefreshing(false);
+          // setData(res[1].response);
+          // setMasterDataSource(res[1].response);
         }
       },
     );
@@ -116,11 +114,12 @@ const CompletedTab = (props) => {
       </View>
     );
   }
-
+  const renderFooter = () => {
+    return (loagind && !refreshing && <View style={{ height: 50, }}><ActivityIndicator color={Color.AppColor} /></View>);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <MySpinner size="large" visible={loagind} />
         {refreshing ? (
           <ActivityIndicator style={{ color: Color.AppColor }} />
         ) : null}
@@ -128,7 +127,7 @@ const CompletedTab = (props) => {
           ListEmptyComponent={
             loagind == false && refreshing == false ? noItemDisplay() : null
           }
-          data={data}
+          data={data && data}
           // inverted={true}
           renderItem={({ item, index }) => (
             <View style={styles.mainView}>
@@ -171,7 +170,7 @@ const CompletedTab = (props) => {
                     onPress={() =>
                       props.navigation.navigate('CompletDetails', {
                         datapass: item,
-                        image: item.customer ? item.customer.image:'',
+                        image: item.customer ? item.customer.image : '',
                       })
                     }>
                     <Text style={styles.btnText}>
@@ -222,6 +221,9 @@ const CompletedTab = (props) => {
               onRefresh={onRefresh}
             />
           }
+          onEndReached={loadMoreData}
+          onEndReachedThreshold={0.01}
+          ListFooterComponent={renderFooter}
           contentContainerStyle={styles.list}></FlatList>
       </View>
     </SafeAreaView>
