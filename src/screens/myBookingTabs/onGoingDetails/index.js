@@ -295,9 +295,9 @@ const onGoingDetails = (props) => {
                 ) : null}
 
                 {data.order_status == 'AC'
-                  // &&
-                  // data.booking_date == currentdate &&
-                  // bookingtimecurrenttime(crtime, data.booking_time) < 60 
+                  &&
+                  data.booking_date == currentdate &&
+                  bookingtimecurrenttime(crtime, data.booking_time) < 60
                   ? (
                     <TouchableOpacity
                       style={styles.btnViewOntheWay}

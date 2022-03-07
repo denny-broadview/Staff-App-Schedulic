@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './style';
-import {String} from '../../utlis/String';
+import { String } from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 const Payment = (props) => {
   const [data, setData] = useState({});
@@ -13,9 +13,9 @@ const Payment = (props) => {
       setPayJson(props.route.params.datapass.payment);
     }
   }, []);
-  useEffect(()=>{
+  useEffect(() => {
     if (payJson && payJson != null && payJson != undefined) {
-      let js={
+      let js = {
         "reference_id": payJson.reference_id,
         "transactionId": payJson.transaction_id,
         "payment_datetime": payJson.payment_date,
@@ -25,10 +25,10 @@ const Payment = (props) => {
       }
       setPayment(js)
     }
-   
-  },[data])
+
+  }, [data])
   return (
-    <View style={styles.mainView}> 
+    <View style={styles.mainView}>
       <HeaderView
         header={true}
         back={true}
@@ -47,41 +47,41 @@ const Payment = (props) => {
           <View>
             <View>
               <TouchableOpacity style={styles.commonpayment}
-                onPress={() => props.navigation.navigate('CashPaymantDetails',{
+                onPress={() => props.navigation.navigate('CashPaymantDetails', {
                   datapass: props.route.params.datapass,
                   payment: payment,
                   method: 'cash',
-                  image:props.route.params.image
-                  })}>
+                  image: props.route.params.image
+                })}>
                 <View>
                   <Text style={styles.textView}>{String.payment.cash}</Text>
                 </View>
                 <View>
                   <Image
                     source={require('../../assets/images/cash.png')}
-                    style={{width: 40, height: 40}}
+                    style={{ width: 40, height: 40 }}
                   />
                 </View>
               </TouchableOpacity>
             </View>
             <View >
               <TouchableOpacity style={styles.commonpayment}
-              // onPress={()=> props.navigation.navigate('OnlinePaymantDetails')}>
-              onPress={() => props.navigation.navigate('CashPaymantDetails',{
-                datapass: props.route.params.datapass,
-                payment: payment,
-                method: 'online',
-                image:props.route.params.image
+                // onPress={()=> props.navigation.navigate('OnlinePaymantDetails')}>
+                onPress={() => props.navigation.navigate('CashPaymantDetails', {
+                  datapass: props.route.params.datapass,
+                  payment: payment,
+                  method: 'online',
+                  image: props.route.params.image
                 })}>
-              <View>
-                <Text style={styles.textView}>{String.payment.Online}</Text>
-              </View>
-              <View>
-                <Image
-                  source={require('../../assets/images/Online.png')}
-                  style={{width: 40, height: 40}}
-                />
-              </View></TouchableOpacity>
+                <View>
+                  <Text style={styles.textView}>{String.payment.Online}</Text>
+                </View>
+                <View>
+                  <Image
+                    source={require('../../assets/images/Online.png')}
+                    style={{ width: 40, height: 40 }}
+                  />
+                </View></TouchableOpacity>
             </View>
             <View style={styles.commonpayment}>
               <View>
