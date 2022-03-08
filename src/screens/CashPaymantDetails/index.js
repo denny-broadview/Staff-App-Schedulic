@@ -174,12 +174,13 @@ const CashPaymantDetails = (props) => {
       };
     }
 
-    console.log(' resObject ', JSON.stringify(resObject));
+    console.log(' resObject----', JSON.stringify(resObject));
 
     setLoading(true);
     axios
       .post(
-        Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant,
+        // Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant,
+        method == 'cash' ? Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant : Constants.ApiBaseUrl + Constants.ApiAction.sendPaymentUrl,
         JSON.stringify(resObject),
         {
           headers: {
