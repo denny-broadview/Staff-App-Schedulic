@@ -171,7 +171,7 @@ const OngoingTab = (props) => {
         if (searchKeyFromProbs) {
             setPage(1)
             getOnGoing()
-          }
+        }
     }, [searchKeyFromProbs]);
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
@@ -227,7 +227,7 @@ const OngoingTab = (props) => {
             userInfo.token,
             userInfo.user_id,
             myForm,
-            Constants.ApiAction.staffOnGoing+ '?page=' + (pageRef === 1 ? 1 : page),
+            Constants.ApiAction.staffOnGoing + '?page=' + (pageRef === 1 ? 1 : page),
             (res) => {
                 if (res[1].data === true) {
                     setRefreshing(false)
@@ -235,11 +235,11 @@ const OngoingTab = (props) => {
                     let dataRes = res[1].response.data;
                     let lastPage = res[1].response.last_page;
                     if (dataRes.length > 0) {
-                      if (pageRef === 1) {
-                        setData(dataRes)
-                      }else {
-                        page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
-                      }
+                        if (pageRef === 1) {
+                            setData(dataRes)
+                        } else {
+                            page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
+                        }
                     }
                     setLastPage(lastPage)
 
@@ -324,7 +324,7 @@ const OngoingTab = (props) => {
     }
 
     const renderFooter = () => {
-        return (loading && !refreshing && <View style={{ flex: 1, height: 50,}}><ActivityIndicator color={Color.AppColor} /></View>);
+        return (loading && !refreshing && <View style={{ flex: 1, height: 50, }}><ActivityIndicator color={Color.AppColor} /></View>);
     }
     return (
         <SafeAreaView style={styles.container} >
@@ -474,7 +474,7 @@ const OngoingTab = (props) => {
                                                 }
                                             </View>
                                             : null}
-                                        {item.order_status == 'AC' &&
+                                        {item.order_status == 'AC' && item.service.service_sub_type === 'at_home' &&
                                             item.booking_date == currentdate &&
                                             bookingtimecurrenttime(crtime, item.booking_time) < parseInt(min_advance_booking_time) ?
                                             <TouchableOpacity style={styles.btnViewOntheWay}

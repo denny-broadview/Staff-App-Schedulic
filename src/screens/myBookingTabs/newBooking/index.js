@@ -81,6 +81,7 @@ const NewBookingTab = (props) => {
   // Api calling for newBookings
   function getBooking(pageRef) {
     let myForm = new FormData();
+    setLoading(true)
     myForm.append('business_id', Constants.businessid);
     myForm.append('search', '');
     Auth.PostCustomerTokenAuth(
@@ -90,6 +91,7 @@ const NewBookingTab = (props) => {
       Constants.ApiAction.staffnewbookin + '?page=' + (pageRef === 1 ? 1 : page),
       (res) => {
         setRefreshing(false)
+        setLoading(false);
         if (res[1].data == true) {
           let dataRes = res[1].response.data;
           let lastPage = res[1].response.last_page;
@@ -133,7 +135,6 @@ const NewBookingTab = (props) => {
                 text: 'Appointment Updated',
                 duration: Snackbar.LENGTH_SHORT
               });
-              props.navigation.navigate('Home');
             }, 1000);
           } else if (st == "AC") {
             setTimeout(() => {
@@ -141,9 +142,11 @@ const NewBookingTab = (props) => {
                 text: 'Appointment Updated',
                 duration: Snackbar.LENGTH_SHORT
               });
-              getBooking();
             }, 1000);
           }
+          setData([])
+          getBooking();
+          setPage(1);
         }
       },
     );
@@ -160,7 +163,7 @@ const NewBookingTab = (props) => {
     );
   }
   const renderFooter = () => {
-    return (loagind && <View style={{ flex: 1, height: 50, marginBottom: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
+    return (loagind && !refreshing && <View style={{ flex: 1, height: 50, marginBottom: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
   }
   return (
     <SafeAreaView style={styles.container}>

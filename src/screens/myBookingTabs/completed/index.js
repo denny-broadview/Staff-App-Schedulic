@@ -18,13 +18,12 @@ import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 const CompletedTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
-  const [refreshing, setRefreshing] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [data, setData] = useState([]);
   const [loagind, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
   // search
-  const [masterDataSource, setMasterDataSource] = useState([]);
   const searchKeyFromProbs = useSelector(
     (state) => state.BookingService.serachKey,
   );
@@ -35,16 +34,13 @@ const CompletedTab = (props) => {
     (state) => state.setting.setting.currency_symbol_position,
   );
 
-  const currencyFrm = useSelector(
-    (state) => state.setting.setting.currency_format,
-  );
-
 
   const loadMoreData = () => {
     if (page <= lastPage) {
       getComplteTask();
       setPage(page + 1);
     }
+    console.log('loadMoreData');
   }
 
   const onRefresh = () => {
@@ -81,10 +77,10 @@ const CompletedTab = (props) => {
       myForm,
       Constants.ApiAction.completTask + '?page=' + (pageRef === 1 ? 1 : page),
       (res) => {
+        setLoading(false);
+        setRefreshing(false);
         if (res[1].data == true) {
-          setLoading(false);
-          setRefreshing(false);
-
+          
           let dataRes = res[1].response.data;
           let lastPage = res[1].response.last_page;
           if (dataRes.length > 0) {
@@ -115,12 +111,12 @@ const CompletedTab = (props) => {
     );
   }
   const renderFooter = () => {
-    return (loagind && !refreshing && <View style={{ height: 50, }}><ActivityIndicator color={Color.AppColor} /></View>);
+    return (loagind && !refreshing && <View style={{ height: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
   }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        {refreshing ? (
+        {refreshing && !loagind ? (
           <ActivityIndicator style={{ color: Color.AppColor }} />
         ) : null}
         <FlatList

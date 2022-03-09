@@ -296,7 +296,7 @@ const onGoingDetails = (props) => {
 
                 {data.order_status == 'AC'
                   &&
-                  data.booking_date == currentdate &&
+                  data.booking_date == currentdate && item.service.service_sub_type === 'at_home' &&
                   bookingtimecurrenttime(crtime, data.booking_time) < 60
                   ? (
                     <TouchableOpacity
