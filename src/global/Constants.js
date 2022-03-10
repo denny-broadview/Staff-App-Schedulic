@@ -8,7 +8,8 @@ const Constants = {
   businessid: 127,
   businessname: 'BI',
   ApiBaseUrl: 'https://api.schedulic.com/api/',
-  GOOGLE_MAPS_APIKEY: "AIzaSyBXIPD2yTHyA66hLrXfuHoHbqg-bCt13xo",
+  // GOOGLE_MAPS_APIKEY: "AIzaSyBXIPD2yTHyA66hLrXfuHoHbqg-bCt13xo",
+  GOOGLE_MAPS_APIKEY: "AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk",
   ApiAction: {
     timeSetting: 'get-front-setting',
     getTax: 'get-tax',

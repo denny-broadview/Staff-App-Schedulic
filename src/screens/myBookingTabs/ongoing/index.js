@@ -544,7 +544,7 @@ const OngoingTab = (props) => {
                                                         datapass: item,
                                                     })
                                                 } >
-                                                    <Text style={styles.btnText}> Reshedul</Text>
+                                                    <Text style={styles.btnText}> Reschedule </Text>
                                                 </TouchableOpacity>
                                             </View>
                                         ) : null

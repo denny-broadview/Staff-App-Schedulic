@@ -2,7 +2,8 @@ import * as firebase from 'firebase';
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBXIPD2yTHyA66hLrXfuHoHbqg-bCt13xo",
+    // apiKey: "AIzaSyBXIPD2yTHyA66hLrXfuHoHbqg-bCt13xo",
+    apiKey: "AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk",
     authDomain: "schedulic-firebase.firebaseapp.com",
     databaseURL: "https://schedulic-63c65-default-rtdb.firebaseio.com",
     projectId: "schedulic-firebase",
