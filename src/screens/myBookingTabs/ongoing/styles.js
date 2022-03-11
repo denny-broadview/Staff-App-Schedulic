@@ -99,14 +99,21 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign:'right'
+    textAlign: 'right'
+  },
+  textOrderID: {
+    color: Color.ligthGray,
+    fontSize: Matrics.Scale(16),
+    fontWeight: '800',
+    width: wp('20%'),
+    textAlign: 'right'
   },
   textstatus_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('25%'),
-    textAlign:'right'
+    textAlign: 'right'
 
   },
   service_btn_mainview: {
@@ -261,7 +268,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '900',
   },
-  statusView:{
-    alignContent:'flex-end',alignItems:'flex-end',flex:1
+  statusView: {
+    alignContent: 'flex-end', alignItems: 'flex-end', flex: 1
   },
 })

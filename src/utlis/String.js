@@ -81,6 +81,7 @@ export const String = {
     myBooking: 'My Booking',
     detail: 'Details',
     date_time: 'Date & Time',
+    orderid: 'Order Id',
     satus: 'Status',
     servicest: 'Services',
     details: 'Details',

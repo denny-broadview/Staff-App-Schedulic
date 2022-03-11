@@ -342,6 +342,14 @@ const OngoingTab = (props) => {
                         // inverted={true}
                         renderItem={({ item, index }) => (
                             <View style={styles.mainView} >
+                                <View style={styles.topView}>
+                                    <Text style={styles.bookingTextDate}>
+                                        {String.MyBookingTab.orderid + ' : '}
+                                    </Text>
+                                    <Text style={styles.textOrderID}>
+                                        {item.id}
+                                    </Text>
+                                </View>
                                 <View style={styles.topView} >
                                     <Text style={styles.bookingTextDate} > {String.MyBookingTab.date_time} </Text>
                                     <Text style={styles.textstatus} > {String.MyBookingTab.satus}</Text>

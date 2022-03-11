@@ -144,9 +144,12 @@ const NewBookingTab = (props) => {
               });
             }, 1000);
           }
-          setData([])
-          getBooking();
-          setPage(1);
+          // setData([])
+          // getBooking();
+          // setPage(1);
+          setData([]);
+          getBooking(1);
+          setPage(1)
         }
       },
     );
@@ -162,6 +165,7 @@ const NewBookingTab = (props) => {
       </View>
     );
   }
+  console.log('data:', data)
   const renderFooter = () => {
     return (loagind && !refreshing && <View style={{ flex: 1, height: 50, marginBottom: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
   }
@@ -179,6 +183,14 @@ const NewBookingTab = (props) => {
             keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
               <View style={styles.mainView}>
+                <View style={styles.topView}>
+                  <Text style={styles.bookingTextDate}>
+                    {String.MyBookingTab.orderid + ' : '}
+                  </Text>
+                  <Text style={styles.textOrderID}>
+                    {item.id}
+                  </Text>
+                </View>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
                     {String.MyBookingTab.date_time}

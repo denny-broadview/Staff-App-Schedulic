@@ -1,5 +1,5 @@
-import {StyleSheet,Dimensions} from 'react-native';
-import {Matrics, Color} from '../../../utlis';
+import { StyleSheet, Dimensions } from 'react-native';
+import { Matrics, Color } from '../../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -7,7 +7,7 @@ import {
 const widthConst = Dimensions.get('screen').width;
 export default StyleSheet.create({
   container: {
-    height:"94%",
+    height: "94%",
     backgroundColor: Color.white,
   },
   header: {
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     margin: wp('2%'),
     elevation: 4,
     shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     borderRadius: Matrics.Scale(10),
     padding: Matrics.Scale(5),
     paddingBottom: '5%',
@@ -52,7 +52,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: hp('1%'),
     // marginStart: wp('5%'),
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
   textDate_time: {
     color: Color.AppColor,
@@ -88,15 +88,23 @@ export default StyleSheet.create({
     width: wp('30%'),
     fontWeight: '800',
     marginBottom: Matrics.Scale(4),
-    alignItems:'flex-end',
-    
+    alignItems: 'flex-end',
+
   },
   textstatus: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign:'right',
+    textAlign: 'right',
+
+  },
+  textOrderID: {
+    color: Color.ligthGray,
+    fontSize: Matrics.Scale(16),
+    fontWeight: '800',
+    width: wp('20%'),
+    textAlign: 'right',
 
   },
   textstatus_dis: {
@@ -104,7 +112,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('40'),
-    textAlign:'right',
+    textAlign: 'right',
   },
   service_btn_mainview: {
     flexDirection: 'row',
@@ -235,7 +243,7 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: '900',
   },
-  statusView:{
-    alignContent:'flex-end',alignItems:'flex-end',flex:1
+  statusView: {
+    alignContent: 'flex-end', alignItems: 'flex-end', flex: 1
   },
 });

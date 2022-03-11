@@ -217,11 +217,23 @@ const CompletDetails = (props) => {
                   {data.customer == null ? null : data.customer.phone}
                 </Text>
               </View>
-              <View style={styles.address_View}>
+              {/* <View style={styles.address_View}>
                 <Icon name="enviroment" style={styles.call_icon} />
                 <Text style={styles.textAddress}>{data.customer != null && (data.customer.address || data.customer.city || data.customer.state)
                   ? (data.customer.address + ' ' + data.customer.city + ' ' + data.customer.state) : "Address not defiend"}</Text>
-              </View>
+              </View> */}
+              {data && data?.service?.service_sub_type === 'at_home' &&
+                (data.orders_info.booking_address || data.orders_info.booking_city || data.orders_info.booking_state) ?
+                <View style={styles.address_View}>
+                  <Icon name="enviroment" style={styles.call_icon} />
+                  <Text style={styles.textAddress}>{' '}
+                    {data.orders_info.booking_address}{' '}
+                    {data.orders_info.booking_city}{' '}
+                    {data.orders_info.booking_state}{' '}
+                    {data.orders_info.booking_zipcode}
+                  </Text>
+                </View>
+                : null}
               {data.status_notes !== null ?
                 <View style={styles.viewLine} /> : null}
               {data.status_notes !== null ? (

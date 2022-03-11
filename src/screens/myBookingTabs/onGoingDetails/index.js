@@ -32,6 +32,9 @@ const onGoingDetails = (props) => {
   const currencySymbolePosition = useSelector(
     (state) => state.setting.setting.currency_symbol_position,
   );
+  const { min_advance_booking_time } = useSelector(
+    (state) => state.setting.setting,
+  );
   const currencyFrm = useSelector(
     (state) => state.setting.setting.currency_format,
   );
@@ -92,6 +95,7 @@ const onGoingDetails = (props) => {
     console.log('second-----------', seconds);
     return hours + ':' + minutes;
   }
+  console.log('dataongoingDetails', data);
 
   // Api calling for newBookings
   function getStatus(st) {
@@ -294,20 +298,23 @@ const onGoingDetails = (props) => {
                   </TouchableOpacity>
                 ) : null}
 
-                {data.order_status == 'AC'
-                  &&
-                  // data.booking_date == currentdate && item.service.service_sub_type === 'at_home' &&
-                  data.booking_date == currentdate && data?.service?.service_sub_type === 'at_home' &&
-                  bookingtimecurrenttime(crtime, data.booking_time) < 60
-                  ? (
-                    <TouchableOpacity
-                      style={styles.btnViewOntheWay}
-                      onPress={() => getStatus('OW')}>
-                      <Text style={styles.btnText}>
-                        {String.MyBookingTab.ontheway}
-                      </Text>
-                    </TouchableOpacity>
-                  ) : null}
+                {
+                  // data.order_status == 'AC'
+                  //   &&
+                  //   data.booking_date == currentdate && item.service.service_sub_type === 'at_home' &&
+                  //   bookingtimecurrenttime(crtime, data.booking_time) < 60
+                  data?.order_status == 'AC' && data?.service?.service_sub_type === 'at_home' &&
+                    data?.booking_date == currentdate &&
+                    bookingtimecurrenttime(crtime, data?.booking_time) < parseInt(min_advance_booking_time)
+                    ? (
+                      <TouchableOpacity
+                        style={styles.btnViewOntheWay}
+                        onPress={() => getStatus('OW')}>
+                        <Text style={styles.btnText}>
+                          {String.MyBookingTab.ontheway}
+                        </Text>
+                      </TouchableOpacity>
+                    ) : null}
                 {data.order_status == 'OW' &&
                   data.service.service_sub_type == 'at_home' ? (
                   <TouchableOpacity
@@ -374,10 +381,23 @@ const onGoingDetails = (props) => {
                 <Text style={styles.textAddress}>jsgsg</Text>
               </View>
             ) : null} */}
-            <View style={styles.address_View}>
+            {/* <View style={styles.address_View}>
               <Icon name="enviroment" style={styles.call_icon} />
               <Text style={styles.textAddress}>{data.customer != null ? data.customer.address : "Address not defiend"}</Text>
-            </View>
+              <Text style={styles.textAddress}>{data?.customer?.address ? data?.customer?.address : "Address not defiend"}</Text>
+            </View> */}
+            {data && data?.service?.service_sub_type === 'at_home' &&
+              (data.orders_info.booking_address || data.orders_info.booking_city || data.orders_info.booking_state) ?
+              <View style={styles.address_View}>
+                <Icon name="enviroment" style={styles.call_icon} />
+                <Text style={styles.textAddress}>{' '}
+                  {data.orders_info.booking_address}{' '}
+                  {data.orders_info.booking_city}{' '}
+                  {data.orders_info.booking_state}{' '}
+                  {data.orders_info.booking_zipcode}
+                </Text>
+              </View>
+              : null}
             {data.status_notes !== null ?
               <View style={styles.viewLine} /> : null}
             {data.status_notes !== null ? (

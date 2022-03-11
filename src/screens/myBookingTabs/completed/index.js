@@ -62,7 +62,7 @@ const CompletedTab = (props) => {
     });
     return unsubscribe;
   }, [props.navigation]);
-  
+
   // Api calling for complteTask
   function getComplteTask(pageRef) {
     setLoading(true);
@@ -80,7 +80,7 @@ const CompletedTab = (props) => {
         setLoading(false);
         setRefreshing(false);
         if (res[1].data == true) {
-          
+
           let dataRes = res[1].response.data;
           let lastPage = res[1].response.last_page;
           if (dataRes.length > 0) {
@@ -127,6 +127,14 @@ const CompletedTab = (props) => {
           // inverted={true}
           renderItem={({ item, index }) => (
             <View style={styles.mainView}>
+              <View style={styles.topView}>
+                <Text style={styles.bookingTextDate}>
+                  {String.MyBookingTab.orderid + ' : '}
+                </Text>
+                <Text style={styles.textOrderID}>
+                  {item.id}
+                </Text>
+              </View>
               <View style={styles.topView}>
                 <Text style={styles.bookingTextDate}>
                   {String.MyBookingTab.date_time}
