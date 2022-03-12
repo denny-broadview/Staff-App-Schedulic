@@ -283,7 +283,8 @@ const OngoingTab = (props) => {
                             text: 'Appointment Updated',
                             duration: Snackbar.LENGTH_SHORT
                         });
-                        getOnGoing();
+                        // getOnGoing();
+                        getOnGoing(1);
                         if (st === 'OW' && sType === 'at_home') {
                             // getStaffLatLng();
                         }
