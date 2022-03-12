@@ -34,7 +34,7 @@ const MapScreen = (props) => {
   const [orderId, setOrderId] = useState(0)
   const [coordinates, setCoordinates] = useState([])
   const [distanceMeter, setDistanceMeter] = useState([])
-  const [destination, setDestination] = useState({ latitude: 21.134345, longitude: 72.85722345 })
+  const [destination, setDestination] = useState({ latitude: 0, longitude: 0 })
   const { width, height } = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.0922;
@@ -44,9 +44,9 @@ const MapScreen = (props) => {
   let sdd = coordinates.data
   let dd = { "latitude": 21.134464, "longitude": 72.857223 }
   if (sdd && sdd.length > 0) {
-    dd = { "latitude": sdd[0], "longitude": sdd[1] }
+    dd = { "latitude": Number(sdd[0]), "longitude": Number(sdd[1]) } 
   }
-  let origin = dd
+  let origin = dd;
   const staffLocation = useSelector(
     (state) => state.BookingService.staffLocation,
   );
@@ -55,9 +55,6 @@ const MapScreen = (props) => {
       let receivedData = props.route.params.datapass
       setData(receivedData);
       setCustomerImage(props.route.params.image)
-      console.log('item ongoing map-----------', receivedData);
-      // console.log('item ongoing Order Item-----------', props.route.params.datapass.);
-      console.log('Map location address ++++++++++++-----------', receivedData.orders_info.booking_address);
     }
     addCoordinates()
   }, []);
@@ -93,7 +90,6 @@ const MapScreen = (props) => {
     let key = props.route.params.datapass.order_id
     firebaseApp.database().ref('trackOrder/currentLocation/' + key)
       .on('value', function (snapshot) {
-        console.log('Response = ', JSON.stringify(snapshot.val()))
         setCoordinates({ data: snapshotToArray(snapshot) })
       });
   }
@@ -225,7 +221,7 @@ const MapScreen = (props) => {
               }
             }}
             onError={(errorMessage) => {
-              console.log('GOT AN ERROR' + errorMessage);
+              console.log('GOT AN ERROR ' + errorMessage);
             }}
           />
         </MapView>) : null}

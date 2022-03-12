@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity, PermissionsAndroid } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -36,12 +36,13 @@ const Home = (props) => {
   }, []);
 
   const requestLocationPermission = async () => {
-
+   
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization();
       getOneTimeLocation();
       subscribeLocationLocation();
     } else {
+     
       try {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -50,7 +51,9 @@ const Home = (props) => {
             message: 'This App needs to Access your location',
           },
         );
+       
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('ermission is granted');
           //To Check, If Permission is granted
           getOneTimeLocation();
           subscribeLocationLocation();
@@ -59,6 +62,7 @@ const Home = (props) => {
         }
       } catch (err) {
         console.warn(err);
+        console.log('ermission is granted 1',err);
       }
     }
   };
@@ -86,8 +90,10 @@ const Home = (props) => {
   };
 
   const subscribeLocationLocation = () => {
+  
     watchID = Geolocation.watchPosition(
       (position) => {
+        console.log('staff Location- 1',longitude);
         const currentLongitude =
           JSON.stringify(position.coords.longitude);
         const currentLatitude =
@@ -95,6 +101,10 @@ const Home = (props) => {
         longitude = currentLongitude;
         latitude = currentLatitude;
         sendLocationCoordinates()
+        console.log(longitude);
+        console.log(latitude);
+   
+
       },
       (error) => {
         alert(error.message);
