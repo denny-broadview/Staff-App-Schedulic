@@ -44,7 +44,7 @@ const MapScreen = (props) => {
   let sdd = coordinates.data
   let dd = { "latitude": 21.134464, "longitude": 72.857223 }
   if (sdd && sdd.length > 0) {
-    dd = { "latitude": Number(sdd[0]), "longitude": Number(sdd[1]) } 
+    dd = { "latitude": Number(sdd[0]), "longitude": Number(sdd[1]) }
   }
   let origin = dd;
   const staffLocation = useSelector(
@@ -88,6 +88,7 @@ const MapScreen = (props) => {
 
   const readCoordinateData = () => {
     let key = props.route.params.datapass.order_id
+    console.log('key --', key);
     firebaseApp.database().ref('trackOrder/currentLocation/' + key)
       .on('value', function (snapshot) {
         setCoordinates({ data: snapshotToArray(snapshot) })
