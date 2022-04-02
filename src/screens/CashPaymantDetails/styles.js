@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Matrics, Color} from '../../utlis';
+import { StyleSheet } from 'react-native';
+import { Matrics, Color } from '../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     borderRadius: 50 / 2,
     zIndex: 0,
-    width:wp('10%')
+    width: wp('10%')
   },
   courseImg: {
     width: Matrics.Scale(50),
@@ -42,8 +42,8 @@ export default StyleSheet.create({
     elevation: 1,
     shadowOpacity: 0.5,
     shadowRadius: 1,
-    shadowOffset: {width: 0, height: 2},
-    padding:hp('1%')
+    shadowOffset: { width: 0, height: 2 },
+    padding: hp('1%')
   },
   imgView: {
     flexDirection: 'row',
@@ -59,7 +59,7 @@ export default StyleSheet.create({
   userAmount: {
     marginLeft: wp('3%'),
     color: Color.gray,
-    
+
   },
   date: {
     color: Color.ligthGray,
@@ -100,13 +100,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   amountView: {
-    marginTop:hp('2%'),
+    marginTop: hp('2%'),
     flexDirection: 'row',
-    justifyContent:'center',
-    alignSelf:'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
     width: wp('100%'),
   },
- 
+
   text_amount: {
     color: Color.bleck,
     width: wp('70%'),
@@ -129,7 +129,8 @@ export default StyleSheet.create({
   },
   text_coupon_applied: {
     color: Color.AppColor,
-    width: wp('45%'),
+    // width: wp('45%'),
+    width: wp('28%'),
     fontSize: Matrics.Scale(16),
     fontWeight: '600',
   },
@@ -145,11 +146,17 @@ export default StyleSheet.create({
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
   },
   coiponViewApp: {
+    // flexDirection: 'row',
+    // justifyContent: 'center',
+    // alignSelf: 'center',
+    // backgroundColor: Color.white,
+    // width: wp('60%'),
+    // height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: Color.white,
-    width: wp('60%'),
+    width: wp('45%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
   },
   textCouponCode: {
@@ -159,7 +166,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     width: wp('35%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-    paddingLeft:10
+    paddingLeft: 10
   },
   couponIconView: {
     backgroundColor: Color.AppColor,
@@ -217,7 +224,7 @@ export default StyleSheet.create({
   },
   buttonStylpass: {
 
-  backgroundColor:Color.AppColor,
+    backgroundColor: Color.AppColor,
     borderRadius: Matrics.Scale(5),
     width: wp('90%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),

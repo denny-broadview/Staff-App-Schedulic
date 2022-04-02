@@ -50,11 +50,13 @@ export const String = {
     Discount: 'Discount',
   },
   payment: {
-    cash: 'cash',
+    // cash: 'cash',
+    cash: 'Cash',
     Online: 'Online',
     Instore: 'Instore',
     Next: 'Next',
-    paymants: 'Paymant',
+    // paymants: 'Paymant',
+    paymants: 'Payment',
     paymantDetails: 'Payment Details',
   },
   account: {

@@ -83,7 +83,7 @@ const Payment = (props) => {
                   />
                 </View></TouchableOpacity>
             </View>
-            <View style={styles.commonpayment}>
+            {/* <View style={styles.commonpayment}>
               <View>
                 <Text style={styles.textView}>{String.payment.Instore}</Text>
               </View>
@@ -93,7 +93,7 @@ const Payment = (props) => {
                   style={styles.imageIcon}
                 />
               </View>
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </View>
