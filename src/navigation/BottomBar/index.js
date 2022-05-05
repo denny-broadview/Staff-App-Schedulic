@@ -6,7 +6,7 @@ import Color from '../../utlis/Color';
 import Feather from 'react-native-vector-icons/Feather'
 //styles
 // import BOTTOM from '../../assets/images/bottomview.png'
-import { Auth, Constants} from '../../global';
+//import { Auth, Constants} from '../../global';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

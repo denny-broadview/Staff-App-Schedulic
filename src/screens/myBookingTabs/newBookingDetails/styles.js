@@ -41,6 +41,21 @@ export default StyleSheet.create({
         marginTop:hp('2%')
        
       },
+      bookingTextDate: {
+        color: Color.AppColor,
+        fontSize: Matrics.Scale(16),
+        width: wp('60%'),
+        fontWeight: '800',
+        marginTop: Matrics.Scale(4),
+      },
+      textOrderID: {
+        color: Color.ligthGray,
+        fontSize: Matrics.Scale(16),
+        fontWeight: '800',
+        width: wp('20%'),
+        textAlign: 'right',
+      },
+
       service_dis_btn:{
         width:wp('30%'),
   

@@ -185,7 +185,7 @@ const NewBookingTab = (props) => {
               <View style={styles.mainView}>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
-                    {String.MyBookingTab.orderid + ' : '}
+                    {String.MyBookingTab.orderid + 'Order Id : '}
                   </Text>
                   <Text style={styles.textOrderID}>
                     {item.id}
@@ -320,16 +320,16 @@ const NewBookingTab = (props) => {
                       {currencySymbolePosition == 'left' ? (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
-                            item.subtotal,
+                            item.total_cost,
                             { code: currency },
-                            // {locale: currencyFrm}, {/* item.total_cost, */}
+                            // {locale: currencyFrm},
                           )}
                         </Text>
                       ) : (
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
-                            item.subtotal,
-                            // {locale: currencyFrm},item.total_cost,
+                            item.total_cost,
+                            // {locale: currencyFrm},
                             { code: currency },
                           )}
                         </Text>

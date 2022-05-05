@@ -76,6 +76,15 @@ const CompletDetails = (props) => {
         <View style={{ justifyContent: 'center', flex: 1 }}>
           <View style={styles.mainView}>
             <View style={styles.topView}>
+              <Text style={styles.bookingTextDate}>
+                {String.MyBookingTab.orderid + 'Order Id : '}
+              </Text>
+              <Text style={styles.textOrderID}>
+                {data.id}
+              </Text>
+            </View>
+
+            <View style={styles.topView}>
               <Text style={styles.textDate_time}>
                 {String.MyBookingTab.date_time}
               </Text>

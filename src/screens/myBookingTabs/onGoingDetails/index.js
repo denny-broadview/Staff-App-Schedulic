@@ -146,6 +146,14 @@ const onGoingDetails = (props) => {
           <View style={styles.mainView}>
             <MySpinner size="large" visible={loagind} />
             <View style={styles.topView}>
+              <Text style={styles.bookingTextDate}>
+                {String.MyBookingTab.orderid + 'Order Id : '}
+              </Text>
+              <Text style={styles.textOrderID}>
+                {data.id}
+              </Text>
+            </View>
+            <View style={styles.topView}>
               <Text style={styles.textDate_time}>
                 {String.MyBookingTab.date_time}
               </Text>

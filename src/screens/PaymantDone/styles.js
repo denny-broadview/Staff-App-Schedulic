@@ -63,7 +63,7 @@ export default StyleSheet.create({
       },
       buttonStylupdate: {
         borderWidth: 1,
-        borderColor: 'rgba(66, 77, 228, 1)',
+        borderColor: '#00A89B',
         borderRadius: Matrics.Scale(5),
         backgroundColor: Color.AppColor,
         borderRadius: Matrics.Scale(5),
@@ -75,6 +75,7 @@ export default StyleSheet.create({
         textAlign: 'center',
       },
       textUpdate: {
+        borderColor: '#00A89B',
         justifyContent: 'center',
         color: '#fff',
         fontWeight: '500',

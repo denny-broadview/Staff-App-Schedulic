@@ -20,7 +20,6 @@ export default StyleSheet.create({
     width: widthConst,
   },
   mainView: {
-
     backgroundColor: Color.white,
     justifyContent: 'center',
     alignSelf: 'center',
@@ -71,6 +70,13 @@ export default StyleSheet.create({
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
     width: wp('60%'),
+    fontWeight: '800',
+    marginTop: Matrics.Scale(4),
+  },
+  bookingTextDate1: {
+    color: Color.AppColor,
+    fontSize: Matrics.Scale(16),
+    width: wp('62%'),
     fontWeight: '800',
     marginTop: Matrics.Scale(4),
   },

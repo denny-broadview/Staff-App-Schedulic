@@ -91,6 +91,14 @@ const CashPaymantDetails = (props) => {
     });
   }
 
+  const removeCoupon = () => {
+    setCouponView(false);
+    setDiscountvalue(0);
+    setDiscountType('F');
+    finalTotal();
+    setCouponeCode('')
+  }
+
   const taxCal = () => {
     // setAllTax(taxArray);
 
@@ -309,14 +317,20 @@ const CashPaymantDetails = (props) => {
           </View>
         </View>
         <View style={styles.amountView}>
-          <Text style={styles.text_coupon}>{String.cashpaymant.coupon}</Text>
+          <Text style={couponview === true ? styles.text_coupon1 : styles.text_coupon}>{String.cashpaymant.coupon}</Text>
           <View>
             {couponview == true ? (
-              <View style={styles.coiponViewApp}>
-                <Text style={styles.text_coupon_applied}>
-                  {String.cashpaymant.coupon_code_applied}
-                </Text>
-              </View>
+              <TouchableOpacity style={styles.coiponViewApp} onPress={() => removeCoupon()}>
+                <View style={styles.coiponViewApp}>
+                  <Text style={styles.text_coupon_applied}>
+                    {String.cashpaymant.coupon_code_applied}
+                  </Text>
+                  <Icon
+                    name="close"
+                    style={styles.inc_coupon_close}
+                  />
+                </View>
+              </TouchableOpacity>
             ) : (
               <View style={styles.coiponView}>
                 <TextInput

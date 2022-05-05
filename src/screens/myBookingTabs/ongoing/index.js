@@ -345,14 +345,14 @@ const OngoingTab = (props) => {
                             <View style={styles.mainView} >
                                 <View style={styles.topView}>
                                     <Text style={styles.bookingTextDate}>
-                                        {String.MyBookingTab.orderid + ' : '}
+                                        {String.MyBookingTab.orderid + 'Order Id : '}
                                     </Text>
                                     <Text style={styles.textOrderID}>
                                         {item.id}
                                     </Text>
                                 </View>
                                 <View style={styles.topView} >
-                                    <Text style={styles.bookingTextDate} > {String.MyBookingTab.date_time} </Text>
+                                    <Text style={styles.bookingTextDate1} > {String.MyBookingTab.date_time} </Text>
                                     <Text style={styles.textstatus} > {String.MyBookingTab.satus}</Text>
                                 </View>
                                 <View style={styles.topView_dis} >
@@ -540,7 +540,7 @@ const OngoingTab = (props) => {
                                                 style={styles.btnViewDetails}
                                                 onPress={() => props.navigation.navigate('onGoingDetails', {
                                                     datapass: item,
-                                                    image: item.customer.image,
+                                                    image: item?.customer?.image,
                                                 })} >
                                                 <Text style={styles.btnText} > {String.MyBookingTab.details}</Text>
                                             </TouchableOpacity>

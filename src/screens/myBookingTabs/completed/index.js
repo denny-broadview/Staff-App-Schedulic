@@ -12,10 +12,10 @@ import styles from './styles';
 import { String } from '../../../utlis/String';
 import { Color, Matrics } from '../../../utlis';
 import { Auth, Constants } from '@global';
-import { MySpinner } from '../../../component/MySpinner';
+//import { MySpinner } from '../../../component/MySpinner';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
-import Snackbar from 'react-native-snackbar';
+//import Snackbar from 'react-native-snackbar';
 const CompletedTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [refreshing, setRefreshing] = useState(false);
@@ -42,7 +42,6 @@ const CompletedTab = (props) => {
     }
     console.log('loadMoreData');
   }
-
   const onRefresh = () => {
     setData([]);
     setPage(1)
@@ -129,7 +128,7 @@ const CompletedTab = (props) => {
             <View style={styles.mainView}>
               <View style={styles.topView}>
                 <Text style={styles.bookingTextDate}>
-                  {String.MyBookingTab.orderid + ' : '}
+                  {String.MyBookingTab.orderid + 'Order Id : '}
                 </Text>
                 <Text style={styles.textOrderID}>
                   {item.id}

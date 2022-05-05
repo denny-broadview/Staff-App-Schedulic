@@ -22,7 +22,6 @@ export default StyleSheet.create({
     width: widthConst,
   },
   mainView: {
-
     backgroundColor: Color.white,
     justifyContent: 'center',
     alignSelf: 'center',
@@ -41,7 +40,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('2%')
-
+  },
+  bookingTextDate: {
+    color: Color.AppColor,
+    fontSize: Matrics.Scale(16),
+    width: wp('60%'),
+    fontWeight: '800',
+    marginTop: Matrics.Scale(4),
   },
   amount_view: {
     flexDirection: 'row',
@@ -65,13 +70,7 @@ export default StyleSheet.create({
     marginTop: Matrics.Scale(8),
 
   },
-  bookingTextDate: {
-    color: Color.AppColor,
-    fontSize: Matrics.Scale(16),
-    width: wp('60%'),
-    fontWeight: '800',
-    marginTop: Matrics.Scale(4),
-  },
+
   textDate_dis: {
     color: Color.ligthGray,
     fontSize: Matrics.Scale(16),

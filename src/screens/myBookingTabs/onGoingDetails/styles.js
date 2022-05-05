@@ -29,7 +29,8 @@ export default StyleSheet.create({
     shadowOffset: {width: 0, height: 2},
     borderRadius: Matrics.Scale(10),
     padding: Matrics.Scale(5),
-    height:"94%",
+    //height:"94%",
+    paddingBottom:"5%"
   },
   mainCustomerDetails:{
       marginBottom:'14%'
@@ -40,6 +41,20 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('2%'),
+  },
+  bookingTextDate: {
+    color: Color.AppColor,
+    fontSize: Matrics.Scale(16),
+    width: wp('60%'),
+    fontWeight: '800',
+    marginTop: Matrics.Scale(4),
+  },
+  textOrderID: {
+    color: Color.ligthGray,
+    fontSize: Matrics.Scale(16),
+    fontWeight: '800',
+    width: wp('20%'),
+    textAlign: 'right',
   },
   service_dis_btn: {
     width: wp('30%'),
@@ -93,6 +108,7 @@ export default StyleSheet.create({
     marginTop: hp('1%'),
     marginStart: wp('5%'),
   },
+
   textDate_time: {
     color: Color.AppColor,
     fontSize: Matrics.Scale(16),
@@ -126,6 +142,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
+    textAlign:'right'
   },
   textstatus_dis: {
     color: Color.ligthGray,

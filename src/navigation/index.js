@@ -8,7 +8,7 @@ import {
   Dimensions,
   View,
   TouchableOpacity,
-  ImageBackground
+  //ImageBackground
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,9 +16,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { String } from '../utlis/String';
 import NetInfo from '@react-native-community/netinfo';
-import BottomBar from './BottomBar';
+//import BottomBar from './BottomBar';
 import Spalsh from '../screens/spalsh';
-import Login from '../screens/login';
+//import Login from '../screens/login';
 import MyBookingMainView from '../screens/myBookingTabs/MainBookingView';
 import LoginMain from '../screens/login/loginmain';
 import Home from '../screens/Home';
@@ -246,7 +246,7 @@ export default App = () => {
     return (
       <TopTab.Navigator
         tabBar={props => <MyBookingMainView {...props} />}
-        swipeEnabled={false}>
+        swipeEnabled={true}>
         <TopTab.Screen name="NewBookingTab" options={{ title: 'New Bookings' }} component={NewBookingTab} />
         <TopTab.Screen name="OngoingTab" options={{ title: 'Upcoming' }} component={OngoingTab} />
         <TopTab.Screen name="CompletedTab" options={{ title: 'Completed' }} component={CompletedTab} />

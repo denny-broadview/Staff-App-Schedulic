@@ -171,14 +171,18 @@ const MapScreen = (props) => {
             <MapView.Marker
               coordinate={origin}>
               <View style={{ marginTop: 30, marginLeft: 10 }}>
-                <View style={styles.courseImgView}>
+                {/* <View style={styles.courseImgView}>
                   <TextAvatar
                     backgroundColor={'#ffff00'}
                     textColor={'#0000ff'}
                     size={60}
                     type={'circle'} // optional
                   >{'Staff'}</TextAvatar>
-                </View>
+                </View> */}
+                <Image
+                    source={require('../../assets/images/motorcycle.png')}
+                    style={{ height: 30, width: 40 }}
+               />
               </View>
             </MapView.Marker>
             <MapView.Marker
