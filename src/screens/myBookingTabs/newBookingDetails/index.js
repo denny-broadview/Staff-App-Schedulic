@@ -167,7 +167,7 @@ const NewBookingDetails = (props) => {
                 ) : null}
                 {data.order_status != null && data.order_status == 'RSC' ? (
                   <View>
-                    <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                    <Text style={styles.textstatus_dis}>Rescheduled By Customer</Text>
                   </View>
                 ) : null}
                 {data.order_status != null && data.order_status == 'ITR' ? (

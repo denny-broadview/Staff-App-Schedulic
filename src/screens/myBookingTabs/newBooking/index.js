@@ -252,7 +252,7 @@ const NewBookingTab = (props) => {
                     ) : null}
                     {item.order_status != null && item.order_status == 'RSC' ? (
                       <View>
-                        <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Customer</Text>
                       </View>
                     ) : null}
                     {item.order_status != null && item.order_status == 'ITR' ? (
