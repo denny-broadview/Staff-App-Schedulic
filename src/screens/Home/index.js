@@ -1,32 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Image, ImageBackground, ScrollView, TouchableOpacity, PermissionsAndroid } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  ScrollView,
+  TouchableOpacity,
+  PermissionsAndroid,
+  Switch,
+} from 'react-native';
 import StarRating from 'react-native-star-rating';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Entypo';
-import { String } from '../../utlis/String';
+import {String} from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
-import { MySpinner } from '../../component/MySpinner';
-import { Auth, Constants } from '@global';
-import { useSelector, useDispatch } from 'react-redux';
+import {MySpinner} from '../../component/MySpinner';
+import {Auth, Constants} from '@global';
+import {useSelector, useDispatch} from 'react-redux';
 import moment from 'moment';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1: import AsyncStorage
 import Geolocation from '@react-native-community/geolocation';
-import { setStaffLocation } from '../../store/actions';
-
+import {setStaffLocation} from '../../store/actions';
+import Snackbar from 'react-native-snackbar';
 const Home = (props) => {
-  const navigation = useNavigation()
-  const userImage = useSelector(state => state.user.userImage)
-  const userInfo = useSelector(state => state.user.user)
-  const dispatch = useDispatch()
+  const navigation = useNavigation();
+  const userImage = useSelector((state) => state.user.userImage);
+  const userInfo = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
   const [starCount, setStarCount] = useState(0);
   const [bookingdata, setBookingData] = useState([]);
   const [onGoingdata, setonGoingData] = useState([]);
   const [completeTask, setCompletedTaskData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(true);
+  const [internalStaffStatus, setInternalStaffStatus] = useState(false);
   let latitude = 0;
   let longitude = 0;
-  let watchID = null
+  let watchID = null;
 
   useEffect(() => {
     requestLocationPermission();
@@ -36,13 +47,11 @@ const Home = (props) => {
   }, []);
 
   const requestLocationPermission = async () => {
-   
     if (Platform.OS === 'ios') {
       Geolocation.requestAuthorization();
       getOneTimeLocation();
       subscribeLocationLocation();
     } else {
-     
       try {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
@@ -51,7 +60,7 @@ const Home = (props) => {
             message: 'This App needs to Access your location',
           },
         );
-       
+
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           console.log('ermission is granted');
           //To Check, If Permission is granted
@@ -62,7 +71,7 @@ const Home = (props) => {
         }
       } catch (err) {
         console.warn(err);
-        console.log('ermission is granted 1',err);
+        console.log('ermission is granted 1', err);
       }
     }
   };
@@ -70,13 +79,11 @@ const Home = (props) => {
   const getOneTimeLocation = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        const currentLongitude =
-          JSON.stringify(position.coords.longitude);
-        const currentLatitude =
-          JSON.stringify(position.coords.latitude);
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+        const currentLatitude = JSON.stringify(position.coords.latitude);
         longitude = currentLongitude;
         latitude = currentLatitude;
-        sendLocationCoordinates()
+        sendLocationCoordinates();
       },
       (error) => {
         alert(error.message);
@@ -84,56 +91,56 @@ const Home = (props) => {
       {
         enableHighAccuracy: false,
         timeout: 30000,
-        maximumAge: 1000
+        maximumAge: 1000,
       },
     );
   };
 
   const subscribeLocationLocation = () => {
-  
     watchID = Geolocation.watchPosition(
       (position) => {
-        console.log('staff Location- 1',longitude);
-        const currentLongitude =
-          JSON.stringify(position.coords.longitude);
-        const currentLatitude =
-          JSON.stringify(position.coords.latitude);
+        console.log('staff Location- 1', longitude);
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+        const currentLatitude = JSON.stringify(position.coords.latitude);
         longitude = currentLongitude;
         latitude = currentLatitude;
-        sendLocationCoordinates()
+        sendLocationCoordinates();
         console.log(longitude);
         console.log(latitude);
-   
-
       },
       (error) => {
         alert(error.message);
       },
       {
         enableHighAccuracy: false,
-        maximumAge: 1000
+        maximumAge: 1000,
       },
     );
   };
 
   const sendLocationCoordinates = () => {
-    let dd = {}
-    dd['latitude'] = latitude
-    dd['longitude'] = longitude
-    dispatch(setStaffLocation(dd))
-  }
+    let dd = {};
+    dd['latitude'] = latitude;
+    dd['longitude'] = longitude;
+    dispatch(setStaffLocation(dd));
+  };
 
   useEffect(() => {
     console.log('userInfo.avgRatings, ', userInfo.avgRatings);
-    userInfo && setStarCount(userInfo.avgRatings && userInfo.avgRatings.length > 0 ? userInfo.avgRatings[0].aggregate : 0)
-  }, [userInfo])
+    userInfo &&
+      setStarCount(
+        userInfo.avgRatings && userInfo.avgRatings.length > 0
+          ? userInfo.avgRatings[0].aggregate
+          : 0,
+      );
+  }, [userInfo]);
 
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
       getBooking();
       getOnGoing();
       getComplteTask();
-      sendLocationCoordinates()
+      sendLocationCoordinates();
       // setStarCount(userInfo.avgRatings == "" ? 0 : userInfo.avgRatings[0].aggregate)
     });
     return unsubscribe;
@@ -143,30 +150,42 @@ const Home = (props) => {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffnewbookin, (res) => {
-      if (res[1].data == true) {
-        setLoading(false);
-        setBookingData(res[1].response.data);
-      } else {
-        setBookingData([]);
-        setLoading(false);
-      }
-    });
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.staffnewbookin,
+      (res) => {
+        if (res[1].data == true) {
+          setLoading(false);
+          setBookingData(res[1].response.data);
+        } else {
+          setBookingData([]);
+          setLoading(false);
+        }
+      },
+    );
   }
   // Api calling for onGoing
   function getOnGoing() {
     setLoading(true);
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
-    Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffOnGoing, (res) => {
-      if (res[1].data == true) {
-        setLoading(false);
-        setonGoingData(res[1].response.data);
-      } else {
-        setonGoingData([]);
-        setLoading(false);
-      }
-    });
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.staffOnGoing,
+      (res) => {
+        if (res[1].data == true) {
+          setLoading(false);
+          setonGoingData(res[1].response.data);
+        } else {
+          setonGoingData([]);
+          setLoading(false);
+        }
+      },
+    );
   }
 
   // Api calling for complteTask
@@ -175,24 +194,80 @@ const Home = (props) => {
     let myForm = new FormData();
     myForm.append('business_id', Constants.businessid);
     myForm.append('staff_id', userInfo.user_id);
-    myForm.append('status', 'CO')
-    Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.completTask, (res) => {
-      if (res[1].data == true) {
-        setLoading(false);
-        setCompletedTaskData(res[1].response.data);
-      } else {
-        setCompletedTaskData([]);
-        setLoading(false);
-      }
-    });
+    myForm.append('status', 'CO');
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.completTask,
+      (res) => {
+        if (res[1].data == true) {
+          setLoading(false);
+          setCompletedTaskData(res[1].response.data);
+        } else {
+          setCompletedTaskData([]);
+          setLoading(false);
+        }
+      },
+    );
   }
 
   // Task#1: Create onTabNavigate method and call on onPress
   const onTabNavigate = async (screenname, tabIndex) => {
-    await AsyncStorage.setItem('goToTab', tabIndex);  // Set value in AsyncStorage
-    navigation.navigate('My Bookings', { screen: 'TopTabs', params: { screen: screenname } });  // Proper do nested navigation
-  }
+    await AsyncStorage.setItem('goToTab', tabIndex); // Set value in AsyncStorage
+    navigation.navigate('My Bookings', {
+      screen: 'TopTabs',
+      params: {screen: screenname},
+    }); // Proper do nested navigation
+  };
 
+  // for toggle switch
+  let staffStatus;
+  useEffect(async () => {
+    let internal_staff11 = await AsyncStorage.getItem('internal_staff');
+    if (internal_staff11) {
+      let newInternalstaff = internal_staff11 === 'Y' ? true : false;
+      setInternalStaffStatus(newInternalstaff);
+    }
+  }, []);
+
+  const toggleSwitch = async () => {
+    setInternalStaffStatus((previousState) => !previousState);
+    if (internalStaffStatus == true) {
+      staffStatus = 'N';
+      await AsyncStorage.setItem('internal_staff', 'N'); // Set value in AsyncStorage
+    } else {
+      await AsyncStorage.setItem('internal_staff', 'Y'); // Set value in AsyncStorage
+      staffStatus = 'Y';
+    }
+    // setLoading(true);
+    let myForm = new FormData();
+    myForm.append('status', staffStatus);
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.staff_status_update,
+      (res) => {
+        console.log('data--------', res[1].response);
+        // await AsyncStorage.getItem('internal_staff');
+        if (res[1].data == true) {
+          setLoading(false);
+          // setData(res[1].response);
+          setTimeout(() => {
+            Snackbar.show({
+              text: res[1].response,
+              duration: Snackbar.LENGTH_SHORT,
+            });
+            props.navigation.navigate('OngoingTab');
+          }, 1000);
+        } else {
+          // setData(res.data);
+          setLoading(false);
+        }
+      },
+    );
+  };
   return (
     <View style={styles.mainHome}>
       <HeaderView
@@ -204,16 +279,13 @@ const Home = (props) => {
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={'Home'}
       />
-      <ScrollView style={{ flex: 1, }}>
+      <ScrollView style={{flex: 1}}>
         <View style={styles.topprofiledeatils}>
           <MySpinner size="large" visible={loading} />
           <View style={styles.profileimage}>
-            <Image
-              style={styles.imageStyle}
-              source={{ uri: userImage }}
-            />
+            <Image style={styles.imageStyle} source={{uri: userImage}} />
           </View>
-          <View style={{ margin: 12 }}>
+          <View style={{margin: 12}}>
             <View style={styles.topHorizontlView}>
               <Text style={styles.hollText}>{String.home.Helloword} </Text>
               <Text style={styles.userText}>{userInfo.full_name}</Text>
@@ -232,20 +304,38 @@ const Home = (props) => {
             </View>
           </View>
         </View>
+        <View style={{marginLeft: 15, marginTop: -22, marginBottom: 5}}>
+          <View style={styles.topHorizontlView}>
+            <Text style={styles.userText}>{`Availability`} </Text>
+            <Text style={styles.userText}>
+              <Switch
+                trackColor={{false: '#767577', true: '#81b0ff'}}
+                thumbColor={internalStaffStatus ? '#00a89b' : '#f4f3f4'}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={internalStaffStatus}
+              />
+            </Text>
+          </View>
+        </View>
         <View style={styles.bottomMainprofile}>
           <ImageBackground
-            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
+            imageStyle={{borderTopLeftRadius: 20, borderTopRightRadius: 20}}
             source={require('../../assets/images/Homebg.png')}
             style={styles.bgimagehome}>
-            <View style={{ padding: 20 }}>
-              <View style={{ flexDirection: 'row' }}>
+            <View style={{padding: 20}}>
+              <View style={{flexDirection: 'row'}}>
                 <Icon name="calendar" style={styles.icon}></Icon>
-                <Text style={styles.dateTex}>  {moment().utcOffset('+05:30').format('DD MMM YYYY')}</Text>
+                <Text style={styles.dateTex}>
+                  {' '}
+                  {moment().utcOffset('+05:30').format('DD MMM YYYY')}
+                </Text>
               </View>
-
-              <View style={{ marginTop: 20, marginBottom: 60 }}>
+              <View style={{marginTop: 20, marginBottom: 60}}>
                 <View style={styles.commonProfile}>
-                  <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('NewBookingTab', '0')} >
+                  <TouchableOpacity
+                    style={styles.btnCard}
+                    onPress={() => onTabNavigate('NewBookingTab', '0')}>
                     {/* <TouchableOpacity style={styles.btnCard} onPress={()=> navigate('My Bookings', { names: ['NewBookingTab'] })}> */}
                     <View>
                       <Image
@@ -263,13 +353,21 @@ const Home = (props) => {
                         </Text>
                       </View>
                       <View>
-                        <Text style={styles.bookingCount}>{bookingdata && bookingdata != null && bookingdata.length > 0 ? bookingdata.length : 0}</Text>
+                        <Text style={styles.bookingCount}>
+                          {bookingdata &&
+                          bookingdata != null &&
+                          bookingdata.length > 0
+                            ? bookingdata.length
+                            : 0}
+                        </Text>
                       </View>
                     </View>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                  <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('OngoingTab', '1')} >
+                  <TouchableOpacity
+                    style={styles.btnCard}
+                    onPress={() => onTabNavigate('OngoingTab', '1')}>
                     <View>
                       <Image
                         source={require('../../assets/images/Ongoing.png')}
@@ -277,7 +375,6 @@ const Home = (props) => {
                       />
                     </View>
                     <View style={styles.cardView}>
-
                       <View>
                         <Text style={styles.cardTextTitel}>
                           {String.home.Ongoing}
@@ -287,14 +384,20 @@ const Home = (props) => {
                         </Text>
                       </View>
                       <View>
-                        <Text style={styles.ongoingCount}> {onGoingdata != null && onGoingdata.length > 0 ? onGoingdata.length : 0} </Text>
+                        <Text style={styles.ongoingCount}>
+                          {' '}
+                          {onGoingdata != null && onGoingdata.length > 0
+                            ? onGoingdata.length
+                            : 0}{' '}
+                        </Text>
                       </View>
-
                     </View>
                   </TouchableOpacity>
                 </View>
                 <View style={styles.commonProfile}>
-                  <TouchableOpacity style={styles.btnCard} onPress={() => onTabNavigate('CompletedTab', '2')} >
+                  <TouchableOpacity
+                    style={styles.btnCard}
+                    onPress={() => onTabNavigate('CompletedTab', '2')}>
                     <View>
                       <Image
                         source={require('../../assets/images/TaskCompleted.png')}
@@ -302,7 +405,6 @@ const Home = (props) => {
                       />
                     </View>
                     <View style={styles.cardView}>
-
                       <View>
                         <Text style={styles.cardTextTitel}>
                           {String.home.TaskCompleted}
@@ -312,17 +414,22 @@ const Home = (props) => {
                         </Text>
                       </View>
                       <View>
-                        <Text style={styles.completCount}> {completeTask != null && completeTask.length > 0 ? completeTask.length : 0} </Text>
+                        <Text style={styles.completCount}>
+                          {' '}
+                          {completeTask != null && completeTask.length > 0
+                            ? completeTask.length
+                            : 0}{' '}
+                        </Text>
                       </View>
-
                     </View>
-                  </TouchableOpacity></View>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </ImageBackground>
         </View>
       </ScrollView>
-    </View >
+    </View>
   );
 };
 export default Home;
