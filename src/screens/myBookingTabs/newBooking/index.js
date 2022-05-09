@@ -1,19 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  SafeAreaView,
+  View, Text, FlatList, TouchableOpacity, SafeAreaView,
   RefreshControl,
-  ActivityIndicator,
+  ActivityIndicator
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
-import {Auth, Constants} from '@global';
-import {Color, Matrics} from '../../../utlis';
-import {MySpinner} from '../../../component/MySpinner';
-import {useSelector} from 'react-redux';
+import { String } from '../../../utlis/String';
+import { Auth, Constants } from '@global';
+import { Color, Matrics } from '../../../utlis';
+import { MySpinner } from '../../../component/MySpinner';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 const NewBookingTab = (props) => {
@@ -41,8 +37,8 @@ const NewBookingTab = (props) => {
 
   useEffect(() => {
     if (searchKeyFromProbs) {
-      setPage(1);
-      getBooking();
+      setPage(1)
+      getBooking()
     }
   }, [searchKeyFromProbs]);
 
@@ -56,16 +52,16 @@ const NewBookingTab = (props) => {
 
   const onRefresh = () => {
     setData([]);
-    setPage(1);
+    setPage(1)
     getBooking(1);
-    setRefreshing(true);
+    setRefreshing(true)
   };
   const loadMoreData = () => {
     if (page <= lastPage) {
       getBooking();
       setPage(page + 1);
     }
-  };
+  }
   //search start
   function searchFilterFunction(text) {
     if (text) {
@@ -85,30 +81,28 @@ const NewBookingTab = (props) => {
   // Api calling for newBookings
   function getBooking(pageRef) {
     let myForm = new FormData();
-    setLoading(true);
+    setLoading(true)
     myForm.append('business_id', Constants.businessid);
     myForm.append('search', '');
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
-      Constants.ApiAction.staffnewbookin +
-        '?page=' +
-        (pageRef === 1 ? 1 : page),
+      Constants.ApiAction.staffnewbookin + '?page=' + (pageRef === 1 ? 1 : page),
       (res) => {
-        setRefreshing(false);
+        setRefreshing(false)
         setLoading(false);
         if (res[1].data == true) {
           let dataRes = res[1].response.data;
           let lastPage = res[1].response.last_page;
           if (dataRes.length > 0) {
             if (pageRef === 1) {
-              setData(dataRes);
+              setData(dataRes)
             } else {
-              page === 1 ? setData(dataRes) : setData(data.concat(dataRes));
+              page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
             }
           }
-          setLastPage(lastPage);
+          setLastPage(lastPage)
           // let resData = res[1].response;
           // setLastPage(res[1].response.last_page)
           // setData(resData.data);
@@ -135,18 +129,18 @@ const NewBookingTab = (props) => {
       (res) => {
         setLoading(false);
         if (res[1].data == true) {
-          if (st == 'R') {
+          if (st == "R") {
             setTimeout(() => {
               Snackbar.show({
                 text: 'Appointment Updated',
-                duration: Snackbar.LENGTH_SHORT,
+                duration: Snackbar.LENGTH_SHORT
               });
             }, 1000);
-          } else if (st == 'AC') {
+          } else if (st == "AC") {
             setTimeout(() => {
               Snackbar.show({
                 text: 'Appointment Updated',
-                duration: Snackbar.LENGTH_SHORT,
+                duration: Snackbar.LENGTH_SHORT
               });
             }, 1000);
           }
@@ -155,7 +149,7 @@ const NewBookingTab = (props) => {
           // setPage(1);
           setData([]);
           getBooking(1);
-          setPage(1);
+          setPage(1)
         }
       },
     );
@@ -164,45 +158,38 @@ const NewBookingTab = (props) => {
     // setLoading(false);
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>
           {String.app.datanotfound}
         </Text>
       </View>
     );
   }
-  console.log('data:', data);
+  console.log('data:', data)
   const renderFooter = () => {
-    return (
-      loagind &&
-      !refreshing && (
-        <View style={{flex: 1, height: 50, marginBottom: 50}}>
-          <ActivityIndicator color={Color.AppColor} />
-        </View>
-      )
-    );
-  };
+    return (loagind && !refreshing && <View style={{ flex: 1, height: 50, marginBottom: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={{justifyContent: 'center', flex: 1}}>
+        <View style={{ justifyContent: 'center', flex: 1 }}>
           {refreshing && !loagind ? (
-            <ActivityIndicator style={{color: Color.AppColor}} />
+            <ActivityIndicator style={{ color: Color.AppColor }} />
           ) : null}
           <FlatList
-            ListEmptyComponent={
-              loagind == false && refreshing == false ? noItemDisplay() : null
-            }
+            ListEmptyComponent={loagind == false && refreshing == false ? noItemDisplay() : null}
             data={data}
             // inverted={true}
             keyExtractor={(item) => item.id}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
                     {String.MyBookingTab.orderid + 'Order Id : '}
                   </Text>
-                  <Text style={styles.textOrderID}>{item.id}</Text>
+                  <Text style={styles.textOrderID}>
+                    {item.id}
+                  </Text>
                 </View>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
@@ -214,13 +201,12 @@ const NewBookingTab = (props) => {
                 </View>
                 <View style={styles.topView_dis}>
                   {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                  <View style={{flexDirection: 'column'}}>
+                  <View style={{ flexDirection: 'column' }}>
                     <Text style={styles.textDate_dis}>
                       {moment(item.booking_date).format('DD MMM YYYY')}
                     </Text>
                     <Text style={styles.bookingTimeText}>
-                      {/* {moment(item.booking_time, 'HH:mm:ss').format('LT')} */}
-                      {moment(item.booking_time, 'h:mm A').format('HH:mm')}
+                      {moment(item.booking_time, 'HH:mm:ss').format('LT')}
                     </Text>
                   </View>
                   <View style={styles.statusView}>
@@ -256,23 +242,17 @@ const NewBookingTab = (props) => {
                     ) : null}
                     {item.order_status != null && item.order_status == 'RSS' ? (
                       <View>
-                        <Text style={styles.textstatus_dis}>
-                          Rescheduled By Staff
-                        </Text>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
                       </View>
                     ) : null}
                     {item.order_status != null && item.order_status == 'RSA' ? (
                       <View>
-                        <Text style={styles.textstatus_dis}>
-                          Rescheduled By Admin
-                        </Text>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
                       </View>
                     ) : null}
                     {item.order_status != null && item.order_status == 'RSC' ? (
                       <View>
-                        <Text style={styles.textstatus_dis}>
-                          Rescheduled By Customer
-                        </Text>
+                        <Text style={styles.textstatus_dis}>Rescheduled By Customer</Text>
                       </View>
                     ) : null}
                     {item.order_status != null && item.order_status == 'ITR' ? (
@@ -282,9 +262,7 @@ const NewBookingTab = (props) => {
                     ) : null}
                     {item.order_status != null && item.order_status == 'CC' ? (
                       <View>
-                        <Text style={styles.textstatus_dis}>
-                          Cancel by Client
-                        </Text>
+                        <Text style={styles.textstatus_dis}>Cancel by Client</Text>
                       </View>
                     ) : null}
                     {item.order_status != null && item.order_status == 'CO' ? (
@@ -293,19 +271,17 @@ const NewBookingTab = (props) => {
                       </View>
                     ) : null}
                   </View>
+
                 </View>
                 <View style={styles.service_btn_mainview}>
                   <View style={styles.service_dis}>
                     <Text style={styles.textDate_time}>
                       {String.MyBookingTab.servicest}
                     </Text>
-                    {item.service !== null ? (
-                      <Text
-                        style={styles.textTime_dis}
-                        key={item.service.service_name}>
+                    {item.service !== null ?
+                      <Text style={styles.textTime_dis} key={item.service.service_name}>
                         {item.service.service_name}
-                      </Text>
-                    ) : null}
+                      </Text> : null}
                   </View>
                   <View style={styles.service_dis_btn}>
                     <TouchableOpacity
@@ -345,7 +321,7 @@ const NewBookingTab = (props) => {
                         <Text style={styles.textTime_dis}>
                           {currencyFormatter.format(
                             item.total_cost,
-                            {code: currency},
+                            { code: currency },
                             // {locale: currencyFrm},
                           )}
                         </Text>
@@ -354,7 +330,7 @@ const NewBookingTab = (props) => {
                           {currencyFormatter.format(
                             item.total_cost,
                             // {locale: currencyFrm},
-                            {code: currency},
+                            { code: currency },
                           )}
                         </Text>
                       )}
@@ -372,14 +348,14 @@ const NewBookingTab = (props) => {
                     <View style={styles.service_dis_btn}>
                       <TouchableOpacity
                         style={styles.btnViewAccept}
-                        onPress={() => getStatus(item.id, 'AC')}>
+                        onPress={() => getStatus(item.id, "AC")}>
                         <Text style={styles.btnText}>
                           {String.MyBookingTab.accept}
                         </Text>
                       </TouchableOpacity>
                     </View>
                     <View style={styles.btnViewReject}>
-                      <TouchableOpacity onPress={() => getStatus(item.id, 'R')}>
+                      <TouchableOpacity onPress={() => getStatus(item.id, "R")}>
                         <Text style={styles.btnText}>
                           {String.MyBookingTab.reject}
                         </Text>
@@ -401,8 +377,8 @@ const NewBookingTab = (props) => {
             ListFooterComponent={renderFooter}
             contentContainerStyle={styles.list}></FlatList>
         </View>
-      </View>
-    </SafeAreaView>
+
+      </View></SafeAreaView>
   );
 };
 export default NewBookingTab;

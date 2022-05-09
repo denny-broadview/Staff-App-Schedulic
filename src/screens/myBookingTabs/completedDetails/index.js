@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,15 +8,15 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
+import { String } from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
 import StarRating from 'react-native-star-rating';
 import moment from 'moment';
-import {Auth, Constants} from '@global';
-import {useSelector} from 'react-redux';
-import {Matrics} from '../../../utlis';
+import { Auth, Constants } from '@global';
+import { useSelector } from 'react-redux';
+import { Matrics } from '../../../utlis';
 const CompletDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [starCount, setStarCount] = useState(0);
@@ -72,14 +72,16 @@ const CompletDetails = (props) => {
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
       />
-      <ScrollView style={{flex: 1}}>
-        <View style={{justifyContent: 'center', flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ justifyContent: 'center', flex: 1 }}>
           <View style={styles.mainView}>
             <View style={styles.topView}>
               <Text style={styles.bookingTextDate}>
                 {String.MyBookingTab.orderid + 'Order Id : '}
               </Text>
-              <Text style={styles.textOrderID}>{data.id}</Text>
+              <Text style={styles.textOrderID}>
+                {data.id}
+              </Text>
             </View>
 
             <View style={styles.topView}>
@@ -89,34 +91,26 @@ const CompletDetails = (props) => {
               <Text style={styles.textstatus}>{String.MyBookingTab.satus}</Text>
             </View>
             <View style={styles.topView_dis}>
-              <View style={{flexDirection: 'row', marginLeft: '4%'}}>
+              <View style={{ flexDirection: "row", marginLeft: "4%" }}>
                 <Text style={styles.textDate_dis}>
-                  {moment(data.booking_date).format('DD MMM YYYY')}
-                  {','}
+                  {moment(data.booking_date).format('DD MMM YYYY')}{","}
                 </Text>
-                <Text style={styles.textTime_dis}>
-                  {' '}
-                  {moment(data.booking_time, 'HH:mm:ss').format('LT')}
-                </Text>
+                <Text style={styles.textTime_dis}>{" "}{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
               </View>
               <View>
-                <Text style={styles.textstatus_dis}>
-                  {data.order_status == 'CO' ? 'Completed' : data.order_status}
-                </Text>
+                <Text style={styles.textstatus_dis}>{data.order_status == 'CO' ? 'Completed' : data.order_status}</Text>
               </View>
             </View>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <View style={styles.service_dis_book}>
                 <Text style={styles.textBook_Time_dis}>
-                  Booked on {moment(data.booking_date).format('DD MMM YYYY')}
-                  &nbsp; @ {moment(data.booking_time, 'HH:mm:ss').format('LT')}
+                  Booked on {moment(data.booking_date).format('DD MMM YYYY')}&nbsp;
+                  @ {moment(data.booking_time, 'HH:mm:ss').format('LT')}
                 </Text>
               </View>
-              <View style={{marginTop: Matrics.Scale(10)}}>
+              <View style={{ marginTop: Matrics.Scale(10) }}>
                 <Text style={styles.text_rat}>{String.MyBookingTab.staff}</Text>
-                <Text style={[styles.textTime_dis, styles.textRight]}>
-                  {userInfo.full_name}
-                </Text>
+                <Text style={[styles.textTime_dis, styles.textRight]}>{userInfo.full_name}</Text>
                 <View style={styles.staff_call_View}>
                   <IconCall
                     name="md-call-outline"
@@ -136,9 +130,7 @@ const CompletDetails = (props) => {
                   {data.service == null ? null : data.service.service_name}
                 </Text>
                 <Text style={styles.textTime_dis}>
-                  Duration{' '}
-                  {data.service == null ? null : data.service.service_time}
-                  &nbsp; min
+                  Duration {data.service == null ? null : data.service.service_time}&nbsp; min
                 </Text>
               </View>
             </View>
@@ -153,7 +145,7 @@ const CompletDetails = (props) => {
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                        {code: currency},
+                        { code: currency },
                         //  {locale: currencyFrm},
                       )}
                     </Text>
@@ -162,7 +154,7 @@ const CompletDetails = (props) => {
                       {currencyFormatter.format(
                         data.total_cost,
                         //  {locale: currencyFrm},
-                        {code: currency},
+                        { code: currency },
                       )}
                     </Text>
                   )}
@@ -172,13 +164,14 @@ const CompletDetails = (props) => {
                     {String.MyBookingTab.customer}
                   </Text>
                   <Text style={styles.textTime_dis}>
+
                     {data.customer == null ? null : data.customer.fullname}
                   </Text>
                 </View>
               </View>
               <View>
                 <View style={styles.service_dis_btn}>
-                  {/* <Text style={styles.text_rat}>
+                  <Text style={styles.text_rat}>
                     {String.MyBookingTab.rating}
                   </Text>
                   <View style={styles.ratingView}>
@@ -192,7 +185,7 @@ const CompletDetails = (props) => {
                       containerStyle={styles.rating}
                       disabled={false}
                     />
-                  </View> */}
+                  </View>
                 </View>
                 <View style={styles.btnViewInvoice}>
                   <TouchableOpacity onPress={() => getinvoice()}>
@@ -204,7 +197,7 @@ const CompletDetails = (props) => {
               </View>
             </View>
           </View>
-          {props.route.params.datapass && (
+          {props.route.params.datapass &&
             <View style={[styles.mainView, styles.mainCustomerDetails]}>
               <Text style={styles.textBookingDetails}>
                 {String.MyBookingTab.customer_detail}
@@ -212,7 +205,7 @@ const CompletDetails = (props) => {
               <View style={styles.imgView}>
                 <View style={styles.courseImgView}>
                   <Image
-                    source={{uri: props.route.params.image}}
+                    source={{ uri: props.route.params.image }}
                     style={styles.courseImg}
                   />
                 </View>
@@ -238,35 +231,27 @@ const CompletDetails = (props) => {
                 <Text style={styles.textAddress}>{data.customer != null && (data.customer.address || data.customer.city || data.customer.state)
                   ? (data.customer.address + ' ' + data.customer.city + ' ' + data.customer.state) : "Address not defiend"}</Text>
               </View> */}
-              {data &&
-              data?.service?.service_sub_type === 'at_home' &&
-              (data.orders_info.booking_address ||
-                data.orders_info.booking_city ||
-                data.orders_info.booking_state) ? (
+              {data && data?.service?.service_sub_type === 'at_home' &&
+                (data.orders_info.booking_address || data.orders_info.booking_city || data.orders_info.booking_state) ?
                 <View style={styles.address_View}>
                   <Icon name="enviroment" style={styles.call_icon} />
-                  <Text style={styles.textAddress}>
-                    {' '}
+                  <Text style={styles.textAddress}>{' '}
                     {data.orders_info.booking_address}{' '}
                     {data.orders_info.booking_city}{' '}
                     {data.orders_info.booking_state}{' '}
                     {data.orders_info.booking_zipcode}
                   </Text>
                 </View>
-              ) : null}
-              {data.status_notes !== null ? (
-                <View style={styles.viewLine} />
-              ) : null}
+                : null}
+              {data.status_notes !== null ?
+                <View style={styles.viewLine} /> : null}
               {data.status_notes !== null ? (
                 <View style={styles.note_View}>
-                  <Text style={styles.textNote}>
-                    {String.MyBookingTab.note}
-                  </Text>
+                  <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>
                   <Text style={styles.textAddress}>{data.status_notes}</Text>
                 </View>
               ) : null}
-            </View>
-          )}
+            </View>}
         </View>
       </ScrollView>
     </View>
