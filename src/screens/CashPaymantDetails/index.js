@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,17 +8,19 @@ import {
   TextInput,
 } from 'react-native';
 import styles from './styles';
-import { String } from '../../utlis/String';
+import {String} from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { useSelector } from 'react-redux';
-import { ScrollView } from 'react-native-gesture-handler';
-import { MySpinner } from '../../component/MySpinner';
-import { Auth, Constants } from '@global';
+import {useSelector} from 'react-redux';
+import {ScrollView} from 'react-native-gesture-handler';
+import {MySpinner} from '../../component/MySpinner';
+import {Auth, Constants} from '@global';
 const axios = require('axios').default;
 const CashPaymantDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
-  const businessdata = useSelector((state) => state.businessDetails.businessDetails);
+  const businessdata = useSelector(
+    (state) => state.businessDetails.businessDetails,
+  );
   var currencyFormatter = require('currency-formatter');
   const currency = useSelector((state) => state.setting.setting.currency);
   const currencySymbolePosition = useSelector(
@@ -41,7 +43,6 @@ const CashPaymantDetails = (props) => {
   let [grantTotal, setGrantTotal] = useState('');
   let tempsArr = [];
 
-
   const [payment, setPayment] = useState([]);
 
   const [taxObject, setTaxObject] = useState([]);
@@ -50,7 +51,6 @@ const CashPaymantDetails = (props) => {
   let taxSub = 0;
   let GstSgstArr1 = [];
   useEffect(() => {
-
     if (props.route.params !== null) {
       setData(props.route.params.datapass);
       setPayment(props.route.params.payment);
@@ -67,7 +67,6 @@ const CashPaymantDetails = (props) => {
     setGrantTotal(val);
     console.log('txtTotla in useEffect  - ', val);
   }, [discountType]);
-
 
   // coupon code api calling
   function couponeCodeapi() {
@@ -96,22 +95,22 @@ const CashPaymantDetails = (props) => {
     setDiscountvalue(0);
     setDiscountType('F');
     finalTotal();
-    setCouponeCode('')
-  }
+    setCouponeCode('');
+  };
 
   const taxCal = () => {
     // setAllTax(taxArray);
-
 
     for (var ii in taxArray) {
       if (ii == 0) {
         amountGST =
           (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr1.push({ amount: amountGST });
+        GstSgstArr1.push({amount: amountGST});
         taxSub = taxSub + amountGST;
       } else if (ii == 1) {
-        amountCGST = (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr1.push({ amount: amountCGST });
+        amountCGST =
+          (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
+        GstSgstArr1.push({amount: amountCGST});
         taxSub = taxSub + amountCGST;
       }
     }
@@ -119,7 +118,7 @@ const CashPaymantDetails = (props) => {
       tempsArr.push({
         name: taxArray[i].name,
         value: taxArray[i].value,
-        amount: GstSgstArr1[0].amount
+        amount: GstSgstArr1[0].amount,
       });
     }
     setCalTaxArray(tempsArr);
@@ -149,7 +148,8 @@ const CashPaymantDetails = (props) => {
         val = parseFloat(grantTotal) - parseFloat(discountvalue);
       }
     } else {
-      val = parseFloat(taxSub) + parseFloat(subtotal);
+      // val = parseFloat(taxSub) + parseFloat(subtotal);
+      val = parseFloat(subtotal);
     }
     return val;
   };
@@ -188,7 +188,9 @@ const CashPaymantDetails = (props) => {
     axios
       .post(
         // Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant,
-        method == 'cash' ? Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant : Constants.ApiBaseUrl + Constants.ApiAction.sendPaymentUrl,
+        method == 'cash'
+          ? Constants.ApiBaseUrl + Constants.ApiAction.cashpaymant
+          : Constants.ApiBaseUrl + Constants.ApiAction.sendPaymentUrl,
         JSON.stringify(resObject),
         {
           headers: {
@@ -207,7 +209,7 @@ const CashPaymantDetails = (props) => {
 
         if (dataSatus == true) {
           console.log(response.data.response);
-          props.navigation.replace('PaymantDone', { order_id: data.id });
+          props.navigation.replace('PaymantDone', {order_id: data.id});
         } else {
           Auth.ToastMessage('Error! while payment Update.');
         }
@@ -238,7 +240,9 @@ const CashPaymantDetails = (props) => {
             <View style={styles.courseImgView}>
               <Image
                 // source={{ uri: props.route.params.image }}
-                source={{ uri: data.service == null ? null : data.service.service_image }}
+                source={{
+                  uri: data.service == null ? null : data.service.service_image,
+                }}
                 style={styles.courseImg}
               />
             </View>
@@ -251,7 +255,7 @@ const CashPaymantDetails = (props) => {
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
                   data.service_cost,
-                  { code: currency },
+                  {code: currency},
                   //{locale: currencyFrm},
                 )}
               </Text> //data.total_cost,
@@ -260,7 +264,7 @@ const CashPaymantDetails = (props) => {
                 {currencyFormatter.format(
                   data.service_cost,
                   // {locale: currencyFrm},
-                  { code: currency },
+                  {code: currency},
                 )}
               </Text> //data.total_cost,
             )}
@@ -273,7 +277,7 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-                { code: currency },
+                {code: currency},
                 // {locale: currencyFrm},
               )}
             </Text>
@@ -282,7 +286,7 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 data.total_cost,
                 // {locale: currencyFrm},
-                { code: currency },
+                {code: currency},
               )}
             </Text>
           )}
@@ -290,16 +294,21 @@ const CashPaymantDetails = (props) => {
 
         <View>
           <View>
-            <FlatList
+            {/* <FlatList
               data={calTaxArray}
-              renderItem={({ item, index }) => (
+              renderItem={({item, index}) => (
                 <View style={styles.amountView}>
-                  <Text style={styles.text_amount}>{item.name}{"("}{item.value}{"%)"}</Text>
+                  <Text style={styles.text_amount}>
+                    {item.name}
+                    {'('}
+                    {item.value}
+                    {'%)'}
+                  </Text>
                   {currencySymbolePosition == 'left' ? (
                     <Text style={styles.text_rs}>
                       {currencyFormatter.format(
                         item.amount,
-                        { code: currency },
+                        {code: currency},
                         // {locale: currencyFrm},
                       )}
                     </Text>
@@ -308,27 +317,31 @@ const CashPaymantDetails = (props) => {
                       {currencyFormatter.format(
                         item.amount,
                         // {locale: currencyFrm},
-                        { code: currency },
+                        {code: currency},
                       )}
                     </Text>
                   )}
                 </View>
-              )}></FlatList>
+              )}></FlatList> */}
           </View>
         </View>
         <View style={styles.amountView}>
-          <Text style={couponview === true ? styles.text_coupon1 : styles.text_coupon}>{String.cashpaymant.coupon}</Text>
+          <Text
+            style={
+              couponview === true ? styles.text_coupon1 : styles.text_coupon
+            }>
+            {String.cashpaymant.coupon}
+          </Text>
           <View>
             {couponview == true ? (
-              <TouchableOpacity style={styles.coiponViewApp} onPress={() => removeCoupon()}>
+              <TouchableOpacity
+                style={styles.coiponViewApp}
+                onPress={() => removeCoupon()}>
                 <View style={styles.coiponViewApp}>
                   <Text style={styles.text_coupon_applied}>
                     {String.cashpaymant.coupon_code_applied}
                   </Text>
-                  <Icon
-                    name="close"
-                    style={styles.inc_coupon_close}
-                  />
+                  <Icon name="close" style={styles.inc_coupon_close} />
                 </View>
               </TouchableOpacity>
             ) : (
@@ -360,7 +373,7 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.textTotalRs}>
               {currencyFormatter.format(
                 grantTotal,
-                { code: currency },
+                {code: currency},
                 // {locale: currencyFrm},
               )}
             </Text>
@@ -369,7 +382,7 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 grantTotal,
                 // {locale: currencyFrm},
-                { code: currency },
+                {code: currency},
               )}
             </Text>
           )}
