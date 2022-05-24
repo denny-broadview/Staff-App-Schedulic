@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -12,16 +12,16 @@ import {
 import StarRating from 'react-native-star-rating';
 import styles from './style';
 import Icon from 'react-native-vector-icons/Entypo';
-import {String} from '../../utlis/String';
+import { String } from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
-import {MySpinner} from '../../component/MySpinner';
-import {Auth, Constants} from '@global';
-import {useSelector, useDispatch} from 'react-redux';
+import { MySpinner } from '../../component/MySpinner';
+import { Auth, Constants } from '@global';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Task#1: import AsyncStorage
 import Geolocation from '@react-native-community/geolocation';
-import {setStaffLocation} from '../../store/actions';
+import { setStaffLocation } from '../../store/actions';
 import Snackbar from 'react-native-snackbar';
 const Home = (props) => {
   const navigation = useNavigation();
@@ -217,7 +217,7 @@ const Home = (props) => {
     await AsyncStorage.setItem('goToTab', tabIndex); // Set value in AsyncStorage
     navigation.navigate('My Bookings', {
       screen: 'TopTabs',
-      params: {screen: screenname},
+      params: { screen: screenname },
     }); // Proper do nested navigation
   };
 
@@ -226,13 +226,15 @@ const Home = (props) => {
   useEffect(async () => {
     let internal_staff11 = await AsyncStorage.getItem('internal_staff');
     if (internal_staff11) {
-      let newInternalstaff = internal_staff11 === 'Y' ? true : false;
+      let newInternalstaff = internal_staff11 === 'N' ? false : true;
       setInternalStaffStatus(newInternalstaff);
     }
   }, []);
 
   const toggleSwitch = async () => {
+
     setInternalStaffStatus((previousState) => !previousState);
+
     if (internalStaffStatus == true) {
       staffStatus = 'N';
       await AsyncStorage.setItem('internal_staff', 'N'); // Set value in AsyncStorage
@@ -242,15 +244,23 @@ const Home = (props) => {
     }
     // setLoading(true);
     let myForm = new FormData();
-    myForm.append('status', staffStatus);
+    // const requestObejct = {
+    //   'status': staffStatus === 'N' ? 'Y' : 'N'
+    // }
+    myForm.append('status', staffStatus === 'Y' ? 'N' : 'Y');
+    // alert('okay');
+
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
       myForm,
       Constants.ApiAction.staff_status_update,
       (res) => {
-        console.log('data--------', res[1].response);
+        // alert('okay');
+
+        console.log('data--------', res);
         // await AsyncStorage.getItem('internal_staff');
+        console.log('--------------------', res[1]?.response);
         if (res[1].data == true) {
           setLoading(false);
           // setData(res[1].response);
@@ -279,13 +289,13 @@ const Home = (props) => {
         onPressNoti={() => props.navigation.navigate('Notification')}
         headertext={'Home'}
       />
-      <ScrollView style={{flex: 1}}>
+      <ScrollView style={{ flex: 1 }}>
         <View style={styles.topprofiledeatils}>
           <MySpinner size="large" visible={loading} />
           <View style={styles.profileimage}>
-            <Image style={styles.imageStyle} source={{uri: userImage}} />
+            <Image style={styles.imageStyle} source={{ uri: userImage }} />
           </View>
-          <View style={{margin: 12}}>
+          <View style={{ margin: 12 }}>
             <View style={styles.topHorizontlView}>
               <Text style={styles.hollText}>{String.home.Helloword} </Text>
               <Text style={styles.userText}>{userInfo.full_name}</Text>
@@ -304,12 +314,12 @@ const Home = (props) => {
             </View>
           </View>
         </View>
-        <View style={{marginLeft: 15, marginTop: -22, marginBottom: 5}}>
+        <View style={{ marginLeft: 15, marginTop: -22, marginBottom: 5 }}>
           <View style={styles.topHorizontlView}>
             <Text style={styles.userText}>{`Availability`} </Text>
             <Text style={styles.userText}>
               <Switch
-                trackColor={{false: '#767577', true: '#81b0ff'}}
+                trackColor={{ false: '#767577', true: '#81b0ff' }}
                 thumbColor={internalStaffStatus ? '#00a89b' : '#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
@@ -320,18 +330,18 @@ const Home = (props) => {
         </View>
         <View style={styles.bottomMainprofile}>
           <ImageBackground
-            imageStyle={{borderTopLeftRadius: 20, borderTopRightRadius: 20}}
+            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
             source={require('../../assets/images/Homebg.png')}
             style={styles.bgimagehome}>
-            <View style={{padding: 20}}>
-              <View style={{flexDirection: 'row'}}>
+            <View style={{ padding: 20 }}>
+              <View style={{ flexDirection: 'row' }}>
                 <Icon name="calendar" style={styles.icon}></Icon>
                 <Text style={styles.dateTex}>
                   {' '}
                   {moment().utcOffset('+05:30').format('DD MMM YYYY')}
                 </Text>
               </View>
-              <View style={{marginTop: 20, marginBottom: 60}}>
+              <View style={{ marginTop: 20, marginBottom: 60 }}>
                 <View style={styles.commonProfile}>
                   <TouchableOpacity
                     style={styles.btnCard}
@@ -355,8 +365,8 @@ const Home = (props) => {
                       <View>
                         <Text style={styles.bookingCount}>
                           {bookingdata &&
-                          bookingdata != null &&
-                          bookingdata.length > 0
+                            bookingdata != null &&
+                            bookingdata.length > 0
                             ? bookingdata.length
                             : 0}
                         </Text>

@@ -125,18 +125,43 @@ const MapScreen = (props) => {
   }, [destination])
 
 
+  // function callNow(item) {
+  //   let phone = item.customer.phone;
+  //   let phoneNumber = phone;
+  //   if (Platform.OS !== 'android') {
+  //      phoneNumber = `telprompt:${phone}`;
+  //     // phoneNumber='9727024373'
+  //     console.log('callNumber ----> ', phoneNumber);
+  //   } else {
+  //     phoneNumber = `tel:${phone}`;
+  //     console.log('call android-------', phoneNumber);
+  //   }
+  //   Linking.canOpenURL(phoneNumber)
+  //     .then((supported) => {
+  //       if (!supported) {
+  //         Alert.alert('Phone number is not available====> ');
+  //       } else {
+  //         return Linking.openURL(phoneNumber);
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
   function callNow(item) {
     let ph = item.customer.phone;
-    let phoneNumber = ph;
+    //console.log("============================================",ph);
+    let phoneNumber;
     if (Platform.OS !== 'android') {
       phoneNumber = `telprompt:${ph}`;
+      // phoneNumber = '9624938627'
+      console.log('callNumber If Condition----> ', phoneNumber);
     } else {
       phoneNumber = `tel:${ph}`;
+      console.log('call android Else Condition------>', phoneNumber);
     }
     Linking.canOpenURL(phoneNumber)
       .then((supported) => {
         if (!supported) {
-          Alert.alert('Phone number is not available');
+          Alert.alert('Phone number is not available======>');
         } else {
           return Linking.openURL(phoneNumber);
         }

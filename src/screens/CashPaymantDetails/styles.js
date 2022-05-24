@@ -104,7 +104,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent:'center',
     alignSelf:'center',
-    width: wp('100%'),
+    width: wp('70%'),
   },
  
   text_amount: {
@@ -136,10 +136,11 @@ export default StyleSheet.create({
   text_coupon_applied: {
     alignSelf: 'center',
     color: Color.AppColor,
-    // width: wp('35%'),
+   // width: wp('35%'),
     fontSize: Matrics.Scale(18),
     fontWeight: '600',
     marginRight:Matrics.Scale(10),
+    marginLeft:hp('3%')
   },
 
   coiponView: {
@@ -160,6 +161,7 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     width: wp('60%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+    marginBottom:hp('3%')
   },
   textCouponCode: {
     justifyContent: 'center',

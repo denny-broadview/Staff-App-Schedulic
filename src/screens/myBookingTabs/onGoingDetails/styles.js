@@ -54,7 +54,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign: 'right',
+    textAlign: 'left',
   },
   service_dis_btn: {
     width: wp('30%'),
@@ -106,7 +106,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginTop: hp('1%'),
-    marginStart: wp('5%'),
+    // marginStart: wp('5%'),
+    justifyContent: 'space-between'
   },
 
   textDate_time: {
@@ -332,6 +333,8 @@ export default StyleSheet.create({
     width: wp('80%'),
     justifyContent: 'center',
     alignSelf: 'center',
+    flexDirection:'row',
+    flex:1
   },
   viewLine: {
     width: wp('80%'),

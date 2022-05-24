@@ -1,6 +1,6 @@
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 // var serviceCart= [];
 const Constants = {
   showStatusBar: true,
@@ -10,7 +10,7 @@ const Constants = {
   businessname: 'BI',
   ApiBaseUrl: 'https://api.schedulic.com/api/',
   // GOOGLE_MAPS_APIKEY: "AIzaSyBXIPD2yTHyA66hLrXfuHoHbqg-bCt13xo",
-  GOOGLE_MAPS_APIKEY: 'AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk',
+  GOOGLE_MAPS_APIKEY: "AIzaSyA8RwRCpG7ajbR-pl0D58oUGzi83c6RCYk",
   ApiAction: {
     timeSetting: 'get-front-setting',
     getTax: 'get-tax',
@@ -42,7 +42,7 @@ const Constants = {
     getCatgorywithService: 'staff-category-services',
     addReferenceKey: 'add-refrence-key',
     sendPaymentUrl: 'send-payment-url',
-    staff_status_update: 'staff-status-update',
+    staff_status_update:'staff-status-update'
   },
   SplashScreen: {
     Duration: 2000,

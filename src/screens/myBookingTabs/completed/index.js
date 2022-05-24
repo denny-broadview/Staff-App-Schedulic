@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,11 +9,11 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
-import { String } from '../../../utlis/String';
-import { Color, Matrics } from '../../../utlis';
-import { Auth, Constants } from '@global';
+import {String} from '../../../utlis/String';
+import {Color, Matrics} from '../../../utlis';
+import {Auth, Constants} from '@global';
 //import { MySpinner } from '../../../component/MySpinner';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import moment from 'moment';
 //import Snackbar from 'react-native-snackbar';
 const CompletedTab = (props) => {
@@ -34,26 +34,24 @@ const CompletedTab = (props) => {
     (state) => state.setting.setting.currency_symbol_position,
   );
 
-
   const loadMoreData = () => {
     if (page <= lastPage) {
       getComplteTask();
       setPage(page + 1);
     }
     console.log('loadMoreData');
-  }
+  };
   const onRefresh = () => {
     setData([]);
-    setPage(1)
+    setPage(1);
     getComplteTask(1);
-    setRefreshing(true)
+    setRefreshing(true);
   };
   useEffect(() => {
     if (searchKeyFromProbs) {
-      setPage(1)
-      getComplteTask()
+      setPage(1);
+      getComplteTask();
     }
-
   }, [searchKeyFromProbs]);
   useEffect(() => {
     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -79,17 +77,16 @@ const CompletedTab = (props) => {
         setLoading(false);
         setRefreshing(false);
         if (res[1].data == true) {
-
           let dataRes = res[1].response.data;
           let lastPage = res[1].response.last_page;
           if (dataRes.length > 0) {
             if (pageRef === 1) {
-              setData(dataRes)
+              setData(dataRes);
             } else {
-              page === 1 ? setData(dataRes) : setData(data.concat(dataRes))
+              page === 1 ? setData(dataRes) : setData(data.concat(dataRes));
             }
           }
-          setLastPage(lastPage)
+          setLastPage(lastPage);
           // setRefreshing(false);
           // setData(res[1].response);
           // setMasterDataSource(res[1].response);
@@ -102,21 +99,28 @@ const CompletedTab = (props) => {
     // setLoading(false);
     return (
       <View
-        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
-        <Text style={{ fontSize: 20, color: Color.AppColor }}>
+        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
+        <Text style={{fontSize: 20, color: Color.AppColor}}>
           {String.app.datanotfound}
         </Text>
       </View>
     );
   }
   const renderFooter = () => {
-    return (loagind && !refreshing && <View style={{ height: 50 }}><ActivityIndicator color={Color.AppColor} /></View>);
-  }
+    return (
+      loagind &&
+      !refreshing && (
+        <View style={{height: 50}}>
+          <ActivityIndicator color={Color.AppColor} />
+        </View>
+      )
+    );
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
         {refreshing && !loagind ? (
-          <ActivityIndicator style={{ color: Color.AppColor }} />
+          <ActivityIndicator style={{color: Color.AppColor}} />
         ) : null}
         <FlatList
           ListEmptyComponent={
@@ -124,16 +128,19 @@ const CompletedTab = (props) => {
           }
           data={data && data}
           // inverted={true}
-          renderItem={({ item, index }) => (
+          renderItem={({item, index}) => (
             <View style={styles.mainView}>
               <View style={styles.topView}>
                 <Text style={styles.bookingTextDate}>
-                  {String.MyBookingTab.orderid + 'Order Id : '}
+                  {String.MyBookingTab.orderid + 'Order Id'}
                 </Text>
-                <Text style={styles.textOrderID}>
-                  {item.id}
-                </Text>
+                <Text style={styles.textOrderID}>{/* {item.id} */}</Text>
               </View>
+
+              <View style={styles.topView_dis}>
+                <Text style={styles.textOrderID}>{item.id}</Text>
+              </View>
+
               <View style={styles.topView}>
                 <Text style={styles.bookingTextDate}>
                   {String.MyBookingTab.date_time}
@@ -144,17 +151,20 @@ const CompletedTab = (props) => {
               </View>
               <View style={styles.topView_dis}>
                 {/* <Text style={styles.textDate_dis}>{item.booking_date}</Text> */}
-                <View style={{ flexDirection: 'column' }}>
+                <View style={{flexDirection: 'column'}}>
                   <Text style={styles.textDate_dis}>
                     {moment(item.booking_date).format('DD MMM YYYY')}
                   </Text>
                   <Text style={styles.bookingTimeText}>
-                    {moment(item.booking_time, 'HH:mm:ss').format('LT')}
+                    {/* {moment(item.booking_time, 'HH:mm:ss').format('LT')} */}
+                    {moment(item.booking_time, 'h:mm A').format('HH:mm')}
                   </Text>
                 </View>
                 <View style={styles.statusView}>
                   <Text style={styles.textstatus_dis}>
-                    {item.order_status == 'CO' ? 'Completed' : item.order_status}
+                    {item.order_status == 'CO'
+                      ? 'Completed'
+                      : item.order_status}
                   </Text>
                 </View>
               </View>
@@ -183,7 +193,7 @@ const CompletedTab = (props) => {
                 </View>
               </View>
 
-              <View style={{ marginLeft: 15 }}>
+              <View style={{marginLeft: 15}}>
                 <View style={styles.service_dis}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
@@ -192,7 +202,7 @@ const CompletedTab = (props) => {
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         item.total_cost,
-                        { code: currency },
+                        {code: currency},
                         // {locale: currencyFrm},
                       )}
                     </Text>
@@ -201,7 +211,7 @@ const CompletedTab = (props) => {
                       {currencyFormatter.format(
                         item.total_cost,
                         // {locale: currencyFrm},
-                        { code: currency },
+                        {code: currency},
                       )}
                     </Text>
                   )}

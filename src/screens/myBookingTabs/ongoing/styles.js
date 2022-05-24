@@ -55,7 +55,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: hp('1%'),
     // marginStart: wp('5%')
-
+    justifyContent: 'space-between'
   },
   textDate_time: {
     color: Color.AppColor,
@@ -86,6 +86,7 @@ export default StyleSheet.create({
     width: wp('30%'),
     fontWeight: '800',
     marginBottom: Matrics.Scale(4),
+    justifyContent: 'space-between'
   },
   textTime_dis: {
     color: Color.ligthGray,
@@ -112,7 +113,8 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign: 'right'
+    textAlign: 'left'
+
   },
   textstatus_dis: {
     color: Color.ligthGray,

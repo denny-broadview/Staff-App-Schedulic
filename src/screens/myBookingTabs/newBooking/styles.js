@@ -68,6 +68,7 @@ export default StyleSheet.create({
     width: wp('60%'),
     fontWeight: '800',
     marginTop: Matrics.Scale(4),
+    
   },
   textDate_dis: {
     color: Color.ligthGray,
@@ -104,8 +105,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign: 'right',
-
+    textAlign: 'left',
   },
   textstatus_dis: {
     color: Color.ligthGray,

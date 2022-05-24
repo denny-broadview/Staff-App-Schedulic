@@ -98,10 +98,15 @@ const NewBookingDetails = (props) => {
           <View style={styles.mainView}>
             <View style={styles.topView}>
               <Text style={styles.bookingTextDate}>
-                {String.MyBookingTab.orderid + 'Order Id : '}
+                {String.MyBookingTab.orderid + 'Order Id '}
               </Text>
+              <Text style={styles.textOrderID}>{/* {data.id} */}</Text>
+            </View>
+
+            <View style={styles.topView_dis}>
               <Text style={styles.textOrderID}>{data.id}</Text>
             </View>
+
             <View style={styles.topView}>
               <Text style={styles.textDate_time}>
                 {String.MyBookingTab.date_time}
@@ -123,7 +128,6 @@ const NewBookingDetails = (props) => {
               <View style={styles.statusView}>
                 {data.order_status != null && data.order_status == 'CNF' ? (
                   <View>
-                    {/* <Text style={styles.textstatus_dis}>Confirm</Text> */}
                     <Text style={styles.textstatus_dis}>
                       Waiting for confirmation
                     </Text>
@@ -317,9 +321,9 @@ const NewBookingDetails = (props) => {
                   <Text style={styles.textAddress}>
                     {' '}
                     {data.orders_info.booking_address}{' '}
-                    {data.orders_info.booking_city}{' '}
-                    {data.orders_info.booking_state}{' '}
-                    {data.orders_info.booking_zipcode}
+                    {/* {data.orders_info.booking_state}{' '} */}
+                    {/* {data.orders_info.booking_city}{' '} */}
+                    {/* {data.orders_info.booking_zipcode} */}
                   </Text>
                 </View>
               ) : null}

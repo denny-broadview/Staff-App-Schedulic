@@ -88,6 +88,7 @@ const NewBookingTab = (props) => {
     setLoading(true);
     myForm.append('business_id', Constants.businessid);
     myForm.append('search', '');
+    console.log('myForm------newBooking', myForm);
     Auth.PostCustomerTokenAuth(
       userInfo.token,
       userInfo.user_id,
@@ -200,8 +201,11 @@ const NewBookingTab = (props) => {
               <View style={styles.mainView}>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
-                    {String.MyBookingTab.orderid + 'Order Id : '}
+                    {String.MyBookingTab.orderid + 'Order Id '}
                   </Text>
+                  <Text style={styles.textOrderID}></Text>
+                </View>
+                <View style={styles.topView_dis}>
                   <Text style={styles.textOrderID}>{item.id}</Text>
                 </View>
                 <View style={styles.topView}>
@@ -226,7 +230,6 @@ const NewBookingTab = (props) => {
                   <View style={styles.statusView}>
                     {item.order_status != null && item.order_status == 'CNF' ? (
                       <View>
-                        {/* <Text style={styles.textstatus_dis}>Confirm</Text> */}
                         <Text style={styles.textstatus_dis}>
                           Waiting for confirmation
                         </Text>

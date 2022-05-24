@@ -28,7 +28,8 @@ export default StyleSheet.create({
         shadowRadius: 1,
         shadowOffset: { width: 0, height: 2 },
         borderRadius: Matrics.Scale(10),
-        padding:Matrics.Scale(5)
+        padding:Matrics.Scale(5),
+        paddingBottom:"5%"
       },
       mainCustomerDetails:{
         marginBottom:'24%'
@@ -53,7 +54,8 @@ export default StyleSheet.create({
         fontSize: Matrics.Scale(16),
         fontWeight: '800',
         width: wp('20%'),
-        textAlign: 'right',
+        textAlign: 'left',
+
       },
 
       service_dis_btn:{
@@ -101,6 +103,7 @@ export default StyleSheet.create({
         alignSelf:'center',
         marginTop:hp('1%'),
         // marginStart:wp('5%')
+        justifyContent: 'space-between'
       },
       textDate_time:{
         color:Color.AppColor,
@@ -141,7 +144,7 @@ export default StyleSheet.create({
         color:Color.ligthGray,
         fontSize:Matrics.Scale(16),
         fontWeight:'800',
-        width:wp('25%'),
+        width:wp('30%'),
         textAlign:'right'
        
       },
@@ -298,7 +301,7 @@ imgView: {
   address_View:{
     flexDirection:'row',
     marginLeft:wp('5%'),
-    
+
   },
   note_View:{
     flexDirection:'row',
@@ -328,7 +331,9 @@ imgView: {
     marginTop:hp('1%'),
     width:wp('80%'),
     justifyContent:'center',
-    alignSelf:'center'
+    alignSelf:'center',
+    flexDirection:'row',
+    flex:1
   },
   viewLine:{
     width:wp('80%'),

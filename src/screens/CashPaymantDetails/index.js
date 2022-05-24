@@ -59,8 +59,8 @@ const CashPaymantDetails = (props) => {
     }
   }, []);
   useEffect(() => {
-    taxCal();
-  }, [data]);
+    // taxCal();
+  }, [data, discountType]);
 
   useEffect(() => {
     let val = fnFinalVal();
@@ -94,7 +94,7 @@ const CashPaymantDetails = (props) => {
     setCouponView(false);
     setDiscountvalue(0);
     setDiscountType('F');
-    finalTotal();
+    // finalTotal();
     setCouponeCode('');
   };
 
@@ -129,6 +129,7 @@ const CashPaymantDetails = (props) => {
       console.log('txtTotla arshad tax - ', val);
     }
   };
+
   const fnFinalVal = () => {
     let val;
     console.log('grantTotal------', grantTotal);
@@ -148,11 +149,11 @@ const CashPaymantDetails = (props) => {
         val = parseFloat(grantTotal) - parseFloat(discountvalue);
       }
     } else {
-      // val = parseFloat(taxSub) + parseFloat(subtotal);
-      val = parseFloat(subtotal);
+      val = parseFloat(taxSub) + parseFloat(subtotal);
     }
     return val;
   };
+
   const paymentApi = () => {
     let resObject;
 
@@ -220,6 +221,7 @@ const CashPaymantDetails = (props) => {
         Auth.ToastMessage('Error! while order Booking.');
       });
   };
+
   return (
     <View style={styles.container}>
       <HeaderView
@@ -292,9 +294,9 @@ const CashPaymantDetails = (props) => {
           )}
         </View>
 
-        <View>
+        {/* <View>
           <View>
-            {/* <FlatList
+            <FlatList
               data={calTaxArray}
               renderItem={({item, index}) => (
                 <View style={styles.amountView}>
@@ -322,9 +324,9 @@ const CashPaymantDetails = (props) => {
                     </Text>
                   )}
                 </View>
-              )}></FlatList> */}
+              )}></FlatList>
           </View>
-        </View>
+        </View> */}
         <View style={styles.amountView}>
           <Text
             style={

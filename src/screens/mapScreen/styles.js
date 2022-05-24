@@ -105,7 +105,7 @@ export default StyleSheet.create({
 
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 5,
     },
     shadowOpacity: 0.30,
     shadowRadius: 4.65,
@@ -115,8 +115,8 @@ export default StyleSheet.create({
 
   },
   courseImg: {
-    width: Matrics.Scale(70),
-    height: Matrics.Scale(70),
+    width: Matrics.Scale(50),
+    height: Matrics.Scale(50),
     borderRadius: 80 / 2,
     resizeMode: 'cover',
     backgroundColor: Color.AppColor,

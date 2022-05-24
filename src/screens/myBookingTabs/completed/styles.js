@@ -60,6 +60,8 @@ export default StyleSheet.create({
     width: wp('80%'),
     justifyContent: 'center',
     alignSelf: 'center',
+    marginTop: hp('1%'),
+    justifyContent: 'space-between'
   },
   textDate_time: {
     color: Color.AppColor,
@@ -106,7 +108,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     fontWeight: '800',
     width: wp('20%'),
-    textAlign: 'right'
+    textAlign: 'left'
   },
   textstatus_dis: {
     color: Color.ligthGray,
@@ -115,7 +117,6 @@ export default StyleSheet.create({
     width: wp('25%'),
     // marginEnd:wp('5%'),
     textAlign: 'right',
-
   },
   service_btn_mainview: {
     flexDirection: 'row',

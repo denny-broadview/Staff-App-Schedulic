@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import styles from './styles';
-import { String } from '../../../utlis/String';
+import {String} from '../../../utlis/String';
 import HeaderView from '../../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconCall from 'react-native-vector-icons/Ionicons';
-import { MySpinner } from '../../../component/MySpinner';
+import {MySpinner} from '../../../component/MySpinner';
 import moment from 'moment';
-import { Auth, Constants } from '@global';
-import { useSelector } from 'react-redux';
+import {Auth, Constants} from '@global';
+import {useSelector} from 'react-redux';
 import Snackbar from 'react-native-snackbar';
 const onGoingDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
@@ -32,7 +26,7 @@ const onGoingDetails = (props) => {
   const currencySymbolePosition = useSelector(
     (state) => state.setting.setting.currency_symbol_position,
   );
-  const { min_advance_booking_time } = useSelector(
+  const {min_advance_booking_time} = useSelector(
     (state) => state.setting.setting,
   );
   const currencyFrm = useSelector(
@@ -118,11 +112,10 @@ const onGoingDetails = (props) => {
           setTimeout(() => {
             Snackbar.show({
               text: 'Appointment Updated',
-              duration: Snackbar.LENGTH_SHORT
+              duration: Snackbar.LENGTH_SHORT,
             });
             props.navigation.navigate('OngoingTab');
           }, 1000);
-
         } else {
           setLoading(false);
         }
@@ -141,18 +134,21 @@ const onGoingDetails = (props) => {
         headertext={String.MyBookingTab.details}
         onPress={() => props.navigation.goBack()}
       />
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ justifyContent: 'center', flex: 1 }}>
+      <ScrollView style={{flex: 1}}>
+        <View style={{justifyContent: 'center', flex: 1}}>
           <View style={styles.mainView}>
             <MySpinner size="large" visible={loagind} />
             <View style={styles.topView}>
               <Text style={styles.bookingTextDate}>
-                {String.MyBookingTab.orderid + 'Order Id : '}
+                {String.MyBookingTab.orderid + 'Order Id'}
               </Text>
-              <Text style={styles.textOrderID}>
-                {data.id}
-              </Text>
+              <Text style={styles.textOrderID}>{/* {data.id} */}</Text>
             </View>
+
+            <View style={styles.topView_dis}>
+              <Text style={styles.textOrderID}>{data.id}</Text>
+            </View>
+
             <View style={styles.topView}>
               <Text style={styles.textDate_time}>
                 {String.MyBookingTab.date_time}
@@ -163,7 +159,10 @@ const onGoingDetails = (props) => {
               <Text style={styles.textDate_dis}>
                 {moment(data.booking_date).format('DD MMM YYYY')}
               </Text>
-              <Text style={styles.textTime_dis}>{moment(data.booking_time, 'HH:mm:ss').format('LT')}</Text>
+              <Text style={styles.textTime_dis}>
+                {/* {moment(data.booking_time, 'HH:mm:ss').format('LT')} */}
+                {moment(data.booking_time, 'h:mm A').format('HH:mm')}
+              </Text>
               {data.order_status != null && data.order_status == 'CNF' ? (
                 <View>
                   <Text style={styles.textstatus_dis}>Confirm</Text>
@@ -196,17 +195,24 @@ const onGoingDetails = (props) => {
               ) : null}
               {data.order_status != null && data.order_status == 'RSS' ? (
                 <View>
-                  <Text style={styles.textstatus_dis}>Rescheduled By Staff</Text>
+                  <Text style={styles.textstatus_dis}>
+                    Rescheduled By Staff
+                  </Text>
                 </View>
               ) : null}
               {data.order_status != null && data.order_status == 'RSA' ? (
                 <View>
-                  <Text style={styles.textstatus_dis}>Rescheduled By Admin</Text>
+                  <Text style={styles.textstatus_dis}>
+                    Rescheduled By Admin
+                  </Text>
                 </View>
               ) : null}
               {data.order_status != null && data.order_status == 'RSC' ? (
                 <View>
-                  <Text style={styles.textstatus_dis}>Rescheduled By Client</Text>
+                  {/* <Text style={styles.textstatus_dis}>Rescheduled By Client</Text> */}
+                  <Text style={styles.textstatus_dis}>
+                    Rescheduled by Customer
+                  </Text>
                 </View>
               ) : null}
               {data.order_status != null && data.order_status == 'ITR' ? (
@@ -246,7 +252,7 @@ const onGoingDetails = (props) => {
               </View>
             </View>
             <View style={styles.service_btn_mainview}>
-              <View style={{ marginLeft: 5 }}>
+              <View style={{marginLeft: 5}}>
                 <View style={styles.service_dis}>
                   <Text style={styles.textDate_time}>
                     {String.MyBookingTab.amount}
@@ -255,7 +261,7 @@ const onGoingDetails = (props) => {
                     <Text style={styles.textTime_dis}>
                       {currencyFormatter.format(
                         data.total_cost,
-                        { code: currency },
+                        {code: currency},
                         // {locale: currencyFrm},
                       )}
                     </Text>
@@ -264,7 +270,7 @@ const onGoingDetails = (props) => {
                       {currencyFormatter.format(
                         data.total_cost,
                         //  {locale: currencyFrm},
-                        { code: currency },
+                        {code: currency},
                       )}
                     </Text>
                   )}
@@ -280,8 +286,8 @@ const onGoingDetails = (props) => {
               </View>
               <View style={styles.service_dis_btn}>
                 {data.order_status == 'OW' &&
-                  data.booking_date == currentdate &&
-                  bookingtimecurrenttime(crtime, data.booking_time) < 30 ? (
+                data.booking_date == currentdate &&
+                bookingtimecurrenttime(crtime, data.booking_time) < 30 ? (
                   <TouchableOpacity
                     style={styles.btnViewWorkstarted}
                     onPress={() => getStatus('WS')}>
@@ -311,20 +317,22 @@ const onGoingDetails = (props) => {
                   //   &&
                   //   data.booking_date == currentdate && item.service.service_sub_type === 'at_home' &&
                   //   bookingtimecurrenttime(crtime, data.booking_time) < 60
-                  data?.order_status == 'AC' && data?.service?.service_sub_type === 'at_home' &&
-                    data?.booking_date == currentdate &&
-                    bookingtimecurrenttime(crtime, data?.booking_time) < parseInt(min_advance_booking_time)
-                    ? (
-                      <TouchableOpacity
-                        style={styles.btnViewOntheWay}
-                        onPress={() => getStatus('OW')}>
-                        <Text style={styles.btnText}>
-                          {String.MyBookingTab.ontheway}
-                        </Text>
-                      </TouchableOpacity>
-                    ) : null}
+                  data?.order_status == 'AC' &&
+                  data?.service?.service_sub_type === 'at_home' &&
+                  data?.booking_date == currentdate &&
+                  bookingtimecurrenttime(crtime, data?.booking_time) <
+                    parseInt(min_advance_booking_time) ? (
+                    <TouchableOpacity
+                      style={styles.btnViewOntheWay}
+                      onPress={() => getStatus('OW')}>
+                      <Text style={styles.btnText}>
+                        {String.MyBookingTab.ontheway}
+                      </Text>
+                    </TouchableOpacity>
+                  ) : null
+                }
                 {data.order_status == 'OW' &&
-                  data.service.service_sub_type == 'at_home' ? (
+                data.service.service_sub_type == 'at_home' ? (
                   <TouchableOpacity
                     style={styles.btnViewMap}
                     onPress={() =>
@@ -364,7 +372,7 @@ const onGoingDetails = (props) => {
             <View style={styles.imgView}>
               <View style={styles.courseImgView}>
                 <Image
-                  source={{ uri: props.route.params.image }}
+                  source={{uri: props.route.params.image}}
                   style={styles.courseImg}
                 />
               </View>
@@ -394,20 +402,25 @@ const onGoingDetails = (props) => {
               <Text style={styles.textAddress}>{data.customer != null ? data.customer.address : "Address not defiend"}</Text>
               <Text style={styles.textAddress}>{data?.customer?.address ? data?.customer?.address : "Address not defiend"}</Text>
             </View> */}
-            {data && data?.service?.service_sub_type === 'at_home' &&
-              (data.orders_info.booking_address || data.orders_info.booking_city || data.orders_info.booking_state) ?
+            {data &&
+            data?.service?.service_sub_type === 'at_home' &&
+            (data.orders_info.booking_address ||
+              data.orders_info.booking_city ||
+              data.orders_info.booking_state) ? (
               <View style={styles.address_View}>
                 <Icon name="enviroment" style={styles.call_icon} />
-                <Text style={styles.textAddress}>{' '}
+                <Text style={styles.textAddress}>
+                  {' '}
                   {data.orders_info.booking_address}{' '}
-                  {data.orders_info.booking_city}{' '}
-                  {data.orders_info.booking_state}{' '}
-                  {data.orders_info.booking_zipcode}
+                  {/* {data.orders_info.booking_state}{' '} */}
+                  {/* {data.orders_info.booking_city}{' '}  */}
+                  {/* {data.orders_info.booking_zipcode} */}
                 </Text>
               </View>
-              : null}
-            {data.status_notes !== null ?
-              <View style={styles.viewLine} /> : null}
+            ) : null}
+            {data.status_notes !== null ? (
+              <View style={styles.viewLine} />
+            ) : null}
             {data.status_notes !== null ? (
               <View style={styles.note_View}>
                 <Text style={styles.textNote}>{String.MyBookingTab.note}</Text>

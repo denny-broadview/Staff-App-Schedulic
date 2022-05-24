@@ -109,6 +109,7 @@ export const String = {
     next: 'Next',
     confirm: 'confirm',
     error_message_select_startdate: 'Please select start date',
+    Getting_Late: 'Getting Late',
   },
 
   cashpaymant: {
