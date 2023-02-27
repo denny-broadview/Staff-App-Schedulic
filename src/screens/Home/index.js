@@ -223,12 +223,15 @@ const Home = (props) => {
 
   // for toggle switch
   let staffStatus;
-  useEffect(async () => {
-    let internal_staff11 = await AsyncStorage.getItem('internal_staff');
-    if (internal_staff11) {
-      let newInternalstaff = internal_staff11 === 'N' ? false : true;
-      setInternalStaffStatus(newInternalstaff);
+  useEffect(() => {
+    const getData = async () => {
+      let internal_staff11 = await AsyncStorage.getItem('internal_staff');
+      if (internal_staff11) {
+        let newInternalstaff = internal_staff11 === 'N' ? false : true;
+        setInternalStaffStatus(newInternalstaff);
+      }
     }
+    getData();
   }, []);
 
   const toggleSwitch = async () => {
