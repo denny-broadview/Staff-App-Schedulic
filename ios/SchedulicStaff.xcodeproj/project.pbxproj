@@ -780,7 +780,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bi.lakshya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bi.schedulicCustomer;
 				PRODUCT_NAME = SchedulicStaff;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -799,6 +799,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.1.1;
 				DEVELOPMENT_TEAM = GXRCMFFZQ2;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SchedulicStaff/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -807,7 +808,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.bi.lakshya;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bi.schedulicCustomer;
 				PRODUCT_NAME = SchedulicStaff;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

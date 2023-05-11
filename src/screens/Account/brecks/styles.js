@@ -34,6 +34,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     marginLeft: wp('5%'),
+    textTransform:'capitalize'
   },
   menu: {
   

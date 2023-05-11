@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import HeaderView from '../../../component/headerTab';
-import {String} from '../../../utlis/String';
-import {Matrics, Color} from '../../../utlis';
-import {Auth, Constants} from '@global';
-import {MySpinner} from '../../../component/MySpinner';
+import { String } from '../../../utlis/String';
+import { Matrics, Color } from '../../../utlis';
+import { Auth, Constants } from '@global';
+import { MySpinner } from '../../../component/MySpinner';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
 const WorkingHours = (props) => {
@@ -22,7 +22,7 @@ const WorkingHours = (props) => {
     let myForm = new FormData();
     myForm.append('staff_id', userInfo.user_id);
     console.log('parm Workinghours~~~~~~~~~', myForm);
-    Auth.PostCustomerTokenAuth(userInfo.token,userInfo.user_id,myForm, Constants.ApiAction.staffWorkingHR, (res) => {
+    Auth.PostCustomerTokenAuth(userInfo.token, userInfo.user_id, myForm, Constants.ApiAction.staffWorkingHR, (res) => {
       console.log('data--------', res);
       if (res[1].data == true) {
         setLoading(false);
@@ -36,8 +36,8 @@ const WorkingHours = (props) => {
   function noItemDisplay() {
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>{String.app.datanotfound}</Text>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>{String.app.datanotfound}</Text>
       </View>
     );
   }
@@ -52,21 +52,29 @@ const WorkingHours = (props) => {
         onPress={() => props.navigation.goBack()}
         headertext={String.account.workinghr}
       />
-      <View style={{justifyContent: 'center'}}>
+      <View style={{ justifyContent: 'center' }}>
         <MySpinner size="large" visible={loagind} />
-      
+
         <FlatList
           ListEmptyComponent={noItemDisplay}
           data={data}
-          renderItem={({item, index}) => (
+          renderItem={({ item, index }) => (
             //<TouchableOpacity onPress={() => props.navigation.replace('BookingServiceDetails', {htitle:item.title.find((i)=>i.title)})}>
             <View>
               <View style={styles.border} />
               <TouchableOpacity style={styles.menuView}>
                 <Text style={styles.menuname}>{item.days}</Text>
                 {/* <Text style={styles.menu}>{item.day_start_time == 'null' ? null :item.day_start_time}</Text> */}
-               {item.day_start_time == null && item.day_end_time == null && item.off_day == 'Y' ?<Text style={styles.menu}>Day Off</Text> : <Text style={styles.menu}>{moment(item.day_start_time, 'HH:mm:ss').format('LT')} {String.account.to} {moment(item.day_end_time, 'HH:mm:ss').format('LT')}</Text>}
-               
+                {
+                  item.day_start_time == null &&
+                    item.day_end_time == null &&
+                    item.off_day == 'Y' ?
+                    <Text style={styles.menu}>Day Off</Text> :
+                    <Text style={styles.menu}>
+                      {moment(item.day_start_time, 'HH:mm:ss').format('HH:mm')}
+                      {" "}{String.account.to} {moment(item.day_end_time, 'HH:mm:ss').format('HH:mm')}</Text>
+                }
+
                 {/* <Icon name="right" style={styles.menu} /> */}
               </TouchableOpacity>
             </View>

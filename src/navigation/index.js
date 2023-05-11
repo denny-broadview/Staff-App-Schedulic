@@ -248,7 +248,7 @@ export default App = () => {
         tabBar={props => <MyBookingMainView {...props} />}
         swipeEnabled={true}>
         <TopTab.Screen name="NewBookingTab" options={{ title: 'New Bookings' }} component={NewBookingTab} />
-        <TopTab.Screen name="OngoingTab" options={{ title: 'Upcoming' }} component={OngoingTab} />
+        <TopTab.Screen name="OngoingTab" options={{ title: 'Ongoing' }} component={OngoingTab} />
         <TopTab.Screen name="CompletedTab" options={{ title: 'Completed' }} component={CompletedTab} />
       </TopTab.Navigator>
 
