@@ -231,7 +231,7 @@ const NewBookingTab = (props) => {
                     {item.order_status != null && item.order_status == 'CNF' ? (
                       <View>
                         <Text style={styles.textstatus_dis}>
-                          Waiting for confirmation
+                          Confirm
                         </Text>
                       </View>
                     ) : null}
