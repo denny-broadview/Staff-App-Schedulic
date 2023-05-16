@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Matrics, Color} from '../../utlis';
+import { StyleSheet } from 'react-native';
+import { Matrics, Color } from '../../utlis';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -23,7 +23,7 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     borderRadius: 50 / 2,
     zIndex: 0,
-    width:wp('10%')
+    width: wp('10%')
   },
   courseImg: {
     width: Matrics.Scale(50),
@@ -42,8 +42,8 @@ export default StyleSheet.create({
     elevation: 1,
     shadowOpacity: 0.5,
     shadowRadius: 1,
-    shadowOffset: {width: 0, height: 2},
-    padding:hp('1%')
+    shadowOffset: { width: 0, height: 2 },
+    padding: hp('1%')
   },
   imgView: {
     flexDirection: 'row',
@@ -59,7 +59,7 @@ export default StyleSheet.create({
   userAmount: {
     marginLeft: wp('3%'),
     color: Color.gray,
-    
+
   },
   date: {
     color: Color.ligthGray,
@@ -100,13 +100,13 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   amountView: {
-    marginTop:hp('2%'),
+    marginTop: hp('2%'),
     flexDirection: 'row',
-    justifyContent:'center',
-    alignSelf:'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
     width: wp('70%'),
   },
- 
+
   text_amount: {
     color: Color.bleck,
     width: wp('70%'),
@@ -136,11 +136,11 @@ export default StyleSheet.create({
   text_coupon_applied: {
     alignSelf: 'center',
     color: Color.AppColor,
-   // width: wp('35%'),
+    // width: wp('35%'),
     fontSize: Matrics.Scale(18),
     fontWeight: '600',
-    marginRight:Matrics.Scale(10),
-    marginLeft:hp('3%')
+    marginRight: Matrics.Scale(10),
+    marginLeft: hp('3%')
   },
 
   coiponView: {
@@ -161,7 +161,7 @@ export default StyleSheet.create({
     backgroundColor: Color.white,
     width: wp('60%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-    marginBottom:hp('3%')
+    marginBottom: hp('3%')
   },
   textCouponCode: {
     justifyContent: 'center',
@@ -170,7 +170,7 @@ export default StyleSheet.create({
     fontSize: Matrics.Scale(16),
     width: wp('35%'),
     height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-    paddingLeft:10
+    paddingLeft: 10
   },
   couponIconView: {
     backgroundColor: Color.AppColor,
@@ -193,7 +193,6 @@ export default StyleSheet.create({
     color: Color.red,
     fontSize: Matrics.Scale(18),
     fontWeight: 'bold',
-    alignSelf:'center',
     marginRight: Matrics.Scale(5),
   },
   borderView: {
@@ -236,22 +235,26 @@ export default StyleSheet.create({
   },
   buttonStylpass: {
 
-  backgroundColor:Color.AppColor,
+    backgroundColor: Color.AppColor,
     borderRadius: Matrics.Scale(5),
     width: wp('90%'),
-    height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+    // height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
     alignItems: 'center',
     alignContent: 'center',
     alignSelf: 'center',
     textAlign: 'center',
+    // flex:1,
+    padding:15
   },
   textChange: {
-    justifyContent: 'center',
+    
+    alignSelf: 'center',
+    alignItems:'center',
     color: Color.white,
     fontWeight: '500',
     fontSize: Matrics.Scale(16),
-    textAlign: 'center',
-    top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
+    // textAlign: 'center',
+    // top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
   },
   proceedtocheckMainView: {
     justifyContent: 'center',
@@ -263,15 +266,15 @@ export default StyleSheet.create({
   buttonStylupdate: {
     borderWidth: 1,
     borderColor: '#00A89B',
-    borderRadius: Matrics.Scale(5), 
-    backgroundColor: Color.white,
     borderRadius: Matrics.Scale(5),
+    backgroundColor: Color.white,
     width: wp('90%'),
-    height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-    alignItems: 'center',
-    alignContent: 'center',
-    alignSelf: 'center',
+    // height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+    // alignItems: 'center',
+    // alignContent: 'center',
+    // alignSelf: 'center',
     textAlign: 'center',
+    padding:15
   },
   textUpdate: {
     justifyContent: 'center',
@@ -279,6 +282,6 @@ export default StyleSheet.create({
     fontWeight: '500',
     fontSize: Matrics.Scale(16),
     textAlign: 'center',
-    top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
+    // top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
   },
 });

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,13 @@ import {
   TextInput,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../utlis/String';
+import { String } from '../../utlis/String';
 import HeaderView from '../../component/headerTab';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {useSelector} from 'react-redux';
-import {ScrollView} from 'react-native-gesture-handler';
-import {MySpinner} from '../../component/MySpinner';
-import {Auth, Constants} from '@global';
+import { useSelector } from 'react-redux';
+import { ScrollView } from 'react-native-gesture-handler';
+import { MySpinner } from '../../component/MySpinner';
+import { Auth, Constants } from '@global';
 const axios = require('axios').default;
 const CashPaymantDetails = (props) => {
   const userInfo = useSelector((state) => state.user.user);
@@ -105,12 +105,12 @@ const CashPaymantDetails = (props) => {
       if (ii == 0) {
         amountGST =
           (parseFloat(taxArray[0].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr1.push({amount: amountGST});
+        GstSgstArr1.push({ amount: amountGST });
         taxSub = taxSub + amountGST;
       } else if (ii == 1) {
         amountCGST =
           (parseFloat(taxArray[1].value) * parseFloat(subtotal)) / 100;
-        GstSgstArr1.push({amount: amountCGST});
+        GstSgstArr1.push({ amount: amountCGST });
         taxSub = taxSub + amountCGST;
       }
     }
@@ -210,7 +210,8 @@ const CashPaymantDetails = (props) => {
 
         if (dataSatus == true) {
           console.log(response.data.response);
-          props.navigation.replace('PaymantDone', {order_id: data.id});
+          getStatus(data.id, 'CO')
+          // props.navigation.replace('PaymantDone', {order_id: data.id});
         } else {
           Auth.ToastMessage('Error! while payment Update.');
         }
@@ -222,6 +223,29 @@ const CashPaymantDetails = (props) => {
       });
   };
 
+  // Api calling for newBookings
+  function getStatus(id, st) {
+    setLoading(true);
+    let myForm = new FormData();
+    myForm.append('order_item_id', id);
+    if (st) {
+      myForm.append('staff_id', userInfo.user_id);
+      myForm.append('order_status', st);
+    }
+    Auth.PostCustomerTokenAuth(
+      userInfo.token,
+      userInfo.user_id,
+      myForm,
+      Constants.ApiAction.status_update,
+      (res) => {
+        if (res[1].data == true) {
+          props.navigation.replace('PaymantDone', { order_id: id });
+        } else {
+          setLoading(false);
+        }
+      },
+    );
+  }
   return (
     <View style={styles.container}>
       <HeaderView
@@ -257,7 +281,7 @@ const CashPaymantDetails = (props) => {
               <Text style={styles.userAmount}>
                 {currencyFormatter.format(
                   data.service_cost,
-                  {code: currency},
+                  { code: currency },
                   //{locale: currencyFrm},
                 )}
               </Text> //data.total_cost,
@@ -266,7 +290,7 @@ const CashPaymantDetails = (props) => {
                 {currencyFormatter.format(
                   data.service_cost,
                   // {locale: currencyFrm},
-                  {code: currency},
+                  { code: currency },
                 )}
               </Text> //data.total_cost,
             )}
@@ -279,7 +303,7 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.text_rs}>
               {currencyFormatter.format(
                 data.total_cost,
-                {code: currency},
+                { code: currency },
                 // {locale: currencyFrm},
               )}
             </Text>
@@ -288,7 +312,7 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 data.total_cost,
                 // {locale: currencyFrm},
-                {code: currency},
+                { code: currency },
               )}
             </Text>
           )}
@@ -375,7 +399,7 @@ const CashPaymantDetails = (props) => {
             <Text style={styles.textTotalRs}>
               {currencyFormatter.format(
                 grantTotal,
-                {code: currency},
+                { code: currency },
                 // {locale: currencyFrm},
               )}
             </Text>
@@ -384,7 +408,7 @@ const CashPaymantDetails = (props) => {
               {currencyFormatter.format(
                 grantTotal,
                 // {locale: currencyFrm},
-                {code: currency},
+                { code: currency },
               )}
             </Text>
           )}

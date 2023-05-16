@@ -66,13 +66,13 @@ export default StyleSheet.create({
         borderColor: '#00A89B',
         borderRadius: Matrics.Scale(5),
         backgroundColor: Color.AppColor,
-        borderRadius: Matrics.Scale(5),
         width: wp('90%'),
-        height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
-        alignItems: 'center',
-        alignContent: 'center',
-        alignSelf: 'center',
-        textAlign: 'center',
+        // height: Platform.OS == 'ios' ? hp('6%') : hp('6%'),
+        padding:15
+        // alignItems: 'center',
+        // alignContent: 'center',
+        // alignSelf: 'center',
+        // textAlign: 'center',
       },
       textUpdate: {
         borderColor: '#00A89B',
@@ -81,7 +81,7 @@ export default StyleSheet.create({
         fontWeight: '500',
         fontSize: Matrics.Scale(16),
         textAlign: 'center',
-        top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
+        // top: Platform.OS === 'ios' ? hp('1%') : hp('1%'),
       },
 
 })

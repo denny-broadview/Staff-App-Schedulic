@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,16 +11,16 @@ import {
   Alert,
 } from 'react-native';
 import styles from './styles';
-import {String} from '../../../utlis/String';
-import {Color, Matrics} from '../../../utlis';
-import {MySpinner} from '../../../component/MySpinner';
-import {Auth, Constants} from '@global';
-import {useSelector, useDispatch} from 'react-redux';
-import {setStaffLocation} from '../../../store/actions';
+import { String } from '../../../utlis/String';
+import { Color, Matrics } from '../../../utlis';
+import { MySpinner } from '../../../component/MySpinner';
+import { Auth, Constants } from '@global';
+import { useSelector, useDispatch } from 'react-redux';
+import { setStaffLocation } from '../../../store/actions';
 import moment from 'moment';
 import Snackbar from 'react-native-snackbar';
 import database from '@react-native-firebase/database';
-import {isRecheduleTimeIsAvailable} from '../../../utlis/function';
+import { isRecheduleTimeIsAvailable } from '../../../utlis/function';
 const OngoingTab = (props) => {
   const userInfo = useSelector((state) => state.user.user);
   const [data, setData] = useState([]);
@@ -34,7 +34,7 @@ const OngoingTab = (props) => {
   const onGoingFromRedux = useSelector(
     (state) => state.BookingService.onGoingData,
   );
-  const {min_advance_booking_time} = useSelector(
+  const { min_advance_booking_time } = useSelector(
     (state) => state.setting.setting,
   );
   const dispatch = useDispatch();
@@ -201,8 +201,8 @@ const OngoingTab = (props) => {
   function noItemDisplay() {
     return (
       <View
-        style={{flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50)}}>
-        <Text style={{fontSize: 20, color: Color.AppColor}}>
+        style={{ flex: 1, alignSelf: 'center', marginTop: Matrics.Scale(50) }}>
+        <Text style={{ fontSize: 20, color: Color.AppColor }}>
           {' '}
           {String.app.datanotfound}
         </Text>
@@ -331,7 +331,7 @@ const OngoingTab = (props) => {
     return (
       loading &&
       !refreshing && (
-        <View style={{flex: 1, height: 50}}>
+        <View style={{ flex: 1, height: 50 }}>
           <ActivityIndicator color={Color.AppColor} />
         </View>
       )
@@ -340,11 +340,11 @@ const OngoingTab = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={{justifyContent: 'center', flex: 1}}>
+        <View style={{ justifyContent: 'center', flex: 1 }}>
           {/* <MySpinner size="large"
                         visible={loading} /> */}
           {refreshing ? (
-            <ActivityIndicator style={{color: Color.AppColor}} />
+            <ActivityIndicator style={{ color: Color.AppColor }} />
           ) : null}
           <FlatList
             ListEmptyComponent={
@@ -352,7 +352,7 @@ const OngoingTab = (props) => {
             }
             data={data}
             // inverted={true}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <View style={styles.mainView}>
                 <View style={styles.topView}>
                   <Text style={styles.bookingTextDate}>
@@ -376,7 +376,7 @@ const OngoingTab = (props) => {
                   </Text>
                 </View>
                 <View style={styles.topView_dis}>
-                  <View style={{flexDirection: 'column'}}>
+                  <View style={{ flexDirection: 'column' }}>
                     <Text style={styles.textDate_dis}>
                       {moment(item.booking_date).format('DD MMM YYYY')}
                     </Text>
@@ -475,8 +475,8 @@ const OngoingTab = (props) => {
                   </View>
                   <View style={styles.service_dis_btn}>
                     {item.order_status == 'OW' &&
-                    item.booking_date == currentdate &&
-                    bookingtimecurrenttime(crtime, item.booking_time) < 30 ? (
+                      item.booking_date == currentdate &&
+                      bookingtimecurrenttime(crtime, item.booking_time) < 30 ? (
                       <TouchableOpacity
                         style={styles.btnViewWorkstarted}
                         onPress={() => {
@@ -494,15 +494,15 @@ const OngoingTab = (props) => {
                           <TouchableOpacity
                             style={styles.btnViewDetails}
                             onPress={() => {
-                              getStatus(
-                                item.id,
-                                'CO',
-                                item.service.service_sub_type,
-                              ),
-                                props.navigation.navigate('Payment', {
-                                  datapass: item,
-                                  image: item.customer.image,
-                                });
+                              // getStatus(
+                              //   item.id,
+                              //   'CO',
+                              //   item.service.service_sub_type,
+                              // ),
+                              props.navigation.navigate('Payment', {
+                                datapass: item,
+                                image: item.customer.image,
+                              });
                             }}>
                             <Text style={styles.btnText}>
                               {String.MyBookingTab.completed}
@@ -529,9 +529,9 @@ const OngoingTab = (props) => {
                       </View>
                     ) : null}
                     {item.order_status == 'AC' &&
-                    item.service.service_sub_type === 'at_home' &&
-                    item.booking_date == currentdate &&
-                    bookingtimecurrenttime(crtime, item.booking_time) <
+                      item.service.service_sub_type === 'at_home' &&
+                      item.booking_date == currentdate &&
+                      bookingtimecurrenttime(crtime, item.booking_time) <
                       parseInt(min_advance_booking_time) ? (
                       <>
                         <TouchableOpacity
@@ -566,7 +566,7 @@ const OngoingTab = (props) => {
                     ) : null}
                     <View>
                       {item.order_status == 'OW' &&
-                      item.service.service_sub_type == 'at_home' ? (
+                        item.service.service_sub_type == 'at_home' ? (
                         <TouchableOpacity
                           style={styles.btnViewMap}
                           onPress={() => gotoMap(item)}>
@@ -579,7 +579,7 @@ const OngoingTab = (props) => {
                     </View>
                     <View>
                       {item.order_status == 'OW' &&
-                      item.service.service_sub_type == 'at_home' ? (
+                        item.service.service_sub_type == 'at_home' ? (
                         <TouchableOpacity
                           style={styles.btnViewDetails}
                           onPress={() =>

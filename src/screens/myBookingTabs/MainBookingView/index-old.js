@@ -95,7 +95,7 @@ const renderHeader = (props) => {
 const renderTopBar = ({ navigation, arshad }) => {
   const [data, setdata] = useState([
     { name: 'New Bookings', selected: true },
-    { name: 'Upcoming', selected: false },
+    { name: 'Ongoing', selected: false },
     { name: 'Completed', selected: false },
   ]);
 
@@ -107,19 +107,19 @@ const renderTopBar = ({ navigation, arshad }) => {
       if (tabIndex === '0') {
         tempData = [
           { name: 'New Bookings', selected: true },
-          { name: 'Upcoming', selected: false },
+          { name: 'Ongoing', selected: false },
           { name: 'Completed', selected: false },
         ]
       } else if (tabIndex === '1') {
         tempData = [
           { name: 'New Bookings', selected: false },
-          { name: 'Upcoming', selected: true },
+          { name: 'Ongoing', selected: true },
           { name: 'Completed', selected: false },
         ]
       } else if (tabIndex === '2') {
         tempData = [
           { name: 'New Bookings', selected: false },
-          { name: 'Upcoming', selected: false },
+          { name: 'Ongoing', selected: false },
           { name: 'Completed', selected: true },
         ]
       }
